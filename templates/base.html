@@ -13,8 +13,9 @@
 
     {% block corecss %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %}
-    {% block extra_css %}
+    {% block extra_css %}   
     {% endblock %}
 
 
@@ -25,11 +26,33 @@
     {% block extra_js %}
     {% endblock %}
 
-
     <title>MarketMinds Analytics {% block extra_title %}{% endblock %}</title>
+    
   </head>
   <body>
-    <header class="container-fluid fixed-top"></header>
+    <header class="container-fluid py-4 px-5">
+      <div class="row ">  
+      
+        <div class="col-md-3 d-flex align-items-center justify-content-center">
+          <a href="">
+            <img src='https://res.cloudinary.com/dbui0ebjv/image/upload/v1703712552/schwarz_Beige_Modern_Gesch%C3%A4ft_Logo_1_1_shh6az.png' alt="MarketMinds Analytics Logo" class="logo">
+        </a>
+        
+        </div>
+
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+          <a href="" class="p-2 inherit-color nav-element"><p class="nav-p">About Us</p></a>
+          <a href="" class="p-2 inherit-color nav-element"><p class="nav-p">Trade Insight</p></a>
+          <a href="" class="p-2 inherit-color nav-element"><p class="nav-p">Get Started</p></a>
+        </div>
+
+        <div class="col-md-3 text-right">
+          <div><a href="" class="inherit-color nav-element"><p class="nav-p">My Account</p></a></div>
+          <div><a href="" class="inherit-color nav-element"><p class="nav-p">Bag</p></a></div>
+        </div>
+
+      </div>  
+    </header>
     {% block page_header %}
     {% endblock %}
 

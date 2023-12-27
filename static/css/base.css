@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Rubik+Mono+One&display=swap');
+
+body {
+ background-color:  #030303; 
+ color: white;
+ font-family: 'Lato', sans-serif;
+}
+.inherit-color {
+    color: inherit !important;
+  }
+a:hover {
+text-decoration: none; /* Entfernt den Unterstrich beim Hover */
+}
+.logo {
+    font-family: 'Rubik Mono One', monospace;
+    font-size: 120%;
+}
+.nav-element {
+    font-size: 110%;
+}
+.logo-p {
+    margin-bottom: 0px;
+    color: #2DEDFA;
+}
+.nav-p {
+    color: #CCCCCC;
+    margin-bottom: -5px;
+}
+.theme-color {
+    color: #db9e02;
+}
+.contrast-grey {
+    color: #adb5bd;
+}
+.logo {
+    max-width: 100%;
+    height: auto;
+}
+.landing-img {
+    width: 100%;
+    height: 400px; 
+    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703678174/AdobeStock_230617255_gmfqlb.jpg');
+    background-size: cover; 
+    background-position: center center; 
+}
+.service-img {
+    width: 100%;
+    height: 700px; 
+    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703700081/Unbenannt_16_ciqry8.png');
+    background-size: cover; 
+    background-position: center center; 
+}
+.container-fluid-img {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 70px;
+}
+.service-text {
+    padding-left: 6%;
+}
+@media screen and (max-width: 768px) {
+    h2 {
+        font-size: 150%;
+    }
+    .service-text {
+        padding: 4% 8%;
+    }
+    .service-img {
+        height: 550px;
+    }
+}
