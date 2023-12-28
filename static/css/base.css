@@ -59,7 +59,11 @@ text-decoration: none; /* Entfernt den Unterstrich beim Hover */
 .service-text {
     padding-left: 6%;
 }
-@media screen and (max-width: 768px) {
+.cred-div {
+    margin-bottom: 70px;
+}
+
+@media screen and (max-width: 760px) {
     h2 {
         font-size: 150%;
     }
@@ -68,5 +72,12 @@ text-decoration: none; /* Entfernt den Unterstrich beim Hover */
     }
     .service-img {
         height: 550px;
+    }
+    .cred-div {
+        text-align: center;
+        margin-top: -30px;
+    }
+    .offset-768-1 {
+        margin-left: 8.333333%;
     }
 }
