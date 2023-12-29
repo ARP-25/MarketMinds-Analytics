@@ -9,11 +9,7 @@ body {
     color: inherit !important;
   }
 a:hover {
-text-decoration: none; /* Entfernt den Unterstrich beim Hover */
-}
-.logo {
-    font-family: 'Rubik Mono One', monospace;
-    font-size: 120%;
+text-decoration: none; 
 }
 .nav-element {
     font-size: 110%;
@@ -32,10 +28,6 @@ text-decoration: none; /* Entfernt den Unterstrich beim Hover */
 .contrast-grey {
     color: #adb5bd;
 }
-.logo {
-    max-width: 100%;
-    height: auto;
-}
 .landing-img {
     width: 100%;
     height: 400px; 
@@ -47,6 +39,13 @@ text-decoration: none; /* Entfernt den Unterstrich beim Hover */
     width: 100%;
     height: 700px; 
     background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703700081/Unbenannt_16_ciqry8.png');
+    background-size: cover; 
+    background-position: center center; 
+}
+.contact-img {
+    width: 100%;
+    height: 400px; 
+    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703845968/Design_ohne_Titel_1_fhxhsr.png');
     background-size: cover; 
     background-position: center center; 
 }
@@ -62,7 +61,10 @@ text-decoration: none; /* Entfernt den Unterstrich beim Hover */
 .cred-div {
     margin-bottom: 70px;
 }
-
+.contact-sec {
+    height: 300px;
+    margin-bottom: 85px;
+}
 /* Custom Button */
 .btn-start {
     padding: 0px 70px 0px 70px;
@@ -70,12 +72,12 @@ text-decoration: none; /* Entfernt den Unterstrich beim Hover */
 .button-62 {
   background: linear-gradient(to bottom right, #adb5bd, #db9e02);
   border: 0;
-  border-radius: 12px;
+  border-radius: 50px;
   color: black;
   cursor: pointer;
   display: inline-block;
   font-family: 'Lato', sans-serif;
-  font-size: 20px;
+  font-size: 23px;
   font-weight: 500;
   line-height: 2.5;
   outline: transparent;
@@ -93,9 +95,42 @@ text-decoration: none; /* Entfernt den Unterstrich beim Hover */
 .button-62:not([disabled]):hover {
     box-shadow: 0 0 .25rem rgba(218, 165, 32, 0.5), -.125rem -.125rem 1rem rgba(218, 165, 32, 0.5), .125rem .125rem 1rem rgba(218, 165, 32, 0.5);
 }
+.white-line {
+    height: 2px; 
+    background-color: white; 
+    width: 100%; 
+}
+/* Custom Container */
+.container-2 {
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    padding: 20px 0px 20px 150px
+  }
+  
+  .top, .middle, .bottom {
+    width: 100%; 
+    text-align: center; 
+  }
+  
+  .top {
+    align-self: flex-start;
+  }
+  
+  .middle {
+    align-self: center;
+  }
+  
+  .bottom {
+    align-self: flex-end;
+  }
+  
+  .container-2 > * {
+    margin: 10px 0; 
+  }
   
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 768px) {
     h2 {
         font-size: 150%;
     }
@@ -111,5 +146,26 @@ text-decoration: none; /* Entfernt den Unterstrich beim Hover */
     }
     .offset-768-1 {
         margin-left: 8.333333%;
+    }
+    .container-2 {
+        display: flex;
+        flex-direction: column; 
+        justify-content: space-between;
+        padding: 50px 0 50px 0;
+      }
+    .h2-exp {
+        font-size: 300%;
+    }
+    .h3-exp {
+        font-size: 170%;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1056px) {
+    .h2-exp {
+        font-size: 200%;
+    }
+    .h3-exp {
+        font-size: 140%;
     }
 }
