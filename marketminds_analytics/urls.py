@@ -4,9 +4,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('subscription/', include('subscription.urls')),
+    path('get-started/', include('subscription.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path('summernote/', include('django_summernote.urls')),
     path('', include('home.urls')),
 ]
 

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Subscription Plans Section -->
+<div class="container text-center">
+    <h1 class="pt-5">Our Plans</h1>    
+    <div class="container">
+        <div class="row">
+            {% for s in subscription_plans %}
+                <div class="col-10 offset-1 col-md-4 offset-md-0">
+                    <div class="square-image p-1">
+                        <img src="{{ s.image.url }}" alt="{{ s.title }}">
+                    </div>
+                    <div class="p-1 text-left"><h2><strong>{{ s.title }}</strong></h4></div>
+                    <div class="p-1 text-left text-secondary">{{ s.description }}</div>
+                    <div class="p-1 text-left">
+                        <h2><span>{{ s.price }}$</span><span class="pl-1" style="font-size:50%">/month</span></h2>
+                    </div>
+                    <div class="p-1 text-left">{{ s.details }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from django_summernote.models import Attachment
+from django_summernote.settings import DjangoSummernoteConfig
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+   # 'django_summernote',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -108,6 +111,11 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+# Setze DEFAULT_AUTO_FIELD auf 'django.db.models.BigAutoField'
+#DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Falls du die spezifische Konfiguration für django_summernote verwenden möchtest:
+#DjangoSummernoteConfig.default_auto_field = 'django.db.models.BigAutoField'
 
 
 # Password validation
