@@ -1,11 +1,10 @@
 from django.shortcuts import render
-from .models import SubscriptionPlan
 from django.http import HttpResponse
+from django.views.generic import ListView
+from .models import SubscriptionPlan
 
 
-def subscription_plan_list(request):
-    plans = SubscriptionPlan.objects.all()
-    context = {
-        'plans' : plans
-    }
-    return render(request, 'subscription/subscription_plan_list.html', context)
+class GetStarted(ListView):
+    model = SubscriptionPlan
+    template_name = 'get_started.html'
+    context_object_name = 'subscription_plans'
