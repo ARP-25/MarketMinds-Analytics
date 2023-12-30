@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'django_summernote',
     'home',
     'subscription',
 ]
@@ -82,6 +83,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'custom_filters': 'subscription.custom_filters',  # Pfad zu deinen benutzerdefinierten Filtern
+            },
         },
     },
 ]
@@ -154,3 +158,5 @@ STATICFILES_DIRS = [
 # This is neccessary for (upload_to='images') to execute
 MEDIA_URL = '/media/'  
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

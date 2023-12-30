@@ -1,23 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 {% block content %}
 
 <!-- Subscription Plans Section -->
 <div class="container text-center">
-    <h1 class="pt-5">Our Plans</h1>    
+    <h1 class="pt-5 pb-5">Our Plans</h1>    
     <div class="container">
         <div class="row">
             {% for s in subscription_plans %}
-                <div class="col-10 offset-1 col-md-4 offset-md-0">
-                    <div class="square-image p-1">
+                <div class="pt-5 col-10 offset-1 col-md-8 offset-md-2 col-lg-4 offset-lg-0">
+                    <div class="square-image">
                         <img src="{{ s.image.url }}" alt="{{ s.title }}">
                     </div>
-                    <div class="p-1 text-left"><h2><strong>{{ s.title }}</strong></h4></div>
-                    <div class="p-1 text-left text-secondary">{{ s.description }}</div>
-                    <div class="p-1 text-left">
-                        <h2><span>{{ s.price }}$</span><span class="pl-1" style="font-size:50%">/month</span></h2>
+                    <div class="p-1 text-left sub-title d-flex align-items-center">
+                        <h2><strong>{{ s.title }}</strong></h4>
                     </div>
-                    <div class="p-1 text-left">{{ s.details }}</div>
+                    <div class="p-1 text-left text-secondary sub-description">
+                        {{ s.description }}
+                    </div>
+                    <div class="p-1 text-left sub-price">
+                        <h2><span><strong>$ {{ s.price }}</strong></span><span class="pl-1" style="font-size:60%">/month</span></h2>
+                    </div>
+                    <div class="d-flex text-align-center justify-content-center pb-3">
+                        <button class="button-62 btn-subscribe">Subscribe</button>
+                    </div>
+                    <div class="p-1 text-left sub-details">
+                        <p>This includes:</p>
+                        {% for detail in s.details|split_by_comma %}
+                            <p><i class="fa-solid fa-trophy pr-3"></i>  {{ detail }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
             {% endfor %}
         </div>

@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Rubik+Mono+One&display=swap');
 
 body {
- background-color:  #030303; 
- color: white;
- font-family: 'Lato', sans-serif;
+    background-color:  #030303; 
+    color: white;
+    font-family: 'Lato', sans-serif;
 }
 .inherit-color {
     color: inherit !important;
   }
 a:hover {
-text-decoration: none; 
+    text-decoration: none; 
 }
 .nav-element {
     font-size: 110%;
@@ -50,10 +50,10 @@ text-decoration: none;
     background-position: center center; 
 }
 .container-fluid-img {
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 70px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 70px;
 }
 .service-text {
     padding-left: 6%;
@@ -66,28 +66,25 @@ text-decoration: none;
     margin-bottom: 85px;
 }
 /* Custom Button */
-.btn-start {
-    padding: 0px 70px 0px 70px;
-}
 .button-62 {
-  background: linear-gradient(to bottom right, #adb5bd, #db9e02);
-  border: 0;
-  border-radius: 50px;
-  color: black;
-  cursor: pointer;
-  display: inline-block;
-  font-family: 'Lato', sans-serif;
-  font-size: 23px;
-  font-weight: 500;
-  line-height: 2.5;
-  outline: transparent;
-  text-align: center;
-  text-decoration: none;
-  transition: box-shadow .2s ease-in-out;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
+    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+    border: 0;
+    border-radius: 50px;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Lato', sans-serif;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow .2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
 }
 .button-62:not([disabled]):focus {
     box-shadow: 0 0 .25rem rgba(218, 165, 32, 0.5), -.125rem -.125rem 1rem rgba(218, 165, 32, 0.5), .125rem .125rem 1rem rgba(218, 165, 32, 0.5);
@@ -100,46 +97,68 @@ text-decoration: none;
     background-color: white; 
     width: 100%; 
 }
+.btn-start {
+    padding: 0px 70px 0px 70px;
+}
+.btn-subscribe {
+    height: 65px;
+    width: 100%;
+    border-radius: 20px;
+}
 /* Custom Container */
 .container-2 {
     display: flex;
     flex-direction: column; 
     justify-content: space-between;
     padding: 20px 0px 20px 150px
-  }
+}
   
-  .top, .middle, .bottom {
+.top, .middle, .bottom {
     width: 100%; 
     text-align: center; 
-  }
+}
   
-  .top {
+.top {
     align-self: flex-start;
-  }
+}
   
-  .middle {
+.middle {
     align-self: center;
-  }
-  
-  .bottom {
+}
+
+.bottom {
     align-self: flex-end;
-  }
-  
-  .container-2 > * {
+}
+
+.container-2 > * {
     margin: 10px 0; 
-  }
-  
+}
+
 /* Subscription Plans */
 .square-image {
-    width: 200px;
-    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-}
-.square-image img {
     width: 100%;
     height: 120px;
-} 
+}
 
+.square-image img {
+    max-width: 100%;
+}
+.sub-title {
+    height: 70px;
+}
+.sub-description {
+    height: 120px;
+}
+.sub-price {
+    height: 70px;
+}
+.sub-details {
+    height: 400px;
+}
 @media screen and (max-width: 768px) {
     h2 {
         font-size: 150%;
