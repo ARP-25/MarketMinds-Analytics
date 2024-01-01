@@ -85,12 +85,15 @@ a:hover {
     -webkit-user-select: none;
     touch-action: manipulation;
     white-space: nowrap;
+    text-decoration: none;
+    color: black;
 }
 .button-62:not([disabled]):focus {
     box-shadow: 0 0 .25rem rgba(218, 165, 32, 0.5), -.125rem -.125rem 1rem rgba(218, 165, 32, 0.5), .125rem .125rem 1rem rgba(218, 165, 32, 0.5);
 }
 .button-62:not([disabled]):hover {
     box-shadow: 0 0 .25rem rgba(218, 165, 32, 0.5), -.125rem -.125rem 1rem rgba(218, 165, 32, 0.5), .125rem .125rem 1rem rgba(218, 165, 32, 0.5);
+    color: whitesmoke;
 }
 .white-line {
     height: 2px; 
@@ -135,6 +138,10 @@ a:hover {
 }
 
 /* Subscription Plans */
+.special-offer {
+    border: solid 1px #db9e02;
+    height: 200px;
+}
 .square-image {
     display: flex;
     align-items: center;
@@ -143,7 +150,6 @@ a:hover {
     width: 100%;
     height: 120px;
 }
-
 .square-image img {
     max-width: 100%;
 }
@@ -158,6 +164,13 @@ a:hover {
 }
 .sub-details {
     height: 400px;
+}
+/* Messages */
+.message-container {
+    position: fixed;
+    top: 72px;
+    right: 15px;
+    z-index: 99999999999;
 }
 @media screen and (max-width: 768px) {
     h2 {
