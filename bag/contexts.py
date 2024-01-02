@@ -1,6 +1,6 @@
 def bag_contents(request):
 
-    bag_items = [1]
+    bag_items = []
     total = 0
     context = {
         'bag_items': bag_items,

@@ -37,9 +37,11 @@
                     <div class="p-1 text-left sub-price">
                         <h2><span><strong>$ {{ s.price }}</strong></span><span class="pl-1" style="font-size:60%">/month</span></h2>
                     </div>
-                    <form method="post" action="{% url 'get_started' %}">
+                    <!-- Add Subscription Form -->
+                    <form method="post" action="{% url 'add_to_bag' %}">
                         {% csrf_token %}
-                        <input type="hidden" name="plan_id" value="{{ s.id }}">
+                        <input type="hidden" name="subscription_plan_id" value="{{ s.id }}">
+                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         {% if bag_items %}
                         {% for item in bag_items %}
                             <input type="hidden" name="bag_items" value="{{ item }}">
@@ -49,6 +51,7 @@
                             <button type="submit" class="button-62 btn-subscribe">Subscribe</button>
                         </div>
                     </form>
+
                     <div class="p-1 text-left sub-details">
                         <p>This includes:</p>
                         {% for detail in s.details|split_by_comma %}
