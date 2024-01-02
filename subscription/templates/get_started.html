@@ -8,16 +8,6 @@
     <h1 class="pt-5 pb-5 d-block text-center"><strong>Our Plans</strong></h1>
     <div class="col-10 col-lg-12 special-offer mx-auto"><p class="text-center">Special Offer!</p></div>
 </div>
-{% if bag_items %}
-    Bag Items:
-    <ul>
-        {% for item in bag_items %}
-            <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
-{% else %}
-    Bag Items not available
-{% endif %}
 
 <!-- Subscription Plans Section -->
 <div class="container text-center mt-5">        

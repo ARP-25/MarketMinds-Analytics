@@ -1,30 +1,35 @@
 from django.shortcuts import render, redirect
+from subscription.models import SubscriptionPlan
 
-# Create your views here.
 def bag(request):
     """
-    A View to return index page
+    A View to return bag page
     """
+    # Test if the session bag
+    print(request.session.get('bag_items', []))  
+
     return render(request, 'bag/bag.html')
+
 
 def add_to_bag(request):
     # Fetching subscription_plan_id from the Request Obj
-    subscription_plan_id = request.POST.get('subscription_plan_id')
+    subscription_plan_id = int(request.POST.get('subscription_plan_id'))
 
     # Fetching redirect_url from the Request Obj
     redirect_url = request.POST.get('redirect_url')
 
-    # Fetching bag Dictionary or create it and store it locally in variable bag
-    bag = request.session.get('bag', [])
+    # Fetching bag_items from session
+    bag_items = request.session.get('bag_items', [])
 
-    # Add Subscription Plan ID to the bag
-    if subscription_plan_id in bag:
+    # Add Subscription Plan ID to the bag or notify already added
+    if subscription_plan_id in bag_items:
         print("You already successfully added this Subscription Plan to your Bag")
     else:
-        bag.append(subscription_plan_id)
-        request.session['bag'] = bag  # Aktualisiere die 'bag'-Liste in der Session
+        # Add subscription_plan_id to bag_items       
+        bag_items.append(subscription_plan_id)
+        request.session['bag_items'] = bag_items  # Aktualisiere session
 
     # Test if Subscription Plan Id got added to the session bag
-    print(request.session.get('bag', []))  # Hier wird die aktualisierte 'bag'-Liste in der Session ausgegeben
+    print(request.session.get('bag_items', []))  
 
     return redirect(redirect_url)

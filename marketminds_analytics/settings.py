@@ -86,7 +86,7 @@ TEMPLATES = [
                 'bag.contexts.bag_contents',
             ],
             'libraries': {
-                'custom_filters': 'subscription.custom_filters',  # Pfad zu deinen benutzerdefinierten Filtern
+                'custom_filters': 'home.custom_filters',  
             },
         },
     },
