@@ -61,7 +61,7 @@
               <a class="d-block element p-1 m-1" href="{% url 'account_signup' %}">Register</a> 
               {% elif user.is_authenticated %}
                 <a class="d-block element p-1 m-1" href="{% url 'account_logout' %}">Logout</a>            
-                <a class="d-block element p-1 m-1" href="#">Account Info</a>
+                <a class="d-block element p-1 m-1" href="#">Profile Info</a>
                 {% if user.is_superuser %}
                   <a class="d-block element p-1 m-1" href="#">Admin Access</a>
                 {% endif %}            

@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include('home.urls')),
     path('', include('subscription.urls')),
     path('', include('bag.urls')),     
+    path('', include('checkout.urls')),     
 ]
 
 if settings.DEBUG:
