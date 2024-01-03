@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Rubik+Mono+One&display=swap');
 
+
 body {
     background-color:  #030303; 
     color: white;
@@ -14,13 +15,23 @@ a:hover {
 .nav-element {
     font-size: 110%;
 }
+
 .logo-p {
     margin-bottom: 0px;
     color: #2DEDFA;
 }
+
 .nav-p {
     color: #CCCCCC;
     margin-bottom: -5px;
+    transition: color 0.2s ease-in-out; 
+}
+.nav-p:hover {
+    color: #db9e02; 
+}
+
+.nav-fa {
+    font-size:140%
 }
 .theme-color {
     color: #db9e02;
@@ -28,13 +39,51 @@ a:hover {
 .contrast-grey {
     color: #adb5bd;
 }
+
+/* Dropdown Profile */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 100px;
+    z-index: 1;
+    right: 100px;
+    top: 50px;
+    border-radius: 3px;
+}
+.dropdown-content a{
+    color: whitesmoke;
+    transition: color 0.2s ease-in-out; 
+}
+.dropdown-content a:hover{
+    color: black;
+    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+}
+.show {
+    display: block;
+}
+
+
+
 .landing-img {
     width: 100%;
     height: 400px; 
     background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703678174/AdobeStock_230617255_gmfqlb.jpg');
     background-size: cover; 
     background-position: center center; 
+    animation-name: scaleImage;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
 }
+
+@keyframes scaleImage {
+    from {
+        background-size: 100%; /* Start with original size */
+    }
+    to {
+        background-size: 110%; /* Scale the image to 110% */
+    }
+}
+
 .service-img {
     width: 100%;
     height: 700px; 
