@@ -108,6 +108,7 @@ a:hover {
     width: 100%;
     border-radius: 20px;
 }
+
 /* Custom Container */
 .container-2 {
     display: flex;
@@ -164,6 +165,16 @@ a:hover {
 }
 .sub-details {
     height: 400px;
+}
+
+/* Bag */
+.bag-image-container {
+    
+}
+.btn-bag {
+    border-radius: 2px;
+    font-size: 15px;
+    width: 90%;
 }
 /* Messages */
 .message-container {
