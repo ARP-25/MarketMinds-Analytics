@@ -28,7 +28,7 @@ def checkout(request):
         currency=settings.STRIPE_CURRENCY,
     )
 
-    #print(f"\nPayment Intent:{intent}")
+    print(f"\nPayment Intent:{intent}")
     if not stripe_public_key:
         message.warning(request, 'Stripe public key is missing.' 
             'Did you forget to set it in your environment?')

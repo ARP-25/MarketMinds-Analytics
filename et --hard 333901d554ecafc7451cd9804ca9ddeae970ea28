@@ -1,0 +1,131 @@
+[33mcommit be654046b4eaa108c74580d164f4cd4a22037128[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Thu Jan 4 16:12:27 2024 +0000
+
+    Add basic checkout functionality
+
+[33mcommit 333901d554ecafc7451cd9804ca9ddeae970ea28[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Thu Jan 4 14:54:45 2024 +0000
+
+    Incluce Stripe JS in base.html and add Stripe Card Element in checkout.html
+
+[33mcommit b043c14b0ab850aeb66d7b030ce3288aa5648813[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Wed Jan 3 21:30:01 2024 +0000
+
+    Start Checkout App. Create Order, OrderLineItem Model. Create Signals, Form, View and Template
+
+[33mcommit 639d5cebda8187ddc6f195d846939a95016f74d4[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Wed Jan 3 13:59:52 2024 +0000
+
+    Implement Dropdown Menu for Profil FA-Icon add CSS for it and add href attributes
+
+[33mcommit 5925d1036bee247940f84eb176ddeedd8122331f[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Wed Jan 3 11:03:58 2024 +0000
+
+    Add all neccessary elements for full functionality to bag template
+
+[33mcommit 04529940a71c4bcfd3d25c86d3f6e4c76a4b6831[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Tue Jan 2 22:01:44 2024 +0000
+
+    Create bag template
+
+[33mcommit 03f29d84c57d3980b2e6465a80ef77ff99db3204[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Tue Jan 2 19:15:21 2024 +0000
+
+    Add add to bag functionality
+
+[33mcommit 36cedfba443bb2d375c6a9a06f2b8defe31174fb[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Mon Jan 1 22:03:28 2024 +0000
+
+    Start Bag App, create basic view and template and link urls up. Create context.py and add to context.processors.
+
+[33mcommit f3f6f2869e666e1078024326b3bb8671301f3dc2[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Sat Dec 30 22:25:10 2023 +0000
+
+    Add Subscription Plan Section in get_started.html inside subscription App
+
+[33mcommit eb99cdf357eb3cce9eb295f9746a7607346617de[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Sat Dec 30 15:28:07 2023 +0000
+
+    Create ListView for Get Started Page, get_started.html Template with basic content and add urls for it
+
+[33mcommit 4e19f93ce054dbe06d77bfbe9871ca86708df357[m[33m ([m[1;32mmein_backup_branch[m[33m)[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Fri Dec 29 13:25:00 2023 +0000
+
+    Finish Responsive Design Landing Page
+
+[33mcommit 273b70b48b24b716916752caa4d2d38572197acf[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Thu Dec 28 23:06:49 2023 +0000
+
+    Restructure Landing Page
+
+[33mcommit 2fea6074123d6c47b82bf74338e00301f2c640d4[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Thu Dec 28 19:28:18 2023 +0000
+
+    Backup Commit
+
+[33mcommit 7fe0d372cdcfa64680dd06d939a7859a22e2c01a[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Thu Dec 28 19:13:03 2023 +0000
+
+    Add View, Url and Template in Subscription App
+
+[33mcommit e4483d5071e50066891be8001d4fc5a278bd0724[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Thu Dec 28 11:15:04 2023 +0000
+
+    Finish Credentials Section in index.html
+
+[33mcommit 69e856d4e01dc2732fb1f8e0358a3714ff3fae2f[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Wed Dec 27 22:39:55 2023 +0000
+
+    Add header to base.html. Landing-image, Expertise and Credentials Section to index.html
+
+[33mcommit 04422d25d04ff99d1f232beaa86c9994eeba0bdf[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Tue Dec 26 09:11:25 2023 +0000
+
+    Start home app, add template and link everthing up
+
+[33mcommit e546315985d1de9b48f944d72dcb53be1be9661f[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Tue Dec 26 08:35:19 2023 +0000
+
+    Add blocks to base template
+
+[33mcommit a0576172b4cd130e8c64333c9d477d94462cfbf2[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Tue Dec 26 08:21:14 2023 +0000
+
+    Add Allauth templates and base template from bootstrap
+
+[33mcommit 5c912e6a818dd16c3c2187b74f2618e48532e075[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Mon Dec 25 19:18:37 2023 +0000
+
+    Setup Allauth
+
+[33mcommit 621366bc4d6b186781c2cadb40493d6b41775c46[m
+Author: Angelo Rocco Pucci <angelo.pucci@outlook.de>
+Date:   Mon Dec 25 15:44:57 2023 +0000
+
+    Initial Commit
+
+[33mcommit ee99282ab4e53eaa407ab59f71e24616dd7eaf49[m
+Author: ARP-25 <139232564+ARP-25@users.noreply.github.com>
+Date:   Mon Dec 25 16:02:21 2023 +0100
+
+    Initial commit
