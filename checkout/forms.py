@@ -1,27 +1,22 @@
 from django import forms
-from .models import Order
+from .models import ActiveSubscription
 
-
-class OrderForm(forms.ModelForm):
+class ActiveSubscriptionForm(forms.ModelForm):
     class Meta:
-        model = Order
-        fields = (  
-                    'full_name',
-                    'email',
-                    'phone_number',
-                    'country',
-                    'postcode',
-                    'town_or_city',
-                    'street_address1',
-                    'street_address2',
-                    'county',
-                )
+        model = ActiveSubscription
+        fields = ['full_name', 'email', 'phone_number', 'country', 'postcode', 'town_or_city', 'street_address1', 'street_address2', 'county']
+
+    full_name = forms.CharField(max_length=100, required=True)
+    email = forms.EmailField(required=True)
+    phone_number = forms.CharField(max_length=20, required=True)
+    country = forms.CharField(max_length=40, required=False)
+    postcode = forms.CharField(max_length=20, required=False)
+    town_or_city = forms.CharField(max_length=40, required=False)
+    street_address1 = forms.CharField(max_length=80, required=False)
+    street_address2 = forms.CharField(max_length=80, required=False)
+    county = forms.CharField(max_length=80, required=False)
 
     def __init__(self, *args, **kwargs):
-        """
-        Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field
-        """
         super().__init__(*args, **kwargs)
         placeholders = {
             'full_name': 'Full Name',
@@ -34,6 +29,7 @@ class OrderForm(forms.ModelForm):
             'street_address2': 'Street Address 2',
             'county': 'County',
         }
+
         self.fields['full_name'].widget.attrs['autofocus'] = True
         for field in self.fields:
             if self.fields[field].required:
