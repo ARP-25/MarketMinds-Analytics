@@ -10,7 +10,7 @@ from django.utils import timezone
 import uuid
 
 class ActiveSubscription(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='active_subscriptions')
     subscription_plan = models.ForeignKey(SubscriptionPlan, on_delete=models.CASCADE)
     start_date = models.DateTimeField(auto_now_add=True)
     end_date = models.DateTimeField()  
@@ -49,4 +49,7 @@ class ActiveSubscription(models.Model):
             # Update the status if needed
             self.status = 'Active'  # Set the status to active (or any other desired status)
             self.save()
+
+    def __str__(self):
+        return f"{self.subscription_plan.title} - Start: {self.start_date}"
 

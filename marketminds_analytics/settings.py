@@ -48,14 +48,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_summernote',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'django_summernote',
+
     'home',
     'subscription',
     'bag',
     'checkout',
+    'profiles',
+    
     'crispy_forms',
     'crispy_bootstrap4',
 ]

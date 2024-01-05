@@ -8,3 +8,4 @@ class SubscriptionPlanAdmin(SummernoteModelAdmin):
     list_display = ['title', 'id', 'image', 'description', 'price', 'details']
     list_filter = ['price']
 
+
