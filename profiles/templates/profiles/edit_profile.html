@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container pt-5">
+    <hr class="border-secondary">
+    <h2 class="logo-font mb-4">Profile Information</h2>
+    <hr class="border-secondary">
+    <div class="row">
+        <div class="offset-1 col-5">
+            Profile Data
+            <div class="row">
+                <form method="POST" action="{% url 'edit_profile' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-5">
+            Active Subscriptions
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block postloadjs %}
+    {{ block.super }}
+{% endblock %}

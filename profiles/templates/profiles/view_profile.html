@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container pt-5">
+    <hr class="border-secondary">
+    <h2 class="logo-font mb-4">Profile Information</h2>
+    <hr class="border-secondary">
+    <div class="row">
+        <div class="offset-1 col-5">
+            <h1>Your Profile</h1>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            
+            <p><strong>Full Name:</strong> {{ user_profile.full_name }}</p>
+            <p><strong>Bio:</strong> {{ user_profile.bio }}</p>
+            <p><strong>Email:</strong> {{ user_profile.email }}</p>
+            <p><strong>Birth Date:</strong> {{ user_profile.birth_date }}</p>
+            <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
+            <p><strong>Country:</strong> {{ user_profile.country }}</p>
+            <p><strong>Postcode:</strong> {{ user_profile.postcode }}</p>
+            <p><strong>Town/City:</strong> {{ user_profile.town_or_city }}</p>
+            <p><strong>Street Address 1:</strong> {{ user_profile.street_address1 }}</p>
+            <p><strong>Street Address 2:</strong> {{ user_profile.street_address2 }}</p>
+            <p><strong>County:</strong> {{ user_profile.county }}</p>
+            
+            <a href="{% url 'edit_profile' %}">Edit Profile</a>
+        </div>
+        <div class="col-5">
+            <h2>Active Subscriptions</h2>
+            <ul>
+              {% for subscription in active_subscriptions %}
+                <li> Plan: {{ subscription.subscription_plan.title }}</li>
+                <li>{{ subscription.subscription_plan }} - Start Date: {{ subscription.start_date }} - End Date: {{ subscription.end_date }}</li>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <button class="cancel-subscription" data-subscription-id="{{ subscription.id }}">Cancel Subscription</button>
+                </form>
+              {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Custom Confirmation Dialogue -->
+    <div id="confirmation-dialog" class="confirmation-dialog">
+        <div class="dialog-content">
+            <p>Are you sure you want to cancel your subscription?</p>
+            <button id="confirm-yes">Yes</button>
+            <button id="confirm-no">No</button>
+        </div>
+    </div>
+    
+</div>
+
+
+{% endblock %}
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'profiles/js/cancel_popup.js' %}"></script>
+{% endblock %}
