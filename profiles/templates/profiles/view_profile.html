@@ -7,58 +7,103 @@
 
 {% block content %}
 <div class="container pt-5">
+    <!-- Button to trigger the modal -->
+
     <hr class="border-secondary">
     <h2 class="logo-font mb-4">Profile Information</h2>
     <hr class="border-secondary">
     <div class="row">
         <div class="offset-1 col-5">
             <h1>Your Profile</h1>
-            <p><strong>Username:</strong> {{ user.username }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
+            <dl>
+                <dt>Username:</dt>
+                <dd>{{ user.username }}</dd>
+                
+                <dt>Email:</dt>
+                <dd>{{ user.email }}</dd>
+                
+                <dt>Full Name:</dt>
+                <dd>{{ user_profile.full_name }}</dd>
+                
+                <dt>Bio:</dt>
+                <dd>{{ user_profile.bio }}</dd>
+                
+                <dt>Email:</dt>
+                <dd>{{ user_profile.email }}</dd>
+                
+                <dt>Birth Date:</dt>
+                <dd>{{ user_profile.birth_date }}</dd>
+                
+                <dt>Phone Number:</dt>
+                <dd>{{ user_profile.phone_number }}</dd>
+                
+                <dt>Country:</dt>
+                <dd>{{ user_profile.country }}</dd>
+                
+                <dt>Postcode:</dt>
+                <dd>{{ user_profile.postcode }}</dd>
+                
+                <dt>Town/City:</dt>
+                <dd>{{ user_profile.town_or_city }}</dd>
+                
+                <dt>Street Address 1:</dt>
+                <dd>{{ user_profile.street_address1 }}</dd>
+                
+                <dt>Street Address 2:</dt>
+                <dd>{{ user_profile.street_address2 }}</dd>
+                
+                <dt>County:</dt>
+                <dd>{{ user_profile.county }}</dd>
             
-            <p><strong>Full Name:</strong> {{ user_profile.full_name }}</p>
-            <p><strong>Bio:</strong> {{ user_profile.bio }}</p>
-            <p><strong>Email:</strong> {{ user_profile.email }}</p>
-            <p><strong>Birth Date:</strong> {{ user_profile.birth_date }}</p>
-            <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
-            <p><strong>Country:</strong> {{ user_profile.country }}</p>
-            <p><strong>Postcode:</strong> {{ user_profile.postcode }}</p>
-            <p><strong>Town/City:</strong> {{ user_profile.town_or_city }}</p>
-            <p><strong>Street Address 1:</strong> {{ user_profile.street_address1 }}</p>
-            <p><strong>Street Address 2:</strong> {{ user_profile.street_address2 }}</p>
-            <p><strong>County:</strong> {{ user_profile.county }}</p>
-            
-            <a href="{% url 'edit_profile' %}">Edit Profile</a>
+            <button class="button-62 btn-bag">
+                <a href="{% url 'edit_profile' %}" style="color:inherit;text-decoration: none;">Edit Profile</a>
+            </button>
+            </dl>
         </div>
+        
         <div class="col-5">
             <h2>Active Subscriptions</h2>
             <ul>
               {% for subscription in active_subscriptions %}
                 <li> Plan: {{ subscription.subscription_plan.title }}</li>
-                <li>{{ subscription.subscription_plan }} - Start Date: {{ subscription.start_date }} - End Date: {{ subscription.end_date }}</li>
-                <form method="POST" action="">
-                    {% csrf_token %}
-                    <button class="cancel-subscription" data-subscription-id="{{ subscription.id }}">Cancel Subscription</button>
-                </form>
+                <li>{{ subscription.subscription_plan }}</li>
+                <li> Start Date: {{ subscription.start_date }}</li>
+                <li> End Date: {{ subscription.end_date }}</li>
+                <button class="button-62 btn-bag cancelSubscriptionBtn" data-toggle="modal" data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}">
+                    Cancel Subscription
+                </button>
               {% endfor %}
             </ul>
         </div>
     </div>
 
-    <!-- Custom Confirmation Dialogue -->
-    <div id="confirmation-dialog" class="confirmation-dialog">
-        <div class="dialog-content">
-            <p>Are you sure you want to cancel your subscription?</p>
-            <button id="confirm-yes">Yes</button>
-            <button id="confirm-no">No</button>
+
+    <!-- Unsubscribe Confirmation Modal -->
+    <div class="modal fade cancelSubscriptionModal" tabindex="-1" role="dialog" aria-labelledby="cancelSubscriptionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content text-white bg-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelSubscriptionModalLabel">Cancel Subscription</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to cancel your subscription?</p>
+                </div>
+                <div class="modal-footer">                   
+                    <form class="confirmCancleForm" action="" method="post">                       
+                        {% csrf_token %}
+                        <button type="button" class="button-62 btn-bag" id="closeCancelBtn"data-dismiss="modal">Close</button>
+                        <button type="submit" class="button-62 btn-bag" id="confirmCancelBtn">Yes, Cancle</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-    
+    </div>  
 </div>
-
-
 {% endblock %}
 {% block postloadjs %}
     {{ block.super }}
-    <script src="{% static 'profiles/js/cancel_popup.js' %}"></script>
+    <script src="{% static 'profiles/js/cancel_pupup.js' %}"></script>
 {% endblock %}

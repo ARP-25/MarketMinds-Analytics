@@ -11,3 +11,11 @@ class GetStarted(ListView):
     context_object_name = 'subscription_plans'
 
 
+class AdminAccess(ListView):
+    model = SubscriptionPlan
+    template_name = 'admin_access.html'
+    context_object_name = 'subscription_plans'
+
+
+
+

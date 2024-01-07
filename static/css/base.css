@@ -207,17 +207,16 @@ a:hover {
     height: 70px;
 }
 .sub-description {
-    height: 120px;
+    min-height: 120px;
 }
 .sub-price {
     height: 70px;
 }
 .sub-details {
-    height: 400px;
+    height: 300px;
 }
 
 /* Bag */
-
 .btn-bag {
     border-radius: 2px;
     font-size: 15px;
@@ -230,43 +229,35 @@ a:hover {
     right: 15px;
     z-index: 99999999999;
 }
+
+/* Admin Access */
+.btn-edit {
+    background: linear-gradient(to bottom right, whitesmoke, gray);
+    border-radius: 5px;
+    font-size: 90%;
+}
+.btn-delete {
+    background: linear-gradient(to bottom right, #adb5bd, #EE0000);
+    border-radius: 5px;
+    font-size: 90%;
+}
+.hr-admin-border{
+    border-top: 5px solid #17a2b8;
+    margin:0;
+    padding:0;
+}
+
 /* Profiles */
 /* Add this in your CSS file or style section */
-.confirmation-dialog {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 20px;
-    z-index: 1000;
-    display: none !important;
+#confirmCancelBtn {
+    background: linear-gradient(to bottom right, #adb5bd, green);
+    width: 30%;
+    min-width: 100px;
 }
-
-.dialog-content {
-    text-align: center;
-}
-
-#confirm-yes,
-#confirm-no {
-    margin: 5px;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-#confirm-yes {
-    background-color: #27ae60;
-    color: #fff;
-    border: none;
-}
-
-#confirm-no {
-    background-color: #e74c3c;
-    color: #fff;
-    border: none;
+#closeCancelBtn {
+    background: linear-gradient(to bottom right, #adb5bd, #EE0000);
+    width: 30%;
+    min-width: 100px;
 }
 @media screen and (max-width: 768px) {
     h2 {

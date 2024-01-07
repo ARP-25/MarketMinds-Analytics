@@ -28,7 +28,10 @@ def checkout(request):
                 subscription.end_date = datetime.now() + timedelta(days=30)
                 subscription.save()
                 messages.success(request, f'Thank you for subscribing to {subscription_plan.title}!')
-        return redirect(reverse('checkout'))
+                if 'bag_items' in request.session:
+                    del request.session['bag_items']
+        return render(request, 'checkout/checkout_success.html')
+
 
     # Render Template and handle Stripe Payment 
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
