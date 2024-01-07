@@ -5,6 +5,7 @@ from .models import SubscriptionPlan
 from django.contrib import messages
 from .forms import SubscriptionPlanForm
 
+
 class GetStarted(ListView):
     model = SubscriptionPlan
     template_name = 'get_started.html'
@@ -46,5 +47,16 @@ def admin_access_delete(request, subscription_id):
         messages.success(request, 'Subscription Plan deleted successfully.')
         return redirect('admin_access')  
     return redirect('admin_access')  
+
+
+def admin_access_edit(request, subscription_id):
+    subscriptionPlan = get_object_or_404(SubscriptionPlan, pk=subscription_id)
+    plan_id = subscription_id
+    form = SubscriptionPlanForm(instance=subscriptionPlan, custom_attribute_value='edit')  
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+        print("post")
+    return render(request, 'admin_access_edit.html', {'form': form})
 
 

@@ -58,12 +58,15 @@
                         <h2 class="text-info text-center pt-2 pb-1 mb-0"><strong>End Preview</strong></h2>
                     </div>
                     <div>
-                        <button class="button-62 btn-edit col-8">
-                            <i class="fa-solid fa-pen-to-square p-2"></i>
-                            Edit
-                            <i class="fa-solid fa-pen-to-square p-2"></i>
-                        </button>
-                        <form method="post" action="{% url 'admin_access' %}">
+                        <form method="POST" action="{% url 'admin_access_edit' subscription_id=s.id %}">
+                            {% csrf_token %}
+                            <button class="button-62 btn-edit col-8" type="submit">
+                                <i class="fa-solid fa-pen-to-square p-2"></i>
+                                Edit
+                                <i class="fa-solid fa-pen-to-square p-2"></i>
+                            </button>
+                        </form>
+                        <form method="POST" action="{% url 'admin_access' %}">
                             {% csrf_token %}
                             <button class="button-62 btn-edit col-8 mt-2" name="action" value="delete_plan">
                                 <i class="fa-solid fa-bolt pr-1"></i>
@@ -111,7 +114,7 @@
 </div> 
 
 <script>
-// Dynamically changes the Action Attribute of Form in Confirm  Modal
+// Dynamically changes the Action Attribute of Form in Confirm Modal
 $('.deleteSubscriptionPlanBtn').on('click', function() {
     var subscriptionId = $(this).data('subscription-id');
     var dynamicUrl = subscriptionId+"/";  
