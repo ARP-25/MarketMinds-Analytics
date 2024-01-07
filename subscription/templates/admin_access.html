@@ -10,8 +10,11 @@
         <h1 class="logo-font text-info"><strong>Admin Access</strong></h1>
         <hr class="text-info hr-admin-border mb-5">
 
-        <button type="submit" class="button-62 btn-edit col-4 mr-2" >Add Plan <i class="fa-solid fa-plus pl-2"></i></button>
-        <button type="submit" class="button-62 btn-edit col-4 mb-4"><i class="fa-solid fa-sort pr-2"></i> Sort Plan's</button>
+            <a class="a-inherit" href="{% url 'admin_access_add' %}">
+                <button type="submit" class="button-62 btn-edit col-4 mr-2" >Add Plan <i class="fa-solid fa-plus pl-2"></i></button>
+            </a>
+
+            <button type="submit" class="button-62 btn-edit col-4 mb-4"><i class="fa-solid fa-sort pr-2"></i> Sort Plan's</button>
 
         <div class="row">
             {% for s in subscription_plans %}              
@@ -64,18 +67,24 @@
                         <h2 class="text-info text-center pt-2 pb-1 mb-0">End Preview - Plan ID: {{ s.id }}</h2>
                     </div>
                     <div>
-                        <button class="button-62 btn-edit col-5 mr-2">
+                        <button class="button-62 btn-edit col-8">
+                            <i class="fa-solid fa-pen-to-square p-2"></i>
                             Edit
-                            <i class="fa-solid fa-pen-to-square pl-2"></i>
+                            <i class="fa-solid fa-pen-to-square p-2"></i>
                         </button>
-                        <button class="button-62 btn-delete col-5">
-                            <i class="fa-solid fa-trash pr-2"></i>
+                        <form method="post" action="{% url 'admin_access' %}">
+                            {% csrf_token %}
+                            <button class="button-62 btn-edit col-8 mt-2" name="action" value="delete_plan">
+                                <i class="fa-solid fa-bolt pr-1"></i>
+                                Feature
+                                <i class="fa-solid fa-bolt pl-1"></i>                         
+                            </button>
+                        </form>
+                        <button class="button-62 btn-delete col-8 mt-2">
+                            <i class="fa-solid fa-trash p-2"></i>
                             Delete                            
-                        </button>
-                        <button class="button-62 btn-edit col-10-x mt-2">
-                            <i class="fa-solid fa-bolt pr-1"></i>
-                            Feature this Plan
-                            <i class="fa-solid fa-bolt pl-1"></i>                         
+                            <i class="fa-solid fa-trash p-2"></i>
+
                         </button>
                     </div>
                     <hr class="text-info hr-admin-border mt-3">

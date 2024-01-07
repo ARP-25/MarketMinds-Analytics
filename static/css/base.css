@@ -258,6 +258,9 @@ a:hover {
 .col-10-x {
     width: 86%;
 }
+.add-plan-form {
+
+}
 
 
 /* Profiles */
@@ -272,6 +275,54 @@ a:hover {
     width: 30%;
     min-width: 100px;
 }
+
+/* Stripe Styles */
+.StripeElement,
+.stripe-style-input {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 0px;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus,
+.stripe-style-input:focus,
+.stripe-style-input:active {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+.stripe-style-input::placeholder {
+    color: #aab7c4;
+}
+
+.fieldset-label {
+    position: relative;
+    right: .5rem;
+}
+
+#payment-form .form-control,
+#card-element {
+    color: #000;
+    border: 1px solid #000;
+}
+.a-inherit, .a-inherit:hover {
+color: inherit; 
+text-decoration: none; 
+}
+.btn.custom-padding {
+    padding: 0; 
+}
+
+
 @media screen and (max-width: 768px) {
     h2 {
         font-size: 150%;
