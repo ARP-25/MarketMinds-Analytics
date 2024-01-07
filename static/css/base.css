@@ -321,7 +321,9 @@ text-decoration: none;
 .btn.custom-padding {
     padding: 0; 
 }
-
+.modal-footer button {
+    width: 100%;
+}
 
 @media screen and (max-width: 768px) {
     h2 {

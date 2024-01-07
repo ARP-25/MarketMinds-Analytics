@@ -35,13 +35,16 @@ def admin_access_add(request):
             messages.success(request, 'Successfully added new Subscription Plan!')
             return redirect('admin_access')  
     else:
-        form = SubscriptionPlanForm()
-    
+        form = SubscriptionPlanForm()   
     return render(request, 'admin_access_add.html', {'form': form})
 
 
-    
-
-
+def admin_access_delete(request, subscription_id):
+    subscriptionPlan = get_object_or_404(SubscriptionPlan, pk=subscription_id)
+    if request.method == 'POST':
+        subscriptionPlan.delete()  
+        messages.success(request, 'Subscription Plan deleted successfully.')
+        return redirect('admin_access')  
+    return redirect('admin_access')  
 
 
