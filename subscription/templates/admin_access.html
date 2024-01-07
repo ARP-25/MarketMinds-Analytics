@@ -6,62 +6,76 @@
 <div class="container text-center mt-5">        
     <div class="container">
 
-        <hr class="border-secondary">
-        <h1 class="logo-font mb-4 text-info"><strong>Admin Access</strong></h1>
-        <hr class="border-secondary">
+        <hr class="text-info hr-admin-border">
+        <h1 class="logo-font text-info"><strong>Admin Access</strong></h1>
+        <hr class="text-info hr-admin-border mb-5">
+
+        <button type="submit" class="button-62 btn-edit col-4 mr-2" >Add Plan <i class="fa-solid fa-plus pl-2"></i></button>
+        <button type="submit" class="button-62 btn-edit col-4 mb-4"><i class="fa-solid fa-sort pr-2"></i> Sort Plan's</button>
+
         <div class="row">
             {% for s in subscription_plans %}              
-                <div class="pt-1 pb-5 mb-5 col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 ">
+                <div class="pt-1 pb-5 mb-5 mt-3 col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 ">
+                    
                     <hr class="text-info hr-admin-border">
                     <div class="div">
-                        <h1 class="text-info text-center">Preview - Plan ID: {{ s.id }}</h4>
+                        <h2 class="text-info text-center">Preview - Plan ID: {{ s.id }}</h2>
                     </div>
                     <hr class="text-info hr-admin-border pb-3">
 
-                    <div class="square-image">
-                        <img src="{{ s.image.url }}" alt="{{ s.title }}"> 
-                    </div>
-                    <div class="p-1 text-left sub-title d-flex align-items-center">
-                        <h2><strong>{{ s.title }}</strong></h4>
-                    </div>
-                    <div class="p-1 text-left text-secondary sub-description">
-                        {{ s.description }}
-                    </div>
-                    <div class="p-1 text-left sub-price">
-                        <h2><span><strong>$ {{ s.price }}</strong></span><span class="pl-1" style="font-size:60%">/month</span></h2>
-                    </div>
-                    <!-- Add Subscription Form -->
-                    <form method="post" action="{% url 'add_to_bag' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="subscription_plan_id" value="{{ s.id }}">
-                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                        {% if bag_items %}
-                        {% for item in bag_items %}
-                            <input type="hidden" name="bag_items" value="{{ item }}">
-                        {% endfor %}
-                        {% endif %}                        
-                        <div class="d-flex text-align-center justify-content-center pb-3">
-                            <button type="submit" class="button-62 btn-subscribe" disabled>Subscribe</button>
+                    <div class="preview">
+                        <div class="square-image">
+                            <img src="{{ s.image.url }}" alt="{{ s.title }}"> 
                         </div>
-                    </form>
+                        <div class="p-1 text-left sub-title d-flex align-items-center">
+                            <h2><strong>{{ s.title }}</strong></h2>
+                        </div>
+                        <div class="p-1 text-left text-secondary sub-description">
+                            {{ s.description }}
+                        </div>
+                        <div class="p-1 text-left sub-price">
+                            <h2><span><strong>$ {{ s.price }}</strong></span><span class="pl-1" style="font-size:60%">/month</span></h2>
+                        </div>
+                        <!-- Add Subscription Form -->
+                        <form method="post" action="{% url 'add_to_bag' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="subscription_plan_id" value="{{ s.id }}">
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                            {% if bag_items %}
+                            {% for item in bag_items %}
+                                <input type="hidden" name="bag_items" value="{{ item }}">
+                            {% endfor %}
+                            {% endif %}                        
+                            <div class="d-flex text-align-center justify-content-center pb-3">
+                                <button type="submit" class="button-62 btn-subscribe" disabled>Subscribe</button>
+                            </div>
+                        </form>
 
-                    <div class="p-1 text-left sub-details">
-                        <p>This includes:</p>
-                        {% for detail in s.details|split_by_comma %}
-                            <p><i class="fa-solid fa-trophy pr-3"></i>  {{ detail }}</p>
-                        {% endfor %}
+                        <div class="p-1 text-left sub-details">
+                            <p>This includes:</p>
+                            {% for detail in s.details|split_by_comma %}
+                                <p><i class="fa-solid fa-trophy pr-3"></i>  {{ detail }}</p>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <hr class="text-info hr-admin-border">
 
+                    <hr class="text-info hr-admin-border">
                     <div class="div">
-                        <h1 class="text-info text-center pt-2 pb-1 mb-0">End Preview - Plan ID: {{ s.id }}</h4>
+                        <h2 class="text-info text-center pt-2 pb-1 mb-0">End Preview - Plan ID: {{ s.id }}</h2>
                     </div>
                     <div>
-                        <button class="button-62 btn-edit col-5">
+                        <button class="button-62 btn-edit col-5 mr-2">
                             Edit
+                            <i class="fa-solid fa-pen-to-square pl-2"></i>
                         </button>
                         <button class="button-62 btn-delete col-5">
-                            Delete
+                            <i class="fa-solid fa-trash pr-2"></i>
+                            Delete                            
+                        </button>
+                        <button class="button-62 btn-edit col-10-x mt-2">
+                            <i class="fa-solid fa-bolt pr-1"></i>
+                            Feature this Plan
+                            <i class="fa-solid fa-bolt pl-1"></i>                         
                         </button>
                     </div>
                     <hr class="text-info hr-admin-border mt-3">

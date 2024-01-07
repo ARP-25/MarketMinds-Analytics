@@ -232,7 +232,7 @@ a:hover {
 
 /* Admin Access */
 .btn-edit {
-    background: linear-gradient(to bottom right, whitesmoke, gray);
+    background: linear-gradient(to bottom right, whitesmoke, #303030);
     border-radius: 5px;
     font-size: 90%;
 }
@@ -246,6 +246,19 @@ a:hover {
     margin:0;
     padding:0;
 }
+.preview {
+    transition: transform 0.4s ease-in-out; /
+  }
+  
+  /* Hover effect */
+  .preview:hover {
+    transform: scale(1.04); 
+
+  }
+.col-10-x {
+    width: 86%;
+}
+
 
 /* Profiles */
 /* Add this in your CSS file or style section */
