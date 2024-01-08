@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
-from subscription.models import SubscriptionPlan
+from django.urls import reverse
 from django.contrib import messages
+from subscription.models import SubscriptionPlan
+
+import logging
+logger = logging.getLogger(__name__)
 
 def bag(request):
     """
@@ -12,17 +16,13 @@ def bag(request):
 
 
 def add_to_bag(request):
-    subscription_plan_id = int(request.POST.get('subscription_plan_id'))
-    redirect_url = request.POST.get('redirect_url')
-    bag_items = request.session.get('bag_items', [])
-    if subscription_plan_id in bag_items:
-        messages.info(request, "You already successfully added this Subscription Plan to your Cart.")
-    else:       
-        bag_items.append(subscription_plan_id)
-        request.session['bag_items'] = bag_items  
-        messages.success(request, "Successfully added Subscription Plan to your Cart.")
-    print(request.session.get('bag_items', []))  
+    if request.method == 'POST':
+        subscription_plan_id = request.POST.get('subscription_plan_id')
+        bag_items = request.session.get('bag_items', [])
+        if subscription_plan_id not in bag_items:
+            bag_items.append(subscription_plan_id)
+            request.session['bag_items'] = bag_items
+        return redirect('get_started')  
 
-    return redirect(redirect_url)
 
 

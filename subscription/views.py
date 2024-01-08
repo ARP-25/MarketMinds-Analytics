@@ -11,7 +11,9 @@ class GetStarted(ListView):
     template_name = 'get_started.html'
     context_object_name = 'subscription_plans'
     paginate_by = 6  
-    
+
+    def get_queryset(self):
+        return SubscriptionPlan.objects.order_by('id')
 
 
 class AdminAccess(ListView):

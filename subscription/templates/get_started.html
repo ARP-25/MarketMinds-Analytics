@@ -36,8 +36,7 @@
                     </div>
                     <form method="post" action="{% url 'add_to_bag' %}">
                         {% csrf_token %}
-                        <input type="hidden" name="subscription_plan_id" value="{{ s.id }}">
-                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                        <input type="hidden" name="subscription_plan_id" value="{{ s.id }}">                      
                         {% if bag_items %}
                         {% for item in bag_items %}
                             <input type="hidden" name="bag_items" value="{{ item }}">

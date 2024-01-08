@@ -8,6 +8,4 @@ urlpatterns = [
     path('admin-access/add', views.admin_access_add, name='admin_access_add'),
     path('admin-access/edit/<int:subscription_id>/', views.admin_access_edit, name='admin_access_edit'),
     path('admin-access/<int:subscription_id>/', views.admin_access_delete, name='admin_access_delete'),
-
-
 ]
