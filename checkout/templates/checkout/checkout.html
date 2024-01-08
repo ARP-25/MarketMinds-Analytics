@@ -8,122 +8,121 @@
 {% block content %}
 <div class="container pt-5">
     <hr class="border-secondary">
-    <h2 class="logo-font mb-4">Checkout</h2>
+    <h2 class="logo-font mb-4 text-center"><strong>Checkout</strong></h2>
     <hr class="border-secondary">
-<div class="row">
-    <div class="col-lg-last col-12 col-lg-6 pt-lg-0 pt-3">
-        <div class="container">
-            <p class="text-muted">Order Summary</p>
-            <div class="row mt-4">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-3">Product Info</div>
-                        <div class="col-3"></div>
-                        <div class="col-3">Price</div>
-                        <div class="col-3">Total</div>
+    <div class="row">
+        <div class="col-lg-last col-12 col-lg-6 pt-lg-0 pt-3">
+            <div class="container">
+                <p class="">Order Summary</p>
+                <div class="row mt-4">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-3 text-secondary">Product Info</div>
+                            <div class="col-4"></div>
+                            <div class="col-5 text-secondary text-right">Price</div>
+                        </div>
+                        {% for item_id in bag_items %}
+                            {% for subscription_plan in subscription_plans %}
+                                {% if subscription_plan.id == item_id|add:0 %}
+                                <div class="row">
+                                    <div class="col-3 square-image">
+                                        <img src="{{ subscription_plan.image.url }}" alt="{{ s.title }}">
+                                    </div>
+                                    <div class="col-4 d-flex align-items-center">
+                                        <h5 style="font-family: Rubik Mono One">{{ subscription_plan.title }}</h5>
+                                    </div>
+                                    <div class="col-5 d-flex align-items-center">
+                                        <p class="text-right">{{ subscription_plan.price }} $ /mo.</p>
+                                    </div>
+                                </div>                    
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %} 
+                        <hr class="border-secondary"> 
+                        <div class="row pt-3 pb-3">
+                            <div class="offset-5 col-2 text-right">
+                                <p class="text-secondary">Total:</p>
+                            </div>
+                            <div class="col-5 text-right">
+                                <strong><p>{{ total }} $ /mo.</p></strong>
+                            </div>
+                        </div>             
                     </div>
-                    {% for item_id in bag_items %}
-                        {% for subscription_plan in subscription_plans %}
-                            {% if subscription_plan.id == item_id|add:0 %}
-                            <div class="row">
-                                <div class="bag-image-container square-image col-3">
-                                    <img src="{{ subscription_plan.image.url }}" alt="{{ s.title }}">
-                                </div>
-                                <div class="col-3 d-flex align-items-center">
-                                    <h3>{{ subscription_plan.title }}</h3>
-                                </div>
-                                <div class="col-3 d-flex align-items-center">
-                                    <p>{{ subscription_plan.price }}</p>
-                                </div>
-                            </div>                    
-                            {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                    <hr class="border-secondary">  
-                    <div class="offset-9 col-3">
-                        
-                        <p>{{ total }}</p>
-                    </div>
-                
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-12 col-lg-6 pt-3 pt-lg-0">
-        <p class="text-muted">Please fill out the form below to complete your order</p>
-        <form action="{% url 'checkout' %}" method="POST" id="payment-form">
-            {% csrf_token %}
-            <fieldset class="px-3 mb-5">
-                <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
-                {{ active_subscription_form.full_name | as_crispy_field }}
-                {{ active_subscription_form.email | as_crispy_field }}
-            </fieldset>
-            <fieldset class="px-3 mb-5">
-                <legend class="fieldset-label small text-black px-2 w-auto">Billing Information</legend>
-                {{ active_subscription_form.phone_number | as_crispy_field }}
-                {{ active_subscription_form.country | as_crispy_field }}
-                {{ active_subscription_form.postcode | as_crispy_field }}
-                {{ active_subscription_form.town_or_city | as_crispy_field }}
-                {{ active_subscription_form.street_address1 | as_crispy_field }}
-                {{ active_subscription_form.street_address2 | as_crispy_field }}
-                {{ active_subscription_form.county | as_crispy_field }}
-                <div class="form-check form-check-inline float-right mr-0">
-                    {% if user.is_authenticated %}
-                        <label class="form-check-label" for="id-save-info">Save this Billing information to my profile</label>
-                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
-                    {% else %}
-                        <label class="form-check-label" for="id-save-info">
-                            <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                            <a class="text-info" href="{% url 'account_login' %}">login</a> to proceed with checkout
-                        </label>
-                    {% endif %}
-                </div>
-            </fieldset>
-            
-              
-            <fieldset class="px-3">
-                <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
-                <!-- A Stripe card element will go here -->
-                <div class="mb-3" id="card-element"></div>
+        <div class="col-12 col-lg-6 pt-3 pt-lg-0">
+            <p class="text-muted">Please fill out the form below to complete your order</p>
+            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                {% csrf_token %}
+                <fieldset class="px-3 mb-5">
+                    <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
+                    {{ active_subscription_form.full_name | as_crispy_field }}
+                    {{ active_subscription_form.email | as_crispy_field }}
+                </fieldset>
+                <fieldset class="px-3 mb-5">
+                    <legend class="fieldset-label small text-black px-2 w-auto">Billing Information</legend>
+                    {{ active_subscription_form.phone_number | as_crispy_field }}
+                    {{ active_subscription_form.country | as_crispy_field }}
+                    {{ active_subscription_form.postcode | as_crispy_field }}
+                    {{ active_subscription_form.town_or_city | as_crispy_field }}
+                    {{ active_subscription_form.street_address1 | as_crispy_field }}
+                    {{ active_subscription_form.street_address2 | as_crispy_field }}
+                    {{ active_subscription_form.county | as_crispy_field }}
+                    <div class="form-check form-check-inline float-right mr-0">
+                        {% if user.is_authenticated %}
+                            <label class="form-check-label" for="id-save-info">Save this Billing information to my profile</label>
+                            <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                        {% else %}
+                            <label class="form-check-label" for="id-save-info">
+                                <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
+                                <a class="text-info" href="{% url 'account_login' %}">login</a> to proceed with checkout
+                            </label>
+                        {% endif %}
+                    </div>
+                </fieldset>
+                        
+                <fieldset class="px-3">
+                    <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
+                    <div class="mb-3" id="card-element"></div>
+                    <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                </fieldset>
 
-                <!-- Used to display form errors -->
-                <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-            </fieldset>
-
-            <div class="submit-button mt-5 mb-2"> 
-                <div class="text-center">
-                    <button class="col-10 col-md-5 d-inline-block button-62 btn-bag ">                   
-                        <a href="{% url 'bag' %}" style="color:inherit;text-decoration: none;">
-                            <span class="icon">
-                                <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="font-weight-bold">Adjust Bag</span>
-                        </a>
-                    </button>
-                    {% if user.is_authenticated %}
-                        <button id="submit-button" class="col-md-5 col-10 button-62 btn-bag d-inline-blockml-sm-3 mt-3 mt-md-0 ml-md-3">
-                            <span class="font-weight-bold">Complete Order</span>
-                            <span class="icon">
-                                <i class="fas fa-lock"></i>
-                            </span>
+                <div class="submit-button mt-5 mb-2"> 
+                    <div class="text-center">
+                        <button class="col-10 col-md-5 d-inline-block button-62 btn-bag ">                   
+                            <a href="{% url 'bag' %}" style="color:inherit;text-decoration: none;">
+                                <span class="icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="font-weight-bold">Adjust Bag</span>
+                            </a>
                         </button>
-                    {% else %}
-                        <button id="submit-button" class="col-md-5 col-10 button-62 btn-bag d-inline-blockml-sm-3 mt-3 mt-md-0 ml-md-3" disabled>
-                            <span class="font-weight-bold">Complete Order</span>
+                        {% if user.is_authenticated %}
+                            <button id="submit-button" class="col-md-5 col-10 button-62 btn-bag d-inline-blockml-sm-3 mt-3 mt-md-0 ml-md-3">
+                                <span class="font-weight-bold">Complete Order</span>
+                                <span class="icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </button>
+                        {% else %}
+                            <button id="submit-button" class="col-md-5 col-10 button-62 btn-bag d-inline-blockml-sm-3 mt-3 mt-md-0 ml-md-3" disabled>
+                                <span class="font-weight-bold">Complete Order</span>
+                                <span class="icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </button>
+                        {% endif %}
+                        <p class="small text-danger my-0 pr-5 text-right">
                             <span class="icon">
-                                <i class="fas fa-lock"></i>
+                                <i class="fas fa-exclamation-circle"></i>
                             </span>
-                        </button>
-                    {% endif %}
-                    <p class="small text-danger my-0 pr-5 text-right">
-                        <span class="icon">
-                            <i class="fas fa-exclamation-circle"></i>
-                        </span>
-                        <span>Your card will be charged <strong>${{ total|floatformat:2 }}</strong></span>
-                    </p>
-                </div>
-            <div>
-        </form>
+                            <span>Your card will be charged <strong>${{ total|floatformat:2 }}</strong></span>
+                        </p>
+                    </div>
+                <div>
+            </form>
+        </div>
     </div>
 </div>
 </div>

@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container mt-4">
-    <h1>Your Shopping Bag</h1>
+<div class="container mt-5 mb-3">
+    <hr class="border-secondary">
+    <h2 class="logo-font mb-4 text-center"><strong>Cart</strong></h2>
+    <hr class="border-secondary">
     <div class="row mt-4">
         <div class="container">
             <div class="row">
-                <div class="col-3">Product Info</div>
-                <div class="col-3"></div>
-                <div class="col-3">Price</div>
-                <div class="col-3">Total</div>
+                <div class="col-3 text-secondary">Product Info</div>
+                <div class="col-4"></div>
+                <div class="col-5 text-secondary text-right">Price</div>
             </div>
             {% for item_id in bag_items %}
                 {% for subscription_plan in subscription_plans %}
@@ -18,18 +19,24 @@
                         <div class="col-3 square-image">
                             <img src="{{ subscription_plan.image.url }}" alt="{{ s.title }}">
                         </div>
-                        <div class="col-3 d-flex align-items-center">
-                            <h3>{{ subscription_plan.title }}</h3>
+                        <div class="col-4 d-flex align-items-center tex">
+                            <h5 style="font-family: Rubik Mono One">{{ subscription_plan.title }}</h5>
                         </div>
-                        <div class="col-3 d-flex align-items-center">
-                            <p>{{ subscription_plan.price }} / month</p>
+                        <div class="col-5 d-flex align-items-center justify-content-end">
+                            <p>{{ subscription_plan.price }} $ /mo.</p>
                         </div>
                     </div>                    
                     {% endif %}
                 {% endfor %}
-            {% endfor %}  
-            <div class="offset-9 col-3">
-                <p>{{ total }} / month</p>
+            {% endfor %} 
+            <hr class="border-secondary"> 
+            <div class="row pt-3 pb-3">
+                <div class="offset-5 col-2 text-right">
+                    <p class="text-secondary">Total:</p>
+                </div>
+                <div class="col-5 text-right">
+                    <strong><p>{{ total }} $ /mo.</p></strong>
+                </div>
             </div>
             <div class="row">
                 <div class="col-8 offset-4 col-md-5 offset-md-7">

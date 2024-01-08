@@ -11,8 +11,9 @@
     <h2 class="mb-4 text-center">Profile Information</h2>
     <hr class="border-secondary">
     <div class="row">
-        <div class="offset-md-1 col-md-5 col-10 offset-2">
+        <div class="offset-md-1 col-md-5 col-10 offset-1">
             <h1>Your Profile</h1>
+            <div class="p-3">
             <dl>
                 <dt>Username:</dt>
                 <dd>{{ user.username }}</dd>
@@ -53,24 +54,26 @@
                 <dt>County:</dt>
                 <dd>{{ user_profile.county }}</dd>
                   
-                <a href="{% url 'edit_profile' %}" style="color:inherit;text-decoration: none;"><button class="button-62 btn-bag"><i class="fa-solid fa-pen-to-square pr-2"></i>Edit Profile</button></a>
+                <a href="{% url 'edit_profile' %}"  style="color:inherit;text-decoration: none;"><button class="button-62 btn-bag col-8 offset-2 mt-4"><i class="fa-solid fa-pen-to-square pr-2"></i>Edit Profile</button></a>
             </dl>
+            </div>
         </div>
         
-        <div class="offset-md-1 col-md-5 col-10 offset-2">
-            <h2>Active Subscriptions</h2>
-            <ul>
-              {% for subscription in active_subscriptions %}
-                <li> Plan: {{ subscription.subscription_plan.title }}</li>
-                <li>{{ subscription.subscription_plan }}</li>
-                <li> Start Date: {{ subscription.start_date }}</li>
-                <li> End Date: {{ subscription.end_date }}</li>
-                <button class="button-62 btn-bag cancelSubscriptionBtn" data-toggle="modal" data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}">
-                    <i class="fa-solid fa-ban pr-2"></i>
-                    Unsubscribe
+        <div class="offset-md-1 col-md-5 col-10 offset-1">
+            <h1>Active Subscriptions</h1>
+            {% for subscription in active_subscriptions %}
+            <div class="row p-3">
+              <div class="col-12">
+                <p style="font-family: Rubik Mono One;">{{ subscription.subscription_plan.title }}</p>
+                <p>Start Date: {{ subscription.start_date }}</p>
+                <p>End Date: {{ subscription.end_date }}</p>
+                <button class="button-62 cancelSubscriptionBtn col-8 offset-2" data-toggle="modal" data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}">
+                  <i class="fa-solid fa-ban pr-2"></i>
+                  Unsubscribe
                 </button>
-              {% endfor %}
-            </ul>
+              </div>
+            </div>
+          {% endfor %}
         </div>
     </div>
 

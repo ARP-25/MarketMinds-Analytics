@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Rubik+Mono+One&display=swap');
 
-
 body {
     background-color:  #030303; 
     color: white;
@@ -39,7 +38,10 @@ a:hover {
 .contrast-grey {
     color: #adb5bd;
 }
+hr.border-secondary {
 
+    border-width: 5px;
+}
 /* Dropdown Profile */
 .dropdown-content {
     display: none;
@@ -217,7 +219,7 @@ a:hover {
 
 /* Bag */
 .btn-bag {
-    border-radius: 2px;
+    border-radius: 5px;
     font-size: 15px;
     width: 90%;
 }
@@ -300,7 +302,14 @@ li.page-item .page-link:hover {
     width: 30%;
     min-width: 100px;
 }
-
+.cancelSubscriptionBtn {
+    background: linear-gradient(to bottom right, #adb5bd, #EE0000);
+    border-radius: 5px;
+    font-size: 90%;
+}
+dl dd {
+    color: #ababab;
+}
 /* Stripe Styles */
 .StripeElement,
 .stripe-style-input {
@@ -378,6 +387,9 @@ text-decoration: none;
     }
     .h3-exp {
         font-size: 170%;
+    }
+    h5 {
+        font-size: 100%;
     }
 }
 
