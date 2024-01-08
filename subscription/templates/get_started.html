@@ -6,7 +6,12 @@
 <!-- Special Offer Section -->
 <div class="container mt-5">
     <h1 class="pt-5 pb-5 d-block text-center"><strong>Our Plans</strong></h1>
-    <div class="col-10 col-lg-12 special-offer mx-auto"><p class="text-center">Special Offer!</p></div>
+    <div class="col-12 special-offer d-flex justify-content-center align-items-center">
+        <h2 class="text-center text-secondary p-2">           
+            📊🚀<strong class="text-white">Limited-Time Offer:</strong> Subscribe to 3, <strong class="text-white">Get 1 Free!</strong> Don't Miss Out on This Exclusive Opportunity to Elevate Your Market Game 💸💥<br>
+            🌊💹Get Ready to Ride the <strong class="text-white">Crypto Bullmarket </strong> and Embark on a Journey through Promising <strong class="text-white">Indices</strong> and <strong class="text-white">Traditional Markets</strong> in 2024 💰✨  
+        </h2>
+    </div>
 </div>
 
 <!-- Subscription Plans Section -->
@@ -21,13 +26,14 @@
                     <div class="p-1 text-left sub-title d-flex align-items-center">
                         <h2><strong>{{ s.title }}</strong></h4>
                     </div>
-                    <div class="p-1 text-left text-secondary sub-description">
-                        {{ s.description }}
+                    <div class="containerx">
+                        <div class="p-1 text-left text-secondary sub-description">
+                            {{ s.description }}
+                        </div>
                     </div>
                     <div class="p-1 text-left sub-price">
                         <h2><span><strong>$ {{ s.price }}</strong></span><span class="pl-1" style="font-size:60%">/month</span></h2>
                     </div>
-                    <!-- Add Subscription Form -->
                     <form method="post" action="{% url 'add_to_bag' %}">
                         {% csrf_token %}
                         <input type="hidden" name="subscription_plan_id" value="{{ s.id }}">
@@ -53,4 +59,42 @@
         </div>
     </div>
 </div>
+
+<!-- Pagination controls -->
+<nav aria-label="Pagination">
+    <ul class="pagination justify-content-center">
+        {% if is_paginated %}
+            {% if page_obj.has_previous %}
+                <li class="page-item bg-dark">
+                    <a class="page-link " href="?page=1" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+            {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+        {% endif %}
+    </ul>
+</nav>
+
 {% endblock %}

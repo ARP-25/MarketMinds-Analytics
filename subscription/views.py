@@ -10,6 +10,8 @@ class GetStarted(ListView):
     model = SubscriptionPlan
     template_name = 'get_started.html'
     context_object_name = 'subscription_plans'
+    paginate_by = 6  
+    
 
 
 class AdminAccess(ListView):

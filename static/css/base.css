@@ -190,7 +190,6 @@ a:hover {
 /* Subscription Plans */
 .special-offer {
     border: solid 1px #db9e02;
-    height: 200px;
 }
 .square-image {
     display: flex;
@@ -207,7 +206,7 @@ a:hover {
     height: 70px;
 }
 .sub-description {
-    min-height: 120px;
+    min-height: 150px;
 }
 .sub-price {
     height: 70px;
@@ -258,9 +257,28 @@ a:hover {
 .col-10-x {
     width: 86%;
 }
-.add-plan-form {
 
+/* Pagination Control */
+a.page-link {
+    background-color: #343a40;
+    color:white;
+    
 }
+.page-link{
+    border: none;
+}
+
+li.page-item.active .page-link{
+    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+    color: black;
+    
+}
+li.page-item .page-link:hover {
+    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+    color: black;
+}
+
+
 
 
 /* Profiles */
