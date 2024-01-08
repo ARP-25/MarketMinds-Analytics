@@ -10,7 +10,7 @@
         <a class="a-inherit" href="{% url 'admin_access_add' %}">
             <button type="submit" class="button-62 btn-edit col-4 mr-2" >Add Plan <i class="fa-solid fa-plus pl-2"></i></button>
         </a>
-        <button type="submit" class="button-62 btn-edit col-4 mb-4"><i class="fa-solid fa-sort pr-2"></i> Sort Plan's</button>
+        <button type="submit" class="button-62 btn-edit col-4 mb-4" disabled><i class="fa-solid fa-sort pr-2"></i> Sort Plan's</button>
 
         <div class="row">
             {% for s in subscription_plans %}              
@@ -70,7 +70,7 @@
                         </form>
                         <form method="POST" action="{% url 'admin_access' %}">
                             {% csrf_token %}
-                            <button class="button-62 btn-edit col-8 mt-2" name="action" value="delete_plan">
+                            <button class="button-62 btn-edit col-8 mt-2" name="action" value="delete_plan" disabled>
                                 <i class="fa-solid fa-bolt pr-1"></i>
                                 Feature
                                 <i class="fa-solid fa-bolt pl-1"></i>                         

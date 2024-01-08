@@ -401,7 +401,10 @@ text-decoration: none;
         font-size: 140%;
     }
 }
-
-
+@media screen and (max-width: 992px) {
+    #profile-cart {
+        text-align: center;
+    }
+}
 
 
