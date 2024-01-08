@@ -7,13 +7,11 @@
 
 {% block content %}
 <div class="container pt-5">
-    <!-- Button to trigger the modal -->
-
     <hr class="border-secondary">
-    <h2 class="logo-font mb-4">Profile Information</h2>
+    <h2 class="mb-4 text-center">Profile Information</h2>
     <hr class="border-secondary">
     <div class="row">
-        <div class="offset-1 col-5">
+        <div class="offset-md-1 col-md-5 col-10 offset-2">
             <h1>Your Profile</h1>
             <dl>
                 <dt>Username:</dt>
@@ -54,14 +52,12 @@
                 
                 <dt>County:</dt>
                 <dd>{{ user_profile.county }}</dd>
-            
-            <button class="button-62 btn-bag">
-                <a href="{% url 'edit_profile' %}" style="color:inherit;text-decoration: none;">Edit Profile</a>
-            </button>
+                  
+                <a href="{% url 'edit_profile' %}" style="color:inherit;text-decoration: none;"><button class="button-62 btn-bag"><i class="fa-solid fa-pen-to-square pr-2"></i>Edit Profile</button></a>
             </dl>
         </div>
         
-        <div class="col-5">
+        <div class="offset-md-1 col-md-5 col-10 offset-2">
             <h2>Active Subscriptions</h2>
             <ul>
               {% for subscription in active_subscriptions %}
@@ -70,13 +66,13 @@
                 <li> Start Date: {{ subscription.start_date }}</li>
                 <li> End Date: {{ subscription.end_date }}</li>
                 <button class="button-62 btn-bag cancelSubscriptionBtn" data-toggle="modal" data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}">
-                    Cancel Subscription
+                    <i class="fa-solid fa-ban pr-2"></i>
+                    Unsubscribe
                 </button>
               {% endfor %}
             </ul>
         </div>
     </div>
-
 
     <!-- Unsubscribe Confirmation Modal -->
     <div class="modal fade cancelSubscriptionModal" tabindex="-1" role="dialog" aria-labelledby="cancelSubscriptionModalLabel" aria-hidden="true">
@@ -94,8 +90,10 @@
                 <div class="modal-footer">                   
                     <form class="confirmCancleForm" action="" method="post">                       
                         {% csrf_token %}
-                        <button type="button" class="button-62 btn-bag" id="closeCancelBtn"data-dismiss="modal">Close</button>
-                        <button type="submit" class="button-62 btn-bag" id="confirmCancelBtn">Yes, Cancle</button>
+                        <div class="container">
+                            <button type="button" class="button-62 btn-edit" id="closeDeleteBtn"data-dismiss="modal">Close</button>
+                            <button type="submit" class="button-62 btn-delete mt-2" id="confirmDeleteBtn">Yes, unsubscribe</button>
+                        </div>
                     </form>
                 </div>
             </div>

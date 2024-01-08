@@ -6,23 +6,26 @@
 {% endblock %}
 
 {% block content %}
-<div class="container pt-5">
-    <hr class="border-secondary">
-    <h2 class="logo-font mb-4">Profile Information</h2>
-    <hr class="border-secondary">
-    <div class="row">
-        <div class="offset-1 col-5">
-            Profile Data
-            <div class="row">
-                <form method="POST" action="{% url 'edit_profile' %}">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Save</button>
-                </form>
-            </div>
+<div class="container pt-5 pb-5">
+    <div class="col-6 offset-3">
+        <hr class="border-secondary">
+        <h2 class="logo-font mb-4 text-center">Profile Information</h2>
+        <hr class="border-secondary">
+        <div class="col-12">
+            {% load crispy_forms_tags %}
+            <form method="POST" action="{% url 'edit_profile' %}">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="text-center pt-4">
+                    <button type="submit"class="button-62 btn-edit col-5 mx-auto">Save <i class="fa-solid fa-download pl-2"></i></button>
+                    <a href="{% url 'view_profile' %}" class="pl-1 mx-auto">
+                        <span class="button-62 btn-edit col-5">
+                            <i class="fa-solid fa-arrow-left pr-2"></i> Return
+                        </span>
+                    </a> 
+                </div>
+            </form>
         </div>
-        <div class="col-5">
-            Active Subscriptions
         </div>
     </div>
 </div>

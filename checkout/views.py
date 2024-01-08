@@ -18,31 +18,33 @@ def checkout(request):
     if not bag:
         messages.error(request, 'There\'s nothing in your bag at the moment')
 
-    if request.method == 'POST':
-        for plan_id in bag:
-            subscription_plan = get_object_or_404(SubscriptionPlan, id=plan_id)
-            active_subscription_form = ActiveSubscriptionForm(request.POST)
-            if active_subscription_form.is_valid():
-                subscription = active_subscription_form.save(commit=False)
-                subscription.user = request.user
-                subscription.subscription_plan = subscription_plan
-                subscription.end_date = timezone.now() + timedelta(days=30)
-                subscription.save()
-                messages.success(request, f'Thank you for subscribing to {subscription_plan.title}!')
-                
-                if 'save-info' in request.POST:                    
-                    user_profile = UserProfile.objects.get(user=request.user)
-                    data_from_form = active_subscription_form.cleaned_data
-                    form_fields = data_from_form.keys()
-                    for field in form_fields:
-                        if hasattr(user_profile, field):
-                            setattr(user_profile, field, data_from_form[field])
-                    user_profile.save()
-  
-                if 'bag_items' in request.session:
-                    del request.session['bag_items']
+    if request.user.is_authenticated:
 
-        return render(request, 'checkout/checkout_success.html')
+        if request.method == 'POST':
+            for plan_id in bag:
+                subscription_plan = get_object_or_404(SubscriptionPlan, id=plan_id)
+                active_subscription_form = ActiveSubscriptionForm(request.POST)
+                if active_subscription_form.is_valid():
+                    subscription = active_subscription_form.save(commit=False)
+                    subscription.user = request.user
+                    subscription.subscription_plan = subscription_plan
+                    subscription.end_date = timezone.now() + timedelta(days=30)
+                    subscription.save()
+                    messages.success(request, f'Thank you for subscribing to {subscription_plan.title}!')
+                    
+                    if 'save-info' in request.POST:                    
+                        user_profile = UserProfile.objects.get(user=request.user)
+                        data_from_form = active_subscription_form.cleaned_data
+                        form_fields = data_from_form.keys()
+                        for field in form_fields:
+                            if hasattr(user_profile, field):
+                                setattr(user_profile, field, data_from_form[field])
+                        user_profile.save()
+    
+                    if 'bag_items' in request.session:
+                        del request.session['bag_items']
+
+            return render(request, 'checkout/checkout_success.html')
 
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY

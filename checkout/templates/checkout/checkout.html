@@ -74,7 +74,7 @@
                     {% else %}
                         <label class="form-check-label" for="id-save-info">
                             <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                            <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+                            <a class="text-info" href="{% url 'account_login' %}">login</a> to proceed with checkout
                         </label>
                     {% endif %}
                 </div>
@@ -100,12 +100,21 @@
                             <span class="font-weight-bold">Adjust Bag</span>
                         </a>
                     </button>
-                    <button id="submit-button" class="col-md-5 col-10 button-62 btn-bag d-inline-blockml-sm-3 mt-3 mt-md-0 ml-md-3">
-                        <span class="font-weight-bold">Complete Order</span>
-                        <span class="icon">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                    </button>
+                    {% if user.is_authenticated %}
+                        <button id="submit-button" class="col-md-5 col-10 button-62 btn-bag d-inline-blockml-sm-3 mt-3 mt-md-0 ml-md-3">
+                            <span class="font-weight-bold">Complete Order</span>
+                            <span class="icon">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </button>
+                    {% else %}
+                        <button id="submit-button" class="col-md-5 col-10 button-62 btn-bag d-inline-blockml-sm-3 mt-3 mt-md-0 ml-md-3" disabled>
+                            <span class="font-weight-bold">Complete Order</span>
+                            <span class="icon">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </button>
+                    {% endif %}
                     <p class="small text-danger my-0 pr-5 text-right">
                         <span class="icon">
                             <i class="fas fa-exclamation-circle"></i>

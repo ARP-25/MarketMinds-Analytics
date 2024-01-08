@@ -1,10 +1,9 @@
 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <img src="..." class="rounded me-2" alt="...">
-      <strong class="me-auto">Bootstrap</strong>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close">Close</button>
-    </div>
-    <div class="toast-body">
+  <div class="toast-header d-flex justify-content-between align-items-center bg-danger">
+    <strong class="me-auto text-dark">Error</strong>
+    <button type="button" id="btn-toast" class="btn-close button-62 btn-toast" data-bs-dismiss="toast" aria-label="Close"><strong>Close</strong></button>
+  </div>
+    <div class="toast-body" style="background-color: #343a40;">
         {{ message }}
     </div>
   </div>

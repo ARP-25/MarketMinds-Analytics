@@ -1,13 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 from subscription.models import SubscriptionPlan
 import uuid
 
-from django.db import models
-from django.contrib.auth.models import User
-from subscription.models import SubscriptionPlan
-from django.utils import timezone
-import uuid
 
 class ActiveSubscription(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='active_subscriptions')
@@ -43,11 +39,9 @@ class ActiveSubscription(models.Model):
         """
         Refresh the subscription by extending the end date by 30 days
         """
-        if self.is_expired():
-            # Extend the end date by 30 days
+        if self.is_expired():           
             self.end_date += timezone.timedelta(days=30)
-            # Update the status if needed
-            self.status = 'Active'  # Set the status to active (or any other desired status)
+            self.status = 'Active' 
             self.save()
 
     def __str__(self):

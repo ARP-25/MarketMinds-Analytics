@@ -138,10 +138,10 @@ a:hover {
     color: black;
 }
 .button-62:not([disabled]):focus {
-    box-shadow: 0 0 .25rem rgba(218, 165, 32, 0.5), -.125rem -.125rem 1rem rgba(218, 165, 32, 0.5), .125rem .125rem 1rem rgba(218, 165, 32, 0.5);
+    box-shadow: 0 0 .25rem rgba(230, 228, 226, 0.5), -.125rem -.125rem 1rem rgba(204, 203, 199, 0.5), .125rem .125rem 1rem rgba(190, 189, 186, 0.5);
 }
 .button-62:not([disabled]):hover {
-    box-shadow: 0 0 .25rem rgba(218, 165, 32, 0.5), -.125rem -.125rem 1rem rgba(218, 165, 32, 0.5), .125rem .125rem 1rem rgba(218, 165, 32, 0.5);
+    box-shadow: 0 0 .25rem rgba(202, 201, 198, 0.5), -.125rem -.125rem 1rem rgba(204, 203, 199, 0.5), .125rem .125rem 1rem rgba(204, 203, 199, 0.5);
     color: whitesmoke;
 }
 .white-line {
@@ -228,6 +228,12 @@ a:hover {
     right: 15px;
     z-index: 99999999999;
 }
+.btn-toast {
+    background: linear-gradient(to bottom right, whitesmoke, #303030);
+    border-radius: 5px;
+    font-size: 90%;
+    width: 30%;
+}
 
 /* Admin Access */
 .btn-edit {
@@ -235,6 +241,7 @@ a:hover {
     border-radius: 5px;
     font-size: 90%;
 }
+
 .btn-delete {
     background: linear-gradient(to bottom right, #adb5bd, #EE0000);
     border-radius: 5px;
