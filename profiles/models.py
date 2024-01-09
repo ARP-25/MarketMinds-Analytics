@@ -5,6 +5,29 @@ from django.dispatch import receiver
 from checkout.models import ActiveSubscription
 
 class UserProfile(models.Model):
+    """
+    Model representing user profile information.
+
+    Fields:
+    - user: One-to-One relationship with the User model.
+    - bio: Text field for user's bio or description.
+    - birth_date: Date field for user's birth date.
+    - full_name: Char field for user's full name.
+    - email: Email field for user's email address.
+    - phone_number: Char field for user's phone number.
+    - country: Char field for user's country.
+    - postcode: Char field for user's postal code.
+    - town_or_city: Char field for user's town or city.
+    - street_address1: Char field for user's street address (line 1).
+    - street_address2: Char field for user's street address (line 2).
+    - county: Char field for user's county.
+
+    Methods:
+    - get_active_subscriptions: Returns active subscriptions for the user.
+
+    Signal Receiver:
+    - create_or_update_user_profile: Creates or updates a user profile upon User creation or update.
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
     birth_date = models.DateField(null=True, blank=True)

@@ -4,8 +4,6 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from subscription.models import SubscriptionPlan
 
-import logging
-logger = logging.getLogger(__name__)
 
 def bag(request):
     """
@@ -15,6 +13,15 @@ def bag(request):
 
 
 def add_to_bag(request):
+    """
+    Add a subscription plan to the user's shopping bag.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        Redirects to the 'get_started' page after adding the subscription plan to the bag.
+    """
     if request.method == 'POST':
         subscription_plan_id = request.POST.get('subscription_plan_id')
         subscription_plan = get_object_or_404(SubscriptionPlan, id=subscription_plan_id)

@@ -6,9 +6,9 @@
     <h1 class="text-center pb-5">Edit Subscription Plan</h1>
     <div class="col-10 offset-1 col-lg-6 offset-lg-3">
         {% load crispy_forms_tags %}
-        <form method="post" class="add-plan-form" action="{% url 'admin_access_add' %}" enctype="multipart/form-data">
+        <form method="post" class="add-plan-form" action="{% url 'admin_access_edit' subscription_id %}" enctype="multipart/form-data">
             {% csrf_token %}
-            {% crispy form %}
+            {{ form|crispy }}
         </form>
         <a href="{% url 'admin_access' %}">
             <button class="button-62 btn-edit col-8 offset-2"><i class="fa-solid fa-arrow-left pr-2"></i> Return</button>

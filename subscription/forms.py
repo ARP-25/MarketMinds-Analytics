@@ -4,6 +4,16 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit
 
 class SubscriptionPlanForm(forms.ModelForm):
+    """
+    Form for creating or adding a new Subscription Plan.
+
+    Allows users to input details for a new subscription plan, including
+    title, image, description, price, details, and SKU. Provides placeholders,
+    form layout, and helper functionality for creating or editing a plan.
+
+    Attributes:
+    - custom_attribute: A custom attribute indicating form usage ('edit' or None).
+    """
     class Meta:
         model = SubscriptionPlan
         fields = '__all__'
@@ -18,6 +28,7 @@ class SubscriptionPlanForm(forms.ModelForm):
         self.fields['price'].widget.attrs['placeholder'] = 'Enter Price...'
         self.fields['details'].widget.attrs['placeholder'] = 'Enter Details in this Format: Detail1, Detail2, Detail3...'
         self.fields['sku'].widget.attrs['placeholder'] = 'Enter SKU... Optional'
+
         self.helper = FormHelper(self)
         self.helper.form_method = 'post'
         self.helper.form_enctype = 'multipart/form-data'
@@ -40,3 +51,24 @@ class SubscriptionPlanForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = False
+
+
+class SubscriptionPlanEditForm(forms.ModelForm):
+    """
+    Form for editing an existing Subscription Plan.
+
+    Similar to SubscriptionPlanForm but intended for editing existing plans.
+    Utilizes TextInput widgets for styling across fields.
+
+    Attributes:
+    - model: The SubscriptionPlan model.
+    - fields: All fields from the SubscriptionPlan model.
+    - widgets: Widgets for styling fields uniformly.
+    """
+    class Meta:
+        model = SubscriptionPlan
+        fields = '__all__'
+        widgets = {
+            field: forms.TextInput(attrs={'class': 'stripe-style-input'})
+            for field in fields
+        }

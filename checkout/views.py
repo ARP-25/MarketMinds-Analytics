@@ -14,12 +14,20 @@ from profiles.models import UserProfile
 
 
 def checkout(request):
+    """
+    Handles the checkout process for subscriptions.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        Renders the checkout page and processes subscription payments.
+        If successful, renders 'checkout_success.html' after subscription creation.
+    """
     bag = request.session.get('bag_items', [])
     if not bag:
         messages.error(request, 'There\'s nothing in your bag at the moment')
-
     if request.user.is_authenticated:
-
         if request.method == 'POST':
             for plan_id in bag:
                 subscription_plan = get_object_or_404(SubscriptionPlan, id=plan_id)
@@ -30,8 +38,7 @@ def checkout(request):
                     subscription.subscription_plan = subscription_plan
                     subscription.end_date = timezone.now() + timedelta(days=30)
                     subscription.save()
-                    messages.success(request, f'Thank you for subscribing to {subscription_plan.title}!')
-                    
+                    messages.success(request, f'Thank you for subscribing to {subscription_plan.title}!')                   
                     if 'save-info' in request.POST:                    
                         user_profile = UserProfile.objects.get(user=request.user)
                         data_from_form = active_subscription_form.cleaned_data
@@ -39,8 +46,7 @@ def checkout(request):
                         for field in form_fields:
                             if hasattr(user_profile, field):
                                 setattr(user_profile, field, data_from_form[field])
-                        user_profile.save()
-    
+                        user_profile.save()   
                     if 'bag_items' in request.session:
                         del request.session['bag_items']
 

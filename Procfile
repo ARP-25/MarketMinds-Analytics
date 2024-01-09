@@ -1,0 +1,1 @@
+web: gunicorn marketminds_analytics.wsgi

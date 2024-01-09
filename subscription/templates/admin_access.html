@@ -60,7 +60,7 @@
                         <h2 class="text-info text-center pt-2 pb-1 mb-0"><strong>End Preview</strong></h2>
                     </div>
                     <div>
-                        <form method="POST" action="{% url 'admin_access_edit' subscription_id=s.id %}">
+                        <form method="GET" action="{% url 'admin_access_edit' subscription_id=s.id %}">
                             {% csrf_token %}
                             <button class="button-62 btn-edit col-8" type="submit">
                                 <i class="fa-solid fa-pen-to-square p-2"></i>

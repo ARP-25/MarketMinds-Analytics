@@ -2,6 +2,22 @@ from django import forms
 from .models import ActiveSubscription
 
 class ActiveSubscriptionForm(forms.ModelForm):
+    """
+    Form for user subscription information.
+
+    Fields:
+    - full_name: CharField for user's full name.
+    - email: EmailField for user's email address.
+    - phone_number: CharField for user's phone number.
+    - country: CharField for user's country.
+    - postcode: CharField for user's postal code.
+    - town_or_city: CharField for user's town or city.
+    - street_address1: CharField for user's street address (line 1).
+    - street_address2: CharField for user's street address (line 2).
+    - county: CharField for user's county.
+
+    The form initializes with placeholder text and styling for a Stripe-style input.
+    """
     class Meta:
         model = ActiveSubscription
         fields = ['full_name', 'email', 'phone_number', 'country', 'postcode', 'town_or_city', 'street_address1', 'street_address2', 'county']

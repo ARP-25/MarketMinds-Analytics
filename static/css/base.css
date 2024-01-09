@@ -68,10 +68,10 @@ hr.border-secondary {
 
 .landing-img {
     width: 100%;
-    height: 400px; 
+    height: 100%;
     background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703678174/AdobeStock_230617255_gmfqlb.jpg');
-    background-size: cover; 
     background-position: center center; 
+
     animation-name: scaleImage;
     animation-duration: 3s;
     animation-fill-mode: forwards;
@@ -102,6 +102,7 @@ hr.border-secondary {
 }
 .container-fluid-img {
     width: 100%;
+    height: 400px;
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 70px;
@@ -157,7 +158,7 @@ hr.border-secondary {
 .btn-subscribe {
     height: 65px;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 13px;
 }
 
 /* Custom Container */
@@ -208,7 +209,7 @@ hr.border-secondary {
     height: 70px;
 }
 .sub-description {
-    min-height: 150px;
+    min-height: 180px;
 }
 .sub-price {
     height: 70px;
@@ -358,8 +359,18 @@ text-decoration: none;
 .modal-footer button {
     width: 100%;
 }
-
+/* Toast */
+.toast {
+    min-width: 250px;
+}
 @media screen and (max-width: 768px) {
+    .landing-img {
+        width: 700px;
+        height: 400px;
+      }
+    .btn-start {
+
+    }
     h2 {
         font-size: 150%;
     }
@@ -405,6 +416,7 @@ text-decoration: none;
     #profile-cart {
         text-align: center;
     }
+
 }
 
 
