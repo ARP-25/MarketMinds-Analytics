@@ -1,32 +1,67 @@
 {% extends "base.html" %}
 {% load allauth i18n socialaccount %}
+{% load crispy_forms_tags %}
 {% block head_title %}
     {% trans "Signup" %}
 {% endblock head_title %}
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Up" %}
-    {% endelement %}
-    <p>
-        {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
-    </p>
-    {% url 'account_signup' as action_url %}
-    {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-        {% slot body %}
-            {% csrf_token %}
-            {% element fields form=form unlabeled=True %}
-            {% endelement %}
-            {% if redirect_field_value %}
-                <input type="hidden"
-                       name="{{ redirect_field_name }}"
-                       value="{{ redirect_field_value }}" />
-            {% endif %}
-        {% endslot %}
-        {% slot actions %}
-            {% element button tags="prominent,signup" type="submit" %}
-                {% trans "Sign Up" %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+    <div class="container">
+        <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 mt-5 pb-5">
+            <h1>Sign Up</h1>
+            <p>Already have an account? Then please <a href="/accounts/login/">sign in</a>.</p>
+        
+            <form method="post" action="/accounts/signup/" class="crispy">
+                {% csrf_token %}
+                
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="id_email">Email:</label>
+                        <input class="stripe-style-input form-control" type="email" name="email" placeholder="Email address" autocomplete="email" maxlength="320" required="" id="id_email">
+                    </div>
+                </div>
+        
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="id_email2">Email (again):</label>
+                        <input class="stripe-style-input form-control" type="email" name="email2" placeholder="Email address confirmation" maxlength="320" required="" id="id_email2">
+                    </div>
+                </div>
+        
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="id_username">Username:</label>
+                        <input class="stripe-style-input form-control" type="text" name="username" placeholder="Username" autocomplete="username" minlength="4" maxlength="150" required="" id="id_username">
+                    </div>
+                </div>
+        
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="id_password1">Password:</label>
+                        <input class="stripe-style-input form-control" type="password" name="password1" placeholder="Password" autocomplete="new-password" required="" id="id_password1">
+                        <span class="helptext">
+                            <ul>
+                                <li>Your password can’t be too similar to your other personal information.</li>
+                                <li>Your password must contain at least 8 characters.</li>
+                                <li>Your password can’t be a commonly used password.</li>
+                                <li>Your password can’t be entirely numeric.</li>
+                            </ul>
+                        </span>
+                    </div>
+                </div>
+        
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="id_password2">Password (again):</label>
+                        <input class="stripe-style-input form-control" type="password" name="password2" placeholder="Password (again)" autocomplete="new-password" required="" id="id_password2">
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col-md-12 pt-2">
+                        <button type="submit" class="button-62 btn-edit col-10 offset-1 "><i class="fa-solid fa-pen-to-square pr-2"></i>Sign Up</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock content %}

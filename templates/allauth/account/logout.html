@@ -9,13 +9,13 @@
             {% endelement %}
             <p>{% trans 'Are you sure you want to sign out?' %}</p>
             </div>
-        <form method="post" action="/accounts/logout/">   
-            <input type="hidden" name="csrfmiddlewaretoken" value="LlSOJERioCRaO6EiPd2DKTdJ2CxWfMd85xKJCKmv10WI0EfDhmLErG1e8O8JxCbU">
-            <button type="submit" class="button-62 btn-edit col-10 offset-1">
-                <i class="fa-solid fa-power-off pr-2"></i>
-                    Sign Out       
-            </button>    
-        </form>
+            <form method="post" action="/accounts/logout/">   
+                {% csrf_token %}
+                <button type="submit" class="button-62 btn-edit col-10 offset-1">
+                    <i class="fa-solid fa-power-off pr-2"></i>
+                        Sign Out       
+                </button>    
+            </form>
         </div>
     </div>
 {% endblock content %}
