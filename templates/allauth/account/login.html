@@ -1,34 +1,55 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% load allauth account socialaccount %}
+{% load crispy_forms_tags %} 
+
 {% block head_title %}
     {% trans "Sign In" %}
 {% endblock head_title %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign In" %}
-    {% endelement %}
-    <p>
-        {% blocktrans %}If you have not created an account yet, then please
-    <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
-    </p>
-    {% url 'account_login' as login_url %}
-    {% element form form=form method="post" action=login_url tags="entrance,login" %}
-        {% slot body %}
-            {% csrf_token %}
-            {% element fields form=form unlabeled=True %}
-            {% endelement %}
-            {% if redirect_field_value %}
-                <input type="hidden"
-                       name="{{ redirect_field_name }}"
-                       value="{{ redirect_field_value }}" />
-            {% endif %}
-        {% endslot %}
-        {% slot actions %}
-            {% element button type="submit" tags="prominent,login" %}
-                {% trans "Sign In" %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+<div class="container">  
+    <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 mt-5 pb-5">
+        <h1>       
+            Sign In        
+        </h1>
+        <p>
+            If you have not created an account yet, then please <a href="/accounts/signup/">sign up</a> first.
+        </p>
+
+        <div class="">
+            <form method="post" action="/accounts/login/" class="crispy">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="id_login" class="form-label">Login:</label>
+                        <input class="stripe-style-input form-control" type="text" name="login" placeholder="Username or email" autocomplete="email" required="" id="id_login">      
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="id_password" class="form-label">Password:</label>
+                        <input type="password" name="password" placeholder="Password" autocomplete="current-password" required="" id="id_password" class="stripe-style-input form-control">
+                        <span class="helptext"><a href="/accounts/password/reset/">Forgot your password?</a></span>      
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label for="id_remember" class="form-label">Remember Me:</label>
+                        <input type="checkbox" name="remember" id="id_remember">       
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="button-62 btn-edit col-10 offset-1" >
+                            <i class="fa-solid fa-right-to-bracket pr-2"></i>Sign In
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}
