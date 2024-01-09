@@ -6,6 +6,8 @@
     {% trans "Confirm Email Address" %}
 {% endblock head_title %}
 {% block content %}
+<div class="container">
+    <div class="col-10 offset-1 col-sm-8 offset-sm-2 mt-5 pb-5 text-center">
     {% element h1 %}
         {% trans "Confirm Email Address" %}
     {% endelement %}
@@ -19,9 +21,9 @@
             {% element form method="post" action=action_url %}
                 {% slot actions %}
                     {% csrf_token %}
-                    {% element button type="submit" %}
-                        {% trans 'Confirm' %}
-                    {% endelement %}
+                    <button class="button-62 btn-edit col-10 col-md-6" type="submit">
+                        Confirm                   
+                    </button>
                 {% endslot %}
             {% endelement %}
         {% else %}
@@ -35,4 +37,7 @@
             {% blocktrans %}This email confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new email confirmation request</a>.{% endblocktrans %}
         </p>
     {% endif %}
+
+</div>
+</div>
 {% endblock content %}
