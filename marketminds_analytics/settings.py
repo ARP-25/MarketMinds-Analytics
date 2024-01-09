@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['8000-arp25-marketmindsanaly-f0kfoh7ork3.ws-eu107.gitpod.io']
 CSRF_TRUSTED_ORIGINS = ['https://8000-arp25-marketmindsanaly-f0kfoh7ork3.ws-eu107.gitpod.io']
 
-# Email
+## Email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_PORT = 587
