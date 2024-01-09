@@ -3,8 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from .models import SubscriptionPlan
 from django.contrib import messages
-from .forms import SubscriptionPlanForm, SubscriptionPlanEditForm
-
+from .forms import SubscriptionPlanForm
 
 class GetStarted(ListView):
     """
@@ -110,7 +109,7 @@ def admin_access_edit(request, subscription_id):
     """
 
     subscriptionPlan = SubscriptionPlan.objects.get(pk=subscription_id)
-    form2 = SubscriptionPlanForm(instance=subscriptionPlan)
+    form2 = SubscriptionPlanForm(instance=subscriptionPlan, custom_attribute_value='edit')
 
     if request.method == 'POST':       
         if form2.is_valid():
@@ -119,17 +118,3 @@ def admin_access_edit(request, subscription_id):
             return redirect('admin_access')  
       
     return render(request, 'admin_access_edit.html', {'form': form2, 'subscription_id': subscription_id})
-
-
-#def edit_profile(request):
-#   user_profile = UserProfile.objects.get(user=request.user)
-#   if request.method == 'POST':
-#      form = UserProfileForm(request.POST, instance=user_profile)
-#      if form.is_valid():
-#           form.save()
-#           messages.success(request, f"Profile Successfully updated!")
-#      return redirect('view_profile')
-#   else:
-#       form = UserProfileForm(instance=user_profile)
-#        
-#   return render(request, 'profiles/edit_profile.html', {'form': form})

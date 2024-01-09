@@ -46,11 +46,12 @@ hr.border-secondary {
 .dropdown-content {
     display: none;
     position: absolute;
-    min-width: 100px;
     z-index: 1;
-    right: 100px;
+    right: 155px;
     top: 50px;
     border-radius: 3px;
+    position: absolute;
+    width: 120px;
 }
 .dropdown-content a{
     color: whitesmoke;
@@ -415,6 +416,11 @@ text-decoration: none;
 @media screen and (max-width: 992px) {
     #profile-cart {
         text-align: center;
+    }
+    .dropdown-content {
+        position: absolute;
+        left: 30%;
+        width: 120px;
     }
 
 }

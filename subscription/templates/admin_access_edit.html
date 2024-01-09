@@ -8,12 +8,11 @@
         {% load crispy_forms_tags %}
         <form method="post" class="add-plan-form" action="{% url 'admin_access_edit' subscription_id %}" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form|crispy }}
+            {% crispy form %}
         </form>
         <a href="{% url 'admin_access' %}">
             <button class="button-62 btn-edit col-8 offset-2"><i class="fa-solid fa-arrow-left pr-2"></i> Return</button>
         </a>
     </div>
 </div>
-
 {% endblock %}

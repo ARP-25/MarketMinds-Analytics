@@ -26,7 +26,7 @@ class SubscriptionPlanForm(forms.ModelForm):
         self.fields['image'].widget.attrs['placeholder'] = 'Enter Image Path...'
         self.fields['description'].widget.attrs['placeholder'] = 'Enter Description...'
         self.fields['price'].widget.attrs['placeholder'] = 'Enter Price...'
-        self.fields['details'].widget.attrs['placeholder'] = 'Enter Details in this Format: Detail1, Detail2, Detail3...'
+        self.fields['details'].widget.attrs['placeholder'] = 'Enter Details in this Format: Detail_1, Detail_2, Detail_3,...Detail_x'
         self.fields['sku'].widget.attrs['placeholder'] = 'Enter SKU... Optional'
 
         self.helper = FormHelper(self)

@@ -1,0 +1,75 @@
+{% load static %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato&family=Rubik+Mono+One&display=swap');
+    body {
+        font-family: Arial, sans-serif;
+        background-color: black;
+    }
+    .container {
+        text-align: center;
+        padding-top: 100px;
+    }
+    h1 {
+        font-size: 48px;
+        color: white;
+    }
+    p {
+        font-size: 18px;
+        color: #555;
+    }
+    i {
+        padding-right:5px;
+    }
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    button {
+        margin-top :60px;
+    }
+    .button-62 {
+    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+    border: 0;
+    border-radius: 50px;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Lato', sans-serif;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow .2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    text-decoration: none;
+    color: black;
+}
+.button-62:not([disabled]):focus {
+    box-shadow: 0 0 .25rem rgba(230, 228, 226, 0.5), -.125rem -.125rem 1rem rgba(204, 203, 199, 0.5), .125rem .125rem 1rem rgba(190, 189, 186, 0.5);
+}
+.button-62:not([disabled]):hover {
+    box-shadow: 0 0 .25rem rgba(202, 201, 198, 0.5), -.125rem -.125rem 1rem rgba(204, 203, 199, 0.5), .125rem .125rem 1rem rgba(204, 203, 199, 0.5);
+    color: whitesmoke;
+}
+.btn-edit {
+    background: linear-gradient(to bottom right, whitesmoke, #303030);
+    border-radius: 5px;
+    font-size: 90%;
+    width: 200px;
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="container">
+    <h1 style="font-family: Rubik Mono One">Oops! Page Not Found</h1>
+    <p>Looks like the data went on an adventurous rollercoaster ride</p>
+    <button class="button-62 btn-edit">
+        <a href="/"><i class="fa-solid fa-backward-step mr-2"></i>Go back to Homepage</a>
+    </button>
+</div>
+
