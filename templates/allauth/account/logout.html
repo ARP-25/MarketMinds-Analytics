@@ -1,27 +1,23 @@
 {% extends "base.html" %}
 {% load allauth i18n %}
-{% block head_title %}
-    {% trans "Sign Out" %}
-{% endblock head_title %}
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Out" %}
-    {% endelement %}
-    <p>{% trans 'Are you sure you want to sign out?' %}</p>
-    {% url 'account_logout' as action_url %}
-    {% element form method="post" action=action_url no_visible_fields=True %}
-        {% slot body %}
-            {% csrf_token %}
-            {% if redirect_field_value %}
-                <input type="hidden"
-                       name="{{ redirect_field_name }}"
-                       value="{{ redirect_field_value }}" />
-            {% endif %}
-        {% endslot %}
-        {% slot actions %}
-            {% element button type="submit" %}
-                {% trans 'Sign Out' %}
+    <div class="container">  
+        <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 mt-5 pb-5">
+            <div class="col-10 offset-1 text-center">
+            {% element h1 %}
+            {% trans "Sign Out" %}
             {% endelement %}
-        {% endslot %}
-    {% endelement %}
+            <p>{% trans 'Are you sure you want to sign out?' %}</p>
+            </div>
+        <form method="post" action="/accounts/logout/">   
+            <input type="hidden" name="csrfmiddlewaretoken" value="LlSOJERioCRaO6EiPd2DKTdJ2CxWfMd85xKJCKmv10WI0EfDhmLErG1e8O8JxCbU">
+            <button type="submit" class="button-62 btn-edit col-10 offset-1">
+                <i class="fa-solid fa-power-off pr-2"></i>
+                    Sign Out       
+            </button>    
+        </form>
+        </div>
+    </div>
 {% endblock content %}
+
+
