@@ -72,3 +72,12 @@ class SubscriptionPlanEditForm(forms.ModelForm):
             field: forms.TextInput(attrs={'class': 'stripe-style-input'})
             for field in fields
         }
+
+class SubscriptionPlanForm2(forms.ModelForm):
+    class Meta:
+        model = SubscriptionPlan
+        fields = '__all__'
+        widgets = {
+            field: forms.TextInput(attrs={'class': 'stripe-style-input'})
+            for field in fields
+        }
