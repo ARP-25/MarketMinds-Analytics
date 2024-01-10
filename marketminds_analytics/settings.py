@@ -259,7 +259,7 @@ DATETIME_FORMAT = 'Y-m-d H:i'
 
 
 if 'USE_AWS' in os.environ:
-    # Bucket Config
+    # Bucket Confi
     AWS_STORAGE_BUCKET_NAME = 'arp-25-boutique-ado'
     AWS_S3_REGION_NAME = 'eu-north-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
