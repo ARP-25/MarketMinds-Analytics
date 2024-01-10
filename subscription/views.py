@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from .models import SubscriptionPlan
 from django.contrib import messages
-from .forms import SubscriptionPlanForm, SubscriptionPlanEditForm, SubscriptionPlanForm2
+from .forms import SubscriptionPlanForm, SubscriptionPlanForm2
 
 class GetStarted(ListView):
     """
@@ -94,19 +94,30 @@ def admin_access_delete(request, subscription_id):
 
 
 
-
-
-
 def admin_access_edit(request, subscription_id):
-    subscription = SubscriptionPlan.objects.get(pk=subscription_id)
-    
+    """
+    View function handling the editing of a subscription plan by ID.
+
+    Retrieves the subscription plan by its ID and renders a form to edit it.
+    If the request method is POST and the form is valid, it updates the plan
+    and redirects to the 'admin_access' page with a success message.
+
+    Args:
+    - request: HTTP request object.
+    - subscription_id: ID of the subscription plan to edit.
+
+    Returns:
+    - Renders a form to edit the subscription plan details.
+    - If the form is submitted and valid, redirects to 'admin_access'
+      with a success message after updating the subscription plan.
+    """
+    subscription = SubscriptionPlan.objects.get(pk=subscription_id) 
     if request.method == 'POST':
         form = SubscriptionPlanForm2(request.POST, request.FILES, instance=subscription)
         if form.is_valid():
             form.save()
             messages.success(request, f"{subscription.title} has been successfully edited!")
-            return redirect('admin_access')  # Replace 'admin_access' with your appropriate URL name
-
+            return redirect('admin_access') 
     else:
         form = SubscriptionPlanForm(instance=subscription)
     

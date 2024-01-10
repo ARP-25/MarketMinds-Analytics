@@ -9,13 +9,16 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
 import os
 import dj_database_url
 from django.contrib.messages import constants as messages
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Allow amiresponsive
+X_FRAME_OPTIONS = 'ALLOW-FROM https://ui.dev/amiresponsive'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -28,15 +31,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['*', '8000-arp25-marketmindsanaly-f0kfoh7ork3.ws-eu107.gitpod.io', 'marketminds-analytics-31d309061593.herokuapp.com',]
 CSRF_TRUSTED_ORIGINS = ['https://8000-arp25-marketmindsanaly-f0kfoh7ork3.ws-eu107.gitpod.io']
 
-## Email
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#EMAIL_HOST = 'smtp-mail.outlook.com'
-#EMAIL_PORT = 587
-#EMAIL_USE_TLS = True
-#EMAIL_HOST_USER = 'angelo.pucci@outlook.de'
-#EMAIL_HOST_PASSWORD = 'angP2508+'
-#DEFAULT_FROM_EMAIL = 'angelo.pucci@outlook.de'
 
+# Email Setup to enable django-allauth sending confimation etc
 EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
@@ -45,6 +41,7 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
+# Base settings for django-allauth
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
@@ -54,7 +51,6 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,17 +60,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_summernote',
-
+    # Django-allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
+    # Custom
     'home',
     'subscription',
     'bag',
     'checkout',
     'profiles',
-    
+    # Other
     'crispy_forms',
     'crispy_bootstrap4',
     'storages'
@@ -105,18 +101,18 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request', # required by allauth
+                'django.template.context_processors.request', # Django-allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'bag.contexts.bag_contents',
             ],
             'libraries': {
-                'custom_filters': 'home.custom_filters',  
+                'custom_filters': 'home.custom_filters',  # Custom
             },
             'builtins': [
-                'crispy_forms.templatetags.crispy_forms_tags',
-                'crispy_forms.templatetags.crispy_forms_field',
+                'crispy_forms.templatetags.crispy_forms_tags',  # Other
+                'crispy_forms.templatetags.crispy_forms_field', # Other
             ]
         },
     },
@@ -137,9 +133,7 @@ WSGI_APPLICATION = 'marketminds_analytics.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-
-
+# Switching Database from Production or Development
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
@@ -156,7 +150,6 @@ else:
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -175,7 +168,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -195,12 +187,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# This is neccessary for (upload_to='images') to execute
+# Media files 
 MEDIA_URL = '/media/'  
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 # Set message storage backend to use cookies
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
@@ -239,25 +229,8 @@ LOGGING = {
 
 DATETIME_FORMAT = 'Y-m-d H:i'
 
-# Connect Django with AWS
-#if 'USE_AWS' in os.environ:
-#    # Bucket Config
-#    AWS_STORAGE_BUCKET_NAME = 'marketminds'
-#    AWS_S3_REGION_NAME = 'eu-north-1'
-#   AWE_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-#    AWE_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-#    # Tell Django where Static Files come from in production
-#    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
-#    # Static and Media Files
-#    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-#    STATICFILES_LOCATION = 'static'
-#    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
-#    MEDIAFILES_LOCATION = 'media'
-#    # Override static and media URLs in production
-#    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
-#    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 
-
+# AWS settings for storing static and media files in an S3 bucket
 if 'USE_AWS' in os.environ:
     # Bucket Confi
     AWS_STORAGE_BUCKET_NAME = 'marketminds-analytics'
