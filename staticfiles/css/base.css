@@ -1,0 +1,428 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Rubik+Mono+One&display=swap');
+
+body {
+    background-color:  #030303; 
+    color: white;
+    font-family: 'Lato', sans-serif;
+}
+.inherit-color {
+    color: inherit !important;
+  }
+a:hover {
+    text-decoration: none; 
+}
+.nav-element {
+    font-size: 110%;
+}
+
+.logo-p {
+    margin-bottom: 0px;
+    color: #2DEDFA;
+}
+
+.nav-p {
+    color: #CCCCCC;
+    margin-bottom: -5px;
+    transition: color 0.2s ease-in-out; 
+}
+.nav-p:hover {
+    color: #db9e02; 
+}
+
+.nav-fa {
+    font-size:140%
+}
+.theme-color {
+    color: #db9e02;
+}
+.contrast-grey {
+    color: #adb5bd;
+}
+hr.border-secondary {
+
+    border-width: 5px;
+}
+/* Dropdown Profile */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    right: 155px;
+    top: 50px;
+    border-radius: 3px;
+    position: absolute;
+    width: 120px;
+}
+.dropdown-content a{
+    color: whitesmoke;
+    transition: color 0.2s ease-in-out; 
+}
+.dropdown-content a:hover{
+    color: black;
+    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+}
+.show {
+    display: block;
+}
+
+
+
+.landing-img {
+    width: 100%;
+    height: 100%;
+    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703678174/AdobeStock_230617255_gmfqlb.jpg');
+    background-position: center center; 
+
+    animation-name: scaleImage;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes scaleImage {
+    from {
+        background-size: 100%; /* Start with original size */
+    }
+    to {
+        background-size: 110%; /* Scale the image to 110% */
+    }
+}
+
+.service-img {
+    width: 100%;
+    height: 700px; 
+    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703700081/Unbenannt_16_ciqry8.png');
+    background-size: cover; 
+    background-position: center center; 
+}
+.contact-img {
+    width: 100%;
+    height: 400px; 
+    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703845968/Design_ohne_Titel_1_fhxhsr.png');
+    background-size: cover; 
+    background-position: center center; 
+}
+.container-fluid-img {
+    width: 100%;
+    height: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 70px;
+}
+.service-text {
+    padding-left: 6%;
+}
+.cred-div {
+    margin-bottom: 70px;
+}
+.contact-sec {
+    height: 300px;
+    margin-bottom: 85px;
+}
+/* Custom Button */
+.button-62 {
+    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+    border: 0;
+    border-radius: 50px;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Lato', sans-serif;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow .2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    text-decoration: none;
+    color: black;
+}
+.button-62:not([disabled]):focus {
+    box-shadow: 0 0 .25rem rgba(230, 228, 226, 0.5), -.125rem -.125rem 1rem rgba(204, 203, 199, 0.5), .125rem .125rem 1rem rgba(190, 189, 186, 0.5);
+}
+.button-62:not([disabled]):hover {
+    box-shadow: 0 0 .25rem rgba(202, 201, 198, 0.5), -.125rem -.125rem 1rem rgba(204, 203, 199, 0.5), .125rem .125rem 1rem rgba(204, 203, 199, 0.5);
+    color: whitesmoke;
+}
+.white-line {
+    height: 2px; 
+    background-color: white; 
+    width: 100%; 
+}
+.btn-start {
+    padding: 0px 70px 0px 70px;
+}
+.btn-subscribe {
+    height: 65px;
+    width: 100%;
+    border-radius: 13px;
+}
+
+/* Custom Container */
+.container-2 {
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    padding: 20px 0px 20px 150px
+}
+  
+.top, .middle, .bottom {
+    width: 100%; 
+    text-align: center; 
+}
+  
+.top {
+    align-self: flex-start;
+}
+  
+.middle {
+    align-self: center;
+}
+
+.bottom {
+    align-self: flex-end;
+}
+
+.container-2 > * {
+    margin: 10px 0; 
+}
+
+/* Subscription Plans */
+.special-offer {
+    border: solid 1px #db9e02;
+}
+.square-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+    height: 120px;
+}
+.square-image img {
+    max-width: 100%;
+}
+.sub-title {
+    height: 70px;
+}
+.sub-description {
+    min-height: 180px;
+}
+.sub-price {
+    height: 70px;
+}
+.sub-details {
+    height: 300px;
+}
+
+/* Bag */
+.btn-bag {
+    border-radius: 5px;
+    font-size: 15px;
+    width: 90%;
+}
+/* Messages */
+.message-container {
+    position: fixed;
+    top: 72px;
+    right: 15px;
+    z-index: 99999999999;
+}
+.btn-toast {
+    background: linear-gradient(to bottom right, whitesmoke, #303030);
+    border-radius: 5px;
+    font-size: 90%;
+    width: 30%;
+}
+
+/* Admin Access */
+.btn-edit {
+    background: linear-gradient(to bottom right, whitesmoke, #303030);
+    border-radius: 5px;
+    font-size: 90%;
+}
+
+.btn-delete {
+    background: linear-gradient(to bottom right, #adb5bd, #EE0000);
+    border-radius: 5px;
+    font-size: 90%;
+}
+.hr-admin-border{
+    border-top: 5px solid #17a2b8;
+    margin:0;
+    padding:0;
+}
+.preview {
+    transition: transform 0.4s ease-in-out; /
+  }
+  
+  /* Hover effect */
+  .preview:hover {
+    transform: scale(1.04); 
+
+  }
+.col-10-x {
+    width: 86%;
+}
+
+/* Pagination Control */
+a.page-link {
+    background-color: #343a40;
+    color:white;
+    
+}
+.page-link{
+    border: none;
+}
+
+li.page-item.active .page-link{
+    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+    color: black;
+    
+}
+li.page-item .page-link:hover {
+    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+    color: black;
+}
+
+
+
+
+/* Profiles */
+/* Add this in your CSS file or style section */
+#confirmCancelBtn {
+    background: linear-gradient(to bottom right, #adb5bd, green);
+    width: 30%;
+    min-width: 100px;
+}
+#closeCancelBtn {
+    background: linear-gradient(to bottom right, #adb5bd, #EE0000);
+    width: 30%;
+    min-width: 100px;
+}
+.cancelSubscriptionBtn {
+    background: linear-gradient(to bottom right, #adb5bd, #EE0000);
+    border-radius: 5px;
+    font-size: 90%;
+}
+dl dd {
+    color: #ababab;
+}
+/* Stripe Styles */
+.StripeElement,
+.stripe-style-input {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 0px;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus,
+.stripe-style-input:focus,
+.stripe-style-input:active {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+.stripe-style-input::placeholder {
+    color: #aab7c4;
+}
+
+.fieldset-label {
+    position: relative;
+    right: .5rem;
+}
+
+#payment-form .form-control,
+#card-element {
+    color: #000;
+    border: 1px solid #000;
+}
+.a-inherit, .a-inherit:hover {
+color: inherit; 
+text-decoration: none; 
+}
+.btn.custom-padding {
+    padding: 0; 
+}
+.modal-footer button {
+    width: 100%;
+}
+/* Toast */
+.toast {
+    min-width: 250px;
+}
+@media screen and (max-width: 768px) {
+    .landing-img {
+        width: 700px;
+        height: 400px;
+      }
+    .btn-start {
+
+    }
+    h2 {
+        font-size: 150%;
+    }
+    .service-text {
+        padding: 4% 8%;
+    }
+    .service-img {
+        height: 550px;
+    }
+    .cred-div {
+        text-align: center;
+        margin-top: -30px;
+    }
+    .offset-768-1 {
+        margin-left: 8.333333%;
+    }
+    .container-2 {
+        display: flex;
+        flex-direction: column; 
+        justify-content: space-between;
+        padding: 50px 0 50px 0;
+      }
+    .h2-exp {
+        font-size: 300%;
+    }
+    .h3-exp {
+        font-size: 170%;
+    }
+    h5 {
+        font-size: 100%;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1056px) {
+    .h2-exp {
+        font-size: 200%;
+    }
+    .h3-exp {
+        font-size: 140%;
+    }
+}
+@media screen and (max-width: 992px) {
+    #profile-cart {
+        text-align: center;
+    }
+    .dropdown-content {
+        position: absolute;
+        left: 30%;
+        width: 120px;
+    }
+
+}
+
+
