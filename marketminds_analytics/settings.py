@@ -29,6 +29,14 @@ ALLOWED_HOSTS = ['*', '8000-arp25-marketmindsanaly-f0kfoh7ork3.ws-eu107.gitpod.i
 CSRF_TRUSTED_ORIGINS = ['https://8000-arp25-marketmindsanaly-f0kfoh7ork3.ws-eu107.gitpod.io']
 
 ## Email
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_HOST = 'smtp-mail.outlook.com'
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
+#EMAIL_HOST_USER = 'angelo.pucci@outlook.de'
+#EMAIL_HOST_PASSWORD = 'angP2508+'
+#DEFAULT_FROM_EMAIL = 'angelo.pucci@outlook.de'
+
 EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
@@ -69,6 +77,7 @@ INSTALLED_APPS = [
     
     'crispy_forms',
     'crispy_bootstrap4',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -229,3 +238,23 @@ LOGGING = {
 }
 
 DATETIME_FORMAT = 'Y-m-d H:i'
+
+# Connect Django with AWS
+if 'USE_AWS' in os.environ:
+    # Bucket Config
+    AWS_STORAGE_BUCKET_NAME = 'marketminds'
+    AWS_S3_REGION_NAME = 'eu-north-1'
+    AWE_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWE_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    # Tell Django where Static Files come from in production
+    AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+    # Static and Media Files
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+    # Override static and media URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}'
+
+
