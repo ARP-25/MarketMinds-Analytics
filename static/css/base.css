@@ -35,6 +35,9 @@ a:hover {
 .theme-color {
     color: #db9e02;
 }
+.bg-color-secondary {
+    background-color: #0d1b2a;
+}
 .contrast-grey {
     color: #adb5bd;
 }
@@ -118,10 +121,10 @@ hr.border-secondary {
 
 /* FB Mailchimp Section */
 .fb-mailchimp {
-    background-color: green;
+    padding: 40px 0 40px;
 }
 .fb {
-    padding: 20px;
+
 }
 .white-line-small {
     height: 3px;
@@ -131,14 +134,13 @@ hr.border-secondary {
 #mc_embed_signup {
     background-color: #030303;
     clear:left;
-    
 }
 #mc_embed_signup form {
     display: block;
     position: relative;
     text-align: left;
     margin: 0!important;
-    padding:20px;
+
   }
 #mc_embed_signup h2 {
     padding: 0;
@@ -148,7 +150,8 @@ hr.border-secondary {
 
   }
 .btn-mailchimp {
-    
+    min-width: 150px;
+    height: 38px;
 }
 
 /* Custom Button */
@@ -185,6 +188,7 @@ hr.border-secondary {
     height: 2px; 
     background-color: white; 
     width: 100%; 
+    margin-top: 60px
 }
 .btn-start {
     padding: 0px 70px 0px 70px;

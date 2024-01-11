@@ -59,7 +59,7 @@
             <a href="#" class="inherit-color nav-element pr-lg-5 p-3" id="dropdownMenu">
                 <p class="nav-p nav-fa mb-0"><i class="far fa-user"></i></p>               
             </a>
-            <div class="dropdown-content bg-dark" id="myDropdown">
+            <div class="dropdown-content bg-color-secondary" id="myDropdown">
               {% if not user.is_authenticated %}
               <a class="d-block element p-1 m-1" href="{% url 'account_login' %}">Login</a>
               <a class="d-block element p-1 m-1" href="{% url 'account_signup' %}">Register</a> 
@@ -107,7 +107,7 @@
             </div>
         </div>
       </div>
-      <div class="row pt-5 pb-5">
+      <div class="row pt-3 pb-5">
         <div class="col-5 offset-1 d-flex">
           <p class="text-secondary">
             Copyright

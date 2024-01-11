@@ -69,18 +69,25 @@
 </div>
 
 <!-- FB Mailchimp Section -->
-<section class="fb-mailchimp container">
-    <h2 class="text-center">Stay in Touch:</h2>
-    <div class="white-line-small mx-auto"></div>
-    <div class="row">
-        <div class="fb col-12 col-md-6">
-            <h3>Social</h3>
+<section class="fb-mailchimp container-fluid bg-color-secondary">
+    <div class="container">
+    <h1 class="text-center"><strong>Stay in Touch:</strong></h1>
+    <div class="white-line-small mx-auto mb-4"></div>
+    <div class="row p-3">
+
+        <div class="fb col-12 col-md-6 pl-md-3 pb-5 pb-md-0">
+            <h3 class=""><strong>Social</strong></h3>
+            <p class="text-secondary">Keep up to date with all our altest offers</p>
+            <div class="d-flex justify-content-start align-items-center">
+                <i class="fa-brands fa-square-facebook pr-2"></i><span>Follow us on Facebook!</span>
+            </div>
         </div>
-        <div class="col-12 col-md-6" id="mc_embed_shell">
+
+        <div class="col-12 col-md-6 pl-md-3" id="mc_embed_shell">
             <div id="mc_embed_signup">
-                <form action="https://herokuapp.us21.list-manage.com/subscribe/post?u=95b2e7664b9f5e1479faf3d3e&amp;id=f84a039936&amp;f_id=0085e5e6f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                <form class="bg-color-secondary" action="https://herokuapp.us21.list-manage.com/subscribe/post?u=95b2e7664b9f5e1479faf3d3e&amp;id=f84a039936&amp;f_id=0085e5e6f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
                     <div id="mc_embed_signup_scroll">
-                        <h3>Subscribe!</h3>
+                        <h3><strong>Subscribe!</strong></h3>
                         <div class="indicates-required">
                             <span class="asterisk">*</span> indicates required
                         </div>
@@ -93,25 +100,23 @@
                             <div class="response" id="mce-success-response" style="display: none;">
                             </div>
                         </div>
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                        <input type="text" name="b_95b2e7664b9f5e1479faf3d3e_f84a039936" tabindex="-1" value="">
-                    </div>
-                        <div class="optionalParent">
-                            <div class="clear foot">
-                                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button-62 btn-edit btn-mailchimp" value="Subscribe" style="border: none;">
-                                <p style="margin: 0px auto;" class="">
-                                    <a href="http://eepurl.com/iHKi12" title="Mailchimp - email marketing made easy and fun">
-                                        <span style="display: inline-block; background-color: transparent; border-radius: 4px;">
-                                            <img class="refferal_badge" src="https://res.cloudinary.com/dbui0ebjv/image/upload/v1704974903/mailchimp_white_h37dnw.png" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;">
-                                        </span>
-                                    </a>
-                                </p>
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                            <input type="text" name="b_95b2e7664b9f5e1479faf3d3e_f84a039936" tabindex="-1" value="">
+                        </div>                   
+                        <div class="custom-button-container text-center mt-3 row">
+                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                <button class="button-62 btn-edit btn-mailchimp" style="color: #0d1b2a;">Subscribe</button>
                             </div>
-                        </div>
+                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                <span class="text-secondary">Powered by</span><i class="fa-brands fa-mailchimp pl-2 display-4"></i>
+                            </div>
+                        </div>                 
                     </div>
                 </form>
             </div>
         </div>
+    
     </div>
+</div>
 </section>
 {% endblock %}
