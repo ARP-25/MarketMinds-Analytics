@@ -114,10 +114,28 @@ hr.border-secondary {
 .cred-div {
     margin-bottom: 70px;
 }
-.contact-sec {
-    height: 300px;
-    margin-bottom: 85px;
+
+
+/* FB Mailchimp Section */
+.fb-mailchimp {
+    background-color: green;
 }
+#mc_embed_signup {
+    background-color: #030303;
+    clear:left;
+    font:14px Helvetica,Arial,sans-serif;
+    width: 600px;
+}
+#mc_embed_signup form {
+    display: block;
+    position: relative;
+    text-align: left;
+    margin: 20px;
+}
+.btn-mailchimp {
+    
+}
+
 /* Custom Button */
 .button-62 {
     background: linear-gradient(to bottom right, #adb5bd, #db9e02);
