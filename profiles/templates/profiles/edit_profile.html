@@ -11,7 +11,7 @@
         <hr class="border-secondary">
         <h2 class="logo-font mb-4 text-center">Profile Information</h2>
         <hr class="border-secondary">
-        <div class="col-12">
+        <div class="col-12 menu-element">
             {% load crispy_forms_tags %}
             <form method="POST" action="{% url 'edit_profile' %}">
                 {% csrf_token %}

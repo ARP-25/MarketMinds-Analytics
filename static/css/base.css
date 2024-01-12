@@ -28,7 +28,6 @@ a:hover {
 .nav-p:hover {
     color: #db9e02; 
 }
-
 .nav-fa {
     font-size:140%
 }
@@ -42,7 +41,6 @@ a:hover {
     color: #adb5bd;
 }
 hr.border-secondary {
-
     border-width: 5px;
 }
 /* Dropdown Profile */
@@ -61,8 +59,8 @@ hr.border-secondary {
     transition: color 0.2s ease-in-out; 
 }
 .dropdown-content a:hover{
-    color: black;
-    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+    color: #000814;
+    background: linear-gradient(to bottom right, whitesmoke, #303030);;
 }
 .show {
     display: block;
@@ -235,7 +233,7 @@ hr.border-secondary {
     background: #1b263b;
 }
 .special-offer {
-    border: solid 1px #db9e02;
+    border: solid 3px #db9e02;
 }
 .square-image {
     display: flex;
@@ -335,6 +333,18 @@ li.page-item .page-link:hover {
 
 
 /* Profiles */
+.menu-element {
+    border: solid 3px #adb5bd;
+    border-radius: 10px;
+    padding: 20px;
+    background: #0d1b2a;
+}
+.menu-element-secondary {
+    border: solid 1px #adb5bd;
+    border-radius: 10px;
+    padding: 15px;
+    background: #1b4965;
+}
 /* Add this in your CSS file or style section */
 #confirmCancelBtn {
     background: linear-gradient(to bottom right, #adb5bd, green);

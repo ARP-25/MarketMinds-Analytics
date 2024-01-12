@@ -11,7 +11,7 @@
     <h2 class="mb-4 text-center">Profile Information</h2>
     <hr class="border-secondary">
     <div class="row">
-        <div class="offset-md-1 col-md-5 col-10 offset-1">
+        <div class="offset-md-0 col-md-5 col-10 offset-1 menu-element">
             <h1>Your Profile</h1>
             <div class="p-3">
             <dl>
@@ -59,11 +59,11 @@
             </div>
         </div>
         
-        <div class="offset-md-1 col-md-5 col-10 offset-1">
+        <div class="offset-md-2 col-md-5 col-10 offset-1 menu-element">
             <h1>Active Subscriptions</h1>
             {% for subscription in active_subscriptions %}
             <div class="row p-3">
-              <div class="col-12">
+              <div class="col-12 menu-element-secondary">
                 <p style="font-family: Rubik Mono One;">{{ subscription.subscription_plan.title }}</p>
                 <p>Start Date: {{ subscription.start_date }}</p>
                 <p>End Date: {{ subscription.end_date }}</p>
