@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Rubik+Mono+One&display=swap');
 
 body {
-    background-color:  #030303; 
+    background-color:  #000814; 
     color: white;
     font-family: 'Lato', sans-serif;
 }
@@ -19,6 +19,9 @@ a:hover {
     margin-bottom: 0px;
     color: #2DEDFA;
 }
+.logo {
+    width: 120%;
+}
 
 .nav-p {
     color: #CCCCCC;
@@ -26,13 +29,13 @@ a:hover {
     transition: color 0.2s ease-in-out; 
 }
 .nav-p:hover {
-    color: #db9e02; 
+    color: #00b4d8; 
 }
 .nav-fa {
     font-size:140%
 }
 .theme-color {
-    color: #db9e02;
+    color: #00b4d8;
 }
 .bg-color-secondary {
     background-color: #0d1b2a;
@@ -65,7 +68,6 @@ hr.border-secondary {
 .show {
     display: block;
 }
-
 
 
 .landing-img {
@@ -113,7 +115,9 @@ hr.border-secondary {
     padding-left: 6%;
 }
 .cred-div {
-    margin-bottom: 70px;
+    text-align: center;
+
+    margin-bottom: 50px;
 }
 
 
@@ -154,7 +158,7 @@ hr.border-secondary {
 
 /* Custom Button */
 .button-62 {
-    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+    background: linear-gradient(to bottom right, #5de0e6, #004aad);
     border: 0;
     border-radius: 50px;
     color: black;
@@ -190,6 +194,7 @@ hr.border-secondary {
 }
 .btn-start {
     padding: 0px 70px 0px 70px;
+    color: #0d1b2a;
 }
 .btn-subscribe {
     height: 65px;
@@ -230,7 +235,7 @@ hr.border-secondary {
 .subscription-plan-style {
     border: solid 3px #adb5bd;
     border-radius: 15px;
-    background: #1b263b;
+    background: #0d1b2a;
 }
 .special-offer {
     border: solid 3px #db9e02;
@@ -421,9 +426,7 @@ text-decoration: none;
         width: 700px;
         height: 400px;
       }
-    .btn-start {
 
-    }
     h2 {
         font-size: 150%;
     }
@@ -433,10 +436,7 @@ text-decoration: none;
     .service-img {
         height: 550px;
     }
-    .cred-div {
-        text-align: center;
-        margin-top: -30px;
-    }
+
     .offset-768-1 {
         margin-left: 8.333333%;
     }
@@ -456,6 +456,11 @@ text-decoration: none;
         font-size: 100%;
     }
 }
+@media screen and (min-width: 768px) {
+    .text-center-md {
+        text-align: center;
+    }
+}
 
 @media screen and (min-width: 769px) and (max-width: 1056px) {
     .h2-exp {
@@ -465,6 +470,7 @@ text-decoration: none;
         font-size: 140%;
     }
 }
+
 @media screen and (max-width: 992px) {
     #profile-cart {
         text-align: center;

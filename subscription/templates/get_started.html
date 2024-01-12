@@ -19,39 +19,41 @@
     <div class="container">
         <div class="row">
             {% for s in subscription_plans %}
-                <div class="pt-2 col-10 offset-1 col-md-8 offset-md-2 col-lg-4 offset-lg-0 subscription-plan-style">
-                    <div class="square-image">
-                        <img src="{{ s.image.url }}" alt="{{ s.title }}">
-                    </div>
-                    <div class="p-1 text-left sub-title d-flex align-items-center">
-                        <h2 style="font-family: Rubik Mono One; font-weight: 80% ">{{ s.title }}</h4>
-                    </div>
-                    <div class="containerx">
-                        <div class="p-1 text-left text-secondary sub-description">
-                            {{ s.description }}
+                <div class="pt-4 col-10 offset-1 col-md-8 offset-md-2 col-lg-4 offset-lg-0 mx-auto">
+                    <div class="subscription-plan-style p-2">
+                        <div class="square-image">
+                            <img src="{{ s.image.url }}" alt="{{ s.title }}">
                         </div>
-                    </div>
-                    <div class="p-1 text-left sub-price">
-                        <h2><span><strong>$ {{ s.price }}</strong></span><span class="pl-1" style="font-size:60%">/month</span></h2>
-                    </div>
-                    <form method="post" action="{% url 'add_to_bag' %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="subscription_plan_id" value="{{ s.id }}">                      
-                        {% if bag_items %}
-                        {% for item in bag_items %}
-                            <input type="hidden" name="bag_items" value="{{ item }}">
-                        {% endfor %}
-                        {% endif %}                        
-                        <div class="d-flex text-align-center justify-content-center pb-3">
-                            <button type="submit" class="button-62 btn-subscribe"><i class="fa-solid fa-plus"></i> Add Subscription</button>
+                        <div class="p-1 text-left sub-title d-flex align-items-center">
+                            <h2 style="font-family: Rubik Mono One; font-weight: 80% ">{{ s.title }}</h4>
                         </div>
-                    </form>
+                        <div class="containerx">
+                            <div class="p-1 text-left text-secondary sub-description">
+                                {{ s.description }}
+                            </div>
+                        </div>
+                        <div class="p-1 text-left sub-price">
+                            <h2><span><strong>$ {{ s.price }}</strong></span><span class="pl-1" style="font-size:60%">/month</span></h2>
+                        </div>
+                        <form method="post" action="{% url 'add_to_bag' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="subscription_plan_id" value="{{ s.id }}">                      
+                            {% if bag_items %}
+                            {% for item in bag_items %}
+                                <input type="hidden" name="bag_items" value="{{ item }}">
+                            {% endfor %}
+                            {% endif %}                        
+                            <div class="d-flex text-align-center justify-content-center pb-3">
+                                <button type="submit" class="button-62 btn-subscribe"><i class="fa-solid fa-plus"></i> Add Subscription</button>
+                            </div>
+                        </form>
 
-                    <div class="p-1 text-left sub-details">
-                        <p>This includes:</p>
-                        {% for detail in s.details|split_by_comma %}
-                            <p><i class="fa-solid fa-trophy pr-3"></i>  {{ detail }}</p>
-                        {% endfor %}
+                        <div class="p-1 text-left sub-details">
+                            <p>This includes:</p>
+                            {% for detail in s.details|split_by_comma %}
+                                <p><i class="fa-solid fa-trophy pr-3"></i>  {{ detail }}</p>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             {% endfor %}

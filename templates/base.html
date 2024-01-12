@@ -2,12 +2,12 @@
 <!doctype html>
 <html lang="en">
   <head>
-
     {% block meta %}
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% endblock %}
+
     {% block extra_meta %}
     {% endblock %}
 
@@ -35,18 +35,18 @@
     <!-- Main JS -->
     <script src="{% static 'js/base.js' %}"></script>
     {% endblock %}
+
     {% block extra_js %}
     {% endblock %}
 
-    <title>MarketMinds Analytics {% block extra_title %}{% endblock %}</title>
-    
+    <title>MarketMinds Analytics {% block extra_title %}{% endblock %}</title>   
   </head>
   <body>
     <header class="container-fluid py-3 px-5">
       <div class="row ">       
         <div class="col-12 col-lg-3 d-flex align-items-center justify-content-center">
           <a href="{% url 'home' %}">
-            <img src='https://res.cloudinary.com/dbui0ebjv/image/upload/v1703712552/schwarz_Beige_Modern_Gesch%C3%A4ft_Logo_1_1_shh6az.png' alt="MarketMinds Analytics Logo" class="logo">
+            <img src='https://res.cloudinary.com/dbui0ebjv/image/upload/v1705073680/newlogo_exzojr.png' alt="MarketMinds Analytics Logo" class="logo">
           </a>       
         </div>
         <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
@@ -77,6 +77,7 @@
           </div>
       </div>      
     </header>
+
     {% block page_header %}
     {% endblock %}
 
@@ -99,7 +100,7 @@
         </div>
     {% endif %}
 
-    <footer class="pt-3 pt-sm-0">
+    <footer class="pt-3 pt-sm-0 ">
       <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-10 offset-1">
@@ -107,24 +108,15 @@
             </div>
         </div>
       </div>
-      <div class="row pt-3 pb-5">
-        <div class="col-5 offset-1 d-flex">
-          <p class="text-secondary">
+      <div class="row pt-3 pb-5 d-flex justify-content-center">
+          <p class="text-secondary pr-3">
             Copyright
           </p>
-          <p class="pl-2">
+          <p class="text-center">
             <strong>© 2023 ARP-25</strong>
           </p>
-        </div>
-        <div class="col-5 text-right">
-          <i class="fa-brands fa-square-x-twitter pl-sm-4 pl-1"></i>
-          <i class="fa-brands fa-square-facebook pl-sm-4 pl-1"></i>
-          <i class="fa-brands fa-square-instagram pl-sm-4 pl-1"></i>
-          <i class="fa-brands fa-square-youtube pl-sm-4 pl-1"></i>
-        </div>
       </div>
     </footer>
-
     {% block postloadjs %}
       {{ block.super }}
         <!-- Toasts -->
