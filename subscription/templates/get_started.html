@@ -4,8 +4,8 @@
 {% block content %}
 
 <!-- Special Offer Section -->
-<div class="container mt-5">
-    <h1 class="pt-5 pb-5 d-block text-center"><strong>Our Plans</strong></h1>
+<div class="container mt-lg-5 pb-lg-4">
+    <h1 class="pt-lg-5 pb-5 d-block text-center"><strong>Our Plans</strong></h1>
     <div class="col-12 special-offer d-flex justify-content-center align-items-center">
         <h2 class="text-center text-secondary p-2">           
             📊🚀<strong class="text-white">Limited-Time Offer:</strong> Subscribe to 3, <strong class="text-white">Get 1 Free!</strong> Don't Miss Out on This Exclusive Opportunity to Elevate Your Market Game 💸💥<br>
@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             {% for s in subscription_plans %}
-                <div class="pt-4 col-10 offset-1 col-md-8 offset-md-2 col-lg-4 offset-lg-0 mx-auto">
+                <div class="col-12 offset-sm-1 col-sm-10 offset-1 col-md-8 offset-md-2 col-lg-4 offset-lg-0 mx-auto">
                     <div class="subscription-plan-style p-2">
                         <div class="square-image">
                             <img src="{{ s.image.url }}" alt="{{ s.title }}">

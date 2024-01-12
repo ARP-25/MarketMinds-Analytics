@@ -73,7 +73,7 @@ hr.border-secondary {
 .landing-img {
     width: 100%;
     height: 100%;
-    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703678174/AdobeStock_230617255_gmfqlb.jpg');
+    background-image: url('../../media/images/landing_img_large.jpg');
     background-position: center center; 
 
     animation-name: scaleImage;
@@ -237,6 +237,10 @@ hr.border-secondary {
     border: solid 3px #adb5bd;
     border-radius: 15px;
     background: #0d1b2a;
+    transition: background 0.3s ease;
+}
+.subscription-plan-style:hover {
+    background: #415a77;
 }
 .special-offer {
     border: solid 3px #db9e02;
@@ -251,6 +255,7 @@ hr.border-secondary {
 }
 .square-image img {
     max-width: 100%;
+    border-radius: 8px;
 }
 .sub-title {
     height: 70px;
