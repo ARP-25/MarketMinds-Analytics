@@ -33,13 +33,17 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-arp25-marketmindsanaly-f0kfoh7ork3.ws-eu10
 
 
 # Email Setup to enable django-allauth sending confimation etc
-EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+#EMAIL_HOST = os.environ.get('EMAIL_HOST')
+#EMAIL_PORT = os.environ.get('EMAIL_PORT')
+#EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+#EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+#EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+#DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
 # Base settings for django-allauth
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
@@ -227,7 +231,7 @@ LOGGING = {
     },
 }
 
-DATETIME_FORMAT = 'Y-m-d H:i'
+
 
 
 # AWS settings for storing static and media files in an S3 bucket
