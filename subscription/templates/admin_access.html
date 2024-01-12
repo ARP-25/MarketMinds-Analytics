@@ -14,13 +14,13 @@
 
         <div class="row">
             {% for s in subscription_plans %}              
-                <div class="pt-1 pb-5 mb-5 mt-3 col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 ">
+                <div class="pt-1 pb-5 mb-5 mt-3 col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
                     <hr class="text-info hr-admin-border">
                     <div class="div">
                         <h2 class="text-info text-center"><strong>Preview - Plan ID: {{ s.id }}</strong></h2>
                     </div>
                     <hr class="text-info hr-admin-border pb-3">
-                    <div class="preview">
+                    <div class="preview subscription-plan-style m-5 p-3">
                         <div class="square-image">
                             <img src="{{ s.image.url }}" alt="{{ s.title }}"> 
                         </div>

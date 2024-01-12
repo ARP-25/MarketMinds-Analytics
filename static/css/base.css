@@ -229,6 +229,11 @@ hr.border-secondary {
 }
 
 /* Subscription Plans */
+.subscription-plan-style {
+    border: solid 3px #adb5bd;
+    border-radius: 15px;
+    background: #1b263b;
+}
 .special-offer {
     border: solid 1px #db9e02;
 }
