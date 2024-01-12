@@ -200,6 +200,7 @@ hr.border-secondary {
     height: 65px;
     width: 100%;
     border-radius: 13px;
+    color: #001d3d;
 }
 
 /* Custom Container */
@@ -269,6 +270,7 @@ hr.border-secondary {
     border-radius: 5px;
     font-size: 15px;
     width: 90%;
+    color: #001d3d;
 }
 /* Messages */
 .message-container {
@@ -289,12 +291,14 @@ hr.border-secondary {
     background: linear-gradient(to bottom right, whitesmoke, #303030);
     border-radius: 5px;
     font-size: 90%;
+    color: #001d3d;
 }
 
 .btn-delete {
     background: linear-gradient(to bottom right, #adb5bd, #EE0000);
     border-radius: 5px;
     font-size: 90%;
+    color:#001d3d;
 }
 .hr-admin-border{
     border-top: 5px solid #17a2b8;
