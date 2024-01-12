@@ -78,3 +78,5 @@ form.addEventListener('submit', function(ev) {
     });
 });
 
+$('#id_stripe_public_key')
+

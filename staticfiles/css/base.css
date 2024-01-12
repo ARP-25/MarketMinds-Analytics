@@ -1,10 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Rubik+Mono+One&display=swap');
 
 body {
-    background-color:  #030303; 
+    background-color:  #000814; 
     color: white;
     font-family: 'Lato', sans-serif;
 }
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background-color:  #000814; 
+    }
+
 .inherit-color {
     color: inherit !important;
   }
@@ -19,6 +28,10 @@ a:hover {
     margin-bottom: 0px;
     color: #2DEDFA;
 }
+.logo {
+    width: 120%;
+    max-width: 450px;
+}
 
 .nav-p {
     color: #CCCCCC;
@@ -26,20 +39,21 @@ a:hover {
     transition: color 0.2s ease-in-out; 
 }
 .nav-p:hover {
-    color: #db9e02; 
+    color: #00b4d8; 
 }
-
 .nav-fa {
     font-size:140%
 }
 .theme-color {
-    color: #db9e02;
+    color: #00b4d8;
+}
+.bg-color-secondary {
+    background-color: #0d1b2a;
 }
 .contrast-grey {
     color: #adb5bd;
 }
 hr.border-secondary {
-
     border-width: 5px;
 }
 /* Dropdown Profile */
@@ -58,19 +72,18 @@ hr.border-secondary {
     transition: color 0.2s ease-in-out; 
 }
 .dropdown-content a:hover{
-    color: black;
-    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+    color: #000814;
+    background: linear-gradient(to bottom right,#5de0e6, #004aad);
 }
 .show {
     display: block;
 }
 
 
-
 .landing-img {
     width: 100%;
     height: 100%;
-    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703678174/AdobeStock_230617255_gmfqlb.jpg');
+    background-image: url('../../media/images/landing_img_large.jpg');
     background-position: center center; 
 
     animation-name: scaleImage;
@@ -107,20 +120,56 @@ hr.border-secondary {
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 70px;
+    margin-top: 75px;
 }
 .service-text {
     padding-left: 6%;
 }
 .cred-div {
-    margin-bottom: 70px;
+    text-align: center;
+
+    margin-bottom: 50px;
 }
-.contact-sec {
-    height: 300px;
-    margin-bottom: 85px;
+
+
+/* FB Mailchimp Section */
+.fb-mailchimp {
+    padding: 40px 0 40px;
 }
+.fb {
+
+}
+.white-line-small {
+    height: 3px;
+    background: white;
+    width: 30px;
+}
+#mc_embed_signup {
+    background-color: #030303;
+    clear:left;
+}
+#mc_embed_signup form {
+    display: block;
+    position: relative;
+    text-align: left;
+    margin: 0!important;
+
+  }
+#mc_embed_signup h2 {
+    padding: 0;
+    margin: -15px 0 !important;
+  }
+#mc_embed_signup input {
+
+  }
+.btn-mailchimp {
+    min-width: 150px;
+    height: 38px;
+}
+
 /* Custom Button */
 .button-62 {
-    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
+    background: linear-gradient(to bottom right, #5de0e6, #004aad);
     border: 0;
     border-radius: 50px;
     color: black;
@@ -152,14 +201,17 @@ hr.border-secondary {
     height: 2px; 
     background-color: white; 
     width: 100%; 
+    margin-top: 60px
 }
 .btn-start {
     padding: 0px 70px 0px 70px;
+    color: #0d1b2a;
 }
 .btn-subscribe {
     height: 65px;
     width: 100%;
     border-radius: 13px;
+    color: #001d3d;
 }
 
 /* Custom Container */
@@ -192,8 +244,17 @@ hr.border-secondary {
 }
 
 /* Subscription Plans */
+.subscription-plan-style {
+    border: solid 3px #adb5bd;
+    border-radius: 15px;
+    background: #0d1b2a;
+    transition: background 0.3s ease;
+}
+.subscription-plan-style:hover {
+    background: #415a77;
+}
 .special-offer {
-    border: solid 1px #db9e02;
+    border: solid 3px #db9e02;
 }
 .square-image {
     display: flex;
@@ -205,6 +266,7 @@ hr.border-secondary {
 }
 .square-image img {
     max-width: 100%;
+    border-radius: 8px;
 }
 .sub-title {
     height: 70px;
@@ -224,6 +286,7 @@ hr.border-secondary {
     border-radius: 5px;
     font-size: 15px;
     width: 90%;
+    color: #001d3d;
 }
 /* Messages */
 .message-container {
@@ -244,12 +307,14 @@ hr.border-secondary {
     background: linear-gradient(to bottom right, whitesmoke, #303030);
     border-radius: 5px;
     font-size: 90%;
+    color: #001d3d;
 }
 
 .btn-delete {
     background: linear-gradient(to bottom right, #adb5bd, #EE0000);
     border-radius: 5px;
     font-size: 90%;
+    color:#001d3d;
 }
 .hr-admin-border{
     border-top: 5px solid #17a2b8;
@@ -293,6 +358,18 @@ li.page-item .page-link:hover {
 
 
 /* Profiles */
+.menu-element {
+    border: solid 3px #adb5bd;
+    border-radius: 10px;
+    padding: 20px;
+    background: #0d1b2a;
+}
+.menu-element-secondary {
+    border: solid 1px #adb5bd;
+    border-radius: 10px;
+    padding: 15px;
+    background: #1b4965;
+}
 /* Add this in your CSS file or style section */
 #confirmCancelBtn {
     background: linear-gradient(to bottom right, #adb5bd, green);
@@ -369,9 +446,7 @@ text-decoration: none;
         width: 700px;
         height: 400px;
       }
-    .btn-start {
 
-    }
     h2 {
         font-size: 150%;
     }
@@ -381,10 +456,7 @@ text-decoration: none;
     .service-img {
         height: 550px;
     }
-    .cred-div {
-        text-align: center;
-        margin-top: -30px;
-    }
+
     .offset-768-1 {
         margin-left: 8.333333%;
     }
@@ -404,6 +476,11 @@ text-decoration: none;
         font-size: 100%;
     }
 }
+@media screen and (min-width: 768px) {
+    .text-center-md {
+        text-align: center;
+    }
+}
 
 @media screen and (min-width: 769px) and (max-width: 1056px) {
     .h2-exp {
@@ -413,6 +490,7 @@ text-decoration: none;
         font-size: 140%;
     }
 }
+
 @media screen and (max-width: 992px) {
     #profile-cart {
         text-align: center;

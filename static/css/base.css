@@ -5,6 +5,15 @@ body {
     color: white;
     font-family: 'Lato', sans-serif;
 }
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background-color:  #000814; 
+    }
+
 .inherit-color {
     color: inherit !important;
   }
@@ -21,6 +30,7 @@ a:hover {
 }
 .logo {
     width: 120%;
+    max-width: 450px;
 }
 
 .nav-p {
@@ -63,7 +73,7 @@ hr.border-secondary {
 }
 .dropdown-content a:hover{
     color: #000814;
-    background: linear-gradient(to bottom right, whitesmoke, #303030);;
+    background: linear-gradient(to bottom right,#5de0e6, #004aad);
 }
 .show {
     display: block;
@@ -110,6 +120,7 @@ hr.border-secondary {
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 70px;
+    margin-top: 75px;
 }
 .service-text {
     padding-left: 6%;
