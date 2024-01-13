@@ -10,7 +10,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 100;
+    z-index:100;
     background-color:  #000814; 
     }
 
@@ -23,6 +23,9 @@ a:hover {
 .nav-element {
     font-size: 110%;
 }
+.nav-link {
+    padding: 1rem;
+}
 
 .logo-p {
     margin-bottom: 0px;
@@ -34,7 +37,7 @@ a:hover {
 }
 
 .nav-p {
-    color: #CCCCCC;
+    color: #fff;
     margin-bottom: -5px;
     transition: color 0.2s ease-in-out; 
 }
@@ -42,7 +45,7 @@ a:hover {
     color: #00b4d8; 
 }
 .nav-fa {
-    font-size:140%
+    font-size: 160%
 }
 .theme-color {
     color: #00b4d8;
@@ -56,6 +59,7 @@ a:hover {
 hr.border-secondary {
     border-width: 5px;
 }
+
 /* Dropdown Profile */
 .dropdown-content {
     display: none;
@@ -79,11 +83,10 @@ hr.border-secondary {
     display: block;
 }
 
-
 .landing-img {
     width: 100%;
     height: 100%;
-    background-image: url('../../media/images/landing_img_large.jpg');
+    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703678174/AdobeStock_230617255_gmfqlb.jpg');
     background-position: center center; 
     animation-name: scaleImage;
     animation-duration: 3s;
@@ -119,7 +122,7 @@ hr.border-secondary {
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 70px;
-    margin-top: 75px;
+    margin-top: 65px;
 }
 .service-text {
     padding-left: 6%;
@@ -134,9 +137,6 @@ hr.border-secondary {
 /* FB Mailchimp Section */
 .fb-mailchimp {
     padding: 40px 0 40px;
-}
-.fb {
-
 }
 .white-line-small {
     height: 3px;
@@ -161,57 +161,14 @@ hr.border-secondary {
 #mc_embed_signup input {
 
   }
-.btn-mailchimp {
-    min-width: 150px;
-    height: 38px;
-}
 
-/* Custom Button */
-.button-62 {
-    background: linear-gradient(to bottom right, #5de0e6, #004aad);
-    border: 0;
-    border-radius: 50px;
-    color: black;
-    cursor: pointer;
-    display: inline-block;
-    font-family: 'Lato', sans-serif;
-    font-size: 23px;
-    font-weight: 500;
-    line-height: 2.5;
-    outline: transparent;
-    text-align: center;
-    text-decoration: none;
-    transition: box-shadow .2s ease-in-out;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    white-space: nowrap;
-    text-decoration: none;
-    color: black;
-}
-.button-62:not([disabled]):focus {
-    box-shadow: 0 0 .25rem rgba(230, 228, 226, 0.5), -.125rem -.125rem 1rem rgba(204, 203, 199, 0.5), .125rem .125rem 1rem rgba(190, 189, 186, 0.5);
-}
-.button-62:not([disabled]):hover {
-    box-shadow: 0 0 .25rem rgba(202, 201, 198, 0.5), -.125rem -.125rem 1rem rgba(204, 203, 199, 0.5), .125rem .125rem 1rem rgba(204, 203, 199, 0.5);
-    color: whitesmoke;
-}
 .white-line {
     height: 2px; 
     background-color: white; 
     width: 100%; 
     margin-top: 60px
 }
-.btn-start {
-    padding: 0px 70px 0px 70px;
-    color: #0d1b2a;
-}
-.btn-subscribe {
-    height: 65px;
-    width: 100%;
-    border-radius: 13px;
-    color: #001d3d;
-}
+
 
 /* Custom Container */
 .container-2 {
@@ -220,27 +177,23 @@ hr.border-secondary {
     justify-content: space-between;
     padding: 20px 0px 20px 150px
 }
-  
 .top, .middle, .bottom {
     width: 100%; 
     text-align: center; 
 }
-  
 .top {
     align-self: flex-start;
 }
-  
 .middle {
     align-self: center;
 }
-
 .bottom {
     align-self: flex-end;
 }
-
 .container-2 > * {
     margin: 10px 0; 
 }
+
 
 /* Subscription Plans */
 .subscription-plan-style {
@@ -281,13 +234,6 @@ hr.border-secondary {
     height: 300px;
 }
 
-/* Bag */
-.btn-bag {
-    border-radius: 5px;
-    font-size: 15px;
-    width: 90%;
-    color: #001d3d;
-}
 /* Messages */
 .message-container {
     position: fixed;
@@ -303,19 +249,6 @@ hr.border-secondary {
 }
 
 /* Admin Access */
-.btn-edit {
-    background: linear-gradient(to bottom right, whitesmoke, #303030);
-    border-radius: 5px;
-    font-size: 90%;
-    color: #001d3d;
-}
-
-.btn-delete {
-    background: linear-gradient(to bottom right, #adb5bd, #EE0000);
-    border-radius: 5px;
-    font-size: 90%;
-    color:#001d3d;
-}
 .hr-admin-border{
     border-top: 5px solid #17a2b8;
     margin:0;
@@ -325,14 +258,13 @@ hr.border-secondary {
     transition: transform 0.4s ease-in-out; /
   }
   
-  /* Hover effect */
-  .preview:hover {
-    transform: scale(1.04); 
-
+.preview:hover {
+transform: scale(1.04); 
   }
 .col-10-x {
     width: 86%;
 }
+
 
 /* Pagination Control */
 a.page-link {
@@ -354,6 +286,88 @@ li.page-item .page-link:hover {
     color: black;
 }
 
+/* Custom Button */
+.hamburger {
+    display: block;
+    width: 35px;
+    cursor: pointer;
+
+    appearance: none;
+    background: none;
+    outline: none;
+    border: none;
+}
+.hamburger .bar, .hamburger:after, .hamburger:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: #fff;
+    margin: 6px 0px;
+    transition: 0.4s;
+}
+.hamburger.is-active:before {
+    transform: rotate(-45deg) translate(-8px, 6px);
+    width: 120%;
+    position: relative;
+    top: 1px;
+}
+.hamburger.is-active:after {
+    transform: rotate(45deg) translate(-9px, -8px);
+    width: 120%;
+    position: relative;
+    top: 1px;
+}
+.hamburger.is-active .bar {
+    opacity: 0;
+}
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    min-height: 100vh;
+    z-index: 98;
+    background-color:#1b263b;
+    padding-top: 120px;
+    transition: 0.4s;
+}
+.mobile-nav.is-active {
+    left: 0;
+}
+.mobile-nav a {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto 16px;
+    text-align: center;
+    padding: 12px 16px 16px;
+    background-color: #1b4965;
+    color: #fff;
+    text-decoration: none;
+}
+.mobile-nav a:hover {
+    background-color:#000814;
+}
+
+@media screen and (min-width: 992px) {
+    .hamburger {
+        display: none;
+    }
+    .mobile-nav {
+        display: none;
+    }
+}
+@media screen and (max-width: 992px) {
+    .main-nav {
+        display: none !important;
+    }
+    .logo {
+        width: 250px;
+    }
+}
+
+
 
 
 
@@ -370,7 +384,69 @@ li.page-item .page-link:hover {
     padding: 15px;
     background: #1b4965;
 }
-/* Add this in your CSS file or style section */
+
+/* Custom Buttons */
+.btn-mailchimp {
+    min-width: 150px;
+    height: 38px;
+}
+.button-62 {
+    background: linear-gradient(to bottom right, #5de0e6, #004aad);
+    border: 0;
+    border-radius: 50px;
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Lato', sans-serif;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow .2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    text-decoration: none;
+    color: black;
+}
+.button-62:not([disabled]):focus {
+    box-shadow: 0 0 .25rem rgba(230, 228, 226, 0.5), -.125rem -.125rem 1rem rgba(204, 203, 199, 0.5), .125rem .125rem 1rem rgba(190, 189, 186, 0.5);
+}
+.button-62:not([disabled]):hover {
+    box-shadow: 0 0 .25rem rgba(202, 201, 198, 0.5), -.125rem -.125rem 1rem rgba(204, 203, 199, 0.5), .125rem .125rem 1rem rgba(204, 203, 199, 0.5);
+    color: whitesmoke;
+}
+.btn-start {
+    padding: 0px 70px 0px 70px;
+    color: #0d1b2a;
+}
+.btn-subscribe {
+    height: 65px;
+    width: 100%;
+    border-radius: 13px;
+    color: #001d3d;
+}
+.btn-edit {
+    background: linear-gradient(to bottom right, whitesmoke, #303030);
+    border-radius: 5px;
+    font-size: 90%;
+    color: #001d3d;
+}
+.btn-delete {
+    background: linear-gradient(to bottom right, #adb5bd, #EE0000);
+    border-radius: 5px;
+    font-size: 90%;
+    color:#001d3d;
+}
+.btn-bag {
+    border-radius: 5px;
+    font-size: 15px;
+    width: 90%;
+    color: #001d3d;
+}
 #confirmCancelBtn {
     background: linear-gradient(to bottom right, #adb5bd, green);
     width: 30%;
@@ -389,6 +465,7 @@ li.page-item .page-link:hover {
 dl dd {
     color: #ababab;
 }
+
 /* Stripe Styles */
 .StripeElement,
 .stripe-style-input {
@@ -402,26 +479,21 @@ dl dd {
   -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
 }
-
 .StripeElement--focus,
 .stripe-style-input:focus,
 .stripe-style-input:active {
   box-shadow: 0 1px 3px 0 #cfd7df;
 }
-
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
-
 .stripe-style-input::placeholder {
     color: #aab7c4;
 }
-
 .fieldset-label {
     position: relative;
     right: .5rem;
 }
-
 #payment-form .form-control,
 #card-element {
     color: #000;
@@ -437,16 +509,16 @@ text-decoration: none;
 .modal-footer button {
     width: 100%;
 }
+
 /* Toast */
 .toast {
     min-width: 250px;
 }
 @media screen and (max-width: 768px) {
     .landing-img {
-        width: 700px;
+        width: 768px;
         height: 400px;
       }
-
     h2 {
         font-size: 150%;
     }
@@ -497,7 +569,7 @@ text-decoration: none;
     }
     .dropdown-content {
         position: absolute;
-        left: 30%;
+        right: 20%;
         width: 120px;
     }
 
