@@ -7,9 +7,7 @@
 
 {% block content %}
 <div class="container pt-5">
-    <hr class="border-secondary">
-    <h2 class="mb-4 text-center">Profile Information</h2>
-    <hr class="border-secondary">
+    <h2 class="m-3 text-center p-5">Profile Information</h2>
     <div class="row">
         <div class="offset-md-0 col-md-5 col-10 offset-1 menu-element">
             <h1>Your Profile</h1>
@@ -17,19 +15,16 @@
             <dl>
                 <dt>Username:</dt>
                 <dd>{{ user.username }}</dd>
-                
+                                               
                 <dt>Email:</dt>
-                <dd>{{ user.email }}</dd>
+                <dd>{{ user_profile.email }}</dd>
                 
                 <dt>Full Name:</dt>
                 <dd>{{ user_profile.full_name }}</dd>
                 
                 <dt>Bio:</dt>
                 <dd>{{ user_profile.bio }}</dd>
-                
-                <dt>Email:</dt>
-                <dd>{{ user_profile.email }}</dd>
-                
+               
                 <dt>Birth Date:</dt>
                 <dd>{{ user_profile.birth_date }}</dd>
                 
@@ -80,7 +75,7 @@
     <!-- Unsubscribe Confirmation Modal -->
     <div class="modal fade cancelSubscriptionModal" tabindex="-1" role="dialog" aria-labelledby="cancelSubscriptionModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content text-white bg-dark">
+            <div class="modal-content text-white">
                 <div class="modal-header">
                     <h5 class="modal-title" id="cancelSubscriptionModalLabel">Cancel Subscription</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

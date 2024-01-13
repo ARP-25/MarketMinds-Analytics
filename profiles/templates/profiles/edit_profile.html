@@ -8,9 +8,7 @@
 {% block content %}
 <div class="container pt-5 pb-5">
     <div class="col-6 offset-3">
-        <hr class="border-secondary">
-        <h2 class="logo-font mb-4 text-center">Profile Information</h2>
-        <hr class="border-secondary">
+        <h2 class="logo-font m-3 text-center p-5">Profile Information</h2>
         <div class="col-12 menu-element">
             {% load crispy_forms_tags %}
             <form method="POST" action="{% url 'edit_profile' %}">

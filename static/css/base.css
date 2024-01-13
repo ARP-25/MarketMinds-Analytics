@@ -56,8 +56,10 @@ a:hover {
 .contrast-grey {
     color: #adb5bd;
 }
-hr.border-secondary {
-    border-width: 5px;
+.orange-line {
+    background: #fca311;
+    height:2px;
+    margin: 10px;
 }
 
 /* Dropdown Profile */
@@ -65,7 +67,7 @@ hr.border-secondary {
     display: none;
     position: absolute;
     z-index: 1;
-    right: 155px;
+    right: 120px;
     top: 50px;
     border-radius: 3px;
     position: absolute;
@@ -206,7 +208,7 @@ hr.border-secondary {
     background: #415a77;
 }
 .special-offer {
-    border: solid 3px #db9e02;
+    border: solid 3px #fca311;
 }
 .square-image {
     display: flex;
@@ -241,11 +243,16 @@ hr.border-secondary {
     right: 15px;
     z-index: 99999999999;
 }
+.toast-body {
+    background: #001d3d;
+}
 .btn-toast {
-    background: linear-gradient(to bottom right, whitesmoke, #303030);
-    border-radius: 5px;
+    background: #fca311 !important;
+    border-radius: 5px !important;
     font-size: 90%;
     width: 30%;
+    font-size: 15px !important;
+    line-height: 30px !important;
 }
 
 /* Admin Access */
@@ -386,6 +393,9 @@ li.page-item .page-link:hover {
 }
 
 /* Custom Buttons */
+.btn-close {
+
+}
 .btn-mailchimp {
     min-width: 150px;
     height: 38px;
@@ -506,10 +516,23 @@ text-decoration: none;
 .btn.custom-padding {
     padding: 0; 
 }
+
+
 .modal-footer button {
     width: 100%;
 }
-
+/* Modal Cancel Subscription */
+.modal-content {
+    background-color: #1b263b;
+    border: 1px solid aliceblue;
+}
+.modal-header {
+    background-color: #17a2b8;
+    color:#000814;
+}
+.modal-footer, .modal-body {
+    background: #001d3d;
+}
 /* Toast */
 .toast {
     min-width: 250px;
