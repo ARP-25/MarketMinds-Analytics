@@ -35,15 +35,15 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-arp25-marketmindsanaly-f0kfoh7ork3.ws-eu10
 # Email Setup to enable django-allauth sending confimation etc
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-#EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
-#EMAIL_HOST = os.environ.get('EMAIL_HOST')
-#EMAIL_PORT = os.environ.get('EMAIL_PORT')
-#EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-#EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-#EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-#DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
 # Base settings for django-allauth
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
@@ -137,7 +137,7 @@ WSGI_APPLICATION = 'marketminds_analytics.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-# Switching Database from Production or Development
+# Switching Database from Production or Developmentt
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
@@ -236,7 +236,12 @@ LOGGING = {
 
 # AWS settings for storing static and media files in an S3 bucket
 if 'USE_AWS' in os.environ:
-    # Bucket Confi
+    # Cache control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=94608000',
+    }
+    # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'marketminds-analytics'
     AWS_S3_REGION_NAME = 'eu-north-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')

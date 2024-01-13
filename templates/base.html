@@ -44,16 +44,18 @@
   <body>
     <header class="container-fluid py-1 px-5 sticky">
       <div class="row ">       
-        <div class="col-6 col-lg-3 d-flex align-items-center justify-content-center">
+        <div class="offset-2 col-8 offset-lg-0 col-lg-3 d-flex align-items-center justify-content-center">
           <a href="{% url 'home' %}">
             <img src='https://res.cloudinary.com/dbui0ebjv/image/upload/v1705073680/newlogo_exzojr.png' alt="MarketMinds Analytics Logo" class="logo">
           </a>       
         </div>
-        <div class="col-6 col-lg-6 d-flex align-items-center justify-content-center">
-          <a href="" class="p-2 nav-element"><p class="nav-p">About Us</p></a>
-          <a href="" class="p-2 nav-element"><p class="nav-p">Trade Insight</p></a>
-          <a href="{% url 'get_started' %}" class="p-2 nav-element" ><p class="nav-p">Get Started</p></a>
+
+        <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
+          <a href="#" class="nav-link nav-element"><p class="nav-p">About Us</p></a>
+          <a href="#" class="nav-link nav-element"><p class="nav-p">Trade Insight</p></a>
+          <a href="{% url 'get_started' %}" class="nav-link nav-element"><p class="nav-p">Get Started</p></a>
         </div>
+        
         <div class="col-12 col-lg-3 d-flex align-items-center justify-content-lg-end justify-content-center">
           <div class="row">
             <a href="#" class="inherit-color nav-element pr-lg-5 p-3" id="dropdownMenu">

@@ -29,8 +29,8 @@ a:hover {
     color: #2DEDFA;
 }
 .logo {
-    width: 120%;
-    max-width: 450px;
+    
+    max-width: 300px;
 }
 
 .nav-p {
@@ -85,7 +85,6 @@ hr.border-secondary {
     height: 100%;
     background-image: url('../../media/images/landing_img_large.jpg');
     background-position: center center; 
-
     animation-name: scaleImage;
     animation-duration: 3s;
     animation-fill-mode: forwards;
@@ -263,6 +262,7 @@ hr.border-secondary {
     overflow: hidden;
     width: 100%;
     height: 120px;
+    border-radius: 8px;
 }
 .square-image img {
     max-width: 100%;
