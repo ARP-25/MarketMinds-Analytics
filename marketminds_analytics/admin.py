@@ -1,16 +1,17 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from .models import ActiveSubscription
 
+
 User = get_user_model()
 
-class ActiveSubscriptionInline(admin.TabularInline):
-    model = ActiveSubscription
-    extra = 0  # Set this to control the number of inline forms displayed
 
-class CustomUserAdmin(admin.ModelAdmin):
-    model = User
-    inlines = [ActiveSubscriptionInline]
+class UserAdmin(UserAdmin):
+    list_display = ('id', 'username', 'email', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_superuser')
 
-admin.site.unregister(User)  # Unregister the default User admin
-admin.site.register(User, CustomUserAdmin)  # Register the custom User admin
+# Unregister the default UserAdmin
+admin.site.unregister(User)
+
+# Register the custom UserAdmin
+admin.site.register(User, UserAdmin)

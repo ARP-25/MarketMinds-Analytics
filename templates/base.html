@@ -52,8 +52,8 @@
 
         <nav class="main-nav col-6">
           <div class="d-flex justify-content-center">
-            <a href="#" class="nav-link nav-element"><p class="nav-p">About Us</p></a>
-            <a href="#" class="nav-link nav-element"><p class="nav-p">Trade Insight</p></a>
+            <a href="{% url 'home' %}" class="nav-link nav-element"><p class="nav-p">Home</p></a>
+            <a href="{% url 'trade_insights' %}" class="nav-link nav-element"><p class="nav-p">Trade Insights</p></a>
             <a href="{% url 'get_started' %}" class="nav-link nav-element"><p class="nav-p">Get Started</p></a>
           </div>
         </nav>
@@ -85,8 +85,8 @@
       </div>      
     </header>
     <nav class="mobile-nav">
-      <a href="#" class="nav-link nav-element"><p class="nav-p">About Us</p></a>
-      <a href="#" class="nav-link nav-element"><p class="nav-p">Trade Insight</p></a>
+      <a href="{% url 'home' %}" class="nav-link nav-element"><p class="nav-p">Home</p></a>
+      <a href="{% url 'trade_insights' %}" class="nav-link nav-element"><p class="nav-p">Trade Insight</p></a>
       <a href="{% url 'get_started' %}" class="nav-link nav-element"><p class="nav-p">Get Started</p></a>
     </nav>
 

@@ -16,7 +16,7 @@ class UserProfileAdmin(admin.ModelAdmin):
     - search_fields: Fields available for searching in the admin interface.
     - ordering: Ordering of displayed data in the admin interface.
     """
-    list_display = ('user', 'bio', 'birth_date', 'full_name', 'email', 'phone_number', 'get_active_subscriptions')
+    list_display = ('user','id', 'bio', 'birth_date', 'full_name', 'email', 'phone_number', 'get_active_subscriptions')
     list_filter = ('birth_date',)
     search_fields = ('user__username', 'full_name', 'email', 'birth_date', 'email', 'phone_number')
     ordering = ('user__username',)

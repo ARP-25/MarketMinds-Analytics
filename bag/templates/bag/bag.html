@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<div class="container mt-5 mb-3">
-    <hr class="border-secondary">
+<div class="container mt-5 mb-3 pt-5">
+    <div class="orange-line mt-5"></div>
     <h2 class="logo-font mb-4 text-center"><strong>Cart</strong></h2>
-    <hr class="border-secondary">
+    <div class="orange-line"></div>
     <div class="row mt-4">
         <div class="container">
             <div class="row">
@@ -29,7 +29,7 @@
                     {% endif %}
                 {% endfor %}
             {% endfor %} 
-            <hr class="border-secondary"> 
+            <div class="orange-line"></div>
             <div class="row pt-3 pb-3">
                 <div class="offset-5 col-2 text-right">
                     <p class="text-secondary">Total:</p>

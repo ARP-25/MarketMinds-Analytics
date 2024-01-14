@@ -17,16 +17,21 @@ body {
 .inherit-color {
     color: inherit !important;
   }
-a:hover {
-    text-decoration: none; 
-}
+
 .nav-element {
     font-size: 110%;
 }
 .nav-link {
     padding: 1rem;
 }
-
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none; 
+    color: inherit;
+}
 .logo-p {
     margin-bottom: 0px;
     color: #2DEDFA;
@@ -35,7 +40,6 @@ a:hover {
     
     max-width: 300px;
 }
-
 .nav-p {
     color: #fff;
     margin-bottom: -5px;
