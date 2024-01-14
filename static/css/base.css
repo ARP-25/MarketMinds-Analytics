@@ -6,6 +6,52 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+/* Animations */
+@keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+}
+.slide-from-left {
+    animation: slideInFromLeft 1s ease-out;
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.slide-from-right {
+    animation: slideInFromRight 1s ease-out;
+}
+
+@keyframes bounceIn {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+.bounce-in {
+    animation: bounceIn 1s ease-out;
+}
+
+
+/* General */
 .sticky {
     position: fixed;
     top: 0;
@@ -69,6 +115,7 @@ a:hover {
     margin: 10px;
 }
 
+
 /* Dropdown Profile */
 .dropdown-content {
     display: none;
@@ -92,6 +139,7 @@ a:hover {
     display: block;
 }
 
+/* Images */
 .landing-img {
     width: 100%;
     height: 100%;
@@ -262,6 +310,7 @@ a:hover {
     line-height: 30px !important;
 }
 
+
 /* Admin Access */
 .hr-admin-border{
     border-top: 5px solid #17a2b8;
@@ -270,11 +319,10 @@ a:hover {
 }
 .preview {
     transition: transform 0.4s ease-in-out; /
-  }
-  
+}
 .preview:hover {
-transform: scale(1.04); 
-  }
+    transform: scale(1.04); 
+}
 .col-10-x {
     width: 86%;
 }
@@ -380,9 +428,6 @@ li.page-item .page-link:hover {
         width: 250px;
     }
 }
-
-
-
 
 
 /* Profiles */
