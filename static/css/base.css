@@ -32,6 +32,9 @@ a:hover {
     text-decoration: none; 
     color: inherit;
 }
+.is-active {
+    text-decoration: underline;
+}
 .logo-p {
     margin-bottom: 0px;
     color: #2DEDFA;

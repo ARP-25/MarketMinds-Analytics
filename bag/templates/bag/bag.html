@@ -22,7 +22,16 @@
                         <div class="col-4 d-flex align-items-center tex">
                             <h5 style="font-family: Rubik Mono One">{{ subscription_plan.title }}</h5>
                         </div>
-                        <div class="col-5 d-flex align-items-center justify-content-end">
+                        <div class="col-1  d-flex align-items-center">
+                            <form method="post" action="{% url 'bag' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="subscription_plan_id" value="{{ subscription_plan.id }}">
+                                <button type="submit" class="btn btn-link text-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-4 d-flex align-items-center justify-content-end">
                             <p>{{ subscription_plan.price }} $ /mo.</p>
                         </div>
                     </div>                    

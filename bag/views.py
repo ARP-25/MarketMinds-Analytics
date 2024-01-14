@@ -7,8 +7,28 @@ from subscription.models import SubscriptionPlan
 
 def bag(request):
     """
-    A View to return bag page
+    View function for rendering the bag page and handling item removal.
+
+    If the request method is POST, it checks for a 'subscription_plan_id' in the
+    POST data, removes the corresponding item from the bag, updates the session,
+    and redirects back to the bag page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered bag page or a redirect response.
     """
+    if request.method == 'POST':
+        item_id = request.POST.get('subscription_plan_id')
+        subscription_plan = get_object_or_404(SubscriptionPlan,pk=item_id)
+        messages.success(request, f"{subscription_plan.title} successfully removed from your Cart!")
+        bag_items = request.session.get('bag_items', [])
+        if item_id in bag_items:
+            bag_items.remove(item_id)
+        request.session['bag_items'] = bag_items
+        return redirect('bag')
+
     return render(request, 'bag/bag.html')
 
 
