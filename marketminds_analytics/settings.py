@@ -212,10 +212,9 @@ MESSAGE_TAGS = {
 # Stripe
 STRIPE_CURRENCY = 'usd'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
-#STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
-STRIPE_SECRET_KEY = 'sk_test_51OOhcmL1KLkVpLL62dTdKSls6ivW2bWLjSNW8ZUNu2mISnZNM5YlElPC0342cu9DMEVgjnME2izl5yzCJHdJfF4300Mga4gbEL'
-#STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WH_KEY', '')
-STRIPE_WEBHOOK_SECRET = 'whsec_iyztT1mQ8sqH4DL05r5q3FNhK8iSdj1Q'
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

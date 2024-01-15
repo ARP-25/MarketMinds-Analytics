@@ -81,6 +81,7 @@ def checkout(request):
         amount=stripe_total,
         currency=settings.STRIPE_CURRENCY,
     )
+    print(f" \nclient_secret: {intent.client_secret}\n")
     if not stripe_public_key:
         message.warning(request, 'Stripe public key is missing. Did you forget to set it in your environment?')
     active_subscription_form = ActiveSubscriptionForm()  

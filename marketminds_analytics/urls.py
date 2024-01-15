@@ -6,7 +6,6 @@ from django.conf.urls import handler404
 from .views import handler404, render_custom_404
 
 
-
 urlpatterns = [   
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),

@@ -9,7 +9,7 @@ class StripeWH_Handler:
     def handle_event(self, event):
         print(f"Handling event: {event['type']}")
         return HttpResponse(
-            content=f"MarketMinds Unhandled webhook received: {event[type]}",
+            content=f"MarketMinds Unhandled webhook received: {event['type']}",
             status=200
         )
 
@@ -18,13 +18,13 @@ class StripeWH_Handler:
         intent = event.data.object
         print(intent)
         return HttpResponse(
-            content=f"MarketMinds Webhook received: {event[type]}",
+            content=f"MarketMinds Webhook received: {event['type']}",
             status=200
         )
 
     def handle_payment_intent_failed(self, event):
         return HttpResponse(
-            content=f"MarketMinds Payment failed Webhook received: {event[type]}",
+            content=f"MarketMinds Payment failed Webhook received: {event['type']}",
             status=200
         )
 
