@@ -80,14 +80,12 @@
                             </label>
                         {% endif %}
                     </div>
-                </fieldset>
-                        
+                </fieldset>                       
                 <fieldset class="px-3">
                     <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
                     <div class="mb-3" id="card-element"></div>
                     <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
                 </fieldset>
-
                 <div class="submit-button mt-5 mb-2"> 
                     <div class="text-center">
                         <button class="col-10 col-md-5 d-inline-block button-62 btn-bag ">                   
@@ -123,8 +121,15 @@
                 <div>
             </form>
         </div>
+        </div>
     </div>
 </div>
+<div id="loading-overlay">
+    <h1 class="text-light logo-font loading-spinner">
+        <span class="icon">
+            <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+        </span>
+    </h1>
 </div>
 {% endblock %}
 {% block postloadjs %}
