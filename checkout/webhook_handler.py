@@ -13,23 +13,53 @@ import json
 import time
 
 class StripeWH_Handler:
-    """Handle Stripe webhooks"""
+    """
+    Handle Stripe webhooks.
+
+    Attributes:
+        request (HttpRequest): The HTTP request object.
+
+    Methods:
+        handle_event(event): Handle a generic/unknown/unexpected webhook event.
+        handle_payment_intent_succeeded(event): Handle the payment_intent.succeeded webhook from Stripe.
+        handle_payment_intent_payment_failed(event): Handle the payment_intent.payment_failed webhook from Stripe.
+    """
 
     def __init__(self, request):
+        """
+        Initialize the Stripe Webhook Handler.
+
+        Args:
+            request (HttpRequest): The HTTP request object.
+        """
         self.request = request
 
     def handle_event(self, event):
         """
-        Handle a generic/unknown/unexpected webhook event
+        Handle a generic/unknown/unexpected webhook event.
+
+        Args:
+            event (dict): The webhook event data.
+
+        Returns:
+            HttpResponse: The HTTP response indicating the handling of the webhook event.
         """
         return HttpResponse(
             content=f'Unhandled webhook received: {event["type"]}',
             status=200)
 
 
+
     def handle_payment_intent_succeeded(self, event):
         """
-        Handle the payment_intent.succeeded webhook from Stripe
+        Handle the payment_intent.succeeded webhook from Stripe.
+        Create ActiveSubscription when checkout View fails to do so.
+
+        Args:
+            event (dict): The webhook event data.
+
+        Returns:
+            HttpResponse: The HTTP response indicating the handling of the webhook event.
         """
         intent = event.data.object
         bag_items = json.loads(intent.metadata.bag)
@@ -57,11 +87,11 @@ class StripeWH_Handler:
                     payment_status='Paid'
                 )
                 new_subscription.save()
-                
-       
+                     
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',
             status=200)
+
 
 
     def handle_payment_intent_payment_failed(self, event):

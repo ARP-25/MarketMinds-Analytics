@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.checkout, name='checkout'),
     path('wh/', my_webhook_view, name='webhook'),
     path('cache_checkout_data/', views.cache_checkout_data, name='cache_checkout_data'),
+    path('success/', views.checkout_success, name='checkout_success.html')
 ]

@@ -15,8 +15,38 @@ from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
 
 
+
 @require_POST
 def cache_checkout_data(request):
+    """
+    Cache checkout data in the session for a Stripe payment.
+
+    This view retrieves the PaymentIntent ID from the client secret, sets the Stripe API key,
+    modifies the PaymentIntent to store additional metadata in Stripe, and then retrieves the
+    modified PaymentIntent.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The HTTP response indicating the result of the operation.
+            - If successful, returns status code 200.
+            - If unsuccessful, returns status code 400 along with an error message.
+
+    Raises:
+        Exception: If there is an unexpected error during the process.
+
+    Usage:
+        This view is intended to be used in conjunction with the Stripe JavaScript SDK to
+        cache checkout data on the client side before confirming the payment.
+
+    Example:
+        POST /checkout/cache_checkout_data/
+        {
+            'client_secret': 'your_payment_intent_client_secret',
+            'save_info': 'true',
+        }
+    """
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -34,7 +64,7 @@ def cache_checkout_data(request):
     except Exception as e:
         messages.error(request, 'Sorry, your payment cannot be \
             processed right now. Please try again later.')
-            
+
         return HttpResponse(content=e, status=400)
 
 
@@ -87,7 +117,6 @@ def checkout(request):
         amount=stripe_total,
         currency=settings.STRIPE_CURRENCY,
     )
-    print(f" \nclient_secret: {intent.client_secret}\n")
     if not stripe_public_key:
         message.warning(request, 'Stripe public key is missing. Did you forget to set it in your environment?')
     active_subscription_form = ActiveSubscriptionForm()  
@@ -98,3 +127,8 @@ def checkout(request):
         'client_secret': intent.client_secret,
     }
     return render(request, template, context)
+
+
+def checkout_success(request):
+
+    return render (request, 'checkout/checkout_success.html')
