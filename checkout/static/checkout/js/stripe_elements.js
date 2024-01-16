@@ -10,8 +10,6 @@
 var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
 var clientSecret = $('#id_client_secret').text().slice(1, -1);
 
-console.log(stripePublicKey)
-console.log(clientSecret)
 
 var stripe = Stripe(stripePublicKey);
 var elements = stripe.elements();
@@ -51,7 +49,6 @@ card.addEventListener('change', function (event) {
 });
 
 
-
 // Handle form submit
 var form = document.getElementById('payment-form');
 
@@ -59,15 +56,9 @@ form.addEventListener('submit', function(ev) {
     ev.preventDefault();
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
-
-    // Overlay Start 
     $('#payment-form').fadeToggle(100);
     $('#loading-overlay').fadeToggle(100);
-
-
-    // Caching Payment Info
     var saveInfo = Boolean($('#id-save-info').attr('checked'));
-    // From using {% csrf_token %} in the form
     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
     var postData = {
         'csrfmiddlewaretoken': csrfToken,
@@ -75,7 +66,6 @@ form.addEventListener('submit', function(ev) {
         'save_info': saveInfo,
     };
     var url = '/checkout/cache_checkout_data/';
-
     $.post(url, postData).done(function () {
         stripe.confirmCardPayment(clientSecret, {
             payment_method: {
@@ -102,11 +92,8 @@ form.addEventListener('submit', function(ev) {
                     </span>
                     <span>${result.error.message}</span>`;
                 $(errorDiv).html(html);
-
-                // Overlay End 
                 $('#payment-form').fadeToggle(100);
                 $('#loading-overlay').fadeToggle(100);
-
                 card.update({ 'disabled': false});
                 $('#submit-button').attr('disabled', false);
             } else {
@@ -116,7 +103,6 @@ form.addEventListener('submit', function(ev) {
             }
         });
     }).fail(function () {
-        // just reload the page, the error will be in django messages
         location.reload();
     })
 });
