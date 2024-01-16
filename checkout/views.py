@@ -17,14 +17,28 @@ from profiles.models import UserProfile
 
 @require_POST
 def cache_checkout_data(request):
+    print("Cache ceckout data View")
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
+
+        # Print the original metadata before modification
+        payment_intent = stripe.PaymentIntent.retrieve(pid)
+
+        print("Original Metadata:", payment_intent.metadata)
+        print(f"\n Bag: {request.session.get('bag_items', [])}")
+
         stripe.PaymentIntent.modify(pid, metadata={
-            'bag': json.dumps(request.session.get('bag', {})),
+            'bag': json.dumps(request.session.get('bag_items', [])),
             'save_info': request.POST.get('save_info'),
-            'username': request.user,
+            'username': request.user,            
         })
+
+        # Print the updated metadata after modification
+        payment_intent = stripe.PaymentIntent.retrieve(pid)
+        
+        print("Updated Metadata:", payment_intent.metadata)
+
         return HttpResponse(status=200)
     except Exception as e:
         messages.error(request, 'Sorry, your payment cannot be \

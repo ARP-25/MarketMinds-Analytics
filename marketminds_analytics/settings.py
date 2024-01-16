@@ -13,6 +13,9 @@ import os
 import dj_database_url
 from django.contrib.messages import constants as messages
 
+from dotenv import load_dotenv, dotenv_values
+load_dotenv()
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -232,8 +235,6 @@ LOGGING = {
         },
     },
 }
-
-
 
 
 # AWS settings for storing static and media files in an S3 bucket

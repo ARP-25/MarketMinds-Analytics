@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from subscription.models import SubscriptionPlan
-
+from django.conf import settings
 
 def bag(request):
     """
@@ -19,6 +19,7 @@ def bag(request):
     Returns:
         HttpResponse: Rendered bag page or a redirect response.
     """
+    
     if request.method == 'POST':
         item_id = request.POST.get('subscription_plan_id')
         subscription_plan = get_object_or_404(SubscriptionPlan,pk=item_id)
