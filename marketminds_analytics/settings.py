@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import dj_database_url
 from django.contrib.messages import constants as messages
+import logging
 
 from dotenv import load_dotenv, dotenv_values
 load_dotenv()
@@ -36,10 +37,6 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-arp25-marketmindsanaly-f0kfoh7ork3.ws-eu10
 
 
 # Email Setup to enable django-allauth sending confimation etc
-
-
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
@@ -217,6 +214,14 @@ STRIPE_CURRENCY = 'usd'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
+# Log the Stripe variables
+logger.debug(f'STRIPE_PUBLIC_KEY: {STRIPE_PUBLIC_KEY}')
+logger.debug(f'STRIPE_SECRET_KEY: {STRIPE_SECRET_KEY}')
+logger.debug(f'STRIPE_WH_SECRET: {STRIPE_WH_SECRET}')
 
 LOGGING = {
     'version': 1,
