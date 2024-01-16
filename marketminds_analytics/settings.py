@@ -214,14 +214,7 @@ STRIPE_CURRENCY = 'usd'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
-# Configure logging
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
 
-# Log the Stripe variables
-logger.debug(f'STRIPE_PUBLIC_KEY: {STRIPE_PUBLIC_KEY}')
-logger.debug(f'STRIPE_SECRET_KEY: {STRIPE_SECRET_KEY}')
-logger.debug(f'STRIPE_WH_SECRET: {STRIPE_WH_SECRET}')
 
 LOGGING = {
     'version': 1,
