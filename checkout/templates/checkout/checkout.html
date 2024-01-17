@@ -24,7 +24,7 @@
                         {% for item_id in bag_items %}
                             {% for subscription_plan in subscription_plans %}
                                 {% if subscription_plan.id == item_id|add:0 %}
-                                <div class="row">
+                                <div class="row" data-item-id="{{ item_id }}">
                                     <div class="col-3 square-image">
                                         <img src="{{ subscription_plan.image.url }}" alt="{{ s.title }}">
                                     </div>
@@ -34,7 +34,7 @@
                                     <div class="col-5 d-flex align-items-center">
                                         <p class="text-right">{{ subscription_plan.price }} $ /mo.</p>
                                     </div>
-                                </div>                    
+                                </div>                                                                  
                                 {% endif %}
                             {% endfor %}
                         {% endfor %} 
@@ -96,7 +96,7 @@
                                 <span class="font-weight-bold">Adjust Bag</span>
                             </a>
                         </button>
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated and bag_items %}
                             <button id="submit-button" class="col-md-5 col-10 button-62 btn-bag d-inline-blockml-sm-3 mt-3 mt-md-0 ml-md-3">
                                 <span class="font-weight-bold">Complete Order</span>
                                 <span class="icon">
@@ -131,10 +131,19 @@
         </span>
     </h1>
 </div>
+
+{% url 'view_profile' as profile_url %}
+<div id="dynamic_profile_url" style="display: none;" data-url="{{ profile_url }}"></div>
+
 {% endblock %}
 {% block postloadjs %}
     {{ block.super }}
-    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-    {{ client_secret|json_script:"id_client_secret" }}
-    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+        <!-- Passing Stripe Data from backend into Frontend and use it in JS -->
+        {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+        {{ client_secret|json_script:"id_client_secret" }}
+        <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+
+        <!-- Passing User Active Subscription Data from backend into Frontend and use it in JS -->
+        {{ active_subscription_plan_id_user|json_script:"id_active_subscription_plan" }}
+        <script src="{% static 'checkout/js/active_subscription_handler.js' %}"></script>
 {% endblock %}

@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 
 from bag.contexts import bag_contents
 from subscription.models import SubscriptionPlan
+from .models import ActiveSubscription
 from .forms import ActiveSubscriptionForm  
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
@@ -121,14 +122,23 @@ def checkout(request):
         message.warning(request, 'Stripe public key is missing. Did you forget to set it in your environment?')
     active_subscription_form = ActiveSubscriptionForm()  
     template = 'checkout/checkout.html'
+
+    if request.user.is_authenticated:
+        user = request.user
+        user_id = user.id
+        active_subscription_plan_id_user = list(map(str, ActiveSubscription.objects.filter(user=user.id).values_list('subscription_plan__id', flat=True)))
+
     context = {
         'active_subscription_form': active_subscription_form,  
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
+        'active_subscription_plan_id_user': active_subscription_plan_id_user,
     }
+
+
     return render(request, template, context)
 
 
 def checkout_success(request):
-
+  
     return render (request, 'checkout/checkout_success.html')

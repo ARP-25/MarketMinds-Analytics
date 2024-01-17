@@ -54,3 +54,17 @@
     margin: 0;
     height: 100%;
 }
+
+.already-subscribed {
+  font-size: 80%;
+  padding-left: 15px;
+}
+.already-subscribed-container {
+  background: #2a9d8f;
+  border-radius: 4px;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
