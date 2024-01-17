@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import ListView
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from .forms import SubscriptionPlanForm, SubscriptionPlanForm2
 from .models import SubscriptionPlan
 
 
+def is_superuser(user):
+    return user.is_superuser
 
 class GetStarted(ListView):
     """
@@ -28,6 +31,7 @@ class GetStarted(ListView):
     def get_queryset(self):
         return SubscriptionPlan.objects.order_by('id')
 
+
 class AdminAccess(ListView):
     """
     View class for administrative access.
@@ -42,6 +46,7 @@ class AdminAccess(ListView):
     model = SubscriptionPlan
     template_name = 'admin_access.html'
     context_object_name = 'subscription_plans'
+
 
     def post(self, request, *args, **kwargs):
         if 'action' in request.POST:
@@ -125,3 +130,4 @@ def admin_access_edit(request, subscription_id):
         form = SubscriptionPlanForm(instance=subscription)
     
     return render(request, 'admin_access_edit.html', {'form': form, 'subscription_id': subscription_id})
+
