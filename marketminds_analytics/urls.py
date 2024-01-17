@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.conf.urls import handler404
 from .views import handler404, render_custom_404
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 urlpatterns = [   
