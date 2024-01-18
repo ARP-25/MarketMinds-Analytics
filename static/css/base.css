@@ -584,6 +584,15 @@ text-decoration: none;
 .toast {
     min-width: 250px;
 }
+
+
+@media screen and (max-width: 360px){
+    .logo {
+      max-width: 180px;
+
+    }
+}
+
 @media screen and (max-width: 768px) {
     .landing-img {
         width: 768px;
