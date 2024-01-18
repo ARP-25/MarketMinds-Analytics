@@ -1,14 +1,18 @@
 # TradeConnect - Tradeboard <br>
-![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701634734/amiresponsive_1_a8dglf.png) 
+![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705585263/amiresponsive_marketminds_kbhhrn.png) 
 ## Description
-TradeConnect  An interactive Django-powered platform designed for traders. Share your trade strategies, engage in insightful discussions, and refine your approach with user ratings and comments. Join us, elevate your trading game, and connect with fellow traders on this vibrant platform crafted for growth and success.
-
-[Click here to view the Live Project](https://tradeconnect-d0f5a2fe7023.herokuapp.com/)
+MarketMinds Analytics is a powerful Django web application tailored for traders and investors seeking expert market analysis in the fields of crypto, forex, and stocks. Users can seamlessly purchase subscriptions to gain valuable insights into financial markets and enhance their trading strategies.
+Users have the flexibility to choose from a variety of subscription plans tailored for crypto, forex, and stocks.
+Plans offer in-depth market analysis, trade insights, and strategies to empower traders for success.
+The web app is equipped with custom admin access page, providing superusers the ability to manage the platform with an intuitive interface.
+Superusers can effortlessly add, edit, and delete subscription plans, ensuring dynamic and responsive adjustments to market demands.
+[Click here to view the Live Project](https://marketminds-analytics-31d309061593.herokuapp.com/)
 
 ## Table of contents
 
 - [User Experience (UX)](#User-Experience-(UX))
 - [Features](#Features)
+- [Business Plan](#Business-Plan)
 - [Design](#Design)
 - [Technologies Used](#Technologies-Used)
 - [Testing](#Testing)
@@ -20,80 +24,96 @@ TradeConnect  An interactive Django-powered platform designed for traders. Share
 
 ### User stories
 
-- US01 Register/Login to the App
+- US01 - Visitor:
+    - As a visitor, I want to see a clear and engaging landing page that highlights the benefits of subscribing to MarketMinds Analytics.
+    - As a visitor, I want to easily navigate through the site to learn more about available subscription plans for crypto, forex, and stocks.
 
-- US02 Create a Trade Post
+- US02 - Registered User:
+    - As a registered user, I want to have my own profile where I can view and manage my active subscriptions.
+    - As a registered user, I want the ability to edit my profile information, including personal details and subscription preferences.
 
-- US03 Edit a Trade Post
+- US03 - Subscriber:
+    - As a subscriber, I want to receive regular market insights, trade recommendations, and updates based on my chosen subscription plan.
+    - As a subscriber, I want the option to unsubscribe or switch to a different subscription plan at any time.
 
-- US04 Search for Trade Post and get a sorted view
+- US04 - Superuser (Site Owner):
+    - As a superuser, I want to access a custom admin panel to add, edit, or delete subscription plans.
+    - As a superuser, I want to view analytics and user statistics to understand the popularity of different subscription plans.
 
-- US05 Delete a Trade Post
+- US05 - Admin Access User:
+    - As an admin access user, I want to log in and access a dedicated admin page outside the Django admin to manage the platform.
+    - As an admin access user, I want the ability to perform administrative tasks such as managing users, reviewing analytics, and handling support requests.
 
-- US06 Rate a Trade Post
+- US06 - Potential Subscriber:
+    - As a potential subscriber, I want to easily find information about the benefits of each subscription plan before making a decision.
+    - As a potential subscriber, I want a straightforward and secure subscription process with clear pricing information.
 
-- US07 Inspect detailed Trade Post
-
-- US08 Comment a Trade Post
-
-- US09 Contact Site Owner
+- US07 - User Interested in Updates:
+    - As a user interested in updates, I want the option to subscribe to newsletters or notifications to receive the latest market trends and special offers.
 
 ## Features
 
 ### Existing Features
 
--  F01 NavBar 
-    -   NavBar with Label(redirects to Main Page) and three elements: Home(redirects to Main Page), Login(redirects to Login Page) and Register(redirects to Register Page)
-        -   Helps users easily navigate and access various parts of the site
-    ![Header](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701690782/01_nav_bar_sho6uh.png)  
+-   **__F01 Navigation Bar__**
+    -   Logo(redirects to the Main Page) 
+    -   Home(redirects to the Main Page)
+    -   Trade Insights(redirects to the Trade Insights Page which is still under construction)
+    -   Get Started(redirects to the Get Started Page)
+    -   Profile Icon(opens dropdown menu on click with varying content depending if user is authenticated or superuser(admin) is authenticated)
+    -   Bag Icon(redirects to the shipping bag)
+    -   Collapses down to a hamburger menu on smaller screen sizes
+        - Navigation Bar
+        ![NavBar](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594298/F01_navbar_plrw0x.png)
+        - Not Authenticated Profile Menu  
+        ![NotAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594936/F01_navbar_profile_menu_hfeje3.png)
+        - Authenticated as User
+        ![UserAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594935/F01_navbar_profile_menu_authenticated_jswrmd.png)
+        - Authenticated as Admin
+        ![SuperuserAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594937/F01_navbar_profile_menu_superuser_bvoy1g.png)
+        - Hamburger clicked
+        ![HamburgerClicked](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594297/F01_navbar_hamburger_xkmeld.png)
 
--  F02 Sign Up Page
-    -   Sign Up
-    ![SignUp](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701690782/02_sign_up_b1lt0o.png) 
 
--  F03 Login Page
-    -   Login
-    ![Login](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701690782/03_login_nq4vqk.png) 
+-   **__F02 Authentication__**
+    -   Django-Allauth was used for semseless and secure authentication processes.
+    -   The Django-Allauth templates were modfied to match the style of the rest of the project
+        -   Sign In
+        ![SignIn](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705596331/F02_authentication_login_1_1_yzedsw.png) 
+        -   Sign Up
+        ![SignUp](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705596330/F02_authentication_register_1_xe8c2u.png)
 
--  F04 Post Trade Button
-    -   Is shifted to Login Button when user is not logged in yet and redirects to Login Page
-    -   If logged in redirects to Create Post Page
-    ![Post a Trade Button](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701690781/04_post_trade_button_dze2tl.png) 
+-   **__F03 Langing Image with Short-Description and Get-Started-Button__**
+    -   Dynamic welcome section
+    -   Presenting brief overview of what to expect
+    -   Get-Started-Button enables visitors to instantly to have quick access to the Get Started Page
+        -   Full Section
+        ![LandingSection](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705597448/F03_landing_section_lb0beg.png)
 
--  F05 Sort Selection Button
-    -   By clicking user is able to sort existing Trade Post's
-    ![Sort Selection Button](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701690781/05_sort_selection_button_s6obo6.png) 
+-   **__F04 Services and Credentials__**
+    -   Information about what services can be expected 
+    -   Credentials and Track-Record
+        - Services
+        ![Services](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705598378/F04_services_yiyyyn.png)
+        - Credentials and Track-Record
+        ![CredTrack](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705598376/F04_credentials_emihyu.png)
 
--  F06 Trade Post List
-    -   Released Trade Post's are found here
-    ![Trade Post List](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701690780/06_trade_post_list_ra0wf0.png)
 
--  F07 Pagination Controls
-    -   Enhance user experience by simplifying navigation through a vast amount of content. Instead of presenting a long list or a substantial amount of data on one page
-    ![Pagination Controls](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701690781/07_pagination_controls_sdiedk.png) 
+-   **__F05 Stay in Touch__**
+    -   Social links (Facebook Business Page)
+    -   Newsletter Subscription Form (Mailchimp)
+        - Stay in Touch
+        ![StayInTouch](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705598377/F05_socials_newsletter_vwb4xd.png)
 
--  F08 Delete and Edit Button
-    -   This feature is available for logged in user's and on their own Trade Post's
-    -   Delete: Deletes Trade Post
-    -   Edit: Redirects to Edit Trade Post Page
-    ![Delete and Edit Button](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701690781/08_delete_edit_hpuvjy.png)
 
--  F09 Edit Trade Post Page
-    -   User is able to take changes on his Trade Post
-    ![Edit Trade Post Page](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701690779/09_edit_page_smyzlp.png)
 
--  F10 Detailed Trade Post Page
-    -   By clicking on a Trade Post inside the Trade Post List(F06) user gets redirected to Detailed Trade Post Page
-    -   Here the user gets a detailed view of the Trade Post, the ability to rate a Trade Post or simply leave a comment
-    ![Edit Trade Post Page](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701690781/10_detailed_trade_post_page_gcomt8.png)
-    -   Commenting
-    ![Comments](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701690780/10_detailed_trade_post_page_comments_ca64fz.png)
-    -   Rating
-    ![Rating](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701690780/10_detailed_trade_post_page_rating_hjzfxa.png)
+-   **__F06 Profile Info__**
+    -   Profile Info
+    -   Profile Edit Function
+    -   Active Subscription Info 
+    -   Cancel Active Subscription Function
 
--  F11 Message Form
-    -   Site visitors are able to contact the site owner without having to create an account
-    ![Edit Trade Post Page](https://res-console.cloudinary.com/dbui0ebjv/thumbnails/v1/image/upload/v1701690780/MTFfbWVzc2FnZV9mb3JtX213aDdjYw==/preview)
+-   **__F0__** Trade Insights
 
 ### Table of Features and User Stories combined
 
