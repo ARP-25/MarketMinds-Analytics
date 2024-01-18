@@ -1,10 +1,8 @@
 
 var activeSubscriptionPlan_ids = JSON.parse($('#id_active_subscription_plan').text());
-console.log(activeSubscriptionPlan_ids)
 activeSubscriptionPlan_ids.forEach(function(id, index, array) {
     array[index] = parseInt(id, 10);
 });
-console.log(activeSubscriptionPlan_ids);
 
 
 var elementsWithDataItemId = $('div[data-item-id]');
@@ -13,7 +11,6 @@ elementsWithDataItemId.each(function() {
     var itemId = $(this).data('item-id');
     newSubscriptionPlan_ids.push(itemId);
 });
-console.log('Item IDs:', newSubscriptionPlan_ids);
 
 
 var id_matches = [];
@@ -33,11 +30,30 @@ $('div[data-item-id]').each(function() {
             text: 'Already subscribed. For more Information check'
         });        
         var profileUrl = $('#dynamic_profile_url').data('url');
-        var anchorElement = $('<a>', {           
+        var anchorProfileUrl = $('<a>', {           
             href: profileUrl,
             text: 'Profile Info'
-        });        
-        alreadySubscribedDiv.append(' ', anchorElement, '.');
+        });
+        var lineBreak = document.createElement('br');               
+        var checkoutAdjsutUrl = 'adjust/' + itemId + '/';      
+        var anchorAdjustUrl = $('<a>', {           
+            href: checkoutAdjsutUrl,
+            text: 'Remove this Plan '
+        });
+        var trashIcon = $('<i>', {
+            class: 'fas fa-trash-alt'
+        });
+        anchorAdjustUrl.append(trashIcon);
+        alreadySubscribedDiv.append(' ', anchorProfileUrl, '.', lineBreak, 'To proceed with checkout click ', anchorAdjustUrl, '.');
         $(this).append(alreadySubscribedDiv);
     }
 });
+
+if(id_matches != 0){
+    $('#submit-button').prop('disabled', true);
+}
+
+
+
+
+

@@ -134,6 +134,9 @@
 
 {% url 'view_profile' as profile_url %}
 <div id="dynamic_profile_url" style="display: none;" data-url="{{ profile_url }}"></div>
+{% url 'checkout_adjust' as checkout_adjust_url %}
+<div id="dynamic_checkout_adjust_url" style="display: none;" data-url="{{ checkout_adjust_url }}"></div>
+
 
 {% endblock %}
 {% block postloadjs %}

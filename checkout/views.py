@@ -139,6 +139,37 @@ def checkout(request):
     return render(request, template, context)
 
 
+
+def checkout_adjust(request, item_id):
+    """
+    View function to adjust the contents of the shopping bag during checkout.
+
+    Args:
+    - request: HTTP request object.
+    - item_id: ID of the subscription plan to adjust.
+
+    Returns:
+    - Redirects to the 'checkout' page after adjusting the shopping bag.
+    """
+    bag_items = request.session.get('bag_items', [])
+    subscription_plan = get_object_or_404(SubscriptionPlan,pk=item_id)
+    if str(item_id) in bag_items:
+        bag_items.remove(str(item_id))
+    request.session['bag_items'] = bag_items
+    messages.success(request, f"\n{subscription_plan} Successfully removed from your Bag!")
+
+    return redirect('checkout')
+
+
+
 def checkout_success(request):
-  
+    """
+    View function to render the checkout success page.
+
+    Args:
+    - request: HTTP request object.
+
+    Returns:
+    - Renders the 'checkout_success.html' template.
+    """  
     return render (request, 'checkout/checkout_success.html')
