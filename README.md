@@ -11,46 +11,6 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
 [Click here to view the Live Project](https://marketminds-analytics-31d309061593.herokuapp.com/)
 
 
-## Business Plan 
--   __**Executive Summary**__
-   - **Overview:**
-      - Subscription-based market analysis for forex, crypto, and stock markets.
-   - **Mission:**
-      - Providing Subscribers with in depth market analysis which enables subscriber to trade profitable. 
-
-### 2. Business Description
-   - **Services:**
-      - Market Analysis and outlooks which contain potential buying and selling zones.
-   - **Target Audience:**
-      - Traders and Investors.
-
-### 3. Subscription Plans
-   - **Plan Structure:**
-      - Every Plan consists of its basic buy and selling , market outlooks and some dynmaic content depening on market conditions.
-   - **Pricing:**
-      - Targeting below 100$/month for each package.
-
-### 5. Marketing and Sales
-   - **Marketing Strategy:**
-      - Digital marketing, social media, and partnerships.
-   - **Sales Channels:**
-      - Website.
-   - **Customer Acquisition:**
-      - Count in costs for customer acquisition.
-
-### 6. Operational Plan
-   - **Technology:**
-      - The subscriber will receive an email containing written analyses accompanied by pictures and/or videos. In the later stages of MarketMinds Analytics webpage development, a database for market analyses and a user interface (UI) for accessing them will be implemented.
-
-   - **Team:**
-      - Market Analyst's and Software Developer's.
-
-### 7. Metrics for Success
-   - **Key Performance Indicators (KPIs) for measuring success:**
-      - Number of subscribers, retention rate, revenue growth.
-
-
-
 ## Table of contents
 - [User Experience (UX)](#User-Experience-(UX))
 - [Features](#Features)
@@ -60,6 +20,46 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
 - [Testing](#Testing)
 - [Deployment](#Deployment)
 - [Credits](#Credits)
+
+
+## Business Plan 
+-   **__1 - Executive Summary__**
+    - **Overview:**
+      - Subscription-based market analysis for forex, crypto, and stock markets.
+    - **Mission:**
+      - Providing Subscribers with in depth market analysis which enables subscriber to trade profitable. 
+
+-   **__2 - Business Description__**
+    - **Services:**
+        - Market Analysis and outlooks which contain potential buying and selling zones.
+    - **Target Audience:**
+      - Traders and Investors.
+
+-   **__3 - Subscription Plans__**
+    - **Plan Structure:**
+      - Every Plan consists of its basic buy and selling , market outlooks and some dynmaic content depening on market conditions.
+    - **Pricing:**
+      - Targeting below 100$/month for each package.
+
+-   **__4 - Marketing and Sales__**
+    - **Marketing Strategy:**
+      - Digital marketing, social media, and partnerships.
+    - **Sales Channels:**
+      - Website.
+    - **Customer Acquisition:**
+      - Count in costs for customer acquisition.
+
+-   **__5 - Operational Plan__**
+    - **Technology:**
+      - The subscriber will receive an email containing written analyses accompanied by pictures and/or videos. In the later stages of MarketMinds Analytics webpage development, a database for market analyses and a user interface (UI) for accessing them will be implemented.
+
+    - **Team:**
+      - Market Analyst's and Software Developer's.
+
+-   **__6 - Metrics for Success__**
+    - **Key Performance Indicators (KPIs) for measuring success:**
+      - Number of subscribers, retention rate, revenue growth.
+
 
 
 ## User Experience (UX)
@@ -223,15 +223,13 @@ In this table you can see that every User Story is covered by an implemented Fea
 -   Special Offers Disclaimer on Get Started Page dynamic and editable by Admin in Admin Access
 
 ### Features which could be implemented in the future
+-   Market Analysis Model and and (UI) to access them as User to view and as  "CRUD functionality" as Admin 
 -   More Social Pages (Instagram , X, YouTube etc.)
--   Switching from monthly to yearly payment by preference
-
-
+-   User ability to swtich between monthly and yearly pament
 
 ## Design
 -   ### Styling
     -  For Styling the Bootstrap 4.6.2 library was imported. Additionaly you will find some custom CSS in the project level static folder, app level static folder and occasionally inline styling to fit in some custom needs.
-
 
 -   ### Colour Scheme
     -  The color Scheme is adjusted to mainly provide good contrast and readability but still offers an appealing design and fit the theme of Trading.
@@ -243,10 +241,9 @@ In this table you can see that every User Story is covered by an implemented Fea
         ![ColorPalette](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705672444/color_palette_xct6l3.png)
 
 -   ### Typography
-    -   Google Fonts was used to import font into styles.css. Lato was chosen for most of the content because of it's great readability and Rubik Mono One was chosen for some of the titles and various elements I wanted to point out and seperate from the rest of the content.
+    -   Google Fonts was utilized to import fonts into styles.css. Lato was chosen for the majority of the content due to its excellent readability. Rubik Mono One was selected for specific titles and various elements to make them stand out and distinguish them from the rest of the content.
 
 -   ### Wireframes
-
     ![WireFrames TradeConnect - TradeBoard](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701699587/tradeconnect_figma_n8cjwk.png)
 
 ### Database Models
@@ -374,10 +371,7 @@ Google Lighthouse in Google Chrome Developer Tools was used to test the performa
 ![Lighthouse Testing](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701694712/lighthouse_testing_1_jdfasw.png)
 
 
-
-
 ### Test Cases and Results
-
 #### Automated Testing
 [Heres the Link to the Test Class in my Repo.](https://github.com/ARP-25/TradeConnect/blob/main/tradeboard/test.py)
 For this iteration of the App I chose to leave out docstring's for the testcases etc. because the test declarations are very short, descriptive and pregnant. I felt commenting them out largely is massively reducing their readability. However, for future iterations the test's will have to get expanded and I plan to define multiple test files to modulate them and providing docstrings for more complex test's.
@@ -523,7 +517,7 @@ Automated Testing completes with zero errors:
 ### Content 
 
 All the Trade Post data is either fictional or out of my own database.
-For styling I tried to imply as much bootstrap as possible, since it was heavily taught in the buildup learning content to pp4.
+For styling I tried to imply as much bootstrap as possible, since it was heavily taught in the buildup learning content to pp5.
 There was some css integrated for button styling from (https://getcssscan.com/css-buttons-examples).
 I also used (https://startbootstrap.com/) and selected a theme as boilerplate to start from.
 
