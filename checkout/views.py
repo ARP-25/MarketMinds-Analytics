@@ -123,6 +123,7 @@ def checkout(request):
     active_subscription_form = ActiveSubscriptionForm()  
     template = 'checkout/checkout.html'
 
+    active_subscription_plan_id_user = []
     if request.user.is_authenticated:
         user = request.user
         user_id = user.id

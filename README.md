@@ -140,10 +140,20 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
     -   Get Started View
     -   Site Visitor can choose from a selection of Subscription Plan's and put them into their shopping bag
     -   Special Offers Section which presents special offers to customers __(functionality to make this section dynamic and editable in the frontend by navigating to Admin Access Page is under construction)__
-    -   Presenting featured Subscription Plan's
+    -   Subscription Plan Section which presents featured Subscription Plan's
         -   Get Started
         ![GetStarted](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705665180/F08_get_started_khvnqg.png)
-           
+
+-   **__F09 Shopping Bag__**
+    -   Customer can review his Shopping Bag, delete items from it, return to Get Started Page or proceed with Checkout
+        -   Shopping Bag View
+        ![ShoppingBag](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705667239/F09_shopping_bag_yulg7c.png)
+-   **__F10 Checkout__**
+    -  Customer has a miniature view of his shopping bag items __(if user has already subscribed the user gets notified, the Subscription Plan gets marked in a signaling color and secure checkout form gets disabled)__
+    -  Checkout Form __(Stripe Secure CreditCard Payment)__
+        -   Checkout View
+        ![Checkout](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705667783/F10_checkout_fvgtko.png)
+         
 
 ### Table of Features and User Stories combined
 
