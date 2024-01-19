@@ -85,7 +85,7 @@
           <a class="d-block element p-1 m-1" href="{% url 'account_signup' %}" aria-label="Register">Register</a>
           {% elif user.is_authenticated %}
           <a class="d-block element p-1 m-1" href="{% url 'account_logout' %}" aria-label="Logout">Logout</a>
-          <a class="d-block element p-1 m-1" href="{% url 'view_profile' %}" aria-label="Profile Info"></a>>Profile
+          <a class="d-block element p-1 m-1" href="{% url 'view_profile' %}" aria-label="Profile Info"></a>Profile
           Info</a>
           {% if user.is_superuser %}
           <a class="d-block element p-1 m-1" href="{% url 'admin_access' %}" aria-label="Admin Access">Admin Access</a>

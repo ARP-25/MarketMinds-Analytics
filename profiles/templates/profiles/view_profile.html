@@ -49,9 +49,10 @@
                     <dt>County:</dt>
                     <dd>{{ user_profile.county }}</dd>
 
-                    <a href="{% url 'edit_profile' %}" style="color:inherit;text-decoration: none;"><button
-                            class="button-62 btn-edit col-8 offset-2 mt-4"><i
-                                class="fa-solid fa-pen-to-square pr-2"></i>Edit Profile</button></a>
+                    <a href="{% url 'edit_profile' %}" style="color:inherit;text-decoration: none;"
+                        aria-label="Edit Profile"><button class="button-62 btn-edit col-8 offset-2 mt-4"
+                            aria-label="Edit Profile"><i class="fa-solid fa-pen-to-square pr-2"></i>Edit
+                            Profile</button></a>
                 </dl>
             </div>
         </div>
@@ -93,9 +94,10 @@
                     <form class="confirmCancleForm" action="" method="post">
                         {% csrf_token %}
                         <div class="container">
-                            <button type="button" class="button-62 btn-edit" id="closeDeleteBtn"
-                                data-dismiss="modal">Close</button>
-                            <button type="submit" class="button-62 btn-delete mt-2" id="confirmDeleteBtn">Yes,
+                            <button type="button" class="button-62 btn-edit" id="closeDeleteBtn" data-dismiss="modal"
+                                aria-label="Close">Close</button>
+                            <button type="submit" class="button-62 btn-delete mt-2" id="confirmDeleteBtn"
+                                aria-label="Unsubscribe">Yes,
                                 unsubscribe</button>
                         </div>
                     </form>

@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -15,19 +15,20 @@
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="text-center pt-4">
-                    <button type="submit"class="button-62 btn-edit col-5 mx-auto">Save <i class="fa-solid fa-download pl-2"></i></button>
-                    <a href="{% url 'view_profile' %}" class="pl-1 mx-auto">
+                    <button type="submit" class="button-62 btn-edit col-5 mx-auto" aria-label="Save">Save <i
+                            class="fa-solid fa-download pl-2"></i></button>
+                    <a href="{% url 'view_profile' %}" class="pl-1 mx-auto" aria-label="Return">
                         <span class="button-62 btn-edit col-5">
                             <i class="fa-solid fa-arrow-left pr-2"></i> Return
                         </span>
-                    </a> 
+                    </a>
                 </div>
             </form>
         </div>
-        </div>
     </div>
+</div>
 </div>
 {% endblock %}
 {% block postloadjs %}
-    {{ block.super }}
+{{ block.super }}
 {% endblock %}

@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="col-12 col-lg-6 pt-3 pt-lg-0">
-            <p class="text-muted">Please fill out the form below to complete your order</p>
+            <p class="text-secondary-custom">Please fill out the form below to complete your order</p>
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
                 <fieldset class="px-3 mb-5">
@@ -83,8 +83,10 @@
                             unchecked>
                         {% else %}
                         <label class="form-check-label" for="id-save-info">
-                            <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
-                            <a class="text-info" href="{% url 'account_login' %}">login</a> to proceed with checkout
+                            <a class="text-info" href="{% url 'account_signup' %}" aria-label="Sign Up">Create an
+                                account</a> or
+                            <a class="text-info" href="{% url 'account_login' %}" aria-label="Login">login</a> to
+                            proceed with checkout
                         </label>
                         {% endif %}
                     </div>
@@ -96,8 +98,9 @@
                 </fieldset>
                 <div class="submit-button mt-5 mb-2">
                     <div class="text-center">
-                        <button class="col-10 col-md-5 d-inline-block button-62 btn-bag ">
-                            <a href="{% url 'bag' %}" style="color:inherit;text-decoration: none;">
+                        <button class="col-10 col-md-5 d-inline-block button-62 btn-bag" aria-label="Adjust Bag">
+                            <a href="{% url 'bag' %}" style="color:inherit;text-decoration: none;"
+                                aria-label="Adjust Bag">
                                 <span class="icon">
                                     <i class="fas fa-chevron-left"></i>
                                 </span>
@@ -106,7 +109,8 @@
                         </button>
                         {% if user.is_authenticated and bag_items %}
                         <button id="submit-button"
-                            class="col-md-5 col-10 button-62 btn-bag d-inline-blockml-sm-3 mt-3 mt-md-0 ml-md-3">
+                            class="col-md-5 col-10 button-62 btn-bag d-inline-blockml-sm-3 mt-3 mt-md-0 ml-md-3"
+                            aria-label="Complete Order">
                             <span class="font-weight-bold">Complete Order</span>
                             <span class="icon">
                                 <i class="fas fa-lock"></i>
