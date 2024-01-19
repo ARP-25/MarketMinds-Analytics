@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /login/
 Disallow: /register/
 Disallow: /admin/
-Sitemap: project_url/sitemap.xml
+Sitemap: https://marketminds-analytics-31d309061593.herokuapp.com/sitemap.xml

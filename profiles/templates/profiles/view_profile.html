@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -12,68 +12,72 @@
         <div class="offset-md-0 col-md-5 col-10 offset-1 menu-element">
             <h1>Your Profile</h1>
             <div class="p-3 menu-element-secondary">
-            <dl>
-                <dt>Username:</dt>
-                <dd>{{ user.username }}</dd>
-                                               
-                <dt>Email:</dt>
-                <dd>{{ user_profile.email }}</dd>
-                
-                <dt>Full Name:</dt>
-                <dd>{{ user_profile.full_name }}</dd>
-                
-                <dt>Bio:</dt>
-                <dd>{{ user_profile.bio }}</dd>
-               
-                <dt>Birth Date:</dt>
-                <dd>{{ user_profile.birth_date }}</dd>
-                
-                <dt>Phone Number:</dt>
-                <dd>{{ user_profile.phone_number }}</dd>
-                
-                <dt>Country:</dt>
-                <dd>{{ user_profile.country }}</dd>
-                
-                <dt>Postcode:</dt>
-                <dd>{{ user_profile.postcode }}</dd>
-                
-                <dt>Town/City:</dt>
-                <dd>{{ user_profile.town_or_city }}</dd>
-                
-                <dt>Street Address 1:</dt>
-                <dd>{{ user_profile.street_address1 }}</dd>
-                
-                <dt>Street Address 2:</dt>
-                <dd>{{ user_profile.street_address2 }}</dd>
-                
-                <dt>County:</dt>
-                <dd>{{ user_profile.county }}</dd>
-                  
-                <a href="{% url 'edit_profile' %}"  style="color:inherit;text-decoration: none;"><button class="button-62 btn-edit col-8 offset-2 mt-4"><i class="fa-solid fa-pen-to-square pr-2"></i>Edit Profile</button></a>
-            </dl>
+                <dl>
+                    <dt>Username:</dt>
+                    <dd>{{ user.username }}</dd>
+
+                    <dt>Email:</dt>
+                    <dd>{{ user_profile.email }}</dd>
+
+                    <dt>Full Name:</dt>
+                    <dd>{{ user_profile.full_name }}</dd>
+
+                    <dt>Bio:</dt>
+                    <dd>{{ user_profile.bio }}</dd>
+
+                    <dt>Birth Date:</dt>
+                    <dd>{{ user_profile.birth_date }}</dd>
+
+                    <dt>Phone Number:</dt>
+                    <dd>{{ user_profile.phone_number }}</dd>
+
+                    <dt>Country:</dt>
+                    <dd>{{ user_profile.country }}</dd>
+
+                    <dt>Postcode:</dt>
+                    <dd>{{ user_profile.postcode }}</dd>
+
+                    <dt>Town/City:</dt>
+                    <dd>{{ user_profile.town_or_city }}</dd>
+
+                    <dt>Street Address 1:</dt>
+                    <dd>{{ user_profile.street_address1 }}</dd>
+
+                    <dt>Street Address 2:</dt>
+                    <dd>{{ user_profile.street_address2 }}</dd>
+
+                    <dt>County:</dt>
+                    <dd>{{ user_profile.county }}</dd>
+
+                    <a href="{% url 'edit_profile' %}" style="color:inherit;text-decoration: none;"><button
+                            class="button-62 btn-edit col-8 offset-2 mt-4"><i
+                                class="fa-solid fa-pen-to-square pr-2"></i>Edit Profile</button></a>
+                </dl>
             </div>
         </div>
-        
+
         <div class="offset-md-2 col-md-5 col-10 mt-4 mt-md-0 offset-1 menu-element">
             <h1>Active Subscriptions</h1>
             {% for subscription in active_subscriptions %}
             <div class="row p-3">
-              <div class="col-12 menu-element-secondary">
-                <p style="font-family: Rubik Mono One;">{{ subscription.subscription_plan.title }}</p>
-                <p>Start Date: {{ subscription.start_date }}</p>
-                <p>End Date: {{ subscription.end_date }}</p>
-                <button class="button-62 cancelSubscriptionBtn col-8 offset-2" data-toggle="modal" data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}">
-                  <i class="fa-solid fa-ban pr-2"></i>
-                  Unsubscribe
-                </button>
-              </div>
+                <div class="col-12 menu-element-secondary">
+                    <p style="font-family: Rubik Mono One;">{{ subscription.subscription_plan.title }}</p>
+                    <p>Start Date: {{ subscription.start_date }}</p>
+                    <p>End Date: {{ subscription.end_date }}</p>
+                    <button class="button-62 cancelSubscriptionBtn col-8 offset-2" data-toggle="modal"
+                        data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}">
+                        <i class="fa-solid fa-ban pr-2"></i>
+                        Unsubscribe
+                    </button>
+                </div>
             </div>
-          {% endfor %}
+            {% endfor %}
         </div>
     </div>
 
     <!-- Unsubscribe Confirmation Modal -->
-    <div class="modal fade cancelSubscriptionModal" tabindex="-1" role="dialog" aria-labelledby="cancelSubscriptionModalLabel" aria-hidden="true">
+    <div class="modal fade cancelSubscriptionModal" tabindex="-1" role="dialog"
+        aria-labelledby="cancelSubscriptionModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content text-white">
                 <div class="modal-header">
@@ -85,21 +89,23 @@
                 <div class="modal-body">
                     <p>Are you sure you want to cancel your subscription?</p>
                 </div>
-                <div class="modal-footer">                   
-                    <form class="confirmCancleForm" action="" method="post">                       
+                <div class="modal-footer">
+                    <form class="confirmCancleForm" action="" method="post">
                         {% csrf_token %}
                         <div class="container">
-                            <button type="button" class="button-62 btn-edit" id="closeDeleteBtn"data-dismiss="modal">Close</button>
-                            <button type="submit" class="button-62 btn-delete mt-2" id="confirmDeleteBtn">Yes, unsubscribe</button>
+                            <button type="button" class="button-62 btn-edit" id="closeDeleteBtn"
+                                data-dismiss="modal">Close</button>
+                            <button type="submit" class="button-62 btn-delete mt-2" id="confirmDeleteBtn">Yes,
+                                unsubscribe</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
 {% endblock %}
 {% block postloadjs %}
-    {{ block.super }}
-    <script src="{% static 'profiles/js/profiles.js' %}"></script>
+{{ block.super }}
+<script src="{% static 'profiles/js/profiles.js' %}"></script>
 {% endblock %}

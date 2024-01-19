@@ -209,6 +209,7 @@ MESSAGE_TAGS = {
     messages.ERROR: 'error',
 }
 APPEND_SLASH = False
+
 # Stripe
 STRIPE_CURRENCY = 'usd'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
@@ -216,6 +217,8 @@ STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
 
+#Debugging
+"""
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -233,6 +236,7 @@ LOGGING = {
         },
     },
 }
+"""
 
 
 # AWS settings for storing static and media files in an S3 bucket

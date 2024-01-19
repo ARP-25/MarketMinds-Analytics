@@ -73,6 +73,10 @@ body {
     background-color: #000814;
 }
 
+.text-secondary-custom {
+    color: #adb5bd;
+}
+
 .inherit-color {
     color: inherit !important;
 }
@@ -255,6 +259,8 @@ a:hover {
 #mc_embed_signup h2 {
     padding: 0;
     margin: -15px 0 !important;
+    font-weight: bold;
+    font-size: 2rem !important;
 }
 
 #mc_embed_signup input {}
