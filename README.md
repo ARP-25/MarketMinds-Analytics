@@ -1,5 +1,7 @@
 # TradeConnect - Tradeboard <br>
 ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705585263/amiresponsive_marketminds_kbhhrn.png) 
+
+
 ## Description
 MarketMinds Analytics is a powerful Django web application tailored for traders and investors seeking expert market analysis in the fields of crypto, forex, and stocks. Users can seamlessly purchase subscriptions to gain valuable insights into financial markets and enhance their trading strategies.
 Users have the flexibility to choose from a variety of subscription plans tailored for crypto, forex, and stocks.
@@ -8,8 +10,48 @@ The web app is equipped with custom admin access page, providing superusers the 
 Superusers can effortlessly add, edit, and delete subscription plans, ensuring dynamic and responsive adjustments to market demands.
 [Click here to view the Live Project](https://marketminds-analytics-31d309061593.herokuapp.com/)
 
-## Table of contents
 
+## Business Plan 
+-   __**Executive Summary**__
+   - **Overview:**
+      - Subscription-based market analysis for forex, crypto, and stock markets.
+   - **Mission:**
+      - Providing Subscribers with in depth market analysis which enables subscriber to trade profitable. 
+
+### 2. Business Description
+   - **Services:**
+      - Market Analysis and outlooks which contain potential buying and selling zones.
+   - **Target Audience:**
+      - Traders and Investors.
+
+### 3. Subscription Plans
+   - **Plan Structure:**
+      - Every Plan consists of its basic buy and selling , market outlooks and some dynmaic content depening on market conditions.
+   - **Pricing:**
+      - Targeting below 100$/month for each package.
+
+### 5. Marketing and Sales
+   - **Marketing Strategy:**
+      - Digital marketing, social media, and partnerships.
+   - **Sales Channels:**
+      - Website.
+   - **Customer Acquisition:**
+      - Count in costs for customer acquisition.
+
+### 6. Operational Plan
+   - **Technology:**
+      - The subscriber will receive an email containing written analyses accompanied by pictures and/or videos. In the later stages of MarketMinds Analytics webpage development, a database for market analyses and a user interface (UI) for accessing them will be implemented.
+
+   - **Team:**
+      - Market Analyst's and Software Developer's.
+
+### 7. Metrics for Success
+   - **Key Performance Indicators (KPIs) for measuring success:**
+      - Number of subscribers, retention rate, revenue growth.
+
+
+
+## Table of contents
 - [User Experience (UX)](#User-Experience-(UX))
 - [Features](#Features)
 - [Business Plan](#Business-Plan)
@@ -24,38 +66,38 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
 
 ### User stories
 
-- US01 - Visitor:
+- **__US01 - Visitor:__**
     - As a visitor, I want to see a clear and engaging landing page that highlights the benefits of subscribing to MarketMinds Analytics.
     - As a visitor, I want to easily navigate through the site to learn more about available subscription plans for crypto, forex, and stocks.
 
-- US02 - Registered User:
+- **__US02 - Registered User:__**
     - As a registered user, I want to have my own profile where I can view and manage my active subscriptions.
     - As a registered user, I want the ability to edit my profile information, including personal details and subscription preferences.
 
-- US03 - Subscriber:
+- **__US03 - Subscriber:__**
     - As a subscriber, I want to receive regular market insights, trade recommendations, and updates based on my chosen subscription plan.
     - As a subscriber, I want the option to unsubscribe or switch to a different subscription plan at any time.
 
-- US04 - Superuser (Site Owner):
+- **__US04 - Superuser (Site Owner):__**
     - As a superuser, I want to access a custom admin panel to add, edit, or delete subscription plans.
     - As a superuser, I want to view analytics and user statistics to understand the popularity of different subscription plans.
 
-- US05 - Admin Access User:
+- **__US05 - Admin Access User:__**
     - As an admin access user, I want to log in and access a dedicated admin page outside the Django admin to manage the platform.
     - As an admin access user, I want the ability to perform administrative tasks such as managing users, reviewing analytics, and handling support requests.
 
-- US06 - Potential Subscriber:
+- **__US06 - Potential Subscriber:__**
     - As a potential subscriber, I want to easily find information about the benefits of each subscription plan before making a decision.
     - As a potential subscriber, I want a straightforward and secure subscription process with clear pricing information.
 
-- US07 - User Interested in Updates:
+- **__US07 - User Interested in Updates:__**
     - As a user interested in updates, I want the option to subscribe to newsletters or notifications to receive the latest market trends and special offers.
 
 ## Features
 
 ### Existing Features
 
--   **__F01 Navigation Bar__**
+-   **__F01 - Navigation Bar__**
     -   Logo(redirects to the Main Page) 
     -   Home(redirects to the Main Page)
     -   Trade Insights(redirects to the Trade Insights Page which is still under construction)
@@ -78,7 +120,7 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
         - Hamburger clicked
             ![HamburgerClicked](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594297/F01_navbar_hamburger_xkmeld.png)
 
--   **__F02 Authentication__**
+-   **__F02 - Authentication__**
     -   Django-Allauth was used for semseless and secure authentication processes.
     -   The Django-Allauth templates were modfied to match the style of the rest of the project
         -   Sign In
@@ -86,14 +128,14 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
         -   Sign Up
         ![SignUp](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705596330/F02_authentication_register_1_xe8c2u.png)
 
--   **__F03 Langing Image with Short-Description and Get-Started-Button__**
+-   **__F03 - Langing Image with Short-Description and Get-Started-Button__**
     -   Dynamic welcome section
     -   Presenting brief overview of what to expect
     -   Get-Started-Button enables visitors to instantly to have quick access to the Get Started Page
         -   Landing
         ![LandingSection](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705597448/F03_landing_section_lb0beg.png)
 
--   **__F04 Services and Credentials__**
+-   **__F04 - Services and Credentials__**
     -   Information about what services can be expected 
     -   Credentials and Track-Record
         - Services
@@ -101,13 +143,13 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
         - Credentials and Track-Record
         ![CredTrack](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705598376/F04_credentials_emihyu.png)
 
--   **__F05 Stay in Touch__**
+-   **__F05 - Stay in Touch__**
     -   Social links (Facebook Business Page)
     -   Newsletter Subscription Form (Mailchimp)
         - Stay in Touch
         ![StayInTouch](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705598377/F05_socials_newsletter_vwb4xd.png)
 
--   **__F06 Profile Info__**
+-   **__F06 - Profile Info__**
     -   Profile Info
     -   Profile Edit Function
     -   Active Subscription Info 
@@ -119,7 +161,7 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
         -   Cancel Subscription Popup
         ![CancelPopup](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705663878/F06_profile_unsubscribe_wdq7lb.png)
 
--   **__F07 Admin Access__**
+-   **__F07 - Admin Access__**
     -   Admin Access View (only as superuser accessible)
     -   Access to all Subscription Plan's in Database
     -   Option to add new, edit oder delete Subscription Plan's
@@ -136,7 +178,7 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
         -  Admin Access Delete Subscription Plan
         ![AdminAccessDelete](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705664937/F07_admin_access_delete_kf2byo.png)
 
--   **__F08 Get Started__**
+-   **__F08 - Get Started__**
     -   Get Started View
     -   Site Visitor can choose from a selection of Subscription Plan's and put them into their shopping bag
     -   Special Offers Section which presents special offers to customers __(functionality to make this section dynamic and editable in the frontend by navigating to Admin Access Page is under construction)__
@@ -144,54 +186,64 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
         -   Get Started
         ![GetStarted](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705665180/F08_get_started_khvnqg.png)
 
--   **__F09 Shopping Bag__**
+-   **__F09 - Shopping Bag__**
     -   Customer can review his Shopping Bag, delete items from it, return to Get Started Page or proceed with Checkout
         -   Shopping Bag View
         ![ShoppingBag](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705667239/F09_shopping_bag_yulg7c.png)
--   **__F10 Checkout__**
-    -  Customer has a miniature view of his shopping bag items __(if user has already subscribed the user gets notified, the Subscription Plan gets marked in a signaling color and secure checkout form gets disabled)__
+-   **__F10 - Checkout__**
+    -  Customer sees a miniature view of his shopping bag items __(if user has already subscribed the user gets notified, the Subscription Plan gets marked in a signaling color and secure checkout form gets disabled)__
     -  Checkout Form __(Stripe Secure CreditCard Payment)__
-        -   Checkout View
-        ![Checkout](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705667783/F10_checkout_fvgtko.png)
+        -   Checkout View not authenticated
+        ![CheckoutAuth](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705668950/F10_checkout_not_authenticated_avyu2f.png)
+        -   Checkout View authenticated
+        ![CheckoutNotAuth](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705667783/F10_checkout_fvgtko.png)
          
 
 ### Table of Features and User Stories combined
 
 In this table you can see that every User Story is covered by an implemented Feature.
 
-|     | US 1     | US 2     | US 3     | US 4     | US 5     | US 6     | US 7     | US 8     |  US 9    | 
-|-----|----------|----------|----------|----------|----------|----------|----------|----------|----------|
-| F 1 |     x    |          |          |          |          |          |          |          |          |
-| F 2 |     x    |          |          |          |          |          |          |          |          |
-| F 3 |     x    |          |          |          |          |          |          |          |          |
-| F 4 |     x    |    x     |          |          |          |          |          |          |          |
-| F 5 |     x    |          |          |   x      |          |          |          |          |          |
-| F 6 |          |          |          |   x      |          |          |          |          |          |
-| F 7 |          |          |          |   x      |  x       |          |          |          |          |
-| F 8 |          |          |          |          |  x       |          |          |          |          |
-| F 9 |          |          |   x      |          |          |          |          |          |          |
-| F10 |          |          |          |          |          |   x      |  x       |      x   |          |
-| F11 |          |          |          |          |          |   x      |  x       |      x   |    x     |
+| Feature         | US01 - Visitor | US02 - Registered User | US03 - Subscriber | US04 - Superuser (Site Owner) | US05 - Admin Access User | US06 - Potential Subscriber | US07 - User Interested in Updates |
+| --------------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| **F01 Navigation Bar** | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **F02 Authentication** | ❌ | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **F03 Landing Image** | ✔️ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ |
+| **F04 Services and Credentials** | ✔️ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ |
+| **F05 Stay in Touch** | ✔️ | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ |
+| **F06 Profile Info** | ❌ | ✔️ | ✔️ | ❌ | ❌ | ❌ | ❌ |
+| **F07 Admin Access** | ❌ | ❌ | ❌ | ✔️ | ✔️ | ❌ | ❌ |
+| **F08 Get Started** | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ |
+| **F09 Shopping Bag** | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ |
+| **F10 Checkout** | ❌ | ❌ | ❌ | ❌ | ❌ | ✔️ | ❌ |
+
+
+### Features which are currently under construction
+-   Sort functionaliy in Admin Acces
+-   Feature functionality in Admin Access
+-   Special Offers Disclaimer on Get Started Page dynamic and editable by Admin in Admin Access
 
 ### Features which could be implemented in the future
+-   More Social Pages (Instagram , X, YouTube etc.)
+-   Switching from monthly to yearly payment by preference
 
-- Ranking System that displays the users with the highest Average Rating on his Trade Post's
-- Trading Journal. Should be preferably its own App but in the same Project
 
 
 ## Design
 -   ### Styling
-    -  For Styling the Bootstrap 5.2.3 library was imported. Additionaly you will find some custom CSS at the top of the style.css file to fit in some custom needs.
+    -  For Styling the Bootstrap 4.6.2 library was imported. Additionaly you will find some custom CSS in the project level static folder, app level static folder and occasionally inline styling to fit in some custom needs.
+
 
 -   ### Colour Scheme
     -  The color Scheme is adjusted to mainly provide good contrast and readability but still offers an appealing design and fit the theme of Trading.
-    -  The specific areas have the background-color: 
-        -   Royal Blue(#4169E1): This color signifies trust, professionalism, and reliability. In the financial and trading sector,         establishing trust is crucial. Royal blue exudes a sense of security, stability, and confidence, which are vital for financial platforms. Black Grey: 
-        -   Dark Grey(#333333): Black and shades of grey are often used in conjunction with blue to create a sense of sophistication, seriousness, and elegance. These colors are associated with formality and can convey a professional, sleek appearance.
+    -  As "theme-color" I chose #00b4d8 which is a modern and eye catching blue. I used this also to design the MarketMinds Analytics Logo, coloring buttons and various other element's.
+    -  For background's and menu element's I decided to utilizie a color panel consisting of #0d1b2a, #1b263b, #415a77 and , #1b4965. These color in conjunction provide good contrast and complement each other.
+    -  For seperation lines I chose a signaling color #FCA311.
     -  Font Color is adjusted through the game to give good contrast to specific background-color.
+        -   Color Palette
+        ![ColorPalette](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705672444/color_palette_xct6l3.png)
 
 -   ### Typography
-    -   Google Fonts was used to import font into styles.css. Montserrat was chosen because it's known for elegance and readability, it's a great choice for conveying a professional tone.
+    -   Google Fonts was used to import font into styles.css. Lato was chosen for most of the content because of it's great readability and Rubik Mono One was chosen for some of the titles and various elements I wanted to point out and seperate from the rest of the content.
 
 -   ### Wireframes
 
