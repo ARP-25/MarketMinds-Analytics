@@ -68,19 +68,19 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
     -   Bag Icon(redirects to the shipping bag)
     -   Collapses down to a hamburger menu on smaller screen sizes
         - Navigation Bar
-            ![NavBar](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594298/F01_navbar_plrw0x.png)
-
+            ![NavBar](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594298/F01_navbar_plrw0x.png){: style="display: block; margin: 0 auto;"}
+        
         - Not Authenticated Profile Menu  
-            ![NotAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594936/F01_navbar_profile_menu_hfeje3.png)
-
+            ![NotAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594936/F01_navbar_profile_menu_hfeje3.png){: style="display: block; margin: 0 auto;"}
+        
         - Authenticated as User
-            ![UserAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594935/F01_navbar_profile_menu_authenticated_jswrmd.png)
-
+            ![UserAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594935/F01_navbar_profile_menu_authenticated_jswrmd.png){: style="display: block; margin: 0 auto;"}
+        
         - Authenticated as Admin
-            ![SuperuserAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594937/F01_navbar_profile_menu_superuser_bvoy1g.png)
-
+            ![SuperuserAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594937/F01_navbar_profile_menu_superuser_bvoy1g.png){: style="display: block; margin: 0 auto;"}
+        
         - Hamburger clicked
-            ![HamburgerClicked](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594297/F01_navbar_hamburger_xkmeld.png)
+            ![HamburgerClicked](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594297/F01_navbar_hamburger_xkmeld.png){: style="display: block; margin: 0 auto;"}
 
 -   **__F02 - Authentication__**
     -   Django-Allauth was used for semseless and secure authentication processes.
