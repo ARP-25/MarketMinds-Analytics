@@ -148,6 +148,11 @@ a:hover {
     margin-top: 140px;
 }
 
+.bag-titles {
+    font-family: Rubik Mono One;
+    font-size: 130%;
+}
+
 /* Dropdown Profile */
 .dropdown-content {
     display: none;

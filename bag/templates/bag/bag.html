@@ -20,13 +20,14 @@
                     <img src="{{ subscription_plan.image.url }}" alt="{{ s.title }}">
                 </div>
                 <div class="col-4 d-flex align-items-center tex">
-                    <h5 style="font-family: Rubik Mono One">{{ subscription_plan.title }}</h5>
+                    <p class="bag-titles">{{ subscription_plan.title }}</p>
                 </div>
                 <div class="col-1  d-flex align-items-center">
                     <form method="post" action="{% url 'bag' %}">
                         {% csrf_token %}
                         <input type="hidden" name="subscription_plan_id" value="{{ subscription_plan.id }}">
-                        <button type="submit" class="btn btn-link text-danger">
+                        <button type="submit" class="btn btn-link text-danger"
+                            aria-labe="Delete Subscription Plan Button">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </form>
@@ -53,11 +54,13 @@
                 <div class="col-8 offset-4 col-md-5 offset-md-7">
                     <div class="pb-3">
                         {% if not bag_items %}
-                        <button type="submit" class="button-62 btn-bag" disabled><i class="fa-solid fa-lock pr-1"></i>
+                        <button type="submit" class="button-62 btn-bag" aria-label="Secure Checkout Button Disabled"
+                            disabled><i class="fa-solid fa-lock pr-1"></i>
                             Secure Checkout</button>
                         {% else %}
-                        <a href="{% url 'checkout' %}">
-                            <button type="submit" class="button-62 btn-bag"><i class="fa-solid fa-lock pr-1"></i> Secure
+                        <a href="{% url 'checkout' %}" aria-label="Secure Checkout">
+                            <button type="submit" class="button-62 btn-bag" aria-label="Secure Checkout Button"><i
+                                    class="fa-solid fa-lock pr-1"></i> Secure
                                 Checkout</button>
                         </a>
                         {% endif %}
