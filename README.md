@@ -64,16 +64,19 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
     -   Bag Icon(redirects to the shipping bag)
     -   Collapses down to a hamburger menu on smaller screen sizes
         - Navigation Bar
-        ![NavBar](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594298/F01_navbar_plrw0x.png)
-        - Not Authenticated Profile Menu  
-        ![NotAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594936/F01_navbar_profile_menu_hfeje3.png)
-        - Authenticated as User
-        ![UserAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594935/F01_navbar_profile_menu_authenticated_jswrmd.png)
-        - Authenticated as Admin
-        ![SuperuserAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594937/F01_navbar_profile_menu_superuser_bvoy1g.png)
-        - Hamburger clicked
-        ![HamburgerClicked](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594297/F01_navbar_hamburger_xkmeld.png)
+            ![NavBar](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594298/F01_navbar_plrw0x.png)
 
+        - Not Authenticated Profile Menu  
+            ![NotAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594936/F01_navbar_profile_menu_hfeje3.png)
+
+        - Authenticated as User
+            ![UserAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594935/F01_navbar_profile_menu_authenticated_jswrmd.png)
+
+        - Authenticated as Admin
+            ![SuperuserAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594937/F01_navbar_profile_menu_superuser_bvoy1g.png)
+
+        - Hamburger clicked
+            ![HamburgerClicked](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594297/F01_navbar_hamburger_xkmeld.png)
 
 -   **__F02 Authentication__**
     -   Django-Allauth was used for semseless and secure authentication processes.
@@ -87,7 +90,7 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
     -   Dynamic welcome section
     -   Presenting brief overview of what to expect
     -   Get-Started-Button enables visitors to instantly to have quick access to the Get Started Page
-        -   Full Section
+        -   Landing
         ![LandingSection](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705597448/F03_landing_section_lb0beg.png)
 
 -   **__F04 Services and Credentials__**
@@ -98,22 +101,49 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
         - Credentials and Track-Record
         ![CredTrack](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705598376/F04_credentials_emihyu.png)
 
-
 -   **__F05 Stay in Touch__**
     -   Social links (Facebook Business Page)
     -   Newsletter Subscription Form (Mailchimp)
         - Stay in Touch
         ![StayInTouch](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705598377/F05_socials_newsletter_vwb4xd.png)
 
-
-
 -   **__F06 Profile Info__**
     -   Profile Info
     -   Profile Edit Function
     -   Active Subscription Info 
     -   Cancel Active Subscription Function
+        -   Profile Info
+        ![Profile Info](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705600046/F06_profile_info_pv4met.png)
+        -   Profile Edit
+        ![ProfileEdit](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705663756/F06_profile_edit_mp3915.png)
+        -   Cancel Subscription Popup
+        ![CancelPopup](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705663878/F06_profile_unsubscribe_wdq7lb.png)
 
--   **__F0__** Trade Insights
+-   **__F07 Admin Access__**
+    -   Admin Access View (only as superuser accessible)
+    -   Access to all Subscription Plan's in Database
+    -   Option to add new, edit oder delete Subscription Plan's
+    -   Option to select which Subscription Plan's get featured on "Get Started Site" __(functionality currently under construction)__
+    -   Option to sort the Subscription Plan's by various criterias __(functionality currently under construction)__
+        -   Admin Access Part 1   
+        ![AdminAccess](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705664181/F07_admin_access_1_fetua7.png)
+        -   Admin Access Part 2
+        ![AdminAccess](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705664204/F07_admin_access_2_qzrcpb.png)
+        -  Admin Access Add Subscription Plan 
+        ![AdminAccessAdd](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705664937/F07_admin_access_add_e9ly2s.png)
+        -  Admin Access Edit Subscription Plan
+        ![AdminAccessEdit](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705664937/F07_admin_access_edit_lmgypl.png)
+        -  Admin Access Delete Subscription Plan
+        ![AdminAccessDelete](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705664937/F07_admin_access_delete_kf2byo.png)
+
+-   **__F08 Get Started__**
+    -   Get Started View
+    -   Site Visitor can choose from a selection of Subscription Plan's and put them into their shopping bag
+    -   Special Offers Section which presents special offers to customers __(functionality to make this section dynamic and editable in the frontend by navigating to Admin Access Page is under construction)__
+    -   Presenting featured Subscription Plan's
+        -   Get Started
+        ![GetStarted](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705665180/F08_get_started_khvnqg.png)
+           
 
 ### Table of Features and User Stories combined
 

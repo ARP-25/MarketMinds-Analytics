@@ -110,7 +110,9 @@ a:hover {
     height:2px;
     margin: 10px;
 }
-
+.container-bag-checkout {
+    margin-top: 140px;
+}
 
 /* Dropdown Profile */
 .dropdown-content {
