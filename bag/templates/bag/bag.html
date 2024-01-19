@@ -8,59 +8,64 @@
     <div class="row mt-4">
         <div class="container">
             <div class="row">
-                <div class="col-3 text-secondary">Product Info</div>
+                <div class="col-3 text-secondary-custom">Product Info</div>
                 <div class="col-4"></div>
-                <div class="col-5 text-secondary text-right">Price</div>
+                <div class="col-5 text-secondary-custom text-right">Price</div>
             </div>
             {% for item_id in bag_items %}
-                {% for subscription_plan in subscription_plans %}
-                    {% if subscription_plan.id == item_id|add:0 %}
-                    <div class="row">
-                        <div class="col-3 square-image">
-                            <img src="{{ subscription_plan.image.url }}" alt="{{ s.title }}">
-                        </div>
-                        <div class="col-4 d-flex align-items-center tex">
-                            <h5 style="font-family: Rubik Mono One">{{ subscription_plan.title }}</h5>
-                        </div>
-                        <div class="col-1  d-flex align-items-center">
-                            <form method="post" action="{% url 'bag' %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="subscription_plan_id" value="{{ subscription_plan.id }}">
-                                <button type="submit" class="btn btn-link text-danger">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="col-4 d-flex align-items-center justify-content-end">
-                            <p>{{ subscription_plan.price }} $ /mo.</p>
-                        </div>
-                    </div>                    
-                    {% endif %}
-                {% endfor %}
-            {% endfor %} 
+            {% for subscription_plan in subscription_plans %}
+            {% if subscription_plan.id == item_id|add:0 %}
+            <div class="row">
+                <div class="col-3 square-image">
+                    <img src="{{ subscription_plan.image.url }}" alt="{{ s.title }}">
+                </div>
+                <div class="col-4 d-flex align-items-center tex">
+                    <h5 style="font-family: Rubik Mono One">{{ subscription_plan.title }}</h5>
+                </div>
+                <div class="col-1  d-flex align-items-center">
+                    <form method="post" action="{% url 'bag' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="subscription_plan_id" value="{{ subscription_plan.id }}">
+                        <button type="submit" class="btn btn-link text-danger">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="col-4 d-flex align-items-center justify-content-end">
+                    <p>{{ subscription_plan.price }} $ /mo.</p>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
             <div class="orange-line"></div>
             <div class="row pt-3 pb-3">
                 <div class="offset-5 col-2 text-right">
-                    <p class="text-secondary">Total:</p>
+                    <p class="text-secondary-custom">Total:</p>
                 </div>
                 <div class="col-5 text-right">
-                    <strong><p>{{ total }} $ /mo.</p></strong>
+                    <strong>
+                        <p>{{ total }} $ /mo.</p>
+                    </strong>
                 </div>
             </div>
             <div class="row">
                 <div class="col-8 offset-4 col-md-5 offset-md-7">
                     <div class="pb-3">
                         {% if not bag_items %}
-                        <button type="submit" class="button-62 btn-bag" disabled><i class="fa-solid fa-lock pr-1"></i> Secure Checkout</button>
+                        <button type="submit" class="button-62 btn-bag" disabled><i class="fa-solid fa-lock pr-1"></i>
+                            Secure Checkout</button>
                         {% else %}
                         <a href="{% url 'checkout' %}">
-                            <button type="submit" class="button-62 btn-bag"><i class="fa-solid fa-lock pr-1"></i> Secure Checkout</button>
+                            <button type="submit" class="button-62 btn-bag"><i class="fa-solid fa-lock pr-1"></i> Secure
+                                Checkout</button>
                         </a>
                         {% endif %}
                     </div>
                     <div class="pb-3">
                         <a href="{% url 'get_started' %}">
-                            <button type="submit" class="button-62 btn-bag"><i class="fas fa-chevron-left pr-1"></i> Keep Exploring</button>
+                            <button type="submit" class="button-62 btn-bag"><i class="fas fa-chevron-left pr-1"></i>
+                                Keep Exploring</button>
                         </a>
                     </div>
                 </div>
