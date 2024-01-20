@@ -159,7 +159,9 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
         ![CheckoutAuth](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705668950/F10_checkout_not_authenticated_avyu2f.png)
         -   Checkout View authenticated
         ![CheckoutNotAuth](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705667783/F10_checkout_fvgtko.png)
-         
+-   **__Fxx - Additional Features__** 
+    -   Custom 404 error page
+        ![404](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705716698/Fxx_custom_404_qrd2xy.png)        
 
 ### Table of Features and User Stories combined
 
