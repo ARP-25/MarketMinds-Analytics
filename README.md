@@ -392,17 +392,16 @@ The 'Too few public methods' warnings in various classes suggests the potential 
 
 Google Lighthouse in Google Chrome Developer Tools was used to test the performance of the website. 
 
-![Lighthouse Testing](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701694712/lighthouse_testing_1_jdfasw.png)
-
+- **Landing**
+![Landing](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705704749/lighthouse_testing_landing_pvojuv.png)
+- **Get Started**
+![Get Started](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705704749/lighthouse_testing_get_started_n64oof.png)
+- **Profile**
+![Profile](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705704749/lighthouse_testing_profile_zr1mcs.png)
+- **Admin**
+![Admin](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705704748/lighthouse_testing_admin_s4ra9i.png)
 
 ### Test Cases and Results
-#### Automated Testing
-[Heres the Link to the Test Class in my Repo.](https://github.com/ARP-25/TradeConnect/blob/main/tradeboard/test.py)
-For this iteration of the App I chose to leave out docstring's for the testcases etc. because the test declarations are very short, descriptive and pregnant. I felt commenting them out largely is massively reducing their readability. However, for future iterations the test's will have to get expanded and I plan to define multiple test files to modulate them and providing docstrings for more complex test's.
-
-Automated Testing completes with zero errors:
-![Automated Testing Results](https://res.cloudinary.com/dbui0ebjv/image/upload/v1701696911/automated_testing_results_ta4xew.png)
-
 #### Manual Testing
 ##### Allauth Login and Registration
 
