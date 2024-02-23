@@ -3,6 +3,8 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
 from django.utils import timezone
+from django.core.mail import send_mail
+
 
 import stripe
 import json
@@ -14,7 +16,7 @@ from .models import ActiveSubscription
 from .forms import ActiveSubscriptionForm  
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
-
+from .email_utils import send_subscription_confirmation_email
 
 
 @require_POST
@@ -103,10 +105,8 @@ def checkout(request):
                             if hasattr(user_profile, field):
                                 setattr(user_profile, field, data_from_form[field])
                         user_profile.save()   
-                    if 'bag_items' in request.session:
-                        del request.session['bag_items']
 
-            return render(request, 'checkout/checkout_success.html')
+            return redirect('checkout_success')
 
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -173,4 +173,6 @@ def checkout_success(request):
     Returns:
     - Renders the 'checkout_success.html' template.
     """  
+    send_subscription_confirmation_email(request)
+
     return render (request, 'checkout/checkout_success.html')

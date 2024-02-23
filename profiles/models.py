@@ -45,6 +45,10 @@ class UserProfile(models.Model):
         return ActiveSubscription.objects.filter(user=self.user)
     get_active_subscriptions.short_description = 'Active Subscriptions'
     
+
+    def __str__(self):
+        return self.full_name if self.full_name else f"UserProfile for {self.user.username}"
+
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
