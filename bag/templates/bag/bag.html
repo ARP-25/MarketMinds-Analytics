@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container mb-3 menu-element container-bag-checkout">
     <div class="orange-line mt-5"></div>
-    <h2 class="logo-font mb-4 text-center"><strong>Cart</strong></h2>
+    <h2 class="logo-font mb-4 text-center"><strong>Shopping Bag</strong></h2>
     <div class="orange-line"></div>
     <div class="row mt-4">
         <div class="container">
@@ -16,7 +16,7 @@
             {% for subscription_plan in subscription_plans %}
             {% if subscription_plan.id == item_id|add:0 %}
             <div class="row">
-                <div class="col-3 square-image">
+                <div class="col-3 square-image p-3">
                     <img src="{{ subscription_plan.image.url }}" alt="{{ s.title }}">
                 </div>
                 <div class="col-4 d-flex align-items-center tex">

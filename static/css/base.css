@@ -213,7 +213,7 @@ a:hover {
     top: 50px;
     border-radius: 3px;
     position: absolute;
-    width: 120px;
+    width: 300px;
 }
 
 .show {
@@ -368,18 +368,20 @@ a:hover {
 }
 
 .square-image {
-    display: flex;
-    align-items: center;
+    width: 100%; /* or any desired width */
+    height: 150px; /* or any desired height */
+    overflow: hidden; /* ensures the image does not exceed the container */
+    display: flex; /* centers the image inside the container */
     justify-content: center;
-    overflow: hidden;
-    width: 100%;
-    height: 120px;
-    border-radius: 8px;
+    align-items: center;
+    padding: 0 0 10px 20px;
 }
 
 .square-image img {
-    max-width: 100%;
-    border-radius: 8px;
+    width: 100%; /* stretches the image to the container's width */
+    height: 100%; /* stretches the image to the container's height */
+    object-fit: cover; /* ensures the aspect ratio is maintained while covering the container */
+    display: block; /* removes any extra space below the image */
 }
 
 .sub-title {
@@ -559,13 +561,13 @@ li.page-item .page-link:hover {
 
 /* Profiles */
 .menu-element {
-    border-radius: 20px;
+    border-radius: 6px;
     padding: 30px;
     background: #0d1b2a;
 }
 
 .menu-element-secondary {
-    border-radius: 20px;
+    border-radius: 6px;
     padding: 15px;
     background: #1b4965;
 }
