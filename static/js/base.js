@@ -17,12 +17,15 @@ $(document).ready(function () {
             $("#myDropdown").removeClass("show");
         }
     });
+    if ($('span.badge').length > 0) {
+        $("#dropdownBag").mouseenter(function (event) {
+            event.stopPropagation();
+            $("#myDropdownBag").toggleClass("show");
+            $("#myDropdown").removeClass("show");
+        });
+        
+    }
 
-    $("#dropdownBag").mouseenter(function (event) {
-        event.stopPropagation();
-        $("#myDropdownBag").toggleClass("show");
-        $("#myDropdown").removeClass("show");
-    });
     $("#myDropdownBag").mouseleave(function (event) {
         $("#myDropdownBag").removeClass("show");
     });
@@ -31,5 +34,6 @@ $(document).ready(function () {
             $("#myDropdownBag").removeClass("show");
         }
     });
+
 
 });
