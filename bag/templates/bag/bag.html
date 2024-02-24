@@ -16,13 +16,13 @@
             {% for subscription_plan in subscription_plans %}
             {% if subscription_plan.id == item_id|add:0 %}
             <div class="row">
-                <div class="col-3 square-image p-3">
+                <div class="col-sm-6 col-lg-3 col-9 square-image p-3">
                     <img src="{{ subscription_plan.image.url }}" alt="{{ s.title }}">
                 </div>
-                <div class="col-4 d-flex align-items-center tex">
+                <div class="col-4 col-sm-3 d-flex align-items-center tex">
                     <p class="bag-titles">{{ subscription_plan.title }}</p>
                 </div>
-                <div class="col-1  d-flex align-items-center">
+                <div class="col-3 col-sm-1 d-flex align-items-center justify-content-end">
                     <form method="post" action="{% url 'bag' %}">
                         {% csrf_token %}
                         <input type="hidden" name="subscription_plan_id" value="{{ subscription_plan.id }}">
@@ -32,7 +32,7 @@
                         </button>
                     </form>
                 </div>
-                <div class="col-4 d-flex align-items-center justify-content-end">
+                <div class="col-sm-2 col-lg-5 col-5 d-flex align-items-center justify-content-end">
                     <p>{{ subscription_plan.price }} $ /mo.</p>
                 </div>
             </div>
