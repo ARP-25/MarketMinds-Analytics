@@ -7,6 +7,7 @@ $(document).ready(function () {
     $("#dropdownMenu").mouseenter(function (event) {
         event.stopPropagation();
         $("#myDropdown").toggleClass("show");
+        $("#myDropdownBag").removeClass("show");
     });
     $("#myDropdown").mouseleave(function (event) {
         $("#myDropdown").removeClass("show");
@@ -21,6 +22,9 @@ $(document).ready(function () {
         event.stopPropagation();
         $("#myDropdownBag").toggleClass("show");
         $("#myDropdown").removeClass("show");
+    });
+    $("#myDropdownBag").mouseleave(function (event) {
+        $("#myDropdownBag").removeClass("show");
     });
     $(document).on("click", function (event) {
         if (!$(event.target).closest("#dropdownBag").length && !$(event.target).closest("#myDropdownBag").length) {
