@@ -165,13 +165,15 @@ def checkout_adjust(request, item_id):
 
 def checkout_success(request):
     """
-    View function to render the checkout success page.
+    View function to handle the checkout success scenario.
+
+    This function is called when a user successfully completes the checkout process. It sends a subscription confirmation email to the user and then renders the checkout success page.
 
     Args:
-    - request: HTTP request object.
+    - request (HttpRequest): The HTTP request object.
 
     Returns:
-    - Renders the 'checkout_success.html' template.
+    - HttpResponse: A rendered checkout success page.
     """  
     send_subscription_confirmation_email(request)
 

@@ -53,6 +53,23 @@
     }
 }
 
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(0.9);
+        opacity: 1;
+    }
+}
+
 .bounce-in {
     animation: bounceIn 1s ease-out;
 }
@@ -112,6 +129,21 @@ a:hover {
     max-width: 300px;
 }
 
+
+
+.badge {
+    position: absolute;
+    bottom: -3px;
+    background-color: #ff4500;
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    padding: 2px 5px;
+    left: 15px;
+    animation: pulse 1s infinite;
+}
+
+
 .nav-p {
     color: #fff;
     margin-bottom: -5px;
@@ -164,15 +196,24 @@ a:hover {
     position: absolute;
     width: 120px;
 }
-
 .dropdown-content a {
     color: whitesmoke;
     transition: color 0.2s ease-in-out;
 }
-
 .dropdown-content a:hover {
     color: #000814;
     background: linear-gradient(to bottom right, #5de0e6, #004aad);
+}
+/* Dropdown Bag */
+.dropdown-content-bag {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    right: -15px;
+    top: 50px;
+    border-radius: 3px;
+    position: absolute;
+    width: 120px;
 }
 
 .show {
@@ -346,16 +387,14 @@ a:hover {
 }
 
 .sub-description {
-    min-height: 180px;
+    min-height: 130px;
 }
 
 .sub-price {
     height: 70px;
 }
 
-.sub-details {
-    height: 300px;
-}
+.sub-details {}
 
 /* Messages */
 .message-container {
