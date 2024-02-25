@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $("#dropdownMenu").click(function (event) {
         event.stopPropagation();
         $("#myDropdown").toggleClass("show");
@@ -31,4 +32,5 @@ $(document).ready(function () {
             $("#myDropdownBag").removeClass("show");
         }
     });
+
 });

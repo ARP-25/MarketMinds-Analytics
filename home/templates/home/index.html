@@ -9,27 +9,34 @@
 {% block content %}
 
 <!-- Landing Image -->
-<div class="container-fluid-img">
+<div class="hero-container">
     <div class="landing-img d-flex flex-column justify-content-center" aria-label="Landing Image Markets Charts">
-        <div class="container" style="height:200px;margin-top: -60px;padding-left:20px">
-            <h2 class="d-block mt-auto mb-auto slide-from-left"><strong class="text-secondary-custom animated-text">Your
+        <div class="container">
+            <h1 class="d-block mt-auto mb-auto slide-from-left landing-text-1 p-2"><strong class="text-secondary-custom animated-text">Your
                     ticket
-                    to</strong></h2>
-            <h2 class="d-block mt-auto mb-auto slide-from-right" style="padding:1rem 2rem 0.5rem">Profitable<strong
+                    to</strong></h1>
+            <h2 class="d-block mt-auto mb-auto slide-from-right landing-text-2 p-2">Profitable<strong
                     class="theme-color"> Trades</strong></h2>
-            <h2 class="d-block mt-auto mb-auto slide-from-right" style="padding:0.5rem 2rem">Market<strong
+            <h2 class="d-block mt-auto mb-auto slide-from-right landing-text-2 p-2">Market<strong
                     class="theme-color"> Insights</strong></h2>
-            <h2 class="d-block mt-auto mb-auto slide-from-right" style="padding:0.5rem 2rem 1.5rem">Garantued<strong
+            <h2 class="d-block mt-auto mb-auto slide-from-right landing-text-2 p-2">Garantued<strong
                     class="theme-color"> Success</strong></h2>
-            <div class="col-12 text-center-md">
+            <div class="col-12 text-center p-2 pb-5">
                 <a href="{% url 'get_started' %}" class="button-62 btn-start slide-from-left">Get Started</a>
             </div>
+            <a href="#">
+            <div class="arrow-container pt-5">
+                <div class="arrow" id="arrow1"></div>
+                <div class="arrow" id="arrow2"></div>
+                <div class="arrow" id="arrow3"></div>
+            </div>
+            </a>
         </div>
     </div>
 </div>
 
 <!-- Expertise Section -->
-<div class="container-fluid mb-5">
+<div class="container-fluid mb-5" id="expertise">
     <div class="row">
         <div class="col-10 col-md-4 offset-1 service-img align-self-stretch"
             aria-label="Service Image Markets Analysis"></div>

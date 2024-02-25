@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&family=Teko:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 
 /* Animations */
@@ -81,13 +83,43 @@ body {
     color: white;
     font-family: 'Lato', sans-serif;
 }
+.logo-1 {
+    font-family: rubik, sans-serif;
+    font-weight: 600;
+    font-size:140%;
+    position: absolute;
+    top: 5px;
+    background: linear-gradient(to bottom right, #5de0e6, #004aad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Für Browser, die background-clip unterstützen */
+    -webkit-text-fill-color: transparent; /* Für Webkit-Browser wie Safari und ältere Chrome-Versionen */
+}
+.logo-2 {
+    font-family: teko, sans-serif;
+    font-weight: 300;
+    font-size:140%;
+    position: absolute;
+    top: 26px;
+    left: 120px;
+    background: linear-gradient(to bottom right, #004aad, #5de0e6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Für Browser, die background-clip unterstützen */
+    -webkit-text-fill-color: transparent; /* Für Webkit-Browser wie Safari und ältere Chrome-Versionen */
+}
+.logo:hover {
+    color: #0056b3; /* Farbe beim Hovern */
+    transform: scale(1.3); /* Leichte Vergrößerung beim Hovern */
+}
 
 .sticky {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 100;
-    background-color: #000814;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
 }
 
 .text-secondary-custom {
@@ -125,9 +157,6 @@ a:hover {
 .logo {
     max-width: 300px;
 }
-
-
-
 .badge {
     position: absolute;
     bottom: -3px;
@@ -138,6 +167,46 @@ a:hover {
     padding: 2px 5px;
     left: 15px;
     animation: pulse 1s infinite;
+}
+/* landing */
+.landing-text-1{
+    font-size:300%;   
+}
+.landing-text-1{
+    
+}
+/* arrow */
+.arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 200px;
+}
+.arrow {
+    border: solid white;
+    border-width: 0 8px 8px 0;
+    display: inline-block;
+    padding: 12px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    opacity: 0;
+}
+#arrow1 {
+    animation: fadeMove 1.5s infinite;
+}
+#arrow2 {
+    animation: fadeMove 1.5s infinite 0.5s;
+}
+#arrow3 {
+    animation: fadeMove 1.5s infinite 1s;
+}
+@keyframes fadeMove {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 
@@ -221,15 +290,7 @@ a:hover {
 
 
 /* Images */
-.landing-img {
-    width: 100%;
-    height: 100%;
-    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1705697920/landing_test_1_wibtna.webp');
-    background-position: center center;
-    animation-name: scaleImage;
-    animation-duration: 3s;
-    animation-fill-mode: forwards;
-}
+
 
 @keyframes scaleImage {
     from {
@@ -249,21 +310,17 @@ a:hover {
     background-position: center center;
 }
 
-.contact-img {
-    width: 100%;
-    height: 400px;
-    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1703845968/Design_ohne_Titel_1_fhxhsr.png');
-    background-size: cover;
-    background-position: center center;
-}
-
-.container-fluid-img {
-    width: 100%;
-    height: 400px;
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 70px;
-    margin-top: 65px;
+.hero-container {
+    height: 1000px; 
+    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1705697920/landing_test_1_wibtna.webp');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden; 
+    margin-bottom: 100px;
 }
 
 .service-text {
@@ -761,9 +818,8 @@ dl dd {
 }
 
 @media screen and (max-width: 768px) {
-    .landing-img {
-        width: 768px;
-        height: 400px;
+    .hero-container{
+        height:500px;
     }
 
     h2 {
