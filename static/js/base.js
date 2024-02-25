@@ -1,4 +1,3 @@
-// Dropdown Menu for Profile Icon
 $(document).ready(function () {
     $("#dropdownMenu").click(function (event) {
         event.stopPropagation();
@@ -23,9 +22,7 @@ $(document).ready(function () {
             $("#myDropdownBag").toggleClass("show");
             $("#myDropdown").removeClass("show");
         });
-        
     }
-
     $("#myDropdownBag").mouseleave(function (event) {
         $("#myDropdownBag").removeClass("show");
     });
@@ -34,6 +31,4 @@ $(document).ready(function () {
             $("#myDropdownBag").removeClass("show");
         }
     });
-
-
 });
