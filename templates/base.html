@@ -231,8 +231,23 @@
         $('.toast').addClass('toast-out');
     }, 3000);
     });
+    $('.btn-close').on('click', function() {
+      $(this).closest('.toast').toast('hide');
+    });
   </script>
 
+  <!-- Arrow -->
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.arrow-container').on('click', function() {
+        var currentScroll = $(window).scrollTop();
+        var viewportHeight = $(window).height();
+        var newScroll = currentScroll + viewportHeight*1.05 ;
+        $('html, body').animate({ scrollTop: newScroll }, 'slow');
+      });
+    });
+  </script>
+  
   <!-- Hamburger -->
   <script type="text/javascript">
     window.onload = function () {

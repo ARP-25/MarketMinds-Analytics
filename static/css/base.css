@@ -86,31 +86,28 @@ body {
 .logo-1 {
     font-family: rubik, sans-serif;
     font-weight: 600;
-    font-size:140%;
+    font-size: 140%;
     position: absolute;
     top: 5px;
-    background: linear-gradient(to bottom right, #5de0e6, #004aad);
+    background: linear-gradient(to bottom right, #e65100, #00b4d8); /* Tiefes Orange zu Blau */
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent; /* Für Browser, die background-clip unterstützen */
-    -webkit-text-fill-color: transparent; /* Für Webkit-Browser wie Safari und ältere Chrome-Versionen */
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 2px #00b4d8, 0 0 2px #00b4d8; /* Oranger Glüheffekt */
 }
 .logo-2 {
     font-family: teko, sans-serif;
     font-weight: 300;
-    font-size:140%;
+    font-size: 140%;
     position: absolute;
     top: 26px;
     left: 120px;
-    background: linear-gradient(to bottom right, #004aad, #5de0e6);
+    background: linear-gradient(to bottom right, #00b4d8, #9c27b0); /* Blau zu Magenta */
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent; /* Für Browser, die background-clip unterstützen */
-    -webkit-text-fill-color: transparent; /* Für Webkit-Browser wie Safari und ältere Chrome-Versionen */
-}
-.logo:hover {
-    color: #0056b3; /* Farbe beim Hovern */
-    transform: scale(1.3); /* Leichte Vergrößerung beim Hovern */
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
 
 .sticky {
@@ -118,10 +115,9 @@ body {
     top: 0;
     width: 100%;
     z-index: 100;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
 }
-
 .text-secondary-custom {
     color: #8d99ae;
 }
@@ -148,15 +144,11 @@ a:hover {
     color: inherit;
 }
 
-
 .logo-p {
     margin-bottom: 0px;
     color: #2DEDFA;
 }
 
-.logo {
-    max-width: 300px;
-}
 .badge {
     position: absolute;
     bottom: -3px;
@@ -167,46 +159,6 @@ a:hover {
     padding: 2px 5px;
     left: 15px;
     animation: pulse 1s infinite;
-}
-/* landing */
-.landing-text-1{
-    font-size:300%;   
-}
-.landing-text-1{
-    
-}
-/* arrow */
-.arrow-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 200px;
-}
-.arrow {
-    border: solid white;
-    border-width: 0 8px 8px 0;
-    display: inline-block;
-    padding: 12px;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    opacity: 0;
-}
-#arrow1 {
-    animation: fadeMove 1.5s infinite;
-}
-#arrow2 {
-    animation: fadeMove 1.5s infinite 0.5s;
-}
-#arrow3 {
-    animation: fadeMove 1.5s infinite 1s;
-}
-@keyframes fadeMove {
-    0%, 100% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
 }
 
 
@@ -283,11 +235,61 @@ a:hover {
     width: 300px;
     border: 2px solid #fca311;
 }
-
 .show {
     display: block;
 }
-
+/****************** landing ***********************/
+.landing-text-1{
+    
+}
+.text-center h2 {
+    font-size:100%;
+    font-size: 250%;
+  font-weight: bold;
+}
+/* arrow */
+.arrow-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 13vh;
+}
+.arrow {
+    border: solid white;
+    border-width: 0 8px 8px 0;
+    display: inline-block;
+    padding: 12px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    opacity: 0;
+}
+#arrow1 {
+    animation: fadeMove 1.5s infinite;
+}
+#arrow2 {
+    animation: fadeMove 1.5s infinite 0.5s;
+}
+#arrow3 {
+    animation: fadeMove 1.5s infinite 1s;
+}
+@keyframes fadeMove {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+.hero-container {
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1705697920/landing_test_1_wibtna.webp');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    overflow: hidden; 
+    margin-bottom: 100px;
+    padding-top: 25vh;
+}
 
 /* Images */
 
@@ -310,18 +312,7 @@ a:hover {
     background-position: center center;
 }
 
-.hero-container {
-    height: 1000px; 
-    background-image: url('https://res.cloudinary.com/dbui0ebjv/image/upload/v1705697920/landing_test_1_wibtna.webp');
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
-    overflow: hidden; 
-    margin-bottom: 100px;
-}
+
 
 .service-text {
     padding-left: 6%;
@@ -818,10 +809,9 @@ dl dd {
 }
 
 @media screen and (max-width: 768px) {
-    .hero-container{
-        height:500px;
+    h1 strong {
+        font-size: 70%;
     }
-
     h2 {
         font-size: 150%;
     }
