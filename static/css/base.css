@@ -86,28 +86,28 @@ body {
 .logo-1 {
     font-family: rubik, sans-serif;
     font-weight: 600;
-    font-size: 140%;
+    font-size: 160%;
     position: absolute;
-    top: 5px;
-    background: linear-gradient(to bottom right, #e65100, #00b4d8); /* Tiefes Orange zu Blau */
+    top: 0px;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 2px #00b4d8, 0 0 2px #00b4d8; /* Oranger Glüheffekt */
+    text-shadow: 0 0 2px #00b4d8, 0 0 2px #00b4d8; 
 }
 .logo-2 {
     font-family: teko, sans-serif;
     font-weight: 300;
     font-size: 140%;
     position: absolute;
-    top: 26px;
-    left: 120px;
-    background: linear-gradient(to bottom right, #00b4d8, #9c27b0); /* Blau zu Magenta */
+    top: 25px;
+    left: 160px;
+    background: linear-gradient(to bottom right, #00b4d8, #9c27b0); 
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 2px white, 0 0 2px white; 
 }
 
 .sticky {
@@ -213,7 +213,7 @@ a:hover {
     border-radius: 3px;
     position: absolute;
     width: 120px;
-    border: 2px solid #fca311;
+    border: 2px solid #8d99ae;
 }
 .dropdown-content a {
     color: whitesmoke;
@@ -233,15 +233,12 @@ a:hover {
     border-radius: 3px;
     position: absolute;
     width: 300px;
-    border: 2px solid #fca311;
+    border: 2px solid #8d99ae;
 }
 .show {
     display: block;
 }
 /****************** landing ***********************/
-.landing-text-1{
-    
-}
 .text-center h2 {
     font-size:100%;
     font-size: 250%;
@@ -252,7 +249,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 13vh;
+    margin-top: 10vh;
 }
 .arrow {
     border: solid white;
@@ -800,6 +797,19 @@ dl dd {
     background: #0d1b2a;
     min-height: 60px;
 }
+
+/* Footer */
+.footer-absolute {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.footer-static {
+    position: static;
+    /* Weitere notwendige Styles */
+  }
+  
 /* Additional Media Queries */
 @media screen and (max-width: 360px) {
     .logo {

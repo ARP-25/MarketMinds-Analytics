@@ -34,3 +34,24 @@ $(document).ready(function () {
     });
 
 });
+/* Footer */
+$(document).ready(function() {
+    function adjustFooter() {
+      var bodyHeight = $('body').outerHeight();
+      var windowHeight = $(window).height();
+      if (bodyHeight > windowHeight * 0.8) {
+        console.log('Adding footer-static class');
+        $('footer').addClass('footer-static');
+        $('footer').removeClass('footer-absolute');
+      } else {
+        console.log('Removing footer-static class');
+        $('footer').removeClass('footer-static');
+        $('footer').addClass('footer-absolute');
+      }
+    }
+    adjustFooter(); 
+    $(window).resize(adjustFooter);
+});
+  
+  
+  
