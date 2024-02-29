@@ -1,5 +1,5 @@
 from django.db import models
-from django_summernote.fields import SummernoteTextField
+from ckeditor.fields import RichTextField
 from profiles.models import UserProfile  
 from subscription.models import SubscriptionPlan
 
@@ -7,7 +7,7 @@ from subscription.models import SubscriptionPlan
 class Insight(models.Model):
     title = models.CharField(max_length=200)
     release_date = models.DateField()
-    content = SummernoteTextField()
+    content = RichTextField()
     category = models.ForeignKey(SubscriptionPlan, on_delete=models.CASCADE, related_name='insights')
     short_description = models.TextField()
     author = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, related_name='authored_insights')
@@ -25,6 +25,6 @@ class Insight(models.Model):
         choices=STAGE_CHOICES,
         default=BACKSTAGE,
     )
-    
+
     def __str__(self):
         return self.title
