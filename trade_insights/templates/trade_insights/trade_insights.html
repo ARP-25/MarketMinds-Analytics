@@ -3,16 +3,43 @@
 
 
 {% block content %}
-<div class="container text-center pt-5 mt-5">
-    <i class="fa-solid fa-person-digging display-1 mt-5"></i>
-    <h5 class="mt-5 mb-3" style="font-family: Rubik Mono One">Welcome to our Trade Insights page! 🚀 We're currently under construction, so fasten your seatbelt and get ready for a wild ride! 💹✨ #UnderConstruction</h5>
-    <button class="button-62 btn-edit pl-4 pr-4 mt-5">
-        <a href="/"><i class="fa-solid fa-backward-step mr-2"></i>Go back to Homepage</a>
-    </button>
+
+{% include 'includes/tradingview/tradingview_widget.html' %}
+
+
+<div class="container">
+    <div class="row preview-row">
+    <div class="col-12 col-md-2">
+        <div class="preview-insight"></div>
+    </div>
+    <div class="col-12 col-md-2">
+        <div class="preview-insight"></div>
+    </div>
+    <div class="col-12 col-md-2">
+        <div class="preview-insight"></div>
+    </div>
+    <div class="col-12 col-md-2">
+        <div class="preview-insight"></div>
+    </div>
+    </div>
 </div>
+
 {% endblock %}
 
 
 {% block postloadjs %}
+<script>
+    $(document).ready(function() {
+        // Tausche beim Laden der Seite die Klasse des ersten col-2 Elements
+        $('.preview-row > .col-md-2:first').removeClass('col-md-2').addClass('col-md-6');
 
+        // Tausche die Klasse bei Hover über ein col-2 oder col-6 Element, das ein direktes Kind von .preview-row ist
+        $('.preview-row').on('mouseenter', '> .col-md-2, > .col-md-6', function() {
+            // Setze alle Geschwister auf col-2 zurück
+            $(this).siblings().removeClass('col-md-6').addClass('col-md-2');
+            // Tausche die Klasse des gehoverten Elements
+            $(this).removeClass('col-md-2').addClass('col-md-6');
+        });
+    });
+</script>
 {% endblock %}

@@ -89,11 +89,7 @@ body {
     font-size: 160%;
     position: absolute;
     top: 0px;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 2px #00b4d8, 0 0 2px #00b4d8; 
+    color: #00b4d8;
 }
 .logo-2 {
     font-family: teko, sans-serif;
@@ -102,12 +98,7 @@ body {
     position: absolute;
     top: 25px;
     left: 160px;
-    background: linear-gradient(to bottom right, #00b4d8, #9c27b0); 
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 2px white, 0 0 2px white; 
+    color: #ffffff;
 }
 
 .sticky {
@@ -142,11 +133,6 @@ a {
 a:hover {
     text-decoration: none;
     color: inherit;
-}
-
-.logo-p {
-    margin-bottom: 0px;
-    color: #2DEDFA;
 }
 
 .badge {
@@ -249,7 +235,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10vh;
+    margin-top: 7vh;
 }
 .arrow {
     border: solid white;
@@ -810,6 +796,26 @@ dl dd {
     /* Weitere notwendige Styles */
   }
   
+/* Trade Insights */
+.tradingview-widget-container {
+    margin-top: 66px;
+}
+.preview-insight {
+    height:40vh;
+    border: 1px solid white;
+    border-radius:5px;
+    margin: 30px 0 30px;
+}
+.preview-row > div {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+
+
+
 /* Additional Media Queries */
 @media screen and (max-width: 360px) {
     .logo {
@@ -817,8 +823,14 @@ dl dd {
 
     }
 }
+/* Bootstrap -sm */
+@media screen and (max-width: 576px) {
 
+}
+
+/* Bootstrap -md */
 @media screen and (max-width: 768px) {
+
     h1 strong {
         font-size: 70%;
     }
@@ -855,6 +867,13 @@ dl dd {
 
     h5 {
         font-size: 100%;
+    }
+}
+/* Bootstrap -lg */
+@media screen and (max-width: 992px) {
+    .preview-row > div {
+        padding-left:2px;
+        padding-right:2px;
     }
 }
 
