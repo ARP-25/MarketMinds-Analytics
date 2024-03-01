@@ -14,7 +14,6 @@ class Insight(models.Model):
 
     cover_image = models.ImageField(      
     upload_to='insights_cover_images/', 
-
     null=True, 
     blank=True
     )
@@ -24,13 +23,25 @@ class Insight(models.Model):
     BACKSTAGE = 'BS'
     STAGE_CHOICES = [
         (MAINSTAGE, 'Mainstage'),
-        (SECOND_STAGE, 'Second Stage'),
+        (SECOND_STAGE, 'Secondstage'),
         (BACKSTAGE, 'Backstage'),
     ]
     stage = models.CharField(
         max_length=2,
         choices=STAGE_CHOICES,
         default=BACKSTAGE,
+    )
+
+    TEXT = 'TXT'
+    IMAGE = 'IMG'
+    DISPLAY_CHOICES = [
+        (TEXT, 'Text'),
+        (IMAGE, 'Image'),
+    ]
+    display = models.CharField(
+        max_length=3,
+        choices=DISPLAY_CHOICES,
+        default=IMAGE,
     )
 
     def __str__(self):

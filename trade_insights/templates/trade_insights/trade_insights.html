@@ -8,8 +8,9 @@
 
 
 <div class="container">
+    <!-- Main Stage -->
     <div class="row mainstage-row">
-        {% for insight in insights %}
+        {% for insight in ms_insights %}
         <div class="col-12 col-md-2">
             <div class="mainstage-insight d-flex justify-content-end flex-column">
                 <div class="background-image" style="background-image: url('{{ insight.cover_image.url }}');"></div>
@@ -17,7 +18,7 @@
                 <div class="mainstage-detail-container">
                     <span class="mainstage-release_date pl-2 d-block pr-2">{{ insight.release_date }}</span>
                     <span class="mainstage-title pl-2 d-block bold-text ellipsis pr-2">{{ insight.title }}</span>
-                    <span class="mainstage-short_description pb-2 pl-2 d-block ellipsis pr-2">{{ insight.short_description }}</span>
+                    <span class="mainstage-short_description pb-2 pl-2 pt-1 d-block ellipsis pr-2">{{ insight.short_description }}</span>
                     <div class="hr d-block m-2"></div>
                     <div class="d-flex justify-content-between align-items-center pl-2 pb-2 pr-2">
                         <div class="category text-center">
@@ -32,27 +33,111 @@
         </div>
         {% endfor %}
     </div>
+
+    <!-- Insight Feed -->
+    <div class="row secondstage-row pt-2">
+        <div class="col-12 pb-2">Insight Feed</div>
+        <div class="col-5 secondstage-left">          
+            {% for insight in ss_insights %}          
+                {% if not forloop.counter|divisibleby:2 %}
+                    {% if insight.display == 'IMG' %}
+                    <div class="col-12 ss-insight-img dark-overlay d-flex justify-content-end flex-column">
+                        <div class="secondstage-insight d-flex justify-content-end flex-column">
+                            <div class="background-image" style="background-image: url('{{ insight.cover_image.url }}');"></div>
+                        </div>                      
+                        <span class="secondstage-release_date pl-2 d-block pr-2">{{ insight.release_date }}</span>
+                        <span class="secondstage-title pl-2 d-block bold-text pr-2">{{ insight.title }}</span>
+                        <span class="secondstage-short_description pb-2 pl-2 pt-1 pr-2">{{ insight.short_description }}</span>
+                        <div class="read-more pl-2 pb-2">
+                            read more<i class="fa-brands fa-readme pl-2"></i>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="col-12 ss-insight-txt dark-overlay d-flex justify-content-end flex-column">                    
+                        <span class="secondstage-release_date pl-2 d-block pr-2">{{ insight.release_date }}</span>
+                        <span class="secondstage-title pl-2 d-block bold-text pr-2">{{ insight.title }}</span>
+                        <span class="secondstage-short_description pb-2 pl-2 pt-1 pr-2">{{ insight.short_description }}</span>
+                        <div class="read-more pl-2 pb-2">
+                            read more<i class="fa-brands fa-readme pl-2"></i>
+                        </div>
+                        <div class="hr d-block m-2"></div>
+                        <div class="category-ss text-center">
+                            <i class="fa-solid fa-square-poll-vertical pr-2"></i>{{ insight.category }}
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}         
+        </div>
+
+        <div class="col-5 secondstage-right">
+            {% for insight in ss_insights %}          
+            {% if forloop.counter|divisibleby:2 %}
+                {% if insight.display == 'IMG' %}
+                <div class="col-12 ss-insight-img dark-overlay d-flex justify-content-end flex-column">
+                    <div class="secondstage-insight d-flex justify-content-end flex-column">
+                        <div class="background-image" style="background-image: url('{{ insight.cover_image.url }}');"></div>
+                    </div>                      
+                    <span class="secondstage-release_date pl-2 d-block pr-2">{{ insight.release_date }}</span>
+                    <span class="secondstage-title pl-2 d-block bold-text pr-2">{{ insight.title }}</span>
+                    <span class="secondstage-short_description pb-2 pl-2 pt-1 pr-2">{{ insight.short_description }}</span>
+                    <div class="read-more pl-2 pb-2">
+                        read more<i class="fa-brands fa-readme pl-2"></i>
+                    </div>
+                </div>
+                {% else %}
+                <div class="col-12 ss-insight-txt dark-overlay d-flex justify-content-end flex-column">                    
+                    <span class="secondstage-release_date pl-2 d-block pr-2">{{ insight.release_date }}</span>
+                    <span class="secondstage-title pl-2 d-block bold-text pr-2">{{ insight.title }}</span>
+                    <span class="secondstage-short_description pb-2 pl-2 pt-1 pr-2">{{ insight.short_description }}</span>
+                    <div class="read-more pl-2 pb-2">
+                        read more<i class="fa-brands fa-readme pl-2"></i>
+                    </div>
+                    <div class="hr d-block m-2"></div>
+                    <div class="category-ss text-center">
+                        <i class="fa-solid fa-square-poll-vertical pr-2"></i>{{ insight.category }}
+                    </div>
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}  
+        </div>
+
+        <div class="col-2 ">
+            marketminds socials
+            global markets
+            popular videos
+            products
+        </div>
+    </div>
+    
 </div>
-
-
 {% endblock %}
 
 
 {% block postloadjs %}
 <script>
     $(document).ready(function() {
-        // Tausche beim Laden der Seite die Klasse des ersten col-2 Elements
         $('.mainstage-row > .col-md-2:first').removeClass('col-md-2').addClass('col-md-6');
-
-        // Tausche die Klasse bei Hover über ein col-2 oder col-6 Element, das ein direktes Kind von .mainstage-row ist
         $('.mainstage-row').on('mouseenter', '> .col-md-2, > .col-md-6', function() {
-            // Setze alle Geschwister auf col-2 zurück
             $(this).siblings().removeClass('col-md-6').addClass('col-md-2');
-            // Tausche die Klasse des gehoverten Elements
             $(this).removeClass('col-md-2').addClass('col-md-6');
         });
     });
 
+    $('.secondstage-short_description').hide();
 
+    $(document).ready(function() {
+    // Standardmäßig ausblenden
+    $('.secondstage-short_description').hide();
+
+    $('.ss-insight-img').hover(
+        function() {
+            $(this).find('.secondstage-short_description').show(800); // Kürzere Dauer
+        }, function() {
+            $(this).find('.secondstage-short_description').hide(800); // Kürzere Dauer
+        }
+    );
+});
 </script>
 {% endblock %}
