@@ -810,10 +810,10 @@ dl dd {
     margin: 30px 0 30px;
 }
 .mainstage-row > div {
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
 }
 .mainstage-insight {
     position: relative;
@@ -881,7 +881,7 @@ dl dd {
 }
 .mainstage-detail-container {
     position: absolute;
-    bottom: -22%; 
+    bottom: -24%; 
     left: 0;
     right: 0;
     transition: bottom 0.5s ease; 
