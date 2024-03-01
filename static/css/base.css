@@ -796,24 +796,84 @@ dl dd {
     /* Weitere notwendige Styles */
   }
   
-/* Trade Insights */
+
+
+/************************ Trade Insights *************************/
+/* Trade Insights General */
 .tradingview-widget-container {
     margin-top: 66px;
 }
-.preview-insight {
+/* Trade Insights Main Stage */
+.mainstage-insight {
     height:40vh;
-    border: 1px solid white;
-    border-radius:5px;
+    border-radius:3px;
     margin: 30px 0 30px;
 }
-.preview-row > div {
+.mainstage-row > div {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
+.mainstage-insight {
+    position: relative;
+    height: 40vh; 
+    z-index: 1; 
+}
+.mainstage-insight .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    transition: filter 0.3s ease;
+    z-index: -1; 
+    border-radius: 4px;
+}
+.mainstage-insight .dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0); 
+    transition: background-color 0.3s ease; 
+    z-index: 0; 
+}
+.mainstage-insight:hover .dark-overlay {
+    background: rgba(0, 0, 0, 0.5); 
+}
+.mainstage-insight .mainstage-detail-container {
+    position: relative;
+    z-index: 2; 
+}
+.mainstage-release_date{
+    font-size: 80%;
+}
+.mainstage-title{
+    font-size: 120%;
+}
+.mainstage-short_description{
+    font-size:80%;
 
-
+}
+.hr {
+    height:1px;
+    background-color: white;
+}
+.category {
+    height: 30px;
+    min-width: 100px;
+    border: 1px solid white;
+    border-radius:15px;
+    backdrop-filter: blur(10px);
+    display:inline-block;
+}
+.read-more {
+    font-size: 80%;
+}
 
 
 /* Additional Media Queries */
@@ -871,7 +931,7 @@ dl dd {
 }
 /* Bootstrap -lg */
 @media screen and (max-width: 992px) {
-    .preview-row > div {
+    .mainstage-row > div {
         padding-left:2px;
         padding-right:2px;
     }
