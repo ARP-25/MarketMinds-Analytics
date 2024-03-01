@@ -97,7 +97,7 @@ body {
     font-size: 140%;
     position: absolute;
     top: 25px;
-    left: 160px;
+    left: 125px;
     color: #ffffff;
 }
 
@@ -838,12 +838,12 @@ dl dd {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0); 
-    transition: background-color 0.3s ease; 
+    background: linear-gradient(transparent, rgba(0, 0, 0, 1.0));
+    transition: background-color 0.8s ease; 
     z-index: 0; 
 }
 .mainstage-insight:hover .dark-overlay {
-    background: rgba(0, 0, 0, 0.5); 
+    background: rgba(0, 0, 0, 0.8); 
 }
 .mainstage-insight .mainstage-detail-container {
     position: relative;
@@ -854,10 +854,11 @@ dl dd {
 }
 .mainstage-title{
     font-size: 120%;
+    color: #00b4d8;
+    font-weight: bold;
 }
 .mainstage-short_description{
     font-size:80%;
-
 }
 .hr {
     height:1px;
@@ -874,6 +875,32 @@ dl dd {
 .read-more {
     font-size: 80%;
 }
+.mainstage-insight {
+    position: relative;
+    overflow: hidden; 
+}
+.mainstage-detail-container {
+    position: absolute;
+    bottom: -22%; 
+    left: 0;
+    right: 0;
+    transition: bottom 0.5s ease; 
+}
+.mainstage-insight:hover .mainstage-detail-container {
+    bottom: 0; 
+}
+.ellipsis {
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
+    max-width: 100%; 
+    padding-right:2px;
+}
+
+
+
+
+
 
 
 /* Additional Media Queries */
@@ -962,5 +989,10 @@ dl dd {
         position: absolute;
         right: 20%;
         width: 120px;
+    }
+}
+@media (min-width: 1200px) {
+    .container{
+      max-width: 1300px;
     }
 }
