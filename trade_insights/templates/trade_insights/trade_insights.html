@@ -1,13 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
 
 {% include 'includes/tradingview/tradingview_widget.html' %}
-
-
-
 
 <div class="container">
     <!-- Main Stage -->
@@ -39,7 +35,7 @@
     <!-- Insight Feed -->
     <div class="row secondstage-row pt-2">
 
-        <div class="col-4 secondstage-left">               
+        <div class="col-6 col-lg-4 secondstage-left">               
             {% for insight in ss_insights %}          
                 {% if not forloop.counter|divisibleby:2 %}
                     {% if insight.display == 'IMG' %}
@@ -72,7 +68,7 @@
             {% endfor %}         
         </div>
 
-        <div class="col-4 secondstage-right">
+        <div class="col-6 col-lg-4 secondstage-right">
             {% for insight in ss_insights %}          
             {% if forloop.counter|divisibleby:2 %}
                 {% if insight.display == 'IMG' %}
@@ -105,9 +101,9 @@
         {% endfor %}  
         </div>
 
-        <div class="col-4">
+        <div class="col-lg-4 offset-lg-0 col-10 offset-1">
             <div class="row">
-                <div class="col-12 ml-3 pr-4 sidebar-border">
+                <div id="sidebar-container" class="col-12 ml-3 pr-4 sidebar-border">
                     <!--<div class="tv-widget-container">
                         <p class="cover-text">Facebook</p>
                         <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=61555685786785&amp;locale=de_DE" data-tabs="timeline" data-width="100" data-height="" data-small-header="true" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
@@ -118,29 +114,29 @@
                     </div>
                     <div class="hr d-block m-2"></div>-->
                     <div class="pl-3">
-
-
                         <p class="cover-text pb-2">Global Market</p>
                         <div class="tv-widget-container">
                             {% include 'includes/tradingview/tradingview_globalmarket.html' %}
                         </div>
                         <div class="hr-secondary d-block mt-4 mb-3"></div>
-                        <p class="pcover-text">Our Products</p>                       
-                        {% for sp in sp %}
-                            <div class="row product-container">
-                                <div class="col-5">
-                                    <img src="{{ sp.image.url }}" alt="{{ sp.title }}" class="product-image"/>
-                                </div>
-                                <div class="col-7">
-                                    <div class="product-text">
-                                        {{ sp.title }}
+                        <p class="pcover-text">Our Products</p> 
+                        <a href="{% url 'get_started' %}" target="_blank">                      
+                            {% for sp in sp %}
+                                <div class="row product-container">
+                                    <div class="col-5">
+                                        <img src="{{ sp.image.url }}" alt="{{ sp.title }}" class="product-image"/>
                                     </div>
-                                    <div class="product-info">
-                                        more info
+                                    <div class="col-7 d-flex flex-column justify-content-between">
+                                        <div class="product-text">
+                                            {{ sp.title }}<i class="fa-solid fa-money-bill-trend-up pl-3"></i>
+                                        </div>
+                                        <div class="product-info">
+                                            More info<i class="fa-solid fa-arrow-right pl-3"></i>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endfor %}                      
+                            {% endfor %}
+                        </a>                      
                         <div class="hr-secondary d-block mt-4 mb-3"></div>
                         <p class="cover-text pb-2">Top Stories</p>
                         <div class="tv-widget-container">
@@ -158,28 +154,38 @@
 
 
 {% block postloadjs %}
+{{ block.super }}
 <script>
     $(document).ready(function() {
+        /* Scale Effekt Mainstage */
         $('.mainstage-row > .col-md-2:first').removeClass('col-md-2').addClass('col-md-6');
         $('.mainstage-row').on('mouseenter', '> .col-md-2, > .col-md-6', function() {
             $(this).siblings().removeClass('col-md-6').addClass('col-md-2');
             $(this).removeClass('col-md-2').addClass('col-md-6');
         });
-    });
 
-    $('.secondstage-short_description').hide();
-
-    $(document).ready(function() {
-    // Standardmäßig ausblenden
-    $('.secondstage-short_description').hide();
-
-    $('.ss-insight-img').hover(
-        function() {
-            $(this).find('.secondstage-short_description').show(800); // Kürzere Dauer
-        }, function() {
-            $(this).find('.secondstage-short_description').hide(800); // Kürzere Dauer
+        /* Short Description Effekt Second Stage */
+        $('.secondstage-short_description').hide();
+        $('.ss-insight-img').hover(
+            function() {
+                $(this).find('.secondstage-short_description').show(800); 
+            }, 
+            function() {
+                $(this).find('.secondstage-short_description').hide(800); 
+            }
+        );
+        
+        /* Remove Sidebar for lower Screensizes */
+        function adjustSidebarClasses() {
+            const sidebarContainer = document.getElementById('sidebar-container');
+            if (window.innerWidth >= 992) {
+                sidebarContainer.classList.add('ml-3', 'pr-4', 'sidebar-border');
+            } else {
+                sidebarContainer.classList.remove('ml-3', 'pr-4', 'sidebar-border');
+            }
         }
-    );
-});
+        adjustSidebarClasses();
+        window.addEventListener('resize', adjustSidebarClasses);
+    });
 </script>
 {% endblock %}

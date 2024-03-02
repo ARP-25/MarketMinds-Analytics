@@ -969,7 +969,14 @@ dl dd {
 .product-container:first {
     margin-top: 0px;
 }
-
+.product-text {
+    font-size: 130%;
+    font-weight: bold;
+    font-family: Rubik Mono One, sans-serif;
+}
+.product-info {
+    font-size: 80%;
+}
 
 /* Additional Media Queries */
 @media screen and (max-width: 360px) {
