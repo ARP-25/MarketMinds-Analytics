@@ -124,12 +124,24 @@
                         <div class="tv-widget-container">
                             {% include 'includes/tradingview/tradingview_globalmarket.html' %}
                         </div>
-                        <div class="hr d-block mt-4 mb-3"></div>
-                        <p class="pcover-text pb-1">Products</p>
-                        <div class="products-container">
-
-                        </div>
-                        <div class="hr d-block mt-4 mb-3"></div>
+                        <div class="hr-secondary d-block mt-4 mb-3"></div>
+                        <p class="pcover-text">Our Products</p>                       
+                        {% for sp in sp %}
+                            <div class="row product-container">
+                                <div class="col-5">
+                                    <img src="{{ sp.image.url }}" alt="{{ sp.title }}" class="product-image"/>
+                                </div>
+                                <div class="col-7">
+                                    <div class="product-text">
+                                        {{ sp.title }}
+                                    </div>
+                                    <div class="product-info">
+                                        more info
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}                      
+                        <div class="hr-secondary d-block mt-4 mb-3"></div>
                         <p class="cover-text pb-2">Top Stories</p>
                         <div class="tv-widget-container">
                             {% include 'includes/tradingview/tradingview_news.html' %}

@@ -864,6 +864,10 @@ dl dd {
     height:1px;
     background-color: white;
 }
+.hr-secondary {
+    height: 1px;
+    background-color: #8d99ae;
+}
 .category {
     height: 30px;
     min-width: 100px;
@@ -944,13 +948,29 @@ dl dd {
 .tradingview-widget-container {
     margin-top: 66px;
 }
-.products-container {
-    border:1px solid white;
-    height:300px;
+
+/* Products */
+.product-container {
+    background-color:#0d1b2a;
+    margin: 15px 0 15px 0;
+    padding: 15px 0 15px;
+    border-radius: 3px;
+    border:solid 1px #495057;
+}
+.product-image {
+    border-radius: 3px;
+    height: 80px; 
+    width: 100%; 
+    object-fit: cover; 
 }
 .sidebar-border {
-    border-left: 1px solid whitesmoke;
+    border-left: 1px solid #8d99ae;
 }
+.product-container:first {
+    margin-top: 0px;
+}
+
+
 /* Additional Media Queries */
 @media screen and (max-width: 360px) {
     .logo {
