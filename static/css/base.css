@@ -888,10 +888,11 @@ dl dd {
 .mainstage-insight {
     position: relative;
     overflow: hidden; 
+    box-shadow: 0 8px 6px -6px white;
 }
 .mainstage-detail-container {
     position: absolute;
-    bottom: -24%; 
+    bottom: -23%; 
     left: 0;
     right: 0;
     transition: bottom 0.5s ease; 
@@ -913,6 +914,7 @@ dl dd {
     background: linear-gradient(transparent, rgba(0, 0, 0, 1.0));
     padding-left:0;
     margin: 15px 0 15px;
+    box-shadow: 0 5px 7px -4px white;
 }
 .ss-insight-txt {
     height:20vh;
@@ -920,13 +922,35 @@ dl dd {
     background: linear-gradient(#90e0ef, rgba(0, 0, 0, 1.0));
     padding-left:0;
     margin: 15px 0 15px;
+    box-shadow: 0 8px 6px -6px white; /* X, Y, Blur, Spread und Farbe */
 }
 .ss-insight-img:first-child, 
 .ss-insight-txt:first-child {
     margin-top: 0;
 }
-
-
+/* Trade Insight Side Bar */
+.cover-text {
+   color: white;
+   font-weight: bolder;
+   margin-bottom:-64px;
+}
+.pcover-text {
+    color: white;
+    font-weight: bolder;
+}
+.tv-widget-container {
+    height:450px;
+}
+.tradingview-widget-container {
+    margin-top: 66px;
+}
+.products-container {
+    border:1px solid white;
+    height:300px;
+}
+.sidebar-border {
+    border-left: 1px solid whitesmoke;
+}
 /* Additional Media Queries */
 @media screen and (max-width: 360px) {
     .logo {

@@ -7,6 +7,8 @@
 {% include 'includes/tradingview/tradingview_widget.html' %}
 
 
+
+
 <div class="container">
     <!-- Main Stage -->
     <div class="row mainstage-row">
@@ -36,8 +38,8 @@
 
     <!-- Insight Feed -->
     <div class="row secondstage-row pt-2">
-        <div class="col-12 pb-2">Insight Feed</div>
-        <div class="col-5 secondstage-left">          
+
+        <div class="col-4 secondstage-left">               
             {% for insight in ss_insights %}          
                 {% if not forloop.counter|divisibleby:2 %}
                     {% if insight.display == 'IMG' %}
@@ -70,7 +72,7 @@
             {% endfor %}         
         </div>
 
-        <div class="col-5 secondstage-right">
+        <div class="col-4 secondstage-right">
             {% for insight in ss_insights %}          
             {% if forloop.counter|divisibleby:2 %}
                 {% if insight.display == 'IMG' %}
@@ -103,13 +105,41 @@
         {% endfor %}  
         </div>
 
-        <div class="col-2 ">
-            marketminds socials
-            global markets
-            popular videos
-            products
+        <div class="col-4">
+            <div class="row">
+                <div class="col-12 ml-3 pr-4 sidebar-border">
+                    <!--<div class="tv-widget-container">
+                        <p class="cover-text">Facebook</p>
+                        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=61555685786785&amp;locale=de_DE" data-tabs="timeline" data-width="100" data-height="" data-small-header="true" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
+                            <blockquote cite="https://www.facebook.com/profile.php?id=61555685786785&amp;locale=de_DE" class="fb-xfbml-parse-ignore">
+                                <a href="https://www.facebook.com/profile.php?id=61555685786785&amp;locale=de_DE">MarketMinds Analytics</a>
+                            </blockquote>
+                        </div>                  
+                    </div>
+                    <div class="hr d-block m-2"></div>-->
+                    <div class="pl-3">
+
+
+                        <p class="cover-text pb-2">Global Market</p>
+                        <div class="tv-widget-container">
+                            {% include 'includes/tradingview/tradingview_globalmarket.html' %}
+                        </div>
+                        <div class="hr d-block mt-4 mb-3"></div>
+                        <p class="pcover-text pb-1">Products</p>
+                        <div class="products-container">
+
+                        </div>
+                        <div class="hr d-block mt-4 mb-3"></div>
+                        <p class="cover-text pb-2">Top Stories</p>
+                        <div class="tv-widget-container">
+                            {% include 'includes/tradingview/tradingview_news.html' %}
+                        </div>
+                    </div>
+                    <!--<div class="hr d-block mt-4 mb-3"></div>-->
+                </div>
+            </div>
         </div>
-    </div>
+</div>
     
 </div>
 {% endblock %}
