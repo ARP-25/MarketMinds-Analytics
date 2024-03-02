@@ -803,6 +803,7 @@ dl dd {
 .tradingview-widget-container {
     margin-top: 66px;
 }
+
 /* Trade Insights Main Stage */
 .mainstage-insight {
     height:40vh;
@@ -814,11 +815,6 @@ dl dd {
     -moz-transition: all 1s ease;
     -o-transition: all 1s ease;
     transition: all 1s ease;
-}
-.mainstage-insight {
-    position: relative;
-    height: 40vh; 
-    z-index: 1; 
 }
 .mainstage-insight .background-image, .secondstage-insight .background-image {
     position: absolute;
@@ -978,6 +974,38 @@ dl dd {
     font-size: 80%;
 }
 
+/**************** Trade Insights Detail **************/
+.insight-detail-image-container {
+    height:40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+}
+.insight-detail-image-container .dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 1.0));
+    transition: background-color 0.8s ease; 
+    z-index: 0; 
+}
+.insight-detail-image-container .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    transition: filter 0.3s ease;
+    z-index: -1; 
+    border-radius: 4px;
+}
+.image-detail-info {
+    z-index:2;
+}
 /* Additional Media Queries */
 @media screen and (max-width: 360px) {
     .logo {

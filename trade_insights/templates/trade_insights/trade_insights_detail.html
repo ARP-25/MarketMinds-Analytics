@@ -6,19 +6,34 @@
 {% include 'includes/tradingview/tradingview_widget.html' %}
 
 <div class="container">
-    <div class="row">
-        <!-- Insight Image Section -->
-        <div class="col-lg-8">
-            test
-            <!-- Left Sidebar -->
-            <div class="col-3">
+    <div class="row mt-4">
+        <!-- Insight Detail Section -->       
+        <div class="col-lg-8 col-12 ">
+            <!-- Insight Detail Picture-->
+            <div class="col-12 insight-detail-image-container">
+                <div class="background-image background-image-detail" style="background-image: url('{{ insight.cover_image.url }}');"></div>
+                <div class="dark-overlay"></div>
+                <div class="image-detail-info">
+                    <span class="mainstage-release_date pl-2 d-block pr-2">{{ insight.release_date }}</span>
+                    <span class="mainstage-title pl-2 d-block bold-text ellipsis pr-2">{{ insight.title }}</span>
+                    <span class="mainstage-short_description pb-2 pl-2 pt-1 d-block ellipsis pr-2">{{ insight.short_description }}</span>
+                    <div class="hr d-block m-2"></div>
+                    <div class="d-flex justify-content-between align-items-center pl-2 pb-2 pr-2">
+                        <div class="category text-center">
+                            <i class="fa-solid fa-square-poll-vertical pr-2"></i>{{ insight.category }}
+                        </div>
+                        <div class="read-more ellipsis">
+                            Author: {{ insight.author }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Left Sidebar Detail Small-->
+            <div class="col-12 insight-detail-text-container mt-3">
+                {{ insight.content|safe }}
 
             </div>
-            <!-- Insight Content -->
-            <div class="col-9">
-
-            </div>
-        </div>
+        </div>                     
         <!-- Sidebar -->
         <div class="col-lg-4 offset-lg-0 col-10 offset-1">
             <div class="row">
@@ -58,24 +73,14 @@
         </div> 
     </div> 
 </div>
+
 {% endblock %}
 
 
 {% block postloadjs %}
 {{ block.super }}
 <script>
-    $(document).ready(function() {
-        /* Short Description Effekt Second Stage */
-        $('.secondstage-short_description').hide();
-        $('.ss-insight-img').hover(
-            function() {
-                $(this).find('.secondstage-short_description').show(800); 
-            }, 
-            function() {
-                $(this).find('.secondstage-short_description').hide(800); 
-            }
-        );
-        
+    $(document).ready(function() {     
         /* Remove Sidebar for lower Screensizes */
         function adjustSidebarClasses() {
             const sidebarContainer = document.getElementById('sidebar-container');
