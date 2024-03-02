@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from .models import Insight
+from django.shortcuts import render, get_object_or_404
 from subscription.models import SubscriptionPlan
 
 # Create your views here.
@@ -15,3 +16,13 @@ def trade_insights(request):
     }
 
     return render(request, 'trade_insights/trade_insights.html', context)
+
+def trade_insights_detail(request, slug):
+    sp = SubscriptionPlan.objects.all()
+    insight = get_object_or_404(Insight, slug=slug)
+    context = {
+        'sp': sp,
+        'insight': insight,
+    }
+
+    return render(request, 'trade_insights/trade_insights_detail.html', context)

@@ -1,11 +1,19 @@
 from django.db import models
+from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 from profiles.models import UserProfile  
 from subscription.models import SubscriptionPlan
 
 
 class Insight(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
+
+    slug = models.SlugField(max_length=200, blank=True, unique=True)
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(Insight, self).save(*args, **kwargs)
+
     release_date = models.DateField()
     content = RichTextField()
     category = models.ForeignKey(SubscriptionPlan, on_delete=models.CASCADE, related_name='insights')

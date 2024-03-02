@@ -9,7 +9,7 @@
     <!-- Main Stage -->
     <div class="row mainstage-row">
         {% for insight in ms_insights %}
-        <div class="col-12 col-md-2">
+        <div class="col-12 col-md-2" onclick="location.href='{% url 'trade_insights_detail' slug=insight.slug %}'">
             <div class="mainstage-insight d-flex justify-content-end flex-column">
                 <div class="background-image" style="background-image: url('{{ insight.cover_image.url }}');"></div>
                 <div class="dark-overlay"></div>
@@ -67,7 +67,7 @@
                 {% endif %}
             {% endfor %}         
         </div>
-
+        
         <div class="col-6 col-lg-4 secondstage-right">
             {% for insight in ss_insights %}          
             {% if forloop.counter|divisibleby:2 %}
@@ -100,7 +100,7 @@
             {% endif %}
         {% endfor %}  
         </div>
-
+        <!-- Sidebar -->
         <div class="col-lg-4 offset-lg-0 col-10 offset-1">
             <div class="row">
                 <div id="sidebar-container" class="col-12 ml-3 pr-4 sidebar-border">
@@ -114,7 +114,7 @@
                     </div>
                     <div class="hr d-block m-2"></div>-->
                     <div class="pl-3">
-                        <p class="cover-text pb-2">Global Market</p>
+                        <p class="cover-text pb-2">Global Markets</p>
                         <div class="tv-widget-container">
                             {% include 'includes/tradingview/tradingview_globalmarket.html' %}
                         </div>

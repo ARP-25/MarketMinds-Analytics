@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'includes/tradingview/tradingview_widget.html' %}
+
+<div class="container">
+    <div class="row">
+        <!-- Insight Image Section -->
+        <div class="col-lg-8">
+            test
+            <!-- Left Sidebar -->
+            <div class="col-3">
+
+            </div>
+            <!-- Insight Content -->
+            <div class="col-9">
+
+            </div>
+        </div>
+        <!-- Sidebar -->
+        <div class="col-lg-4 offset-lg-0 col-10 offset-1">
+            <div class="row">
+                <div id="sidebar-container" class="col-12 ml-3 pr-4 sidebar-border">
+                    <div class="pl-3">
+                        <p class="cover-text pb-2">Global Markets</p>
+                        <div class="tv-widget-container">
+                            {% include 'includes/tradingview/tradingview_globalmarket.html' %}
+                        </div>
+                        <div class="hr-secondary d-block mt-4 mb-3"></div>
+                        <p class="pcover-text">Our Products</p> 
+                        <a href="{% url 'get_started' %}" target="_blank">                      
+                            {% for sp in sp %}
+                                <div class="row product-container">
+                                    <div class="col-5">
+                                        <img src="{{ sp.image.url }}" alt="{{ sp.title }}" class="product-image"/>
+                                    </div>
+                                    <div class="col-7 d-flex flex-column justify-content-between">
+                                        <div class="product-text">
+                                            {{ sp.title }}<i class="fa-solid fa-money-bill-trend-up pl-3"></i>
+                                        </div>
+                                        <div class="product-info">
+                                            More info<i class="fa-solid fa-arrow-right pl-3"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </a>                      
+                        <div class="hr-secondary d-block mt-4 mb-3"></div>
+                        <p class="cover-text pb-2">Top Stories</p>
+                        <div class="tv-widget-container">
+                            {% include 'includes/tradingview/tradingview_news.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div> 
+</div>
+{% endblock %}
+
+
+{% block postloadjs %}
+{{ block.super }}
+<script>
+    $(document).ready(function() {
+        /* Short Description Effekt Second Stage */
+        $('.secondstage-short_description').hide();
+        $('.ss-insight-img').hover(
+            function() {
+                $(this).find('.secondstage-short_description').show(800); 
+            }, 
+            function() {
+                $(this).find('.secondstage-short_description').hide(800); 
+            }
+        );
+        
+        /* Remove Sidebar for lower Screensizes */
+        function adjustSidebarClasses() {
+            const sidebarContainer = document.getElementById('sidebar-container');
+            if (window.innerWidth >= 992) {
+                sidebarContainer.classList.add('ml-3', 'pr-4', 'sidebar-border');
+            } else {
+                sidebarContainer.classList.remove('ml-3', 'pr-4', 'sidebar-border');
+            }
+        }
+        adjustSidebarClasses();
+        window.addEventListener('resize', adjustSidebarClasses);
+    });
+</script>
+{% endblock %}
