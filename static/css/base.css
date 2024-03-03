@@ -882,6 +882,17 @@ dl dd {
     display:inline-block;
     margin: 0 0 8px 8px;
 }
+.category-ss-small {
+    height: 26px;
+    width: 80%;
+    min-width: 80%;
+    border: 1px solid white;
+    border-radius:13px;
+    display:inline-block;
+    margin: 0 0 8px 8px;
+    font-size: 75%;
+}
+
 .read-more {
     font-size: 80%;
 }
@@ -923,7 +934,18 @@ dl dd {
     padding-left:0;
     margin: 15px 0 15px;
     box-shadow: 0 8px 6px -6px white; /* X, Y, Blur, Spread und Farbe */
+    padding-right:0;
 }
+.ss-insight-txt-small {
+    height:20vh;
+    border-radius:4px;
+    background: linear-gradient(#90e0ef, rgba(0, 0, 0, 1.0));
+    padding-left:0;
+    margin: 15px 0 15px;
+    box-shadow: 0 8px 6px -6px white; /* X, Y, Blur, Spread und Farbe */
+    padding-right:0;
+}
+
 .ss-insight-img:first-child, 
 .ss-insight-txt:first-child {
     margin-top: 0;
@@ -934,6 +956,10 @@ dl dd {
    font-weight: bolder;
    margin-bottom:-64px;
 }
+.cover-text-small {
+    color: white;
+    font-weight: bolder;
+ }
 .pcover-text {
     color: white;
     font-weight: bolder;
@@ -990,6 +1016,8 @@ dl dd {
     background: linear-gradient(transparent, rgba(0, 0, 0, 1.0));
     transition: background-color 0.8s ease; 
     z-index: 0; 
+    box-shadow: 0 8px 6px -6px white;
+
 }
 .insight-detail-image-container .background-image {
     position: absolute;
@@ -1006,6 +1034,9 @@ dl dd {
 .image-detail-info {
     z-index:2;
 }
+.insight-detail-leftside {
+    border-right: 1px solid #8d99ae;
+}
 /* Additional Media Queries */
 @media screen and (max-width: 360px) {
     .logo {
@@ -1020,7 +1051,10 @@ dl dd {
 
 /* Bootstrap -md */
 @media screen and (max-width: 768px) {
-
+    .insight-detail-container .row {
+        display: flex;
+        flex-direction: column-reverse;
+    }
     h1 strong {
         font-size: 70%;
     }
@@ -1084,6 +1118,8 @@ dl dd {
 }
 
 @media screen and (max-width: 992px) {
+
+
     #profile-cart {
         text-align: center;
     }
@@ -1092,6 +1128,21 @@ dl dd {
         position: absolute;
         right: 20%;
         width: 120px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .insight-detail-leftside {
+        border-right: none;
+    }
+    .ss-insight-txt-small {
+        height:20vh;
+        border-radius:4px;
+        background: linear-gradient(#90e0ef, rgba(0, 0, 0, 1.0));
+        padding-left:0;
+        margin: 15px 0 15px;
+        box-shadow: 0 8px 6px -6px white; /* X, Y, Blur, Spread und Farbe */
+        padding-right:0;
+        align-items: center;
     }
 }
 @media (min-width: 1200px) {

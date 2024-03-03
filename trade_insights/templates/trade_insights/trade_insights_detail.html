@@ -10,7 +10,7 @@
         <!-- Insight Detail Section -->       
         <div class="col-lg-8 col-12 ">
             <!-- Insight Detail Picture-->
-            <div class="col-12 insight-detail-image-container">
+            <div class="col-12 insight-detail-image-container mb-2">
                 <div class="background-image background-image-detail" style="background-image: url('{{ insight.cover_image.url }}');"></div>
                 <div class="dark-overlay"></div>
                 <div class="image-detail-info">
@@ -28,11 +28,32 @@
                     </div>
                 </div>
             </div>
-            <!-- Left Sidebar Detail Small-->
-            <div class="col-12 insight-detail-text-container mt-3">
-                {{ insight.content|safe }}
+            <!-- Sidebar and Text Content -->
+            <div class="col-12 insight-detail-container">
+                <div class="row d-xl-flex flex-xl-row flex-column-reverse">
+                    <!-- Left Sidebar Detail Small-->
+                    <div class="col-xl-2 col-12 insight-detail-leftside mt-2">
+                        <p class="cover-text-small">Similar Insights</p>
+                        {% for insight in similiar_insights %}
+                        <a href="{% url 'trade_insights_detail' slug=insight.slug %}">  
+                            <div class="col-12 ss-insight-txt-small dark-overlay d-flex justify-content-end flex-column">                                   
+                                <span class="secondstage-release_date pl-2 d-block pr-2">{{ insight.release_date }}</span>
+                                <span class="secondstage-title pl-2 d-block bold-text pr-2 pb-1">{{ insight.title }}</span>
+                                <div class="category-ss-small text-small d-flex justify-content-center align-items-center">
+                                    <i class="fa-solid fa-square-poll-vertical pr-2"></i>{{ insight.category }}
+                                </div>                                
+                            </div>
+                        </a> 
+                        {% endfor %}
+                    </div>
 
+                    <!-- Insight Text Content -->
+                    <div class="col-xl-10 col-12 insight-detail-text mt-2">
+                        {{ insight.content|safe }}
+                    </div>
+                </div>
             </div>
+            
         </div>                     
         <!-- Sidebar -->
         <div class="col-lg-4 offset-lg-0 col-10 offset-1">

@@ -20,9 +20,12 @@ def trade_insights(request):
 def trade_insights_detail(request, slug):
     sp = SubscriptionPlan.objects.all()
     insight = get_object_or_404(Insight, slug=slug)
+    category = insight.category
+    similiar_insights = Insight.objects.filter(category=category)
     context = {
         'sp': sp,
         'insight': insight,
+        'similiar_insights': similiar_insights
     }
 
     return render(request, 'trade_insights/trade_insights_detail.html', context)
