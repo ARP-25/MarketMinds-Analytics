@@ -16,7 +16,8 @@ urlpatterns = [
     path('', include('bag.urls')),     
     path('checkout/', include('checkout.urls')),     
     path('profile/', include('profiles.urls')),  
-    path('trade-insights/', include('trade_insights.urls')),  
+    path('trade-insights/', include('trade_insights.urls')),
+    path('admin_access/',include('admin_access.urls')),  
     path('render-404/', render_custom_404, name='render_404'), 
 ]
 

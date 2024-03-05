@@ -31,9 +31,9 @@ class GetStarted(ListView):
     def get_queryset(self):
         return SubscriptionPlan.objects.order_by('id')
 
-
+"""
 class AdminAccess(ListView):
-    """
+    
     View class for administrative access.
 
     Handles POST requests for sorting or deleting subscription plans.
@@ -42,7 +42,7 @@ class AdminAccess(ListView):
     - model: SubscriptionPlan model for retrieving data.
     - template_name: HTML template to render.
     - context_object_name: Name of the context object in the template.
-    """
+    
     model = SubscriptionPlan
     template_name = 'admin_access.html'
     context_object_name = 'subscription_plans'
@@ -55,7 +55,7 @@ class AdminAccess(ListView):
                 return HttpResponse("Sort Plans ausgeführt!")
             elif action == 'delete_plan':
                 return HttpResponse("Delete Plan ausgeführt!")
-
+"""
 
 def admin_access_add(request):
     """

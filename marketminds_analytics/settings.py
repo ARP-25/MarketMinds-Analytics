@@ -82,6 +82,7 @@ INSTALLED_APPS = [
     'checkout',
     'profiles',
     'trade_insights',
+    'admin_access',
     # Other
     'crispy_forms',
     'crispy_bootstrap4',

@@ -650,6 +650,7 @@ dl dd {
     border-radius: 5px;
     font-size: 90%;
     color: #001d3d;
+    min-width: 120px;
 }
 
 .btn-delete {
@@ -1037,6 +1038,86 @@ dl dd {
 .insight-detail-leftside {
     border-right: 1px solid #8d99ae;
 }
+
+
+
+
+/******************** Admin Access *******************/
+.header-space {
+    margin-top: 13vh;
+}
+.admin-access-row {
+    
+}
+/* Admin Access Menu */
+.admin-access-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.admin-access-menu li {
+    padding: 8px;
+    margin: 5px;
+    background-color: #0d1b2a;
+    cursor: pointer;
+    width: 100%;
+}
+.admin-access-menu {
+    color:whitesmoke;
+    transition: color 0.2s ease-in-out;  
+    width:80%;
+}
+#admin-menu {
+    width: 80%;
+    display: flex; 
+    justify-content: space-around; 
+    padding-left: 0; 
+    list-style: none; 
+    margin: 0; 
+}
+.admin-access-menu li:hover {
+    transition: color 0.2s ease-in-out;
+}
+.admin-access-menu li:hover {
+    color: #000814;
+    background: linear-gradient(to bottom right, #5de0e6, #004aad);
+}
+/* Border-Radius für das erste li-Element (links) */
+#admin-menu .menu-item:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+/* Border-Radius für das letzte li-Element (rechts) */
+#admin-menu .menu-item:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.sub-details {
+    height: 240px;
+    overflow: hidden;
+}
+.sub-plan-admin {
+    min-width:200px;
+}
+.admin-banner {
+    position: fixed; 
+    top: 10%; 
+    right: 0; 
+    transform: translateY(-50%); 
+    background-color: #06d6a0; 
+    color: white; 
+    padding: 10px; 
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px; 
+    font-size: 1.1em; 
+    z-index:3;
+}
+
+
+
+
+
 /* Additional Media Queries */
 @media screen and (max-width: 360px) {
     .logo {
