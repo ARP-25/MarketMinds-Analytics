@@ -7,8 +7,8 @@ from .views import is_superuser
 
 
 urlpatterns = [
-    path('',user_passes_test(is_superuser)(views.AdminAccessSubscription.as_view()), name='admin_access'),
-    #path('admin-access/add', user_passes_test(is_superuser)(views.admin_access_add), name='admin_access_add'),
-    #path('admin-access/edit/<int:subscription_id>/', user_passes_test(is_superuser)(views.admin_access_edit), name='admin_access_edit'),
-    #path('admin-access/<int:subscription_id>/', user_passes_test(is_superuser)(views.admin_access_delete), name='admin_access_delete'),
+    path('',user_passes_test(is_superuser)(views.AdminAccessSubscription.as_view()), name='AdminAccessSubscription'),
+    path('add/', user_passes_test(is_superuser)(views.admin_access_subscription_add), name='admin_access_subscription_add'),
+    path('edit/<int:subscription_id>/', user_passes_test(is_superuser)(views.admin_access_subscription_edit), name='admin_access_subscription_edit'),
+    path('<int:subscription_id>/', user_passes_test(is_superuser)(views.admin_access_subscription_delete), name='admin_access_subscription_delete'),
 ]

@@ -22,6 +22,8 @@ class SubscriptionPlan(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     details = models.TextField()
     sku = models.CharField(max_length=254, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    staged = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

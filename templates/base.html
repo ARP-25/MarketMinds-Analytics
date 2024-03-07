@@ -91,7 +91,7 @@
           <a class="d-block element p-1 m-1" href="{% url 'account_logout' %}" aria-label="Logout">Logout</a>
           <a class="d-block element p-1 m-1" href="{% url 'view_profile' %}" aria-label="Profile Info">Profile Info</a>
           {% if user.is_superuser %}
-          <a class="d-block element p-1 m-1" href="{% url 'admin_access' %}" aria-label="Admin Access">Admin Access</a>
+          <a class="d-block element p-1 m-1" href="{% url 'AdminAccessSubscription' %}" aria-label="Admin Access">Admin Access</a>
           {% endif %}
           {% endif %}
         </div>

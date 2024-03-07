@@ -1113,6 +1113,23 @@ dl dd {
     font-size: 1.1em; 
     z-index:3;
 }
+.is-active {
+    color: #000814;
+    background: linear-gradient(to bottom right, #5de0e6, #004aad);
+}
+.dropdown-menu {
+    background-color:#000814;
+}
+.dropdown-item {
+    color: whitesmoke;
+}
+.dropdown-item:hover {
+    color: #000814;
+    background: linear-gradient(to bottom right, #5de0e6, #004aad);
+}
+.dropdown-menu a{
+    transition: color 0.2s ease-in-out;
+}
 
 
 
