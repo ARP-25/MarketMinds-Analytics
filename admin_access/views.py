@@ -59,8 +59,12 @@ class AdminAccessSubscription(ListView):
             queryset = queryset.order_by('-title')
         elif sort == 'price_desc':
             queryset = queryset.order_by('-price')
-        elif sort == 'price_asc':
-            queryset = queryset.order_by('price')
+        elif sort == 'staged':
+            queryset = queryset.filter(staged=True)
+        elif sort == 'unstaged':
+            queryset = queryset.filter(staged=False)
+        elif sort == 'all':
+            queryset = super().get_queryset()            
 
         return queryset
 
