@@ -4,15 +4,17 @@
 
 
 <div class="container mt-5 pt-5">
-    <h1 class="text-center pb-5 mt-5">Add a new Subscription Plan</h1>
+    <h1 class="text-center pb-5 mt-5">Edit Subscription Plan</h1>
     <div class="col-10 offset-1 col-lg-6 offset-lg-3 menu-element">
         {% load crispy_forms_tags %}
-        <form method="post" class="add-plan-form" action="{% url 'admin_access_subscription_add' %}" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {% crispy form %}
+            {{ form|crispy }}
+            <button type="submit" class="button-62 btn-edit col-8 offset-2" aria-label="Save"><i
+                    class="fa-solid fa-plus pr-2"></i> Add Subscription Plan</button>
         </form>
-        <a href="{% url 'admin_access' %}">
-            <button class="button-62 btn-edit col-8 offset-2" aria-label="Return"><i
+        <a href="{% url 'AdminAccessSubscription' %}">
+            <button class="button-62 btn-edit col-8 offset-2 mt-3" aria-label="Return"><i
                     class="fa-solid fa-arrow-left pr-2"></i>
                 Return</button>
         </a>
@@ -21,4 +23,19 @@
 
 
 
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script>
+$(document).ready(function(){
+    $('.test').on('click', function() {
+        var actionAttr = $('form').attr('action'); // Annahme, es gibt nur ein Formular auf der Seite
+        console.log('Button pressed');
+        console.log('Form action attribute: ' + actionAttr);
+    });
+});
+
+
+</script>
 {% endblock %}

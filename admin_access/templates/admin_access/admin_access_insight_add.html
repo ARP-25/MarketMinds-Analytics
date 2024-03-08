@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-5 pt-5">
+    <h1 class="text-center pb-5 mt-5">Add Insight</h1>
+    <div class="col-10 offset-1 col-lg-6 offset-lg-3 menu-element">
+        <form method="post" action="{% url 'admin_access_insight_add' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="button-62 btn-edit col-8 offset-2 mt-3 mb-2" aria-label="Add">
+                <i class="fa-solid fa-plus pr-2"></i>
+                Add Insight
+            </button>
+        </form>
+        <a href="{% url 'AdminAccessInsight' %}" class="button-62 btn-edit col-8 offset-2 mt-3" aria-label="Return">
+            <i class="fa-solid fa-arrow-left pr-2"></i>
+            Return
+        </a>
+    </div>
+</div>
+{% endblock %}

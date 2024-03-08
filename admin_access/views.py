@@ -4,24 +4,38 @@ from django.views.generic import ListView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 
-from subscription.forms import SubscriptionPlanForm, SubscriptionPlanForm2
+from subscription.forms import SubscriptionPlanForm
 from subscription.models import SubscriptionPlan
-
+from trade_insights.models import Insight
+from .forms import InsightForm
 
 def is_superuser(user):
     return user.is_superuser
 
-
+# Admin Acces Subscription
 class AdminAccessSubscription(ListView):
     """
-    View class for administrative access.
+    A view class for administrative access to manage subscription plans.
 
-    Handles POST requests for sorting or deleting subscription plans.
+    This class handles both GET and POST requests. It supports sorting subscription plans 
+    based on various criteria such as creation date, title, price, and staging status. 
+    It also allows for staging and unstaging subscription plans through POST requests.
 
     Attributes:
-    - model: SubscriptionPlan model for retrieving data.
-    - template_name: HTML template to render.
-    - context_object_name: Name of the context object in the template.
+    - model: SubscriptionPlan model, used to retrieve subscription plan data.
+    - template_name: String, the name of the HTML template used to render the view.
+    - context_object_name: String, the name of the context object to use in the template.
+
+    The view supports sorting by:
+    - Most recent creation ('most_recent')
+    - Oldest creation ('oldest')
+    - Alphabetically by title ('a_z', 'z_a')
+    - Price ('price_desc')
+    - Staged status ('staged', 'unstaged')
+    - All subscription plans without filter ('all')
+
+    POST requests are used to change the 'staged' status of subscription plans, with
+    appropriate success messages and redirection to the 'AdminAccessSubscription' view.
     """
     model = SubscriptionPlan
     template_name = 'admin_access/admin_access_subscription.html'
@@ -86,8 +100,8 @@ def admin_access_subscription_delete(request, subscription_id):
     if request.method == 'POST':
         subscriptionPlan.delete()  
         messages.success(request, 'Subscription Plan deleted successfully.')
-        return redirect('admin_access')  
-    return redirect('admin_access')  
+        return redirect('AdminAccessSubscription')  
+    return redirect('AdminAccessSubscription')  
 
 
 def admin_access_subscription_add(request):
@@ -107,7 +121,7 @@ def admin_access_subscription_add(request):
         if form.is_valid():
             form.save()  
             messages.success(request, 'Successfully added new Subscription Plan!')
-            return redirect('admin_access')  
+            return redirect('AdminAccessSubscription')  
     else:
         form = SubscriptionPlanForm()   
     return render(request, 'admin_access_add.html', {'form': form})
@@ -132,12 +146,66 @@ def admin_access_subscription_edit(request, subscription_id):
     """
     subscription = SubscriptionPlan.objects.get(pk=subscription_id) 
     if request.method == 'POST':
-        form = SubscriptionPlanForm2(request.POST, request.FILES, instance=subscription)
+        form = SubscriptionPlanForm(request.POST, request.FILES, instance=subscription)
         if form.is_valid():
             form.save()
             messages.success(request, f"{subscription.title} has been successfully edited!")
-            return redirect('admin_access') 
+            return redirect('AdminAccessSubscription') 
     else:
         form = SubscriptionPlanForm(instance=subscription)
     
     return render(request, 'admin_access_edit.html', {'form': form, 'subscription_id': subscription_id})
+
+
+# Admin Access Trade Insight
+class AdminAccessInsight(ListView):
+
+    model = Insight
+    template_name = 'admin_access/admin_access_insight.html'
+    context_object_name = 'trade_insights'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # Your filtering/sorting logic goes here
+        return queryset
+
+
+def admin_access_insight_edit(request, insight_id):
+    """
+    View function handling the editing of a subscription plan by ID.
+
+    Retrieves the subscription plan by its ID and renders a form to edit it.
+    If the request method is POST and the form is valid, it updates the plan
+    and redirects to the 'admin_access' page with a success message.
+
+    Args:
+    - request: HTTP request object.
+    - subscription_id: ID of the subscription plan to edit.
+
+    Returns:
+    - Renders a form to edit the subscription plan details.
+    - If the form is submitted and valid, redirects to 'admin_access'
+      with a success message after updating the subscription plan.
+    """
+    insight = Insight.objects.get(pk=insight_id) 
+    #if request.method == 'POST':
+        #form = SubscriptionPlanForm2(request.POST, request.FILES, instance=subscription)
+        #if form.is_valid():
+        #    form.save()
+        #    messages.success(request, f"{subscription.title} has been successfully edited!")
+        #    return redirect('admin_access') 
+    #else:
+    #    form = SubscriptionPlanForm(instance=subscription)
+    form = InsightForm(instance=insight)
+    return render(request, 'admin_access/admin_access_insight_edit.html', {'form': form,'insight_id': insight_id})
+
+def admin_access_insight_add(request):
+    if request.method == 'POST':
+        form = InsightForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()  
+            messages.success(request, 'Successfully added new Insight!')
+            return redirect('AdminAccessInsight')  
+    else:
+        form = InsightForm()   
+    return render(request, 'admin_access/admin_access_insight_add.html', {'form': form})

@@ -3,8 +3,6 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
-
-from .forms import SubscriptionPlanForm, SubscriptionPlanForm2
 from .models import SubscriptionPlan
 
 
