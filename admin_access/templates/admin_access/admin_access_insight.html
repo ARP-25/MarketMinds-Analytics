@@ -10,12 +10,14 @@
         </div>
         <!-- Admin Access Menu -->
         <div class="col-12 admin-access-menu d-flex align-items-center justify-content-center">
-            <ul id="admin-menu" class="d-flex text-center">
-                <li class="menu-item " data-content="subscription-plans"><a href="{% url 'AdminAccessSubscription' %}">Subscription Plans</a></li>
-                <li class="menu-item is-active" data-content="trade-insights">Trade Insights</li>
-                <li class="menu-item" data-content="special-offers">Special Offers</li>
-                <li class="menu-item" data-content="metrics">Platform Metrics</li>
-            </ul>            
+            <ul id="admin-menu" class="text-center">
+                <a href="{% url 'AdminAccessSubscription' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="subscription-plans">Subscription Plans</li></a>
+                <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item is-active-admin" data-content="trade-insights">Trade Insights</li></a>
+                <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="special-offers">Special Offers</li></a>
+                <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="metrics">Platform Metrics</li></a>
+            </ul>
+            
+                     
         </div>
         <!-- Admin Access Content-->
         <!-- Admin Access Control Subscription Plan Board -->
@@ -24,13 +26,13 @@
                 <h2 class="content-title pb-2">Trade Insights</h2>
                 <!-- Add Insight -->
                 <a class="a-inherit" href="{% url 'admin_access_insight_add' %}">
-                    <button type="submit" class="button-62 btn-edit col-4 mr-2" aria-label="Add Plan">Add Insight <i
+                    <button type="submit" class="button-62 btn-edit mr-2" aria-label="Add Plan">Add Insight <i
                             class="fa-solid fa-plus pl-2"></i></button>
                 </a>
                 <!-- Dropdown for Sorting -->
-                <div class="dropdown d-inline-block col-4">
+                <div class="dropdown d-inline-block ">
                     <button class="button-62 btn-edit w-100 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sort Insight's
+                        Sort Insights
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="?sort=most_recent">Most Recent</a>

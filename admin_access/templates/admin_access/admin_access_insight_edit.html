@@ -5,6 +5,7 @@
     <h1 class="text-center pb-5 mt-5">Edit Insight</h1>
     <div class="col-10 offset-1 col-lg-6 offset-lg-3 menu-element">
         {% load crispy_forms_tags %}
+        {{ form.media }}
         {{ form|crispy }}       
         <a href="{% url 'AdminAccessInsight' %}">
             <button class="button-62 btn-edit col-8 offset-2 mt-3" aria-label="Return">

@@ -11,10 +11,10 @@
         <!-- Admin Access Menu -->
         <div class="col-12 admin-access-menu d-flex align-items-center justify-content-center">
             <ul id="admin-menu" class="d-flex text-center">
-                <li class="menu-item is-active" data-content="subscription-plans">Subscription Plans</li>
-                <li class="menu-item" data-content="trade-insights"><a href="{% url 'AdminAccessInsight' %}">Trade Insights</a></li>
-                <li class="menu-item" data-content="special-offers">Special Offers</li>
-                <li class="menu-item" data-content="metrics">Platform Metrics</li>
+                <a href="{% url 'AdminAccessSubscription' %}" class="col-3"><li class="menu-item is-active-admin" data-content="subscription-plans">Subscription Plans</li></a>
+                <a href="{% url 'AdminAccessInsight' %}" class="col-3"><li class="menu-item" data-content="trade-insights">Trade Insights</li></a>
+                <a href="{% url 'AdminAccessInsight' %}" class="col-3"> <li class="menu-item" data-content="special-offers">Special Offers</li></a>
+                <a href="{% url 'AdminAccessInsight' %}" class="col-3"><li class="menu-item" data-content="metrics">Platform Metrics</li></a>
             </ul>            
         </div>
         <!-- Admin Access Content-->
@@ -24,13 +24,13 @@
                 <h2 class="content-title pb-2">Subscription Plans</h2>
                 <!-- Add Plan -->
                 <a class="a-inherit" href="{% url 'admin_access_subscription_add' %}">
-                    <button type="submit" class="button-62 btn-edit col-4 mr-2" aria-label="Add Plan">Add Plan <i
+                    <button type="submit" class="button-62 btn-edit mr-2" aria-label="Add Plan">Add Plan <i
                             class="fa-solid fa-plus pl-2"></i></button>
                 </a>
                 <!-- Dropdown for Sorting -->
-                <div class="dropdown d-inline-block col-4">
+                <div class="dropdown d-inline-block ">
                     <button class="button-62 btn-edit w-100 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sort Plan's
+                        Sort Plans
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="?sort=most_recent">Most Recent</a>

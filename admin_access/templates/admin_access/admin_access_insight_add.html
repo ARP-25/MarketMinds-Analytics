@@ -7,6 +7,7 @@
     <div class="col-10 offset-1 col-lg-6 offset-lg-3 menu-element">
         <form method="post" action="{% url 'admin_access_insight_add' %}" enctype="multipart/form-data">
             {% csrf_token %}
+            {{ form.media }}
             {{ form|crispy }}
             <button type="submit" class="button-62 btn-edit col-8 offset-2 mt-3 mb-2" aria-label="Add">
                 <i class="fa-solid fa-plus pr-2"></i>

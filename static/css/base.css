@@ -1069,11 +1069,30 @@ dl dd {
 }
 #admin-menu {
     width: 80%;
-    display: flex; 
-    justify-content: space-around; 
     padding-left: 0; 
     list-style: none; 
-    margin: 0; 
+    margin: 0;
+}
+
+@media (min-width: 992px) { /* Dies entspricht der Bootstrap 'lg' Breakpoint */
+    #admin-menu {
+        display: flex; 
+        justify-content: space-around;
+    }
+    /* Target the first li element directly under #admin-menu */
+#admin-menu > a:first-child > li {
+    border-top-left-radius: 10px; /* Adjust the radius as needed */
+    border-bottom-left-radius: 10px;
+}
+
+/* Target the last li element directly under #admin-menu */
+#admin-menu > a:last-child > li {
+    border-top-right-radius: 10px; /* Adjust the radius as needed */
+    border-bottom-right-radius: 10px;
+}
+}
+#admin-menu a {
+    padding:5px;
 }
 .admin-access-menu li:hover {
     transition: color 0.2s ease-in-out;
@@ -1082,17 +1101,8 @@ dl dd {
     color: #000814;
     background: linear-gradient(to bottom right, #5de0e6, #004aad);
 }
-/* Border-Radius für das erste li-Element (links) */
-#admin-menu .menu-item:first-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
 
-/* Border-Radius für das letzte li-Element (rechts) */
-#admin-menu .menu-item:last-child {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
+
 .sub-details {
     height: 240px;
     overflow: hidden;
@@ -1113,7 +1123,7 @@ dl dd {
     font-size: 1.1em; 
     z-index:3;
 }
-.is-active {
+.is-active-admin {
     color: #000814;
     background: linear-gradient(to bottom right, #5de0e6, #004aad);
 }
