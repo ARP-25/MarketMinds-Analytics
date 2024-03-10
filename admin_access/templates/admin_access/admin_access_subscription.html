@@ -10,12 +10,12 @@
         </div>
         <!-- Admin Access Menu -->
         <div class="col-12 admin-access-menu d-flex align-items-center justify-content-center">
-            <ul id="admin-menu" class="d-flex text-center">
-                <a href="{% url 'AdminAccessSubscription' %}" class="col-3"><li class="menu-item is-active-admin" data-content="subscription-plans">Subscription Plans</li></a>
-                <a href="{% url 'AdminAccessInsight' %}" class="col-3"><li class="menu-item" data-content="trade-insights">Trade Insights</li></a>
-                <a href="{% url 'AdminAccessInsight' %}" class="col-3"> <li class="menu-item" data-content="special-offers">Special Offers</li></a>
-                <a href="{% url 'AdminAccessInsight' %}" class="col-3"><li class="menu-item" data-content="metrics">Platform Metrics</li></a>
-            </ul>            
+            <ul id="admin-menu" class="text-center">
+                <a href="{% url 'AdminAccessSubscription' %}" class="col-12 col-lg-3"><li class="menu-item is-active-admin" data-content="subscription-plans">Subscription Plans</li></a>
+                <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item " data-content="trade-insights">Trade Insights</li></a>
+                <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="special-offers">Special Offers</li></a>
+                <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="metrics">Platform Metrics</li></a>
+            </ul>                  
         </div>
         <!-- Admin Access Content-->
         <!-- Admin Access Control Subscription Plan Board -->
@@ -173,7 +173,7 @@
     // Dynamically changes the Action Attribute of Form in Confirm Modal
     $('.deleteSubscriptionPlanBtn').on('click', function () {
         var subscriptionId = $(this).data('subscription-id');
-        var dynamicUrl = subscriptionId + "/";
+        var dynamicUrl = "delete/" + subscriptionId + "/";
         $('.confirmDeleteForm').attr('action', dynamicUrl);
     });
 </script>

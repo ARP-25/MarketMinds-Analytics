@@ -21,7 +21,7 @@ class Insight(models.Model):
     author = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, related_name='authored_insights')
 
     cover_image = models.ImageField(      
-    upload_to='insights_cover_images/', 
+    upload_to='images/', 
     null=True, 
     blank=True
     )

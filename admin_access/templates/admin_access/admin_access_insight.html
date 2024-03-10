@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container header-space">
     <div class="row admin-access-row">
-        <!-- Admin Access Header -->
+        <!-- Admin Access Banner -->
         <div class="admin-banner">
             <i class="fa-solid fa-lock pr-2"></i>Admin Access
         </div>
@@ -15,9 +15,7 @@
                 <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item is-active-admin" data-content="trade-insights">Trade Insights</li></a>
                 <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="special-offers">Special Offers</li></a>
                 <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="metrics">Platform Metrics</li></a>
-            </ul>
-            
-                     
+            </ul>                  
         </div>
         <!-- Admin Access Content-->
         <!-- Admin Access Control Subscription Plan Board -->
@@ -35,6 +33,9 @@
                         Sort Insights
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="?sort=crypto">Crypto</a>
+                        <a class="dropdown-item" href="?sort=forex">Forex</a>
+                        <a class="dropdown-item" href="?sort=stocks">Stocks</a>
                         <a class="dropdown-item" href="?sort=most_recent">Most Recent</a>
                         <a class="dropdown-item" href="?sort=oldest">Oldest</a>
                         <a class="dropdown-item" href="?sort=a_z">A-Z</a>
@@ -53,38 +54,49 @@
                         <div class="div">
                             <h2 class="text-info text-center"><strong>Preview - Insight ID: {{ insight.id }}</strong></h2>
                         </div>
-                        <hr class="text-info hr-admin-border pb-3">
-                        <div class="col-12 ss-insight-img dark-overlay d-flex justify-content-end flex-column">
-                            <div class="secondstage-insight d-flex justify-content-end flex-column">
-                                <div class="background-image" style="background-image: url('{{ insight.cover_image.url }}');"></div>
-                            </div>                      
-                            <span class="secondstage-release_date pl-2 d-block pr-2">{{ insight.release_date }}</span>
-                            <span class="secondstage-title pl-2 d-block bold-text pr-2">{{ insight.title }}</span>
-                            <span class="secondstage-short_description pb-2 pl-2 pt-1 pr-2">{{ insight.short_description }}</span>
-                            <div class="read-more pl-2 pb-2">
-                                read more<i class="fa-brands fa-readme pl-2"></i>
-                            </div>
-                        </div>
                         <hr class="text-info hr-admin-border">
-                        <div class="div">
-                            <h2 class="text-info text-center pt-2 pb-1 mb-0"><strong>End Preview</strong></h2>
-                        </div>
-                        <div>
-                            <form method="GET" action="{% url 'admin_access_insight_edit' insight_id=insight.id %}">
-                                {% csrf_token %}
-                                <button class="button-62 btn-edit col-8" type="submit" aria-label="Edit">
-                                    <i class="fa-solid fa-pen-to-square p-2"></i>
-                                    Edit
+
+                        <!-- Insight Preview Display -->
+                        <a href="{% url 'admin_access_insight_edit' insight_id=insight.id %}">
+                            <div class=" col-12 d-flex justify-content-end flex-column image-overlay-container" style="height: 30vh; position: relative;">
+                                <!-- Backgrounds -->
+                                <div class="insight-background-image" style="background-image: url('{{ insight.cover_image.url }}');"></div>
+                                <div class="overlay-admin"></div>
+                                <!-- Content -->
+                                <span class="secondstage-release_date pl-2 d-block pr-2 z-index-2">{{ insight.release_date }}</span>
+                                <span class="secondstage-title pl-2 d-block bold-text pr-2 z-index-2">{{ insight.title }}</span>
+                                <span class="secondstage-short_description pb-2 pl-2 pt-1 pr-2 z-index-2">{{ insight.short_description }}</span>
+                                <div class="d-flex justify-content-between align-items-center pl-2 pb-2 pr-2 z-index-2">
+                                    <div class="category text-center">
+                                        <i class="fa-solid fa-square-poll-vertical pr-2"></i>{{ insight.category }}
+                                    </div>
+                                    <div>
+                                        Stage: {{ insight.stage }}
+                                    </div>
+                                </div>                       
+                            </div>
+                                                
+                            <hr class="text-info hr-admin-border">
+                            <div class="div">
+                                <h2 class="text-info text-center pt-2 pb-1 mb-0"><strong>End Preview</strong></h2>
+                            </div>
+                            <div>
+                                <form method="GET" action="{% url 'admin_access_insight_edit' insight_id=insight.id %}">
+                                    {% csrf_token %}
+                                    <button class="button-62 btn-edit col-8" type="submit" aria-label="Edit">
+                                        <i class="fa-solid fa-pen-to-square p-2"></i>
+                                        Edit
+                                    </button>
+                                </form>                           
+                                <button class="button-62 btn-delete col-8 mt-2 deleteInsightBtn" data-toggle="modal"
+                                    data-target=".deleteInsightModal" data-insight-id="{{ insight.id }}"
+                                    aria-label="Delete">
+                                    <i class="fa-solid fa-trash p-2"></i>
+                                    Delete
+                            
                                 </button>
-                            </form>                           
-                            <button class="button-62 btn-delete col-8 mt-2 deleteSubscriptionPlanBtn" data-toggle="modal"
-                                data-target=".deleteSubscriptionPlanModal" data-subscription-id="{{ s.id }}"
-                                aria-label="Delete">
-                                <i class="fa-solid fa-trash p-2"></i>
-                                Delete
-                           
-                            </button>
-                        </div>
+                            </div>
+                        </a>
                         <hr class="text-info hr-admin-border mt-3">
                     </div>
                     {% endfor %}
@@ -96,19 +108,19 @@
 
 
 <!-- Unsubscribe Confirmation Modal -->
-<div class="modal fade deleteSubscriptionPlanModal" tabindex="-1" role="dialog"
-    aria-labelledby="deleteSubscriptionPlanModalLabel" aria-hidden="true">
+<div class="modal fade deleteInsightModal" tabindex="-1" role="dialog"
+    aria-labelledby="deleteInsightModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content text-white bg-dark">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteSubscriptionPlanModalLabel">Delete Subscription Plan <strong></strong>
+                <h5 class="modal-title" id="deleteInsightModalLabel">Delete Insight <strong></strong>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure, you want to delete this Subscription Plan?</p>
+                <p>Are you sure, you want to delete this Insight?</p>
             </div>
             <div class="modal-footer">
                 <form class="confirmDeleteForm" action="" method="post">
@@ -130,11 +142,11 @@
 
 {{ block.super }}
 <script>
-    /* Dynamically changes the Action Attribute of Form in Confirm Modal
-    $('.deleteSubscriptionPlanBtn').on('click', function () {
-        var subscriptionId = $(this).data('subscription-id');
-        var dynamicUrl = subscriptionId + "/";
+    //Dynamically changes the Action Attribute of Form in Confirm Modal
+    $('.deleteInsightBtn').on('click', function () {
+        var insightId = $(this).data('insight-id');
+        var dynamicUrl = "delete/" + insightId + "/";
         $('.confirmDeleteForm').attr('action', dynamicUrl);
-    });*/
+    });
 </script>
 {% endblock %}

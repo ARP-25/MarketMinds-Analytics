@@ -1041,20 +1041,19 @@ dl dd {
 
 
 
-
 /******************** Admin Access *******************/
+.is-active-admin {
+    color: #000814;
+    background: linear-gradient(to bottom right, #5de0e6, #004aad);
+}
 .header-space {
     margin-top: 13vh;
-}
-.admin-access-row {
-    
 }
 /* Admin Access Menu */
 .admin-access-menu ul {
     list-style-type: none;
     padding: 0;
 }
-
 .admin-access-menu li {
     padding: 8px;
     margin: 5px;
@@ -1073,21 +1072,17 @@ dl dd {
     list-style: none; 
     margin: 0;
 }
-
-@media (min-width: 992px) { /* Dies entspricht der Bootstrap 'lg' Breakpoint */
+@media (min-width: 992px) { 
     #admin-menu {
         display: flex; 
         justify-content: space-around;
     }
-    /* Target the first li element directly under #admin-menu */
 #admin-menu > a:first-child > li {
-    border-top-left-radius: 10px; /* Adjust the radius as needed */
+    border-top-left-radius: 10px; 
     border-bottom-left-radius: 10px;
 }
-
-/* Target the last li element directly under #admin-menu */
 #admin-menu > a:last-child > li {
-    border-top-right-radius: 10px; /* Adjust the radius as needed */
+    border-top-right-radius: 10px; 
     border-bottom-right-radius: 10px;
 }
 }
@@ -1101,8 +1096,7 @@ dl dd {
     color: #000814;
     background: linear-gradient(to bottom right, #5de0e6, #004aad);
 }
-
-
+/* Admin Access Subscription */
 .sub-details {
     height: 240px;
     overflow: hidden;
@@ -1110,6 +1104,7 @@ dl dd {
 .sub-plan-admin {
     min-width:200px;
 }
+/* Admin Access banner */
 .admin-banner {
     position: fixed; 
     top: 10%; 
@@ -1123,10 +1118,7 @@ dl dd {
     font-size: 1.1em; 
     z-index:3;
 }
-.is-active-admin {
-    color: #000814;
-    background: linear-gradient(to bottom right, #5de0e6, #004aad);
-}
+/* Admin Access Dropdown Menu */
 .dropdown-menu {
     background-color:#000814;
 }
@@ -1140,6 +1132,32 @@ dl dd {
 .dropdown-menu a{
     transition: color 0.2s ease-in-out;
 }
+/* Admin Access Insight */
+.overlay-admin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    z-index: 1; 
+}
+.z-index-2 {
+    position: relative;
+    z-index: 2;
+}
+.insight-background-image { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    background-size: cover; 
+    background-position: center; 
+    z-index: 1;
+}
+
+
 
 
 
