@@ -4,9 +4,13 @@
 <div class="container mt-5 pt-5">
     <h1 class="text-center pb-5 mt-5">Edit Insight</h1>
     <div class="col-10 offset-1 col-lg-6 offset-lg-3 menu-element">
-        {% load crispy_forms_tags %}
-        {{ form.media }}
-        {{ form|crispy }}       
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form|crispy }}
+            <button type="submit" class="button-62 btn-edit col-8 offset-2" aria-label="Save"><i
+                    class="fa-solid fa-download pr-2"></i> Save Changes</button>
+        </form>   
         <a href="{% url 'AdminAccessInsight' %}">
             <button class="button-62 btn-edit col-8 offset-2 mt-3" aria-label="Return">
                 <i class="fa-solid fa-arrow-left pr-2"></i>

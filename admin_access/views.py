@@ -82,28 +82,6 @@ class AdminAccessSubscription(ListView):
 
         return queryset
 
-
-def admin_access_subscription_delete(request, subscription_id):
-    """
-    View function for deleting a subscription plan.
-
-    Retrieves and deletes a subscription plan by ID.
-
-    Args:
-    - request: HTTP request object.
-    - subscription_id: ID of the subscription plan to delete.
-
-    Returns:
-    - Redirects to 'admin_access' after successful deletion.
-    """
-    subscriptionPlan = get_object_or_404(SubscriptionPlan, pk=subscription_id)
-    if request.method == 'POST':
-        subscriptionPlan.delete()  
-        messages.success(request, 'Subscription Plan deleted successfully.')
-        return redirect('AdminAccessSubscription')  
-    return redirect('AdminAccessSubscription')  
-
-
 def admin_access_subscription_add(request):
     """
     View function for adding a new subscription plan.
@@ -125,7 +103,6 @@ def admin_access_subscription_add(request):
     else:
         form = SubscriptionPlanForm()   
     return render(request, 'admin_access_add.html', {'form': form})
-
 
 def admin_access_subscription_edit(request, subscription_id):
     """
@@ -156,6 +133,26 @@ def admin_access_subscription_edit(request, subscription_id):
     
     return render(request, 'admin_access_edit.html', {'form': form, 'subscription_id': subscription_id})
 
+def admin_access_subscription_delete(request, subscription_id):
+    """
+    View function for deleting a subscription plan.
+
+    Retrieves and deletes a subscription plan by ID.
+
+    Args:
+    - request: HTTP request object.
+    - subscription_id: ID of the subscription plan to delete.
+
+    Returns:
+    - Redirects to 'admin_access' after successful deletion.
+    """
+    subscriptionPlan = get_object_or_404(SubscriptionPlan, pk=subscription_id)
+    if request.method == 'POST':
+        subscriptionPlan.delete()  
+        messages.success(request, 'Subscription Plan deleted successfully.')
+        return redirect('AdminAccessSubscription')  
+    return redirect('AdminAccessSubscription')  
+
 
 # Admin Access Trade Insight
 class AdminAccessInsight(ListView):
@@ -166,38 +163,28 @@ class AdminAccessInsight(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+        sort = self.request.GET.get('sort')
+
+        if sort == 'most_recent':
+            queryset = queryset.order_by('-release_date') 
+        elif sort == 'oldest':
+            queryset = queryset.order_by('release_date')
+        elif sort == 'a_z':
+            queryset = queryset.order_by('title')
+        elif sort == 'z_a':
+            queryset = queryset.order_by('-title')
+        elif sort == 'mainstage':
+            queryset = Insight.objects.filter(stage='MS')
+        elif sort == 'secondstage':
+            queryset = Insight.objects.filter(stage='SS')
+        elif sort == 'backstage':
+            queryset = Insight.objects.filter(stage='BS')
+        elif sort == 'all':
+            queryset = super().get_queryset()            
+
+        return queryset
         # Your filtering/sorting logic goes here
         return queryset
-
-
-def admin_access_insight_edit(request, insight_id):
-    """
-    View function handling the editing of a subscription plan by ID.
-
-    Retrieves the subscription plan by its ID and renders a form to edit it.
-    If the request method is POST and the form is valid, it updates the plan
-    and redirects to the 'admin_access' page with a success message.
-
-    Args:
-    - request: HTTP request object.
-    - subscription_id: ID of the subscription plan to edit.
-
-    Returns:
-    - Renders a form to edit the subscription plan details.
-    - If the form is submitted and valid, redirects to 'admin_access'
-      with a success message after updating the subscription plan.
-    """
-    insight = Insight.objects.get(pk=insight_id) 
-    #if request.method == 'POST':
-        #form = SubscriptionPlanForm2(request.POST, request.FILES, instance=subscription)
-        #if form.is_valid():
-        #    form.save()
-        #    messages.success(request, f"{subscription.title} has been successfully edited!")
-        #    return redirect('admin_access') 
-    #else:
-    #    form = SubscriptionPlanForm(instance=subscription)
-    form = InsightForm(instance=insight)
-    return render(request, 'admin_access/admin_access_insight_edit.html', {'form': form,'insight_id': insight_id})
 
 def admin_access_insight_add(request):
     if request.method == 'POST':
@@ -209,3 +196,37 @@ def admin_access_insight_add(request):
     else:
         form = InsightForm()   
     return render(request, 'admin_access/admin_access_insight_add.html', {'form': form})
+
+def admin_access_insight_edit(request, insight_id):
+    """
+    View function for editing an existing trade insight.
+
+    This function retrieves an existing trade insight by its ID and presents a form for editing it.
+    If the request method is POST and the submitted form is valid, the insight is updated in the database.
+    Upon successful update, a success message is displayed and the user is redirected to the list of all insights.
+
+    Args:
+    - request: The HTTP request object.
+    - insight_id: The ID of the insight to be edited.
+
+    Returns:
+    - An HttpResponse object that renders the 'admin_access/admin_access_insight_edit.html' template.
+      This template includes the form for editing the insight.
+    - If the form is submitted and valid, redirects to the 'AdminAccessInsight' view, indicating
+      successful editing with a success message.
+    """
+    insight = Insight.objects.get(pk=insight_id) 
+    if request.method == 'POST':
+        form = InsightForm(request.POST, request.FILES, instance=insight)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"{insight.title} has been successfully edited!")
+            return redirect('AdminAccessInsight')
+
+    else:
+        form = InsightForm(instance=insight)
+    form = InsightForm(instance=insight)
+    return render(request, 'admin_access/admin_access_insight_edit.html', {'form': form,'insight_id': insight_id})
+
+
+#def admin_accesss_insight_delete(request, insight_id):
