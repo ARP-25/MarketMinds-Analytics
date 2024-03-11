@@ -140,7 +140,6 @@ def checkout(request):
     return render(request, template, context)
 
 
-
 def checkout_adjust(request, item_id):
     """
     View function to adjust the contents of the shopping bag during checkout.
@@ -162,7 +161,6 @@ def checkout_adjust(request, item_id):
     return redirect('checkout')
 
 
-
 def checkout_success(request):
     """
     View function to handle the checkout success scenario.
@@ -175,6 +173,75 @@ def checkout_success(request):
     Returns:
     - HttpResponse: A rendered checkout success page.
     """  
-    send_subscription_confirmation_email(request)
+    #send_subscription_confirmation_email(request)
 
     return render (request, 'checkout/checkout_success.html')
+
+
+def checkout2(request):
+    """
+    Handles the checkout process for subscriptions.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        Renders the checkout page and processes subscription payments.
+        If successful, renders 'checkout_success.html' after subscription creation.
+    """
+    bag = request.session.get('bag_items', [])
+    if not bag:
+        messages.error(request, 'There\'s nothing in your bag at the moment')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            for plan_id in bag:
+                subscription_plan = get_object_or_404(SubscriptionPlan, id=plan_id)
+                active_subscription_form = ActiveSubscriptionForm(request.POST)
+                if active_subscription_form.is_valid():
+                    subscription = active_subscription_form.save(commit=False)
+                    subscription.user = request.user
+                    subscription.subscription_plan = subscription_plan
+                    subscription.end_date = timezone.now() + timedelta(days=30)
+                    subscription.save()
+                    messages.success(request, f'Thank you for subscribing to {subscription_plan.title}!')                   
+                    if 'save-info' in request.POST:                    
+                        user_profile = UserProfile.objects.get(user=request.user)
+                        data_from_form = active_subscription_form.cleaned_data
+                        form_fields = data_from_form.keys()
+                        for field in form_fields:
+                            if hasattr(user_profile, field):
+                                setattr(user_profile, field, data_from_form[field])
+                        user_profile.save()   
+
+            return redirect('checkout_success')
+
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
+    current_bag = bag_contents(request)
+    total = current_bag['total']
+    stripe_total = round(total * 100)
+    stripe.api_key = stripe_secret_key
+    intent = stripe.PaymentIntent.create(
+        amount=stripe_total,
+        currency=settings.STRIPE_CURRENCY,
+    )
+    if not stripe_public_key:
+        message.warning(request, 'Stripe public key is missing. Did you forget to set it in your environment?')
+    active_subscription_form = ActiveSubscriptionForm()  
+    template = 'checkout/checkout2.html'
+
+    active_subscription_plan_id_user = []
+    if request.user.is_authenticated:
+        user = request.user
+        user_id = user.id
+        active_subscription_plan_id_user = list(map(str, ActiveSubscription.objects.filter(user=user.id).values_list('subscription_plan__id', flat=True)))
+
+    context = {
+        'active_subscription_form': active_subscription_form,  
+        'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
+        'active_subscription_plan_id_user': active_subscription_plan_id_user,
+    }
+
+
+    return render(request, template, context)
