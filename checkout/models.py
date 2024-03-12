@@ -1,49 +1,49 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
 from subscription.models import SubscriptionPlan
-import uuid
-
+import stripe
+from django.utils import timezone
 
 class ActiveSubscription(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='active_subscriptions')
     subscription_plan = models.ForeignKey(SubscriptionPlan, on_delete=models.CASCADE)
+    stripe_subscription_id = models.CharField(max_length=200, blank=True, null=True)
     start_date = models.DateTimeField(auto_now_add=True)
-    end_date = models.DateTimeField()  
-    status = models.CharField(max_length=50)  
-    payment_status = models.CharField(max_length=50)  
+    renewal_date = models.DateTimeField()
+    status = models.CharField(max_length=50, default='active')
     created_at = models.DateTimeField(auto_now_add=True)
-    purchase_number = models.CharField(max_length=32, null=False, editable=False)
-
-    def _generate_purchase_number(self):
-        """
-        Generate a unique purchase number using UUID
-        """
-        return uuid.uuid4().hex.upper()
 
     def save(self, *args, **kwargs):
-        """
-        Override save method to generate purchase number and handle other operations
-        """
-        if not self.purchase_number:
-            self.purchase_number = self._generate_purchase_number()
+        if not self.start_date:
+            self.start_date = timezone.now()
+        self.renewal_date = self.start_date + timezone.timedelta(days=30)  # Updated field name
+
         super().save(*args, **kwargs)
 
     def is_expired(self):
-        """
-        Check if the subscription has expired
-        """
-        return self.end_date < timezone.now()
+        return timezone.now() >= self.renewal_date  # Updated field name
 
     def refresh_subscription(self):
-        """
-        Refresh the subscription by extending the end date by 30 days
-        """
-        if self.is_expired():           
-            self.end_date += timezone.timedelta(days=30)
-            self.status = 'Active' 
+        if self.is_expired():
+            self.renewal_date = timezone.now() + timezone.timedelta(days=30)  # Updated field name
             self.save()
 
+    def cancel_subscription(self):
+        # Logic to cancel subscription via Stripe API
+        try:
+            stripe.api_key = 'your_stripe_api_key'
+            stripe.Subscription.delete(self.stripe_subscription_id)
+            self.status = 'cancelled'
+            self.save()
+        except stripe.error.StripeError as e:
+            # Handle error
+            print(f"Stripe error: {e}")
+
+    def update_status(self, new_status):
+        # Logic to update subscription status based on Stripe webhook data or API response
+        self.status = new_status
+        self.save()
+
     def __str__(self):
-        return f"{self.subscription_plan.title} - Start: {self.start_date}"
+        return f"{self.subscription_plan.title} - {self.user.username} - {self.status}"
 

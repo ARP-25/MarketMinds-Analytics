@@ -275,8 +275,6 @@ a:hover {
 }
 
 /* Images */
-
-
 @keyframes scaleImage {
     from {
         background-size: 100%;
@@ -1160,6 +1158,18 @@ dl dd {
 
 
 
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.loading-text {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
 
 
 

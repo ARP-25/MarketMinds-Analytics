@@ -149,16 +149,25 @@ def checkout_adjust(request, item_id):
     - item_id: ID of the subscription plan to adjust.
 
     Returns:
-    - Redirects to the 'checkout' page after adjusting the shopping bag.
+    - Redirects to the 'checkout2' page or 'get_started' page after adjusting the shopping bag.
     """
     bag_items = request.session.get('bag_items', [])
-    subscription_plan = get_object_or_404(SubscriptionPlan,pk=item_id)
+    subscription_plan = get_object_or_404(SubscriptionPlan, pk=item_id)
+
     if str(item_id) in bag_items:
         bag_items.remove(str(item_id))
-    request.session['bag_items'] = bag_items
-    messages.success(request, f"\n{subscription_plan} Successfully removed from your Bag!")
+        messages.success(request, f"{subscription_plan} successfully removed from your bag!")
+    else:
+        messages.error(request, "The item was not in your bag.")
 
-    return redirect('checkout')
+    request.session['bag_items'] = bag_items
+
+   
+    if not bag_items:
+        messages.info(request, "Your bag is empty. Add subscription plans to proceed with checkout.")
+        return redirect('get_started')  
+
+    return redirect('checkout2')
 
 
 def checkout_success(request):
@@ -191,32 +200,32 @@ def checkout2(request):
 
         if not active_subscription_form.is_valid():
             messages.error(request, "There was an error with the form. Please check your information.")
-            # Re-render the page with the form errors
             return render(request, template, {'active_subscription_form': active_subscription_form})
 
         payment_method_id = request.POST.get('payment_method_id')
         if not payment_method_id:
             messages.error(request, "No payment method provided.")
-            # Re-render the page with the form errors
             return render(request, template, {'active_subscription_form': active_subscription_form})
 
         customer_id = get_or_create_stripe_customer(request.user)
 
-
         for plan_id in bag:
             subscription_plan = get_object_or_404(SubscriptionPlan, id=plan_id)
+
+            # Prüfen, ob eine aktive Subscription existiert
+            if ActiveSubscription.objects.filter(
+                user=request.user, 
+                subscription_plan=subscription_plan
+            ).exists():
+                messages.error(request, f"You already have an active subscription for {subscription_plan.title}.")
+                continue  
+
             try:
-                # Attach the payment method to the customer
                 stripe.PaymentMethod.attach(payment_method_id, customer=customer_id)
+                stripe.Customer.modify(customer_id, invoice_settings={'default_payment_method': payment_method_id})
+                stripe.Subscription.create(customer=customer_id, items=[{"plan": subscription_plan.stripe_plan_id}])
 
-                # Set the default payment method on the customer
-                stripe.Customer.modify(
-                    customer_id,
-                    invoice_settings={'default_payment_method': payment_method_id}
-                )
-
-                # Create Stripe Subscription
-                stripe.Subscription.create(
+                stripe_subscription = stripe.Subscription.create(
                     customer=customer_id,
                     items=[{"plan": subscription_plan.stripe_plan_id}],
                 )
@@ -225,26 +234,36 @@ def checkout2(request):
                 active_subscription = ActiveSubscription(
                     user=request.user,
                     subscription_plan=subscription_plan,
-                    end_date=timezone.now() + timedelta(days=30)  # Set end_date to 30 days from now
+                    stripe_subscription_id=stripe_subscription.id,  # Save Stripe Subscription ID
+                    status=stripe_subscription.status,  # Save Stripe Subscription Status
                 )
                 active_subscription.save()
 
             except stripe.error.StripeError as e:
                 messages.error(request, "Stripe Error: " + str(e))
-                return render(request, template, {'active_subscription_form': active_subscription_form})
+                continue  # Springt zum nächsten Plan in der Schleife
+
+        if not ActiveSubscription.objects.filter(user=request.user, subscription_plan__in=bag, status='active').exists():
+            messages.error(request, "Keine neuen Abonnements erstellt.")
+            return redirect(reverse('view_bag'))
 
         messages.success(request, "Thank you for your subscription!")
         return redirect('checkout_success')
 
     else:
-        # For GET requests, create a blank form
         active_subscription_form = ActiveSubscriptionForm()
-        # Create a SetupIntent when loading the page
         setup_intent = stripe.SetupIntent.create()
+
+        active_subscription_plan_id_user = []
+        if request.user.is_authenticated:
+            active_subscriptions = ActiveSubscription.objects.filter(user=request.user).values_list('subscription_plan_id', flat=True)
+            active_subscription_plan_id_user = list(map(str, active_subscriptions))
+
         context = {
             'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
             'client_secret': setup_intent.client_secret,
-            'active_subscription_form': active_subscription_form
+            'active_subscription_form': active_subscription_form,
+            'active_subscription_plan_id_user': active_subscription_plan_id_user
         }
         return render(request, template, context)
 

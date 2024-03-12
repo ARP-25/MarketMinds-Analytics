@@ -1,4 +1,4 @@
-/*
+
 var activeSubscriptionPlan_ids = JSON.parse($('#id_active_subscription_plan').text());
 activeSubscriptionPlan_ids.forEach(function(id, index, array) {
     array[index] = parseInt(id, 10);
@@ -47,4 +47,4 @@ $('div[data-item-id]').each(function() {
 if(id_matches != 0){
     $('#submit-button').prop('disabled', true);
 }
-*/
+
