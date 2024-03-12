@@ -64,6 +64,7 @@
                 <div class="col-12 menu-element-secondary">
                     <p style="font-family: Rubik Mono One;">{{ subscription.subscription_plan.title }}</p>
                     <p>Start Date: {{ subscription.start_date }}</p>
+                    <p>Renewal Date: {{ subscription.renewal_date }}</p>
                     <p>End Date: {{ subscription.end_date }}</p>
                     <button class="button-62 cancelSubscriptionBtn col-8 offset-2" data-toggle="modal"
                         data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}">

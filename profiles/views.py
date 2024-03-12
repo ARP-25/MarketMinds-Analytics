@@ -79,7 +79,7 @@ def cancel_subscription(request, subscription_id):
     """
     subscription = get_object_or_404(ActiveSubscription, pk=subscription_id)
     if request.method == 'POST':
-        subscription.delete()  
+        subscription.cancel_subscription()
         messages.success(request, f"Subscription canceled successfully and will expire at: {subscription.end_date.strftime('%Y-%m-%d %H:%M')}.")
 
         return redirect('view_profile') 
