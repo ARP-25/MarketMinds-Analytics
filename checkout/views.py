@@ -70,9 +70,9 @@ def cache_checkout_data(request):
 
         return HttpResponse(content=e, status=400)
 
-
+"""
 def checkout(request):
-    """
+    
     Handles the checkout process for subscriptions.
 
     Args:
@@ -81,7 +81,7 @@ def checkout(request):
     Returns:
         Renders the checkout page and processes subscription payments.
         If successful, renders 'checkout_success.html' after subscription creation.
-    """
+    
     bag = request.session.get('bag_items', [])
     if not bag:
         messages.error(request, 'There\'s nothing in your bag at the moment')
@@ -138,7 +138,7 @@ def checkout(request):
 
 
     return render(request, template, context)
-
+"""
 
 def checkout_adjust(request, item_id):
     """
@@ -179,69 +179,89 @@ def checkout_success(request):
 
 
 def checkout2(request):
-    """
-    Handles the checkout process for subscriptions.
-
-    Args:
-        request: The HTTP request object.
-
-    Returns:
-        Renders the checkout page and processes subscription payments.
-        If successful, renders 'checkout_success.html' after subscription creation.
-    """
-    bag = request.session.get('bag_items', [])
-    if not bag:
-        messages.error(request, 'There\'s nothing in your bag at the moment')
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            for plan_id in bag:
-                subscription_plan = get_object_or_404(SubscriptionPlan, id=plan_id)
-                active_subscription_form = ActiveSubscriptionForm(request.POST)
-                if active_subscription_form.is_valid():
-                    subscription = active_subscription_form.save(commit=False)
-                    subscription.user = request.user
-                    subscription.subscription_plan = subscription_plan
-                    subscription.end_date = timezone.now() + timedelta(days=30)
-                    subscription.save()
-                    messages.success(request, f'Thank you for subscribing to {subscription_plan.title}!')                   
-                    if 'save-info' in request.POST:                    
-                        user_profile = UserProfile.objects.get(user=request.user)
-                        data_from_form = active_subscription_form.cleaned_data
-                        form_fields = data_from_form.keys()
-                        for field in form_fields:
-                            if hasattr(user_profile, field):
-                                setattr(user_profile, field, data_from_form[field])
-                        user_profile.save()   
-
-            return redirect('checkout_success')
-
-    stripe_public_key = settings.STRIPE_PUBLIC_KEY
-    stripe_secret_key = settings.STRIPE_SECRET_KEY
-    current_bag = bag_contents(request)
-    total = current_bag['total']
-    stripe_total = round(total * 100)
-    stripe.api_key = stripe_secret_key
-    intent = stripe.PaymentIntent.create(
-        amount=stripe_total,
-        currency=settings.STRIPE_CURRENCY,
-    )
-    if not stripe_public_key:
-        message.warning(request, 'Stripe public key is missing. Did you forget to set it in your environment?')
-    active_subscription_form = ActiveSubscriptionForm()  
+    stripe.api_key = settings.STRIPE_SECRET_KEY
     template = 'checkout/checkout2.html'
 
-    active_subscription_plan_id_user = []
-    if request.user.is_authenticated:
-        user = request.user
-        user_id = user.id
-        active_subscription_plan_id_user = list(map(str, ActiveSubscription.objects.filter(user=user.id).values_list('subscription_plan__id', flat=True)))
+    if request.method == 'POST':
+        active_subscription_form = ActiveSubscriptionForm(request.POST)
+        bag = request.session.get('bag_items', [])
+        if not bag:
+            messages.error(request, "There's nothing in your bag at the moment")
+            return redirect(reverse('view_bag'))
 
-    context = {
-        'active_subscription_form': active_subscription_form,  
-        'stripe_public_key': stripe_public_key,
-        'client_secret': intent.client_secret,
-        'active_subscription_plan_id_user': active_subscription_plan_id_user,
-    }
+        if not active_subscription_form.is_valid():
+            messages.error(request, "There was an error with the form. Please check your information.")
+            # Re-render the page with the form errors
+            return render(request, template, {'active_subscription_form': active_subscription_form})
+
+        payment_method_id = request.POST.get('payment_method_id')
+        if not payment_method_id:
+            messages.error(request, "No payment method provided.")
+            # Re-render the page with the form errors
+            return render(request, template, {'active_subscription_form': active_subscription_form})
+
+        customer_id = get_or_create_stripe_customer(request.user)
 
 
-    return render(request, template, context)
+        for plan_id in bag:
+            subscription_plan = get_object_or_404(SubscriptionPlan, id=plan_id)
+            try:
+                # Attach the payment method to the customer
+                stripe.PaymentMethod.attach(payment_method_id, customer=customer_id)
+
+                # Set the default payment method on the customer
+                stripe.Customer.modify(
+                    customer_id,
+                    invoice_settings={'default_payment_method': payment_method_id}
+                )
+
+                # Create Stripe Subscription
+                stripe.Subscription.create(
+                    customer=customer_id,
+                    items=[{"plan": subscription_plan.stripe_plan_id}],
+                )
+
+                # Save the subscription info in ActiveSubscription model
+                active_subscription = ActiveSubscription(
+                    user=request.user,
+                    subscription_plan=subscription_plan,
+                    end_date=timezone.now() + timedelta(days=30)  # Set end_date to 30 days from now
+                )
+                active_subscription.save()
+
+            except stripe.error.StripeError as e:
+                messages.error(request, "Stripe Error: " + str(e))
+                return render(request, template, {'active_subscription_form': active_subscription_form})
+
+        messages.success(request, "Thank you for your subscription!")
+        return redirect('checkout_success')
+
+    else:
+        # For GET requests, create a blank form
+        active_subscription_form = ActiveSubscriptionForm()
+        # Create a SetupIntent when loading the page
+        setup_intent = stripe.SetupIntent.create()
+        context = {
+            'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+            'client_secret': setup_intent.client_secret,
+            'active_subscription_form': active_subscription_form
+        }
+        return render(request, template, context)
+
+
+
+
+def get_or_create_stripe_customer(user):
+    """
+    Retrieve a Stripe Customer ID for a given user.
+    If no customer exists, create a new one in Stripe.
+    """
+    user_profile, created = UserProfile.objects.get_or_create(user=user)
+    
+    if user_profile.stripe_customer_id:
+        return user_profile.stripe_customer_id
+    else:
+        customer = stripe.Customer.create(email=user.email)
+        user_profile.stripe_customer_id = customer.id
+        user_profile.save()
+        return customer.id

@@ -84,7 +84,7 @@ body {
     font-family: 'Lato', sans-serif;
 }
 .logo-1 {
-    font-family: rubik, sans-serif;
+    font-family: 'Rubik', sans-serif;
     font-weight: 600;
     font-size: 160%;
     position: absolute;
@@ -92,7 +92,7 @@ body {
     color: #00b4d8;
 }
 .logo-2 {
-    font-family: teko, sans-serif;
+    font-family: 'Teko', sans-serif;
     font-weight: 300;
     font-size: 140%;
     position: absolute;
@@ -185,7 +185,7 @@ a:hover {
 }
 
 .bag-titles {
-    font-family: Rubik Mono One;
+    font-family: 'Rubik Mono One', sans-serif;
     font-size: 130%;
 }
 
@@ -995,7 +995,7 @@ dl dd {
 .product-text {
     font-size: 130%;
     font-weight: bold;
-    font-family: Rubik Mono One, sans-serif;
+    font-family: 'Rubik Mono One' , sans-serif;
 }
 .product-info {
     font-size: 80%;

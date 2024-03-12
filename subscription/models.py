@@ -24,7 +24,8 @@ class SubscriptionPlan(models.Model):
     sku = models.CharField(max_length=254, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     staged = models.BooleanField(default=False)
-
+    stripe_plan_id = models.CharField(max_length=255, blank=True, null=True)
+    
     def __str__(self):
         return self.title
 
