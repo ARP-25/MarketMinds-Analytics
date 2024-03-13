@@ -3,11 +3,17 @@ from django.http import HttpResponse
 from django.views.generic import ListView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.conf import settings
+
+import stripe
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 from subscription.forms import SubscriptionPlanForm
 from subscription.models import SubscriptionPlan
 from trade_insights.models import Insight
 from .forms import InsightForm
+
+
 
 def is_superuser(user):
     """
@@ -106,48 +112,98 @@ class AdminAccessSubscription(ListView):
 
 def admin_access_subscription_add(request):
     """
-    View function for adding a new subscription plan.
+    Handles the creation of a new subscription plan, both in the Stripe platform and the Django application.
 
-    Handles form submission for adding a new subscription plan.
+    This view function processes a form submission for a new subscription plan. On POST request, it first attempts 
+    to create a corresponding product and price in Stripe using the submitted title and price information. If this 
+    succeeds, it then saves the new subscription plan to the Django backend, including the Stripe price ID. 
+
+    In case of a Stripe error, an error message is displayed. If the form is not valid, an appropriate error message 
+    is shown. On successful creation of the subscription plan, a success message is displayed, and the user is 
+    redirected to the 'AdminAccessSubscription' view.
 
     Args:
     - request: HTTP request object.
 
     Returns:
-    - Renders the 'admin_access_add.html' template with the form for adding a plan.
+    - Rendered 'admin_access_add.html' template with a context containing the subscription plan form. On successful 
+      creation, redirects to 'AdminAccessSubscription' view.
     """
     if request.method == 'POST':
         form = SubscriptionPlanForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()  
-            messages.success(request, 'Subscription Plan has been added successfully!')
-            return redirect('AdminAccessSubscription')  
+            try:
+                title = form.cleaned_data['title']
+                price = int(form.cleaned_data['price'] * 100) 
+                stripe_product = stripe.Product.create(name=title)
+                stripe_price = stripe.Price.create(
+                    unit_amount=price,
+                    currency='usd',
+                    recurring={"interval": "month"},
+                    product=stripe_product.id,
+                )            
+                subscription_plan = form.save(commit=False)
+                subscription_plan.stripe_price_id = stripe_price.id
+                subscription_plan.save()
+                messages.success(request, 'Subscription Plan has been added successfully!')
+                return redirect('AdminAccessSubscription')  
+            except stripe.error.StripeError as e:
+                messages.error(request, f"Stripe error: {e}")
+        else:
+            messages.error(request, "There was a problem with the form. Please check the details.")
+
     else:
-        form = SubscriptionPlanForm()   
+        form = SubscriptionPlanForm()
     return render(request, 'admin_access_add.html', {'form': form})
+
 
 def admin_access_subscription_edit(request, subscription_id):
     """
-    View function handling the editing of a subscription plan by ID.
+    View function for editing a subscription plan in the Django application and updating
+    the corresponding plan in Stripe. Due to Stripe's limitations, plans cannot be 
+    directly edited once created. Therefore, this function handles changes by creating 
+    a new plan in Stripe if there are significant changes (like price) and then updates 
+    the plan information in the Django backend.
 
-    Retrieves the subscription plan by its ID and renders a form to edit it.
-    If the request method is POST and the form is valid, it updates the plan
-    and redirects to the 'admin_access' page with a success message.
+    The process involves:
+    1. Checking if there is a change in the price of the subscription plan.
+    2. If the price is changed, creating a new plan in Stripe with the updated details.
+    3. Deactivating the old plan in Stripe to prevent new subscriptions.
+    4. Updating the subscription plan details in the Django backend, including referencing
+       the new Stripe plan ID.
 
     Args:
     - request: HTTP request object.
     - subscription_id: ID of the subscription plan to edit.
 
     Returns:
-    - Renders a form to edit the subscription plan details.
-    - If the form is submitted and valid, redirects to 'admin_access'
-      with a success message after updating the subscription plan.
+    - On GET request: Renders a form pre-populated with the existing subscription plan details.
+    - On valid POST request: Creates a new plan in Stripe if necessary, updates the plan in
+      the backend, and redirects to the 'admin_access' page with a success message.
+    - On invalid POST request: Renders the form again with error messages.
     """
     subscription = SubscriptionPlan.objects.get(pk=subscription_id) 
+    original_price = subscription.price  
+
     if request.method == 'POST':
         form = SubscriptionPlanForm(request.POST, request.FILES, instance=subscription)
-        if form.is_valid():
-            form.save()
+        if form.is_valid():           
+            if form.cleaned_data['price'] != original_price:
+                try:                    
+                    new_price = int(form.cleaned_data['price'] * 100) 
+                    stripe_product = stripe.Product.create(name=form.cleaned_data['title'])
+                    stripe_price = stripe.Price.create(
+                        unit_amount=new_price,
+                        currency='usd',
+                        recurring={"interval": "month"},
+                        product=stripe_product.id,
+                    )
+                    subscription.stripe_price_id = stripe_price.id
+                except stripe.error.StripeError as e:
+                    messages.error(request, f"Stripe error: {e}")
+                    return render(request, 'admin_access_edit.html', {'form': form, 'subscription_id': subscription_id})
+
+            subscription.save()
             messages.success(request, f"{subscription.title} has been edited successfully!")
             return redirect('AdminAccessSubscription') 
     else:
@@ -155,25 +211,39 @@ def admin_access_subscription_edit(request, subscription_id):
     
     return render(request, 'admin_access_edit.html', {'form': form, 'subscription_id': subscription_id})
 
+
 def admin_access_subscription_delete(request, subscription_id):
     """
     View function for deleting a subscription plan.
 
-    Retrieves and deletes a subscription plan by ID.
+    Checks if the plan is in use in Stripe before deleting. Deletes the plan in Stripe
+    and the backend if not in use, otherwise, informs the user.
 
     Args:
     - request: HTTP request object.
     - subscription_id: ID of the subscription plan to delete.
 
     Returns:
-    - Redirects to 'admin_access' after successful deletion.
+    - Redirects to 'admin_access' with a message about the deletion status.
     """
     subscriptionPlan = get_object_or_404(SubscriptionPlan, pk=subscription_id)
     if request.method == 'POST':
-        subscriptionPlan.delete()  
-        messages.success(request, 'Subscription Plan has been deleted successfully.')
+        try:
+            stripe_subscriptions = stripe.Subscription.list(plan=subscriptionPlan.stripe_price_id)
+            if not stripe_subscriptions['data']:
+                stripe.Plan.delete(subscriptionPlan.stripe_price_id)
+                subscriptionPlan.delete()
+                messages.success(request, 'Subscription Plan has been deleted successfully.')
+            else:
+                subscriptionPlan.delete()
+                messages.warning(request, 'Subscription Plan deleted from app, but not from Stripe due to active subscriptions.')
+        except stripe.error.StripeError as e:
+            messages.error(request, f"Stripe error: {e}")
+        except Exception as e:
+            messages.error(request, f"An error occurred: {e}")
         return redirect('AdminAccessSubscription')  
-    return redirect('AdminAccessSubscription')  
+
+    return redirect('AdminAccessSubscription')
 
 
 # Admin Access Trade Insight

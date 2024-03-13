@@ -15,7 +15,7 @@ class SubscriptionPlanAdmin(SummernoteModelAdmin):
     - list_filter: Fields available for filtering in the admin interface.
     """
     summernote_fields = ('title')
-    list_display = ['title', 'id', 'image', 'description', 'price', 'details']
+    list_display = ['title', 'id', 'image', 'description', 'price', 'details','stripe_price_id']
     list_filter = ['price']
 
 

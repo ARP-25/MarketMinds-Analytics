@@ -31,13 +31,6 @@ class ActiveSubscription(models.Model):
 
         super().save(*args, **kwargs)
 
-    def is_expired(self):
-        return timezone.now() >= self.renewal_date  
-
-    def refresh_subscription(self):
-        if self.is_expired():
-            self.renewal_date = timezone.now() + timezone.timedelta(days=30) 
-            self.save()
 
     def cancel_subscription(self):
         """
@@ -66,3 +59,14 @@ class ActiveSubscription(models.Model):
     def __str__(self):
         return f"{self.subscription_plan.title} - {self.user.username} - {self.status}"
 
+
+    # This functionality is automated and in sync with stripe webhook implementation and not used here for now.
+    # These methods can be useful for local checks, administrative tasks or fallback mechanisms.
+    def is_expired(self):
+        return timezone.now() >= self.renewal_date  
+    # This functionality is automated and in sync with stripe webhook implementation and not used here for now.
+    # These methods can be useful for local checks, administrative tasks or fallback mechanisms.
+    def refresh_subscription(self):
+        if self.is_expired():
+            self.renewal_date = timezone.now() + timezone.timedelta(days=30) 
+            self.save()
