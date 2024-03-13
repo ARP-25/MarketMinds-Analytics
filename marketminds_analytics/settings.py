@@ -39,10 +39,10 @@ CSRF_TRUSTED_ORIGINS = ['https://8000-arp25-marketmindsanaly-4ytef92srmx.ws-eu10
 # Email Setup to enable django-allauth sending confimation etc
 
 # Development
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Production
-EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+#EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')

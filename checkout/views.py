@@ -30,7 +30,7 @@ def checkout_adjust(request, item_id):
     - item_id: ID of the subscription plan to adjust.
 
     Returns:
-    - Redirects to the 'checkout2' page or 'get_started' page after adjusting the shopping bag.
+    - Redirects to the 'checkout' page or 'get_started' page after adjusting the shopping bag.
     """
     bag_items = request.session.get('bag_items', [])
     subscription_plan = get_object_or_404(SubscriptionPlan, pk=item_id)
@@ -48,29 +48,35 @@ def checkout_adjust(request, item_id):
         messages.info(request, "Your bag is empty. Add subscription plans to proceed with checkout.")
         return redirect('get_started')  
 
-    return redirect('checkout2')
+    return redirect('checkout')
 
 
 def checkout_success(request):
     """
-    View function to handle the checkout success scenario.
+    View function for handling the post-checkout success scenario.
 
-    This function is called when a user successfully completes the checkout process. It sends a subscription confirmation email to the user and then renders the checkout success page.
+    This function is triggered when a user successfully completes a checkout. It
+    performs two main tasks: sending a subscription confirmation email and rendering
+    the checkout success page. The function first calls 'send_subscription_confirmation_email'
+    to send an email with details of the user's active subscriptions. It then clears
+    the 'bag_items' from the session to reset the shopping bag. Finally, it renders
+    the checkout success page to confirm the successful transaction to the user.
 
     Args:
     - request (HttpRequest): The HTTP request object.
 
     Returns:
-    - HttpResponse: A rendered checkout success page.
-    """  
-    #send_subscription_confirmation_email(request)
+    - HttpResponse: A rendered checkout success page, confirming the successful transaction.
+    """
+    send_subscription_confirmation_email(request)
+    request.session.pop('bag_items', None)
 
     return render (request, 'checkout/checkout_success.html')
 
 
-def checkout2(request):
+def checkout(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
-    template = 'checkout/checkout2.html'
+    template = 'checkout/checkout.html'
 
     if request.method == 'POST':
         active_subscription_form = ActiveSubscriptionForm(request.POST)
@@ -107,11 +113,11 @@ def checkout2(request):
             try:
                 stripe.PaymentMethod.attach(payment_method_id, customer=customer_id)
                 stripe.Customer.modify(customer_id, invoice_settings={'default_payment_method': payment_method_id})
-                stripe.Subscription.create(customer=customer_id, items=[{"plan": subscription_plan.stripe_plan_id}])
+                stripe.Subscription.create(customer=customer_id, items=[{"plan": subscription_plan.stripe_price_id}])
 
                 stripe_subscription = stripe.Subscription.create(
                     customer=customer_id,
-                    items=[{"plan": subscription_plan.stripe_plan_id}],
+                    items=[{"plan": subscription_plan.stripe_price_id}],
                 )
 
                 # Save the subscription info in ActiveSubscription model

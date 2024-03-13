@@ -156,7 +156,6 @@ def admin_access_subscription_add(request):
         form = SubscriptionPlanForm()
     return render(request, 'admin_access_add.html', {'form': form})
 
-
 def admin_access_subscription_edit(request, subscription_id):
     """
     View function for editing a subscription plan in the Django application and updating
@@ -210,7 +209,6 @@ def admin_access_subscription_edit(request, subscription_id):
         form = SubscriptionPlanForm(instance=subscription)
     
     return render(request, 'admin_access_edit.html', {'form': form, 'subscription_id': subscription_id})
-
 
 def admin_access_subscription_delete(request, subscription_id):
     """
