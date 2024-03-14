@@ -261,6 +261,7 @@ def remove_plan_from_bag(request, subscription_id):
         bag_items.remove(str(subscription_id))
         request.session['bag_items'] = bag_items
         messages.info(request, 'Removed deleted plan from your bag.')
+
 # Admin Access Trade Insight
 class AdminAccessInsight(ListView):
     """
