@@ -12,7 +12,7 @@
 {% block content %}
 <div class="container menu-element container-bag-checkout">
     <div class="orange-line mt-5"></div>
-    <h2 class="logo-font mb-4 text-center"><strong>Checkout2</strong></h2>
+    <h2 class="logo-font mb-4 text-center"><strong>checkout</strong></h2>
     <div class="orange-line"></div>
     <div class="row">
         <!-- Order Summary -->
@@ -58,7 +58,7 @@
         <!-- Payment Form -->
         <div class="col-12 col-lg-6 pt-3 pt-lg-0 text-center">
             <p class="text-secondary-custom text-left mt-2 mb-4">Please fill out the form below to complete your order</p>
-            <form action="{% url 'checkout2' %}" method="POST" id="payment-form">
+            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
                 <fieldset class="px-3">
                     {{ active_subscription_form.full_name | as_crispy_field }}

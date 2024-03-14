@@ -135,7 +135,7 @@ def checkout(request):
 
         if not ActiveSubscription.objects.filter(user=request.user, subscription_plan__in=bag, status='active').exists():
             messages.error(request, "Keine neuen Abonnements erstellt.")
-            return redirect(reverse('view_bag'))
+            return redirect(reverse('bag'))
 
         messages.success(request, "Thank you for your subscription!")
         return redirect('checkout_success')

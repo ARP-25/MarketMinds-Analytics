@@ -231,9 +231,11 @@ def admin_access_subscription_delete(request, subscription_id):
             if not stripe_subscriptions['data']:
                 stripe.Plan.delete(subscriptionPlan.stripe_price_id)
                 subscriptionPlan.delete()
+                remove_plan_from_bag(request, subscription_id)
                 messages.success(request, 'Subscription Plan has been deleted successfully.')
             else:
                 subscriptionPlan.delete()
+                remove_plan_from_bag(request, subscription_id)
                 messages.warning(request, 'Subscription Plan deleted from app, but not from Stripe due to active subscriptions.')
         except stripe.error.StripeError as e:
             messages.error(request, f"Stripe error: {e}")
@@ -243,7 +245,22 @@ def admin_access_subscription_delete(request, subscription_id):
 
     return redirect('AdminAccessSubscription')
 
+def remove_plan_from_bag(request, subscription_id):
+    """
+    Removes a given subscription plan ID from the 'bag_items' session variable.
+    
+    Args:
+    - request: The HTTP request object.
+    - subscription_id: The ID of the subscription plan to remove.
 
+    Returns:
+    - None
+    """
+    bag_items = request.session.get('bag_items', [])
+    if str(subscription_id) in bag_items:
+        bag_items.remove(str(subscription_id))
+        request.session['bag_items'] = bag_items
+        messages.info(request, 'Removed deleted plan from your bag.')
 # Admin Access Trade Insight
 class AdminAccessInsight(ListView):
     """
