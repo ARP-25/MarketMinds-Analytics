@@ -221,7 +221,7 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR: 'error',
 }
-APPEND_SLASH = False
+
 
 # Stripe
 STRIPE_CURRENCY = 'usd'
