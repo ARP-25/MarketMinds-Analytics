@@ -22,7 +22,7 @@ $('div[data-item-id]').each(function() {
         $(this).addClass('already-subscribed-container mb-2');
         var alreadySubscribedDiv = $('<div>', {
             class: 'already-subscribed',
-            text: 'Already subscribed. For more Information check'
+            html: "You've got active subscription time for this Plan.<br>For more Information check"
         });        
         var profileUrl = $('#dynamic_profile_url').data('url');
         var anchorProfileUrl = $('<a>', {           

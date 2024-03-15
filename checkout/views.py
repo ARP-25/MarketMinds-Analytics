@@ -106,15 +106,14 @@ def checkout(request):
             # Prüfen, ob eine aktive Subscription existiert
             if ActiveSubscription.objects.filter(
                 user=request.user, 
-                subscription_plan=subscription_plan
+                subscription_plan=subscription_plan,
+                end_date__isnull=True,
             ).exists():
                 messages.error(request, f"You already have an active subscription for {subscription_plan.title}.")
                 continue   
             try:
                 stripe.PaymentMethod.attach(payment_method_id, customer=customer_id)
                 stripe.Customer.modify(customer_id, invoice_settings={'default_payment_method': payment_method_id})
-                stripe.Subscription.create(customer=customer_id, items=[{"plan": subscription_plan.stripe_price_id}])
-
                 stripe_subscription = stripe.Subscription.create(
                     customer=customer_id,
                     items=[{"plan": subscription_plan.stripe_price_id}],

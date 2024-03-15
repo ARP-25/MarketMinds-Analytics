@@ -63,6 +63,7 @@
             <div class="row p-3">
                 <div class="col-12 menu-element-secondary">
                     <p style="font-family: Rubik Mono One;">{{ subscription.subscription_plan.title }}</p>
+                    <p>Stripe Subscription ID: {{ subscription.stripe_subscription_id }}</p>
                     <p>Start Date: {{ subscription.start_date }}</p>
                     <p>Renewal Date: {{ subscription.renewal_date }}</p>
                     <p>End Date: {{ subscription.end_date }}</p>
