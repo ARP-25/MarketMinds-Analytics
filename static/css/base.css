@@ -425,12 +425,7 @@ a:hover {
 .sub-details {}
 
 /* Messages */
-.message-container {
-    position: fixed;
-    top: 72px;
-    right: 15px;
-    z-index: 99999999999;
-}
+
 
 
 /* Admin Access */
@@ -758,18 +753,22 @@ dl dd {
 
 /* Toast */
 .toast {
-    min-width: 250px;
-    transition: transform 0.5s ease-in-out, opacity 0.5s;
-    position: fixed; /* Positionierung relativ zum Viewport */
-    right: 10px; /* Startposition am rechten Bildschirmrand */
+    width: 280px;
+    transition: transform 0.6s ease-in-out, opacity 0.6s;
+    opacity: 0; 
+    transform: translateX(110%);
+    margin-top: 10px; 
+}
+.toast-container:first-child {
+    margin-top:70px;
 }
 .toast-in {
-    opacity: 1; /* Voll sichtbar */
+    opacity: 1; 
+    transform: translateX(0%); 
 }
 .toast-out {
     transform: translateX(110%); 
 }
-
 .btn-toast {
     background: #fca311 !important;
     border-radius: 5px !important;

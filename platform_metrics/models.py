@@ -5,7 +5,9 @@ class FinancialMetrics(models.Model):
     period = models.DateField()
 
     total_revenue = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    
     monthly_recurring_revenue = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    
 
     new_subscriptions = models.IntegerField(default=0)
     canceled_subscriptions = models.IntegerField(default=0)

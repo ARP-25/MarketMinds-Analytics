@@ -12,7 +12,18 @@ admin.site.register(PlanMetrics, PlanMetricsAdmin)
 
 class FinancialMetricsAdmin(admin.ModelAdmin):
 
-    list_display = ('new_subscriptions','canceled_subscriptions')
+
+
+    def get_plan_metrics_display(self, obj):
+        # Assuming PlanMetrics has a ForeignKey to FinancialMetrics and SubscriptionPlan
+        plan_metrics = PlanMetrics.objects.filter(financial_metrics=obj)
+        return ", ".join(plan_metric.subscription_plan.name for plan_metric in plan_metrics)
+
+    get_plan_metrics_display.short_description = 'Plan Metrics'
+    
+    list_display = ('new_subscriptions','canceled_subscriptions','get_plan_metrics_display')
+
+
 
 admin.site.register(FinancialMetrics, FinancialMetricsAdmin)
 

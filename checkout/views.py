@@ -146,7 +146,10 @@ def checkout(request):
 
         active_subscription_plan_id_user = []
         if request.user.is_authenticated:
-            active_subscriptions = ActiveSubscription.objects.filter(user=request.user).values_list('subscription_plan_id', flat=True)
+            active_subscriptions = ActiveSubscription.objects.filter(
+                user=request.user, 
+                end_date__isnull=True  
+            ).values_list('subscription_plan_id', flat=True)
             active_subscription_plan_id_user = list(map(str, active_subscriptions))
 
         context = {

@@ -187,18 +187,20 @@
   {% endblock %}
 
   {% if messages %}
-  <div class="message-container">
-    {% for message in messages %}
-    {% with message.level as level %}
-    {% if level == 40 %}
-    {% include 'includes/toasts/toast_error.html' %}
-    {% elif level == 25 %}
-    {% include 'includes/toasts/toast_success.html' %}
-    {% else %}
-    {% include 'includes/toasts/toast_info.html' %}
-    {% endif %}
-    {% endwith %}
-    {% endfor %}
+  <div aria-live="polite" aria-atomic="true" style="min-height: 200px;">
+    <div class="toast-container" style="position: absolute; top: 0; right: 0;">
+      {% for message in messages %}
+      {% with message.level as level %}
+      {% if level == 40 %}
+      {% include 'includes/toasts/toast_error.html' %}
+      {% elif level == 25 %}
+      {% include 'includes/toasts/toast_success.html' %}
+      {% else %}
+      {% include 'includes/toasts/toast_info.html' %}
+      {% endif %}
+      {% endwith %}
+      {% endfor %}
+    </div>
   </div>
   {% endif %}
 
@@ -231,7 +233,7 @@
       $('.toast').toast('show');
       setTimeout(function() {
         $('.toast').addClass('toast-out');
-    }, 3000);
+    }, 5000);
     });
     $('.btn-close').on('click', function() {
       $(this).closest('.toast').toast('hide');

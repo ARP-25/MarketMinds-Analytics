@@ -260,11 +260,16 @@ def admin_access_subscription_delete(request, subscription_id):
                 subscriptionPlan.delete()
                 messages.success(request, f"The plan '{subscriptionPlan.title}' was successfully deleted.")
             else:
+                print(f"\nWere in else block\n subscriptionPlan.staged:{subscriptionPlan.staged}\n")
+                print(f"\nWere in else block\n subscriptionPlan.id:{subscriptionPlan.id}\n")
                 subscriptionPlan.staged = False
-                messages.warning(request, f"The plan '{subscriptionPlan.title}' cannot be deleted as it is still in use in Stripe and would compromsie Database integrity. The Subscription Plan will be marked as insivsible.")
+                print(f"\nShould have set on False now\n subscriptionPlan:{subscriptionPlan.staged}\n")
+                print(f"\nShould have set on False now\n subscriptionPlan.id:{subscriptionPlan.id}\n")
+                messages.warning(request, f"The plan '{subscriptionPlan.title}' cannot be deleted as it is still in use in Stripe and would compromsie Database integrity. The Subscription Plan will be marked as insivsible instead.")
     except Exception as e:
         messages.error(request, f"An error occurred: {e}")
-
+    print(f"\nShould still be on False now\n subscriptionPlan:{subscriptionPlan.staged}\n")
+    print(f"\nShould still be on False now\n subscriptionPlan.id:{subscriptionPlan.id}\n")
     return redirect('AdminAccessSubscription')
 
 def remove_plan_from_bag(request, subscription_id):
