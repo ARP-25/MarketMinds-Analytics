@@ -31,7 +31,6 @@ class ActiveSubscription(models.Model):
 
         super().save(*args, **kwargs)
 
-
     def cancel_subscription(self):
         """
         Cancel subscription via Stripe API and update renewal_date and end_date.

@@ -83,6 +83,7 @@ INSTALLED_APPS = [
     'profiles',
     'trade_insights',
     'admin_access',
+    'platform_metrics',
     # Other
     'crispy_forms',
     'crispy_bootstrap4',
