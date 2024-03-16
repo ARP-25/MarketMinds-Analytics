@@ -307,6 +307,10 @@ a:hover {
 
 
 /* FB Mailchimp Section */
+.container-mailchimp{
+    width:95vw;
+    border-radius:20px;
+}
 .fb-mailchimp {
     padding: 40px 0 40px;
 }
@@ -783,6 +787,42 @@ dl dd {
 }
 
 /* Footer */
+.footer-element-container {
+    height: 60vh;
+    padding: 15px;
+}
+.footer-element-content {
+    height:100%;
+    position: relative;
+    transition: background-color 0.3s; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Stellen Sie sicher, dass der Container die volle Höhe einnimmt */
+    padding: 15px; /* Ihr vorhandenes Padding */
+}
+.footer-element-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, #000814, #0d1b2a);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1; 
+}
+.footer-element-content:hover::before {
+    opacity: 1;
+}
+.footer-logo {
+    font-family: 'Rubik Mono One',sans-serif;
+    letter-spacing: normal;
+}
+
+
+
 .footer-absolute {
     position: absolute;
     left: 0;
@@ -791,9 +831,8 @@ dl dd {
 }
 .footer-static {
     position: static;
-    /* Weitere notwendige Styles */
-  }
-  
+}
+
 
 
 /************************ Trade Insights *************************/

@@ -32,8 +32,11 @@ $(document).ready(function () {
             $("#myDropdownBag").removeClass("show");
         }
     });
-
 });
+
+
+ /* Barchart */
+
 /* Footer */
 $(document).ready(function() {
     function adjustFooter() {
