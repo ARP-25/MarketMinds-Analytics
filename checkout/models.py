@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.forms import ValidationError
 from django.utils import timezone
 import datetime
 
@@ -35,6 +36,9 @@ class ActiveSubscription(models.Model):
         """
         Cancel subscription via Stripe API and update renewal_date and end_date.
         """
+        if self.end_date is not None:
+            raise ValidationError("Subscription cannot be cancelled because it is already cancelled.")
+
         try:
             stripe.api_key = settings.STRIPE_SECRET_KEY
             subscription = stripe.Subscription.retrieve(self.stripe_subscription_id)
@@ -59,13 +63,3 @@ class ActiveSubscription(models.Model):
         return f"{self.subscription_plan.title} - {self.user.username} - {self.status}"
 
 
-    # This functionality is automated and in sync with stripe webhook implementation and not used here for now.
-    # These methods can be useful for local checks, administrative tasks or fallback mechanisms.
-    def is_expired(self):
-        return timezone.now() >= self.renewal_date  
-    # This functionality is automated and in sync with stripe webhook implementation and not used here for now.
-    # These methods can be useful for local checks, administrative tasks or fallback mechanisms.
-    def refresh_subscription(self):
-        if self.is_expired():
-            self.renewal_date = timezone.now() + timezone.timedelta(days=30) 
-            self.save()

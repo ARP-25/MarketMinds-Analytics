@@ -11,7 +11,7 @@ from subscription.models import SubscriptionPlan
 
 import stripe
 
-import logging
+#import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -56,15 +56,15 @@ def stripe_webhook(request):
         )
     except ValueError as e:
         #log
-        logger.error(f"Webhook error: Invalid payload - {e}")
+        #logger.error(f"Webhook error: Invalid payload - {e}")
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
         #log
-        logger.error(f"Webhook error: Invalid signature - {e}")
+        #logger.error(f"Webhook error: Invalid signature - {e}")
         return HttpResponse(status=400)
 
     #log
-    logger.debug(f"Received Stripe webhook event: {event['type']}")
+    #logger.debug(f"Received Stripe webhook event: {event['type']}")
 
     event_handlers = {
         'setup_intent.created': handle_setup_intent_created,
