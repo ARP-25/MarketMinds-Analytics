@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    // Dropdown Menu for Profil on click
     $("#dropdownMenu").click(function (event) {
         event.stopPropagation();
         $("#myDropdown").toggleClass("show");
@@ -17,6 +18,9 @@ $(document).ready(function () {
             $("#myDropdown").removeClass("show");
         }
     });
+
+
+    // Showing miniature shopping bag only when badge > 0 (badge is derived from bag_items count)
     if ($('span.badge').length > 0) {
         $("#dropdownBag").mouseenter(function (event) {
             event.stopPropagation();
@@ -32,26 +36,75 @@ $(document).ready(function () {
             $("#myDropdownBag").removeClass("show");
         }
     });
+
+
+     // FAQ toggling answers
+    $('.faq-question').click(function(){
+        // Togglen on click 
+        $(this).next('.faq-answer').slideToggle();
+        $(this).find('i').toggleClass('fa-angle-down fa-angle-up');
+        // Schließen der anderen Elemente und ändern von fa logo
+        $('.faq-question').not(this).next('.faq-answer:visible').slideUp();
+        $('.faq-question').not(this).find('i.fa-angle-up').removeClass('fa-angle-up').addClass('fa-angle-down');
+    });
+
+
+    // Footer Switch color of title on hover
+    $('.footer-element-container').hover(
+        function() {
+            $(this).find('.text-secondary-custom:first').addClass('text-highlight').removeClass('text-secondary-custom');
+        },
+        function() {
+            $(this).find('.text-highlight:first').addClass('text-secondary-custom').removeClass('text-highlight');
+        }
+    );
+
+
+    // Hover color Effekt für Developed By Footer
+    $('.footer-links').hover(
+        function() {
+            $(this).find('span').addClass('text-white');
+            $(this).find('i').addClass('theme-color');
+        }, 
+        function() {
+            $(this).find('span').removeClass('text-white');
+            $(this).find('i').removeClass('theme-color');
+        }
+    );
+
+    // Skript um Footer immer am ende vom Viewport anzuheften
+    function adjustFooter() {
+        var bodyHeight = $('body').outerHeight();
+        var windowHeight = $(window).height();
+        if (bodyHeight > windowHeight * 0.8) {
+          $('footer').addClass('footer-static');
+          $('footer').removeClass('footer-absolute');
+        } else {
+          $('footer').removeClass('footer-static');
+          $('footer').addClass('footer-absolute');
+        }
+      }
+      adjustFooter(); 
+      $(window).resize(adjustFooter);
 });
 
 
- /* Barchart */
 
+
+
+
+
+
+
+
+
+
+
+  
+  
 /* Footer */
 $(document).ready(function() {
-    function adjustFooter() {
-      var bodyHeight = $('body').outerHeight();
-      var windowHeight = $(window).height();
-      if (bodyHeight > windowHeight * 0.8) {
-        $('footer').addClass('footer-static');
-        $('footer').removeClass('footer-absolute');
-      } else {
-        $('footer').removeClass('footer-static');
-        $('footer').addClass('footer-absolute');
-      }
-    }
-    adjustFooter(); 
-    $(window).resize(adjustFooter);
+
 });
   
   

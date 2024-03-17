@@ -787,8 +787,17 @@ dl dd {
 }
 
 /* Footer */
+.text-highlight {
+    color: #00b4d8;
+}
+.footer-hr {
+    border-top: 1px solid #8d99ae;
+    width: 20px;
+    float: left;
+    margin:none;
+    }
 .footer-element-container {
-    height: 60vh;
+    min-height: 60vh;
     padding: 15px;
 }
 .footer-element-content {
@@ -820,18 +829,54 @@ dl dd {
     font-family: 'Rubik Mono One',sans-serif;
     letter-spacing: normal;
 }
+.footer-logo a {
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+
+.footer-logo a:hover {
+    transform: translateX(10px);
+}
+.custom-divider {
+    border: 0;
+    height: 2px;
+    background-color: #8d99ae;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    width: 30px;
+    float: left;
+}
+.custom-footer-line {
+    border: 0;
+    height: 2px;
+    background-color: #8d99ae;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    width: 250px;
+    float: left;
+}
+.clear-both {
+    clear: both; 
+}
+.footer-description {
+    height:60px;
+}
+.developed-by-content {
+    padding-left: 30px;
+    font-size: 85%;
+}
 
 
-
+/*footer aligntment*/
 .footer-absolute {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 100%;
 }
 .footer-static {
     position: static;
 }
+
 
 
 
@@ -1319,8 +1364,16 @@ dl dd {
         align-items: center;
     }
 }
+/* Bootstrap xl */
+@media (max-width: 1200px) {
+    .footer-element-container {
+        min-height: 40vh;
+        padding: 15px;
+    }
+}
 @media (min-width: 1200px) {
     .container{
       max-width: 1300px;
     }
+
 }
