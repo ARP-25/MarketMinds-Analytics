@@ -4,6 +4,11 @@ from ckeditor.fields import RichTextField
 from profiles.models import UserProfile  
 from subscription.models import SubscriptionPlan
 
+# Used as Backup in Case SubscriptionPlan with associated Insight got deleted
+# So template wont try to render a Null Field when SubscriptionPlan is deleted
+DEFAULT_SUBSCRIPTION_PLAN_ID = 39
+
+
 
 class Insight(models.Model):
     title = models.CharField(max_length=200, unique=True)
@@ -16,7 +21,7 @@ class Insight(models.Model):
 
     release_date = models.DateField()
     content = RichTextField()
-    category = models.ForeignKey(SubscriptionPlan, on_delete=models.CASCADE, related_name='insights')
+    category = models.ForeignKey(SubscriptionPlan, on_delete=models.SET_DEFAULT, default=DEFAULT_SUBSCRIPTION_PLAN_ID, related_name='insights')
     short_description = models.TextField()
     author = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, related_name='authored_insights')
 

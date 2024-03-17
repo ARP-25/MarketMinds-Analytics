@@ -50,6 +50,7 @@
 </head>
 
 <body>
+  <!-- Header -->
   <header class="container-fluid py-1 px-lg-5 sticky">
     <div class="row">
       <div class="offset col-6 offset-lg-0 col-lg-3 d-flex align-items-center justify-content-start">
@@ -168,6 +169,7 @@
     </div>
   </header>
   
+  <!-- Mobile Nav -->
   <nav class="mobile-nav">
     <a href="{% url 'home' %}" class="nav-link nav-element">
       <p class="nav-p">Home</p>
@@ -186,6 +188,8 @@
   {% block content %}
   {% endblock %}
 
+
+  <!-- Django Messages -->
   {% if messages %}
   <div aria-live="polite" aria-atomic="true" style="min-height: 200px;">
     <div class="toast-container" style="position: absolute; top: 0; right: 0;">
@@ -205,13 +209,8 @@
   {% endif %}
 
 
-
-
-
-
   <!-- Footer -->
   <footer class="pt-3 pt-sm-0 ">
-
     <!-- Footer Section -->
     <div class="row mr-4 ml-4">
       <!-- Footer Element 1 -->
@@ -334,7 +333,7 @@
 
   {% block postloadjs %}
   {{ block.super }}
-  <!-- Toasts -->
+  <!-- Toast Animation for In and Out -->
   <script type="text/javascript">
     $(document).ready(function () {
       $('.toast').addClass('toast-in');
@@ -351,7 +350,7 @@
     });
   </script>
 
-  <!-- Arrow -->
+  <!-- Scroll Arrow on Landing Page-->
   <script type="text/javascript">
     $(document).ready(function(){
       $('.arrow-container').on('click', function() {

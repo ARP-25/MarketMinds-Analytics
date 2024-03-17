@@ -102,10 +102,4 @@ $(document).ready(function () {
 
   
   
-/* Footer */
-$(document).ready(function() {
-
-});
-  
-  
   
