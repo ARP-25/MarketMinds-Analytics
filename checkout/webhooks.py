@@ -1,11 +1,21 @@
+from django.utils import timezone
+from datetime import datetime
+
 from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
+from .models import ActiveSubscription
+from subscription.models import SubscriptionPlan
+
 
 import stripe
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
 
 @csrf_exempt
 def stripe_webhook(request):
@@ -31,18 +41,30 @@ def stripe_webhook(request):
     Returns:
     - HttpResponse: A response with HTTP status 200 for successful processing, or 
       400 for any errors encountered during the event validation or processing.
-    """    
+    """   
+
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    wh_secret = settings.STRIPE_WH_SECRET
+
     payload = request.body
     sig_header = request.META.get('HTTP_STRIPE_SIGNATURE')
 
+
     try:
         event = stripe.Webhook.construct_event(
-            payload, sig_header, settings.STRIPE_WH_SECRET
+            payload, sig_header, wh_secret
         )
     except ValueError as e:
+        #log
+        logger.error(f"Webhook error: Invalid payload - {e}")
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
+        #log
+        logger.error(f"Webhook error: Invalid signature - {e}")
         return HttpResponse(status=400)
+
+    #log
+    logger.debug(f"Received Stripe webhook event: {event['type']}")
 
     event_handlers = {
         'setup_intent.created': handle_setup_intent_created,
@@ -185,4 +207,8 @@ def handle_subscription_updated(event):
 
 def handle_unexpected_event(event):
     print(f"Unerwartetes Event erhalten: {event['type']}")
+    return HttpResponse(status=200)
+
+def handle_setup_intent_created(event):
+    # Your code to handle the 'setup_intent.created' event
     return HttpResponse(status=200)
