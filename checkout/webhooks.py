@@ -47,6 +47,7 @@ def stripe_webhook(request):
     event_handlers = {
         'setup_intent.created': handle_setup_intent_created,
         'price.deleted': handle_price_deleted,
+        'customer.subscription.updated': handle_subscription_updated,
     }
 
     handler = event_handlers.get(event['type'], handle_unexpected_event)
@@ -147,6 +148,38 @@ def handle_price_deleted(event):
     except SubscriptionPlan.DoesNotExist:
         print(f"No plan found in the database with Stripe Price ID {stripe_price_id}.")
     
+    return HttpResponse(status=200)
+
+
+def handle_subscription_updated(event):
+    """
+    Handles the 'customer.subscription.updated' event from Stripe.
+
+    Args:
+    - event: The Stripe event object containing webhook data.
+
+    Returns:
+    - HttpResponse with a status code indicating the result of the operation.
+    """
+    subscription = event['data']['object']
+
+    try:
+        active_subscription = ActiveSubscription.objects.get(stripe_subscription_id=subscription['id'])
+        active_subscription.status = subscription['status']
+        active_subscription.renewal_date = timezone.make_aware(
+            datetime.fromtimestamp(subscription['current_period_end'])
+        )
+        if subscription['cancel_at_period_end']:
+            active_subscription.end_date = timezone.make_aware(
+                datetime.fromtimestamp(subscription['canceled_at'])
+            )
+        else:
+            active_subscription.end_date = None
+        active_subscription.save()
+        print(f"Updated subscription: {active_subscription}")
+    except ActiveSubscription.DoesNotExist:
+        print(f"No active subscription found in the database with Stripe Subscription ID {subscription['id']}.")
+
     return HttpResponse(status=200)
 
 

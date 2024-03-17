@@ -74,92 +74,6 @@ def checkout_success(request):
     return render (request, 'checkout/checkout_success.html')
 
 
-def checkout(request):
-    stripe.api_key = settings.STRIPE_SECRET_KEY
-    template = 'checkout/checkout.html'
-
-    if request.method == 'POST':
-        active_subscription_form = ActiveSubscriptionForm(request.POST)
-        bag = request.session.get('bag_items', [])
-        if not bag:
-            messages.error(request, "There's nothing in your bag at the moment")
-            return redirect(reverse('view_bag'))
-
-        if not active_subscription_form.is_valid():
-            messages.error(request, "There was an error with the form. Please check your information.")
-            return render(request, template, {'active_subscription_form': active_subscription_form})
-
-        payment_method_id = request.POST.get('payment_method_id')
-        if not payment_method_id:
-            messages.error(request, "No payment method provided.")
-            return render(request, template, {'active_subscription_form': active_subscription_form})
-
-        customer_id = get_or_create_stripe_customer(request.user)
-
-        # Ensure that customer_id is a string (the ID of the customer)
-        if isinstance(customer_id, stripe.Customer):
-            customer_id = customer_id.id
-
-        for plan_id in bag:
-            subscription_plan = get_object_or_404(SubscriptionPlan, id=plan_id)
-
-            # Prüfen, ob eine aktive Subscription existiert
-            if ActiveSubscription.objects.filter(
-                user=request.user, 
-                subscription_plan=subscription_plan,
-                end_date__isnull=True,
-            ).exists():
-                messages.error(request, f"You already have an active subscription for {subscription_plan.title}.")
-                continue   
-            try:
-                stripe.PaymentMethod.attach(payment_method_id, customer=customer_id)
-                stripe.Customer.modify(customer_id, invoice_settings={'default_payment_method': payment_method_id})
-                stripe_subscription = stripe.Subscription.create(
-                    customer=customer_id,
-                    items=[{"plan": subscription_plan.stripe_price_id}],
-                )
-
-                # Save the subscription info in ActiveSubscription model
-                active_subscription = ActiveSubscription(
-                    user=request.user,
-                    subscription_plan=subscription_plan,
-                    stripe_subscription_id=stripe_subscription.id,  # Save Stripe Subscription ID
-                    status=stripe_subscription.status,  # Save Stripe Subscription Status
-                )
-                active_subscription.save()
-
-            except stripe.error.StripeError as e:
-                messages.error(request, "Stripe Error: " + str(e))
-                continue  # Springt zum nächsten Plan in der Schleife
-
-        if not ActiveSubscription.objects.filter(user=request.user, subscription_plan__in=bag, status='active').exists():
-            messages.error(request, "Keine neuen Abonnements erstellt.")
-            return redirect(reverse('bag'))
-
-        messages.success(request, "Thank you for your subscription!")
-        return redirect('checkout_success')
-
-    else:
-        active_subscription_form = ActiveSubscriptionForm()
-        setup_intent = stripe.SetupIntent.create()
-
-        active_subscription_plan_id_user = []
-        if request.user.is_authenticated:
-            active_subscriptions = ActiveSubscription.objects.filter(
-                user=request.user, 
-                end_date__isnull=True  
-            ).values_list('subscription_plan_id', flat=True)
-            active_subscription_plan_id_user = list(map(str, active_subscriptions))
-
-        context = {
-            'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
-            'client_secret': setup_intent.client_secret,
-            'active_subscription_form': active_subscription_form,
-            'active_subscription_plan_id_user': active_subscription_plan_id_user
-        }
-        return render(request, template, context)
-
-
 def get_or_create_stripe_customer(user):
     # Assuming you have a UserProfile model linked to your User model
     profile = UserProfile.objects.get(user=user)
@@ -187,3 +101,132 @@ def get_or_create_stripe_customer(user):
         # Handle error
         print(f"Stripe error: {e}")
         return None
+
+
+def process_or_renew_subscription(request, customer_id, payment_method_id, subscription_plan):
+    # Check for an existing canceled subscription
+    existing_subscription = ActiveSubscription.objects.filter(
+        user=request.user, 
+        subscription_plan=subscription_plan,
+        status='pending cancellation'  # or the appropriate status for canceled subscriptions
+    ).first()
+
+    if existing_subscription:
+        # Renew the existing subscription
+        try:
+            # Retrieve the subscription from Stripe
+            subscription = stripe.Subscription.retrieve(existing_subscription.stripe_subscription_id)
+
+            # Assuming the subscription only has one item. Adjust as necessary if multiple.
+            subscription_item_id = subscription['items']['data'][0]['id']
+
+            # Modify the subscription to renew it
+            stripe.Subscription.modify(
+                existing_subscription.stripe_subscription_id,
+                cancel_at_period_end=False,
+                items=[{"id": subscription_item_id, "plan": subscription_plan.stripe_price_id}],
+            )
+
+            existing_subscription.status = 'active'  # Update the status to active
+            existing_subscription.end_date = None
+            existing_subscription.save()
+            messages.success(request, f"{subscription_plan.title} subscription renewed successfully.")
+            return True
+        except stripe.error.StripeError as e:
+            messages.error(request, "Stripe Error: " + str(e))
+            return False
+    else:
+        # Create a new subscription
+        try:
+            stripe.PaymentMethod.attach(payment_method_id, customer=customer_id)
+            stripe.Customer.modify(customer_id, invoice_settings={'default_payment_method': payment_method_id})
+            stripe_subscription = stripe.Subscription.create(
+                customer=customer_id,
+                items=[{"plan": subscription_plan.stripe_price_id}],
+            )
+            new_active_subscription = ActiveSubscription(
+                user=request.user,
+                subscription_plan=subscription_plan,
+                stripe_subscription_id=stripe_subscription.id,
+                status=stripe_subscription.status,
+            )
+            new_active_subscription.save()
+            messages.success(request, f"{subscription_plan.title} subscription created successfully.")
+            return True
+        except stripe.error.StripeError as e:
+            messages.error(request, "Stripe Error: " + str(e))
+            return False
+
+
+def process_checkout(request, bag, payment_method_id, customer_id):
+    for plan_id in bag:
+        subscription_plan = get_object_or_404(SubscriptionPlan, id=plan_id)
+
+        # Skip if user already has an active subscription
+        if ActiveSubscription.objects.filter(
+            user=request.user, 
+            subscription_plan=subscription_plan,
+            end_date__isnull=True
+        ).exists():
+            messages.error(request, f"You already have an active subscription for {subscription_plan.title}.")
+            continue
+
+        success = process_or_renew_subscription(request, customer_id, payment_method_id, subscription_plan)
+        if not success:
+            return False
+    return True
+
+
+def checkout(request):
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    template = 'checkout/checkout.html'
+    bag = request.session.get('bag_items', [])
+
+    # POST - 
+    if request.method == 'POST':
+        active_subscription_form = ActiveSubscriptionForm(request.POST)
+        
+        if not bag:
+            messages.error(request, "There's nothing in your bag at the moment")
+            return redirect(reverse('view_bag'))
+
+        if not active_subscription_form.is_valid():
+            messages.error(request, "There was an error with the form. Please check your information.")
+            return render(request, template, {'active_subscription_form': active_subscription_form})
+
+        payment_method_id = request.POST.get('payment_method_id')
+        if not payment_method_id:
+            messages.error(request, "No payment method provided.")
+            return render(request, template, {'active_subscription_form': active_subscription_form})
+
+        customer_id = get_or_create_stripe_customer(request.user)
+        if isinstance(customer_id, stripe.Customer):
+            customer_id = customer_id.id
+
+        success = process_checkout(request, bag, payment_method_id, customer_id)
+        if not success:
+            return redirect(reverse('bag'))
+
+        messages.success(request, "Thank you for your subscription!")
+        return redirect('checkout_success')
+
+    # GET - Returns rendered Template with context Data consisting Stripe Keys and Active Subscription Info for User
+    else:
+        active_subscription_form = ActiveSubscriptionForm()
+        setup_intent = stripe.SetupIntent.create()
+        active_subscription_plan_id_user = []
+        if request.user.is_authenticated:
+            active_subscriptions = ActiveSubscription.objects.filter(
+                user=request.user, 
+                end_date__isnull=True
+            ).values_list('subscription_plan_id', flat=True)
+            active_subscription_plan_id_user = list(map(str, active_subscriptions))
+
+        context = {
+            'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+            'client_secret': setup_intent.client_secret,
+            'active_subscription_form': active_subscription_form,
+            'active_subscription_plan_id_user': active_subscription_plan_id_user
+        }
+        return render(request, template, context)
+
