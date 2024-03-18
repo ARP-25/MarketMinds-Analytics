@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from profiles.models import UserProfile  
 from subscription.models import SubscriptionPlan
-
+#from tinymce.models import HTMLField
 
 # Used as Backup in Case SubscriptionPlan with associated Insight got deleted
 # So template wont try to render a Null Field when SubscriptionPlan is deleted

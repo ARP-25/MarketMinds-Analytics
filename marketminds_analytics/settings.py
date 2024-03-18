@@ -88,7 +88,16 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
     'storages',
+    'tinymce',
 ]
+SUMMERNOTE_CONFIG = {
+    # Using 'width' and 'height' properties
+    'summernote': {
+        'width': '100%',  # width of the editor
+        'height': '480',  # height of the editor in pixels
+    },
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
