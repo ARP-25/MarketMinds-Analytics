@@ -84,7 +84,7 @@ body {
     font-family: 'Lato', sans-serif;
 }
 .logo-1 {
-    font-family: rubik, sans-serif;
+    font-family: 'Rubik', sans-serif;
     font-weight: 600;
     font-size: 160%;
     position: absolute;
@@ -92,7 +92,7 @@ body {
     color: #00b4d8;
 }
 .logo-2 {
-    font-family: teko, sans-serif;
+    font-family: 'Teko', sans-serif;
     font-weight: 300;
     font-size: 140%;
     position: absolute;
@@ -126,7 +126,7 @@ body {
 }
 
 a {
-    color: inherit;
+    color: whitesmoke!important;
     text-decoration: none;
 }
 
@@ -185,7 +185,7 @@ a:hover {
 }
 
 .bag-titles {
-    font-family: Rubik Mono One;
+    font-family: 'Rubik Mono One', sans-serif;
     font-size: 130%;
 }
 
@@ -275,8 +275,6 @@ a:hover {
 }
 
 /* Images */
-
-
 @keyframes scaleImage {
     from {
         background-size: 100%;
@@ -306,9 +304,17 @@ a:hover {
 
     margin-bottom: 50px;
 }
-
+/* Allauth */
+.container-allauth-templates{
+    margin-top: 30vh;
+    margin-bottom: 20vh;
+}
 
 /* FB Mailchimp Section */
+.container-mailchimp{
+    width:95vw;
+    border-radius:20px;
+}
 .fb-mailchimp {
     padding: 40px 0 40px;
 }
@@ -427,12 +433,7 @@ a:hover {
 .sub-details {}
 
 /* Messages */
-.message-container {
-    position: fixed;
-    top: 72px;
-    right: 15px;
-    z-index: 99999999999;
-}
+
 
 
 /* Admin Access */
@@ -760,18 +761,22 @@ dl dd {
 
 /* Toast */
 .toast {
-    min-width: 250px;
-    transition: transform 0.5s ease-in-out, opacity 0.5s;
-    position: fixed; /* Positionierung relativ zum Viewport */
-    right: 10px; /* Startposition am rechten Bildschirmrand */
+    width: 280px;
+    transition: transform 0.6s ease-in-out, opacity 0.6s;
+    opacity: 0; 
+    transform: translateX(110%);
+    margin-top: 10px; 
+}
+.toast-container:first-child {
+    margin-top:70px;
 }
 .toast-in {
-    opacity: 1; /* Voll sichtbar */
+    opacity: 1; 
+    transform: translateX(0%); 
 }
 .toast-out {
     transform: translateX(110%); 
 }
-
 .btn-toast {
     background: #fca311 !important;
     border-radius: 5px !important;
@@ -786,17 +791,100 @@ dl dd {
 }
 
 /* Footer */
+.footer-container {
+    margin-top:5vh;
+}
+.text-highlight {
+    color: #00b4d8;
+}
+.footer-hr {
+    border-top: 1px solid #8d99ae;
+    width: 20px;
+    float: left;
+    margin:none;
+    }
+.footer-element-container {
+    min-height: 60vh;
+    padding: 15px;
+}
+.footer-element-content {
+    height:100%;
+    position: relative;
+    transition: background-color 0.3s; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Stellen Sie sicher, dass der Container die volle Höhe einnimmt */
+    padding: 15px; /* Ihr vorhandenes Padding */
+}
+.footer-element-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, #000814, #0d1b2a);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1; 
+}
+.footer-element-content:hover::before {
+    opacity: 1;
+}
+.footer-logo {
+    font-family: 'Rubik Mono One',sans-serif;
+    letter-spacing: normal;
+}
+.footer-logo a {
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+
+.footer-logo a:hover {
+    transform: translateX(10px);
+}
+.custom-divider {
+    border: 0;
+    height: 2px;
+    background-color: #8d99ae;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    width: 30px;
+    float: left;
+}
+.custom-footer-line {
+    border: 0;
+    height: 2px;
+    background-color: #8d99ae;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    width: 250px;
+    float: left;
+}
+.clear-both {
+    clear: both; 
+}
+.footer-description {
+    height:60px;
+}
+.developed-by-content {
+    padding-left: 30px;
+    font-size: 85%;
+}
+
+
+/*footer aligntment*/
 .footer-absolute {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 100%;
 }
 .footer-static {
     position: static;
-    /* Weitere notwendige Styles */
-  }
-  
+}
+
+
 
 
 /************************ Trade Insights *************************/
@@ -835,13 +923,13 @@ dl dd {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 1.0));
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     transition: background-color 0.8s ease; 
     z-index: 0; 
 }
-.mainstage-insight:hover .dark-overlay {
+/*.mainstage-insight:hover .dark-overlay {
     background: rgba(0, 0, 0, 0.8); 
-}
+}*/
 .mainstage-insight .mainstage-detail-container {
     position: relative;
     z-index: 2; 
@@ -873,6 +961,16 @@ dl dd {
     backdrop-filter: blur(10px);
     display:inline-block;
 }
+.category-small {
+    font-size: 85%;
+    height: 25px;
+    min-width: 85px;
+    border: 1px solid white;
+    border-radius:12px;
+    backdrop-filter: blur(10px);
+    display:inline-block;
+}
+
 .category-ss {
     height: 30px;
     width: 100px;
@@ -923,7 +1021,7 @@ dl dd {
 .ss-insight-img {
     height:30vh;
     border-radius:4px;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 1.0));
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     padding-left:0;
     margin: 15px 0 15px;
     box-shadow: 0 5px 7px -4px white;
@@ -995,7 +1093,7 @@ dl dd {
 .product-text {
     font-size: 130%;
     font-weight: bold;
-    font-family: Rubik Mono One, sans-serif;
+    font-family: 'Rubik Mono One' , sans-serif;
 }
 .product-info {
     font-size: 80%;
@@ -1041,20 +1139,19 @@ dl dd {
 
 
 
-
 /******************** Admin Access *******************/
+.is-active-admin {
+    color: #000814;
+    background: linear-gradient(to bottom right, #5de0e6, #004aad);
+}
 .header-space {
     margin-top: 13vh;
-}
-.admin-access-row {
-    
 }
 /* Admin Access Menu */
 .admin-access-menu ul {
     list-style-type: none;
     padding: 0;
 }
-
 .admin-access-menu li {
     padding: 8px;
     margin: 5px;
@@ -1069,11 +1166,26 @@ dl dd {
 }
 #admin-menu {
     width: 80%;
-    display: flex; 
-    justify-content: space-around; 
     padding-left: 0; 
     list-style: none; 
-    margin: 0; 
+    margin: 0;
+}
+@media (min-width: 992px) { 
+    #admin-menu {
+        display: flex; 
+        justify-content: space-around;
+    }
+#admin-menu > a:first-child > li {
+    border-top-left-radius: 10px; 
+    border-bottom-left-radius: 10px;
+}
+#admin-menu > a:last-child > li {
+    border-top-right-radius: 10px; 
+    border-bottom-right-radius: 10px;
+}
+}
+#admin-menu a {
+    padding:5px;
 }
 .admin-access-menu li:hover {
     transition: color 0.2s ease-in-out;
@@ -1082,17 +1194,7 @@ dl dd {
     color: #000814;
     background: linear-gradient(to bottom right, #5de0e6, #004aad);
 }
-/* Border-Radius für das erste li-Element (links) */
-#admin-menu .menu-item:first-child {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-
-/* Border-Radius für das letzte li-Element (rechts) */
-#admin-menu .menu-item:last-child {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
+/* Admin Access Subscription */
 .sub-details {
     height: 240px;
     overflow: hidden;
@@ -1100,6 +1202,7 @@ dl dd {
 .sub-plan-admin {
     min-width:200px;
 }
+/* Admin Access banner */
 .admin-banner {
     position: fixed; 
     top: 10%; 
@@ -1113,10 +1216,7 @@ dl dd {
     font-size: 1.1em; 
     z-index:3;
 }
-.is-active {
-    color: #000814;
-    background: linear-gradient(to bottom right, #5de0e6, #004aad);
-}
+/* Admin Access Dropdown Menu */
 .dropdown-menu {
     background-color:#000814;
 }
@@ -1130,8 +1230,46 @@ dl dd {
 .dropdown-menu a{
     transition: color 0.2s ease-in-out;
 }
+/* Admin Access Insight */
+.overlay-admin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    z-index: 1; 
+}
+.z-index-2 {
+    position: relative;
+    z-index: 2;
+}
+.insight-background-image { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    background-size: cover; 
+    background-position: center; 
+    z-index: 1;
+}
 
 
+
+
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.loading-text {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
 
 
 
@@ -1243,8 +1381,16 @@ dl dd {
         align-items: center;
     }
 }
+/* Bootstrap xl */
+@media (max-width: 1200px) {
+    .footer-element-container {
+        min-height: 40vh;
+        padding: 15px;
+    }
+}
 @media (min-width: 1200px) {
     .container{
-      max-width: 1300px;
+      max-width: 1500px;
     }
+
 }

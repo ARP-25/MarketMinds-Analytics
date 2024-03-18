@@ -17,7 +17,7 @@ import logging
 from dotenv import load_dotenv, dotenv_values
 load_dotenv()
 
-
+SECRET_KEY='secret_123'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -88,7 +88,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
     'storages',
-    'ckeditor',
 ]
 
 MIDDLEWARE = [

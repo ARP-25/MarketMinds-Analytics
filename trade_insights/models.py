@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.text import slugify
-from ckeditor.fields import RichTextField
 from profiles.models import UserProfile  
 from subscription.models import SubscriptionPlan
 
@@ -21,7 +20,7 @@ class Insight(models.Model):
         super(Insight, self).save(*args, **kwargs)
 
     release_date = models.DateField()
-    content = RichTextField()
+    content = models.TextField()
     category = models.ForeignKey(SubscriptionPlan, on_delete=models.SET_DEFAULT, default=DEFAULT_SUBSCRIPTION_PLAN_ID, related_name='insights')
     short_description = models.TextField()
     author = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, related_name='authored_insights')
