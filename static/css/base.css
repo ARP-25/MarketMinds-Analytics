@@ -604,6 +604,7 @@ dl dd {
     min-width: 150px;
     height: 38px;
     border-radius: 19px!important;
+    background: linear-gradient(to bottom right, #5de0e6, #004aad)!important;
 }
 .btn-mailchimp:hover {
     background: linear-gradient(to bottom right, #5de0e6, #004aad);

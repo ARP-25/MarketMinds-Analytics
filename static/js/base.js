@@ -1,23 +1,28 @@
 $(document).ready(function () {
 
-    // Dropdown Menu for Profil on click
+    
+    // Dropdown Menu for Profil displaying functionality
     $("#dropdownMenu").click(function (event) {
         event.stopPropagation();
-        $("#myDropdown").toggleClass("show");
+        $("#myDropdown").fadeToggle(300); 
     });
+
     $("#dropdownMenu").mouseenter(function (event) {
         event.stopPropagation();
-        $("#myDropdown").toggleClass("show");
-        $("#myDropdownBag").removeClass("show");
+        $("#myDropdown").fadeIn(300); 
+        $("#myDropdownBag").fadeOut(300); 
     });
+
     $("#myDropdown").mouseleave(function (event) {
-        $("#myDropdown").removeClass("show");
+        $("#myDropdown").fadeOut(300); 
     });
+
     $(document).on("click", function (event) {
         if (!$(event.target).closest("#dropdownMenu").length && !$(event.target).closest("#myDropdown").length) {
-            $("#myDropdown").removeClass("show");
+            $("#myDropdown").fadeOut(300); 
         }
     });
+
 
 
     // Showing miniature shopping bag only when badge > 0 (badge is derived from bag_items count)
