@@ -8,7 +8,7 @@ from subscription.models import SubscriptionPlan
 def trade_insights(request):
     ms_insights = Insight.objects.filter(stage='MS')
     ss_insights = Insight.objects.filter(stage='SS')
-    sp = SubscriptionPlan.objects.all()
+    sp = SubscriptionPlan.objects.filter(staged=True)
     context = {
         'ms_insights': ms_insights,
         'ss_insights': ss_insights,
