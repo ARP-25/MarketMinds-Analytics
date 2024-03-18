@@ -318,6 +318,9 @@ a:hover {
 .fb-mailchimp {
     padding: 40px 0 40px;
 }
+.fb-mailchimp i:hover{
+    color:#00b4d8!important;
+}
 
 .white-line-small {
     height: 3px;
@@ -600,6 +603,11 @@ dl dd {
 .btn-mailchimp {
     min-width: 150px;
     height: 38px;
+    border-radius: 19px!important;
+}
+.btn-mailchimp:hover {
+    background: linear-gradient(to bottom right, #5de0e6, #004aad);
+    color: whitesmoke!important;
 }
 
 .button-62 {
@@ -633,7 +641,12 @@ dl dd {
     box-shadow: 0 0 .25rem rgba(202, 201, 198, 0.5), -.125rem -.125rem 1rem rgba(204, 203, 199, 0.5), .125rem .125rem 1rem rgba(204, 203, 199, 0.5);
     color: whitesmoke;
 }
-
+a.button-62 {
+    color:#000814!important;
+}
+a.button-62:hover {
+    color:whitesmoke!important;
+}
 .btn-start {
     padding: 0px 70px 0px 70px;
     color: #0d1b2a;
@@ -1229,6 +1242,10 @@ dl dd {
 }
 .dropdown-menu a{
     transition: color 0.2s ease-in-out;
+}
+.dropdown-content a:hover {
+    color: #000814!important;
+    background: linear-gradient(to bottom right, #5de0e6, #004aad);
 }
 /* Admin Access Insight */
 .overlay-admin {

@@ -16,7 +16,6 @@ django-crispy-forms==2.1
 django-js-asset==2.2.0
 django-storages==1.14.2
 django-summernote==0.8.20.0
-django-tinymce==3.7.1
 filelock==3.13.1
 gunicorn==21.2.0
 idna==3.6
