@@ -28,7 +28,7 @@ X_FRAME_OPTIONS = 'ALLOW-FROM https://ui.dev/amiresponsive'
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'p@ei#69*b*zz3u4yie-$()@cy^l(+x9&@6ypx+r0lm(3%_9hr7'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

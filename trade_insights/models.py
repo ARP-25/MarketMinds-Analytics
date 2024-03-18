@@ -4,6 +4,7 @@ from ckeditor.fields import RichTextField
 from profiles.models import UserProfile  
 from subscription.models import SubscriptionPlan
 
+
 # Used as Backup in Case SubscriptionPlan with associated Insight got deleted
 # So template wont try to render a Null Field when SubscriptionPlan is deleted
 DEFAULT_SUBSCRIPTION_PLAN_ID = 39

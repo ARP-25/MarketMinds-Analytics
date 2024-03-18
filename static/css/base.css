@@ -304,7 +304,11 @@ a:hover {
 
     margin-bottom: 50px;
 }
-
+/* Allauth */
+.container-allauth-templates{
+    margin-top: 30vh;
+    margin-bottom: 20vh;
+}
 
 /* FB Mailchimp Section */
 .container-mailchimp{
@@ -787,6 +791,9 @@ dl dd {
 }
 
 /* Footer */
+.footer-container {
+    margin-top:5vh;
+}
 .text-highlight {
     color: #00b4d8;
 }
