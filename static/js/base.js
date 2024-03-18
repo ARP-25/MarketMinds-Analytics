@@ -1,29 +1,32 @@
 $(document).ready(function () {
-
-    
+ 
     // Dropdown Menu for Profil displaying functionality
+    let canFadeOut = true;
     $("#dropdownMenu").click(function (event) {
         event.stopPropagation();
         $("#myDropdown").fadeToggle(300); 
     });
-
     $("#dropdownMenu").mouseenter(function (event) {
         event.stopPropagation();
-        $("#myDropdown").fadeIn(300); 
-        $("#myDropdownBag").fadeOut(300); 
+        $("#myDropdown").stop(false, true).fadeIn(300); 
+        $("#myDropdownBag").stop(false, true).fadeOut(300); 
+        canFadeOut = false;
+        setTimeout(function() {
+            canFadeOut = true;
+        }, 300);
     });
-
     $("#myDropdown").mouseleave(function (event) {
-        $("#myDropdown").fadeOut(300); 
-    });
-
-    $(document).on("click", function (event) {
-        if (!$(event.target).closest("#dropdownMenu").length && !$(event.target).closest("#myDropdown").length) {
-            $("#myDropdown").fadeOut(300); 
+        if (canFadeOut) {
+            $("#myDropdown").stop(false, true).fadeOut(300); 
         }
     });
-
-
+    $(document).on("click", function (event) {
+        if (!$(event.target).closest("#dropdownMenu").length && !$(event.target).closest("#myDropdown").length) {
+            if (canFadeOut) {
+                $("#myDropdown").stop(false, true).fadeOut(300); 
+            }
+        }
+    });
 
     // Showing miniature shopping bag only when badge > 0 (badge is derived from bag_items count)
     if ($('span.badge').length > 0) {
@@ -42,17 +45,13 @@ $(document).ready(function () {
         }
     });
 
-
      // FAQ toggling answers
     $('.faq-question').click(function(){
-        // Togglen on click 
         $(this).next('.faq-answer').slideToggle();
         $(this).find('i').toggleClass('fa-angle-down fa-angle-up');
-        // Schließen der anderen Elemente und ändern von fa logo
         $('.faq-question').not(this).next('.faq-answer:visible').slideUp();
         $('.faq-question').not(this).find('i.fa-angle-up').removeClass('fa-angle-up').addClass('fa-angle-down');
     });
-
 
     // Footer Switch color of title on hover
     $('.footer-element-container').hover(
@@ -63,7 +62,6 @@ $(document).ready(function () {
             $(this).find('.text-highlight:first').addClass('text-secondary-custom').removeClass('text-highlight');
         }
     );
-
 
     // Hover color Effekt für Developed By Footer
     $('.footer-links').hover(
@@ -77,7 +75,7 @@ $(document).ready(function () {
         }
     );
 
-    // Skript um Footer immer am ende vom Viewport anzuheften
+    // Skript um Footer immer am ende vom Viewport anzuheften egal wie viel Content vorhanden ist
     function adjustFooter() {
         var bodyHeight = $('body').outerHeight();
         var windowHeight = $(window).height();
