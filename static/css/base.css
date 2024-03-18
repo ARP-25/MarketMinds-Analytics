@@ -126,7 +126,7 @@ body {
 }
 
 a {
-    color: inherit;
+    color: whitesmoke!important;
     text-decoration: none;
 }
 
@@ -954,6 +954,16 @@ dl dd {
     backdrop-filter: blur(10px);
     display:inline-block;
 }
+.category-small {
+    font-size: 85%;
+    height: 25px;
+    min-width: 85px;
+    border: 1px solid white;
+    border-radius:12px;
+    backdrop-filter: blur(10px);
+    display:inline-block;
+}
+
 .category-ss {
     height: 30px;
     width: 100px;
@@ -1373,7 +1383,7 @@ dl dd {
 }
 @media (min-width: 1200px) {
     .container{
-      max-width: 1300px;
+      max-width: 1500px;
     }
 
 }

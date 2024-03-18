@@ -6,7 +6,7 @@ from subscription.models import SubscriptionPlan
 
 # Create your views here.
 def trade_insights(request):
-    ms_insights = Insight.objects.filter(stage='MS')
+    ms_insights = Insight.objects.filter(stage='MS').order_by('-release_date')[:4]
     ss_insights = Insight.objects.filter(stage='SS')
     sp = SubscriptionPlan.objects.filter(staged=True)
     context = {

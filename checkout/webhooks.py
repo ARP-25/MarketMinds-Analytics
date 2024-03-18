@@ -1,3 +1,4 @@
+from decimal import Decimal
 import logging
 from django.utils import timezone
 from datetime import datetime
@@ -7,15 +8,16 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from .models import ActiveSubscription
+from profiles.models import UserProfile
 from subscription.models import SubscriptionPlan
 
 
 import stripe
 
-#import logging
+import logging
 
 # Get an instance of a logger
-#logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 @csrf_exempt
@@ -57,25 +59,26 @@ def stripe_webhook(request):
         )
     except ValueError as e:
         #log
-        #logger.error(f"Webhook error: Invalid payload - {e}")
+        logger.error(f"Webhook error: Invalid payload - {e}")
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
         #log
-        #logger.error(f"Webhook error: Invalid signature - {e}")
+        logger.error(f"Webhook error: Invalid signature - {e}")
         return HttpResponse(status=400)
 
     #log
-    #logger.debug(f"Received Stripe webhook event: {event['type']}")
+    logger.debug(f"Received Stripe webhook event: {event['type']}")
 
     event_handlers = {
         'setup_intent.created': handle_setup_intent_created,
         'price.deleted': handle_price_deleted,
+        'customer.subscription.created': handle_subscription_created,
         'customer.subscription.updated': handle_subscription_updated,
     }
 
     handler = event_handlers.get(event['type'], handle_unexpected_event)
     response = handler(event)
-    return response
+    return response if response else HttpResponse(status=200)
 
 
 def handle_price_created(event):
@@ -174,6 +177,43 @@ def handle_price_deleted(event):
     return HttpResponse(status=200)
 
 
+def handle_subscription_created(event):
+    """
+    Handles the 'customer.subscription.created' event from Stripe.
+    """
+    subscription = event['data']['object']
+    user = get_user_from_stripe_customer_id(subscription['customer'])
+    price_id = subscription["items"]["data"][0]["price"]["id"]
+    plan_stripe_id = subscription['plan']['id']
+
+    try:
+        price_details = stripe.Price.retrieve(price_id)
+        monthly_cost = Decimal(price_details["unit_amount"]) / 100
+        subscription_plan = SubscriptionPlan.objects.get(stripe_price_id=plan_stripe_id)       
+        new_active_subscription = ActiveSubscription.objects.create(
+            user=user,
+            subscription_plan=subscription_plan,  
+            stripe_subscription_id=subscription['id'],
+            status=subscription['status'],
+            current_period_end=timezone.make_aware(
+                datetime.fromtimestamp(subscription['current_period_end'])
+            ),
+            renewal_date=timezone.make_aware(
+                datetime.fromtimestamp(subscription['current_period_end'])
+            ),
+            monthly_cost=monthly_cost
+        )
+        new_active_subscription.save()
+
+    except SubscriptionPlan.DoesNotExist:
+        logger.error(f"No SubscriptionPlan found with Stripe Price ID {plan_stripe_id}")
+    except Exception as e:
+        logger.error(f"Error in handling subscription_created event: {e}")
+
+    return HttpResponse(status=200)
+
+
+
 def handle_subscription_updated(event):
     """
     Handles the 'customer.subscription.updated' event from Stripe.
@@ -189,15 +229,18 @@ def handle_subscription_updated(event):
     try:
         active_subscription = ActiveSubscription.objects.get(stripe_subscription_id=subscription['id'])
         active_subscription.status = subscription['status']
-        active_subscription.renewal_date = timezone.make_aware(
+        active_subscription.current_period_end = timezone.make_aware(
             datetime.fromtimestamp(subscription['current_period_end'])
         )
         if subscription['cancel_at_period_end']:
-            active_subscription.end_date = timezone.make_aware(
+            active_subscription.canceled_at = timezone.make_aware(
                 datetime.fromtimestamp(subscription['canceled_at'])
             )
+            active_subscription.renewal_date = None                        
+            active_subscription.status = 'pending cancellation'
         else:
-            active_subscription.end_date = None
+            active_subscription.renewal_date = active_subscription.current_period_end
+            active_subscription.canceled_at = None
         active_subscription.save()
         print(f"Updated subscription: {active_subscription}")
     except ActiveSubscription.DoesNotExist:
@@ -213,3 +256,15 @@ def handle_unexpected_event(event):
 def handle_setup_intent_created(event):
     # Your code to handle the 'setup_intent.created' event
     return HttpResponse(status=200)
+
+
+def get_user_from_stripe_customer_id(customer_id):
+    """
+    Helper function to get the user associated with a Stripe customer ID.
+    """
+    try:
+        user_profile = UserProfile.objects.get(stripe_customer_id=customer_id)
+        return user_profile.user  
+    except UserProfile.DoesNotExist:
+        logger.error(f"No UserProfile found for Stripe Customer ID {customer_id}")
+        return None

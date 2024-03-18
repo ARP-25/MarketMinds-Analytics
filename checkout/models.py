@@ -15,13 +15,14 @@ class ActiveSubscription(models.Model):
     subscription_plan = models.ForeignKey(SubscriptionPlan, on_delete=models.CASCADE)
     stripe_subscription_id = models.CharField(max_length=200, blank=True, null=True)
     start_date = models.DateTimeField(auto_now_add=True)
+    current_period_end = models.DateTimeField(null=True, blank=True)
     renewal_date = models.DateTimeField(null=True, blank=True)
-    end_date = models.DateTimeField(null=True, blank=True) 
+    canceled_at = models.DateTimeField(null=True, blank=True) 
     status = models.CharField(max_length=50, default='active')
     created_at = models.DateTimeField(auto_now_add=True)
     billing_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     monthly_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-
+    """
     def save(self, *args, **kwargs):
         if not self.start_date:
             self.start_date = timezone.now()
@@ -31,12 +32,12 @@ class ActiveSubscription(models.Model):
             self.monthly_cost = self.subscription_plan.price
 
         super().save(*args, **kwargs)
-
+    """
     def cancel_subscription(self):
         """
-        Cancel subscription via Stripe API and update renewal_date and end_date.
+        Cancel subscription via Stripe API and update renewal_date and canceled_at.
         """
-        if self.end_date is not None:
+        if self.canceled_at is not None:
             raise ValidationError("Subscription cannot be cancelled because it is already cancelled.")
 
         try:
@@ -46,9 +47,15 @@ class ActiveSubscription(models.Model):
                 self.stripe_subscription_id,
                 cancel_at_period_end=True
             )
-            self.end_date = timezone.make_aware(
+            self.current_period_end = timezone.make_aware(
                 datetime.datetime.fromtimestamp(subscription.current_period_end)
             )
+            self.canceled_at = timezone.make_aware(
+                datetime.datetime.fromtimestamp(subscription.current_period_end)
+            )
+
+            print(f"{subscription.current_period_end}")
+
             self.renewal_date = None  
             self.status = 'pending cancellation'
             self.save()

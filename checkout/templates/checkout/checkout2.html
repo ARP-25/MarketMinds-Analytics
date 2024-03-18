@@ -71,7 +71,7 @@
                     <!-- Login Required Notification -->
                     {% if not user.is_authenticated %}
                         <div class="pb-2 pt-2">                       
-                            <a class="text-info" href="{% url 'account_signup' %}" aria-label="Sign Up">Create an
+                            <a class="text-info" href="{% url 'account_signup' %}" style="color:blue" aria-label="Sign Up">Create an
                                 account</a> or
                             <a class="text-info" href="{% url 'account_login' %}" aria-label="Login">login</a> to
                             proceed with checkout

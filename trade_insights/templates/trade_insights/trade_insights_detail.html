@@ -35,15 +35,19 @@
                     <div class="col-xl-2 col-12 insight-detail-leftside mt-2">
                         <p class="cover-text-small">Similar Insights</p>
                         {% for insight in similiar_insights %}
-                        <a href="{% url 'trade_insights_detail' slug=insight.slug %}">  
-                            <div class="col-12 ss-insight-txt-small dark-overlay d-flex justify-content-end flex-column">                                   
-                                <span class="secondstage-release_date pl-2 d-block pr-2">{{ insight.release_date }}</span>
-                                <span class="secondstage-title pl-2 d-block bold-text pr-2 pb-1">{{ insight.title }}</span>
-                                <div class="category-ss-small text-small d-flex justify-content-center align-items-center">
-                                    <i class="fa-solid fa-square-poll-vertical pr-2"></i>{{ insight.category }}
-                                </div>                                
+                        <a href="{% url 'trade_insights_detail' slug=insight.slug %}">
+                            <div class="col-12 ss-insight-img dark-overlay d-flex justify-content-end flex-column">
+                                <div class="secondstage-insight d-flex justify-content-end flex-column">
+                                    <div class="background-image" style="background-image: url('{{ insight.cover_image.url }}');"></div>
+                                </div>                      
+                                <span class="secondstage-title pl-2 d-block bold-text pr-2">{{ insight.title }}</span>
+                                <div class="d-flex justify-content-between align-items-center pl-2 pb-2 pr-2">
+                                    <div class="category-small text-center">
+                                        <i class="fa-solid fa-square-poll-vertical pr-2"></i>{{ insight.category }}
+                                    </div>
+                                </div>  
                             </div>
-                        </a> 
+                            </a>
                         {% endfor %}
                     </div>
 

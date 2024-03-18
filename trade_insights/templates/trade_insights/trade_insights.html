@@ -49,9 +49,15 @@
                         <span class="secondstage-release_date pl-2 d-block pr-2">{{ insight.release_date }}</span>
                         <span class="secondstage-title pl-2 d-block bold-text pr-2">{{ insight.title }}</span>
                         <span class="secondstage-short_description pb-2 pl-2 pt-1 pr-2">{{ insight.short_description }}</span>
-                        <div class="read-more pl-2 pb-2">
-                            read more<i class="fa-brands fa-readme pl-2"></i>
-                        </div>
+                        <div class="hr d-block m-2"></div>
+                        <div class="d-flex justify-content-between align-items-center pl-2 pb-2 pr-2">
+                            <div class="category text-center">
+                                <i class="fa-solid fa-square-poll-vertical pr-2"></i>{{ insight.category }}
+                            </div>
+                            <div class="read-more ellipsis">
+                                read more<i class="fa-brands fa-readme pl-2"></i>
+                            </div>
+                        </div>  
                     </div>
                     </a>
                     {% else %}
@@ -86,9 +92,15 @@
                     <span class="secondstage-release_date pl-2 d-block pr-2">{{ insight.release_date }}</span>
                     <span class="secondstage-title pl-2 d-block bold-text pr-2">{{ insight.title }}</span>
                     <span class="secondstage-short_description pb-2 pl-2 pt-1 pr-2">{{ insight.short_description }}</span>
-                    <div class="read-more pl-2 pb-2">
-                        read more<i class="fa-brands fa-readme pl-2"></i>
-                    </div>
+                    <div class="hr d-block m-2"></div>
+                    <div class="d-flex justify-content-between align-items-center pl-2 pb-2 pr-2">
+                        <div class="category text-center">
+                            <i class="fa-solid fa-square-poll-vertical pr-2"></i>{{ insight.category }}
+                        </div>
+                        <div class="read-more ellipsis">
+                            read more<i class="fa-brands fa-readme pl-2"></i>
+                        </div>
+                    </div>  
                 </div>
                 </a>
                 {% else %}
