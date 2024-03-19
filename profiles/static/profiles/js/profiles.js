@@ -1,7 +1,10 @@
 // Dynamically changes the Action Attribute of .confirmCancleForm in Confirm Cancelation Modal
-$('.cancelSubscriptionBtn').on('click', function() {
+// Attach event listener to the icon/button with the class '.toggle-icon'
+$('.icon-trigger').on('click', function() {
     var subscriptionId = $(this).data('subscription-id');
-    var dynamicUrl = "cancel-subscription/"+subscriptionId+"/";
+    console.log(subscriptionId + " is the subscription id");
+    var dynamicUrl = "cancel-subscription/" + subscriptionId + "/";
     $('.confirmCancleForm').attr('action', dynamicUrl);
 });
+
 

@@ -6,42 +6,103 @@
 {% endblock %}
 
 {% block content %}
-<div class="container container-profile-menu pt-5 pb-5 mt-5 mb-5">
-    <h2 class="m-3 text-center p-5">Profile Information</h2>
+<div class="container responsive-space menu-element">
     <div class="row">
-        <div class="offset-md-0 col-md-5 col-10 offset-1">
-            <h1>Your Profile</h1>
+        <div class="col-12">
+            <h1>Profile Information</h1>
             <!-- Profile Data -->
-            <div class="p-3 menu-element-secondary">
+            <div class="mb-4">
                 <dl>
-                    <dt>Username:</dt>
-                    <dd>{{ user.username }}</dd>
-                    <dt>Email:</dt>
-                    <dd>{{ user_profile.email }}</dd>
-                    <a href="{% url 'edit_profile' %}" style="color:inherit;text-decoration: none;"
-                        aria-label="Edit Profile"><button class="button-62 btn-edit col-8 offset-2 mt-4"
-                            aria-label="Edit Profile"><i class="fa-solid fa-pen-to-square pr-2"></i>Edit
-                            Profile</button></a>
+                    <div class="menu-element-third m-2">
+                        <dt>Username:</dt>
+                        <dd class="text-secondary-custom">{{ user.username }}</dd>
+                    </div>
+                    <div class="menu-element-third m-2">
+                        <dt>Email:</dt>
+                        <dd class="text-secondary-custom">{{ user_profile.email }}</dd>
+                    </div>
+                    <div class="text-center">
+                        <a href="{% url 'edit_profile' %}" style="color:inherit; text-decoration: none;" aria-label="Edit Profile">
+                            <button class="button-62 btn-edit mt-2" aria-label="Edit Profile">
+                                <i class="fa-solid fa-pen-to-square pr-2"></i>
+                                Edit Profile Information
+                            </button>
+                        </a>
+                    </div>
                 </dl>
             </div>
         </div>
 
-        <div class="offset-md-2 col-md-5 col-10 mt-4 mt-md-0 offset-1">
+        <div class="col-12">
             <h1>Active Subscriptions</h1>
-            <!-- Active Subscription Data -->
             {% for subscription in active_subscriptions %}
-            <div class="row p-3">
-                <div class="col-12 menu-element-secondary">
-                    <p style="font-family: Rubik Mono One;">{{ subscription.subscription_plan.title }}</p>
-                    <p>Stripe Subscription ID: {{ subscription.stripe_subscription_id }}</p>
-                    <p>Start Date: {{ subscription.start_date }}</p>
-                    <p>Renewal Date: {{ subscription.renewal_date }}</p>
-                    <p>End Date: {{ subscription.end_date }}</p>
-                    <button class="button-62 cancelSubscriptionBtn col-8 offset-2" data-toggle="modal"
-                        data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}">
-                        <i class="fa-solid fa-ban pr-2"></i>
-                        Unsubscribe
-                    </button>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="menu-element-third m-2">
+                        <!-- Background Image Div -->
+                        <div class="background-image" 
+                            style="background-image: url('{{ subscription.subscription_plan.image.url }}');
+                                   background-size: cover;
+                                   background-position: center;
+                                   height: 200px;
+                                   width: 100%;
+                                   border-radius: 3px;
+                                   margin-top: 3px;
+                                   margin-bottom: 3px;">
+                        </div>
+                        <dl>
+                            <div class="pt-3 pl-2 pr-2" style="font-family: Rubik Mono One; font-size: 120%;">{{ subscription.subscription_plan.title }}</div>
+                            <div class="pt-2 pl-4 pr-4">
+                                <div class="menu-element-fourth m-2">
+                                    <dt>Stripe Subscription ID:</dt>
+                                    <dd class="text-secondary-custom text-wrap">{{ subscription.stripe_subscription_id }}</dd>
+                                </div>
+                                <div class="menu-element-fourth m-2">
+                                    <dt>Start Date:</dt>
+                                    <dd class="text-secondary-custom">{{ subscription.start_date }}</dd>
+                                </div>
+                                {% if subscription.renewal_date %}
+                                <div class="menu-element-fourth m-2">
+                                    <dt>Renewal Date:</dt>
+                                    <dd class="text-secondary-custom">{{ subscription.renewal_date }}</dd>
+                                </div>
+                                {% endif %}
+                                {% if subscription.canceled_at %}
+                                <div class="menu-element-fourth m-2">
+                                    <dt>Current Period End:</dt>
+                                    <dd class="text-secondary-custom">{{ subscription.current_period_end }}</dd>
+                                </div>
+                                <div class="menu-element-fourth m-2 d-flex justify-content-between">
+                                    <div class="">
+                                        <dt>Status</dt>
+                                        <dd class="text-info">{{ subscription.status }}</dd>
+                                    </div>
+                                    <div class="display-200">
+                                        <button class="icon-trigger-activate" data-toggle="modal"
+                                        data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}"
+                                        aria-label="Toggle Subscription">
+                                        <i class="fa-solid fa-toggle-off text-info"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div class="menu-element-fourth m-2 d-flex justify-content-between">
+                                    <div class="">
+                                        <dt>Status</dt>
+                                        <dd class="text-success">{{ subscription.status }}</dd>
+                                    </div>
+                                    <div class="display-200">
+                                        <button class="icon-trigger" data-toggle="modal"
+                                        data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}"
+                                        aria-label="Toggle Subscription">
+                                            <i class="fa-solid fa-toggle-on text-success"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </dl>
+                    </div>
                 </div>
             </div>
             {% endfor %}

@@ -147,7 +147,10 @@ a:hover {
     animation: pulse 1s infinite;
 }
 
-
+dd {
+    margin-left: 0;
+    margin-bottom: 0!important;
+}
 .nav-p {
     color: #fff;
     margin-bottom: -5px;
@@ -570,9 +573,26 @@ li.page-item .page-link:hover {
 
 
 /* Profiles */
+dl div.menu-element-third {
+    
+}
 .container-profile-menu {
    
 }
+.text-ellipsis {
+    overflow: hidden; /* Hide overflow text */
+    white-space: nowrap; /* Keep text in a single line */
+    text-overflow: ellipsis; /* Add ellipsis to overflow text */
+    max-width: 100%; /* Set a max-width to trigger overflow */
+}
+/* Expanded text */
+/* Expanded text */
+.expanded-text {
+    white-space: normal; /* Allows text wrapping */
+    overflow: visible;
+    text-overflow: clip;
+}
+
 .menu-element {
     border-radius: 6px;
     padding: 30px;
@@ -585,8 +605,37 @@ li.page-item .page-link:hover {
     background: #1b4965;
 }
 
-dl dd {
-    color: #caf0f8;
+.menu-element-third {
+    border-radius: 4px;
+    padding: 0 8px 0 8px;
+    background: #000814;
+    padding: 4px 8px 4px 8px;
+}
+.menu-element-fourth {
+    border-radius: 4px;
+    padding: 0 8px 0 8px;
+    background: #0d1b2a;
+    padding: 4px 8px 4px 8px;
+    height: auto;
+}
+.text-wrap {
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+}
+.display-200 {
+    font-size: 200%;
+}
+.icon-trigger, .icon-trigger-activate {
+    background: none;
+    color: whitesmoke;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.icon-trigger:focus, .icon-trigger-activate:focus {
+    outline: none;
 }
 
 
@@ -656,7 +705,7 @@ a.button-62:hover {
     border-radius: 5px;
     font-size: 90%;
     color: #001d3d;
-    min-width: 120px;
+    width:200px;
 }
 
 .btn-delete {
@@ -689,6 +738,7 @@ a.button-62:hover {
     background: linear-gradient(to bottom right, #adb5bd, #EE0000);
     border-radius: 5px;
     font-size: 90%;
+    width:120px;
 }
 
 .btn.custom-padding {
@@ -749,7 +799,7 @@ a.button-62:hover {
 }
 
 .modal-content {
-    background-color: #1b263b;
+    background-color: #000814;
     border: 1px solid aliceblue;
 }
 
@@ -760,7 +810,7 @@ a.button-62:hover {
 
 .modal-footer,
 .modal-body {
-    background: #001d3d;
+    background: #000814;
 }
 
 
@@ -1340,6 +1390,14 @@ a.button-62:hover {
 
     h5 {
         font-size: 100%;
+    }
+}
+/* Bootstrap sm */
+@media screen and (max-width: 576px) {
+    .container {
+        width: auto;
+        margin-left: 5vw!important;
+        margin-right: 5vw!important;
     }
 }
 /* Bootstrap -lg */

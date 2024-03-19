@@ -6,8 +6,8 @@
 {% endblock %}
 
 {% block content %}
-<div class="container pt-5 pb- mt-5">
-    <div class="col-6 offset-3">
+<div class="container responsive-space">
+    <div class="col-12">
         <h2 class="logo-font m-3 text-center p-5">Profile Information</h2>
         <div class="col-12 menu-element">
             {% load crispy_forms_tags %}
@@ -15,10 +15,11 @@
                 {% csrf_token %}
                 {{ form|crispy }}
                 <div class="text-center pt-4">
-                    <button type="submit" class="button-62 btn-edit col-5 mx-auto" aria-label="Save">Save <i
-                            class="fa-solid fa-download pl-2"></i></button>
-                    <a href="{% url 'view_profile' %}" class="pl-1 mx-auto" aria-label="Return">
-                        <span class="button-62 btn-edit col-5">
+                    
+                    <button type="submit" class="button-62 btn-edit mx-auto mb-2 d-block" aria-label="Save"><i
+                        class="fa-solid fa-download pr-2"></i>Save </button>
+                    <a href="{% url 'view_profile' %}" class="mx-auto d-block" aria-label="Return">
+                        <span class="button-62 btn-edit">
                             <i class="fa-solid fa-arrow-left pr-2"></i> Return
                         </span>
                     </a>
