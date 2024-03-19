@@ -19,7 +19,7 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-
+# Webhook Handling
 @csrf_exempt
 def stripe_webhook(request):
     """
@@ -81,6 +81,7 @@ def stripe_webhook(request):
     return response if response else HttpResponse(status=200)
 
 
+# Subscription Plan Creation Handling
 def handle_price_created(event):
     """
     Handles the 'price.created' webhook event from Stripe. This function is invoked when a new price is created in Stripe.
@@ -136,6 +137,7 @@ def handle_price_created(event):
     return HttpResponse(status=200)
 
 
+# Subscription Plan Deletion Handling
 def handle_price_deleted(event):
     """
     Handles the 'price.deleted' event from Stripe webhooks.
@@ -177,6 +179,7 @@ def handle_price_deleted(event):
     return HttpResponse(status=200)
 
 
+# Subscribing to a Plan Handling
 def handle_subscription_created(event):
     """
     Handles the 'customer.subscription.created' event from Stripe.
@@ -213,7 +216,7 @@ def handle_subscription_created(event):
     return HttpResponse(status=200)
 
 
-
+# Renewal and Cancellation to a Plan Handling
 def handle_subscription_updated(event):
     """
     Handles the 'customer.subscription.updated' event from Stripe.
@@ -249,15 +252,18 @@ def handle_subscription_updated(event):
     return HttpResponse(status=200)
 
 
+# Default Event Handling
 def handle_unexpected_event(event):
     print(f"Unerwartetes Event erhalten: {event['type']}")
     return HttpResponse(status=200)
 
+
+# Not needed since it is implicitly handled  within stripe subscription process
 def handle_setup_intent_created(event):
-    # Your code to handle the 'setup_intent.created' event
+    
     return HttpResponse(status=200)
 
-
+# Helper Functions
 def get_user_from_stripe_customer_id(customer_id):
     """
     Helper function to get the user associated with a Stripe customer ID.

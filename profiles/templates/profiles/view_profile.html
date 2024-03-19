@@ -6,49 +6,18 @@
 {% endblock %}
 
 {% block content %}
-<div class="container pt-5">
+<div class="container container-profile-menu pt-5 pb-5 mt-5 mb-5">
     <h2 class="m-3 text-center p-5">Profile Information</h2>
     <div class="row">
-        <div class="offset-md-0 col-md-5 col-10 offset-1 menu-element">
+        <div class="offset-md-0 col-md-5 col-10 offset-1">
             <h1>Your Profile</h1>
+            <!-- Profile Data -->
             <div class="p-3 menu-element-secondary">
                 <dl>
                     <dt>Username:</dt>
                     <dd>{{ user.username }}</dd>
-
                     <dt>Email:</dt>
                     <dd>{{ user_profile.email }}</dd>
-
-                    <dt>Full Name:</dt>
-                    <dd>{{ user_profile.full_name }}</dd>
-
-                    <dt>Bio:</dt>
-                    <dd>{{ user_profile.bio }}</dd>
-
-                    <dt>Birth Date:</dt>
-                    <dd>{{ user_profile.birth_date }}</dd>
-
-                    <dt>Phone Number:</dt>
-                    <dd>{{ user_profile.phone_number }}</dd>
-
-                    <dt>Country:</dt>
-                    <dd>{{ user_profile.country }}</dd>
-
-                    <dt>Postcode:</dt>
-                    <dd>{{ user_profile.postcode }}</dd>
-
-                    <dt>Town/City:</dt>
-                    <dd>{{ user_profile.town_or_city }}</dd>
-
-                    <dt>Street Address 1:</dt>
-                    <dd>{{ user_profile.street_address1 }}</dd>
-
-                    <dt>Street Address 2:</dt>
-                    <dd>{{ user_profile.street_address2 }}</dd>
-
-                    <dt>County:</dt>
-                    <dd>{{ user_profile.county }}</dd>
-
                     <a href="{% url 'edit_profile' %}" style="color:inherit;text-decoration: none;"
                         aria-label="Edit Profile"><button class="button-62 btn-edit col-8 offset-2 mt-4"
                             aria-label="Edit Profile"><i class="fa-solid fa-pen-to-square pr-2"></i>Edit
@@ -57,8 +26,9 @@
             </div>
         </div>
 
-        <div class="offset-md-2 col-md-5 col-10 mt-4 mt-md-0 offset-1 menu-element">
+        <div class="offset-md-2 col-md-5 col-10 mt-4 mt-md-0 offset-1">
             <h1>Active Subscriptions</h1>
+            <!-- Active Subscription Data -->
             {% for subscription in active_subscriptions %}
             <div class="row p-3">
                 <div class="col-12 menu-element-secondary">
