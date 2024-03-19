@@ -146,7 +146,6 @@ a:hover {
     left: 15px;
     animation: pulse 1s infinite;
 }
-
 dd {
     margin-left: 0;
     margin-bottom: 0!important;
@@ -168,6 +167,9 @@ dd {
 .theme-color {
     color: #00b4d8;
 }
+.text-theme {
+    color: #00b4d8;
+}
 
 .bg-color-secondary {
     background-color: #0d1b2a;
@@ -176,17 +178,24 @@ dd {
 .contrast-grey {
     color: #adb5bd;
 }
-
 .orange-line {
     background: #fca311;
     height: 2px;
     margin: 10px;
 }
-
+/* Checkout */
+.already-subscribed a {
+    color: blue!important;
+}
 .container-bag-checkout {
     margin-top: 140px;
 }
-
+button a {
+    color: inherit!important;
+}
+button a:hover {
+    color: whitesmoke!important;
+}
 .bag-titles {
     font-family: 'Rubik Mono One', sans-serif;
     font-size: 130%;
@@ -407,7 +416,7 @@ dd {
     border: solid 3px #fca311;
 }
 
-.square-image {
+.square-image, .square-image-bag{
     width: 100%; 
     height: 150px; 
     overflow: hidden; 
@@ -415,7 +424,6 @@ dd {
     justify-content: center;
     align-items: center;
 }
-
 .square-image img {
     width: 100%; 
     height: 100%; 
@@ -424,8 +432,15 @@ dd {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
+.square-image-bag img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
+    border-radius: 4px;
+}
 .sub-title {
-    height: 70px;
+    
 }
 
 .sub-description {
@@ -448,15 +463,12 @@ dd {
     margin: 0;
     padding: 0;
 }
-
 .preview {
     transition: transform 0.4s ease-in-out;/
 }
-
 .preview:hover {
     transform: scale(1.04);
 }
-
 .col-10-x {
     width: 86%;
 }
@@ -466,22 +478,18 @@ dd {
 a.page-link {
     background-color: #343a40;
     color: white;
-
 }
-
 .page-link {
     border: none;
 }
-
 li.page-item.active .page-link {
-    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
-    color: black;
+    background: linear-gradient(to bottom right, #adb5bd, #00b4d8);
+    color: #000814;
 
 }
-
 li.page-item .page-link:hover {
-    background: linear-gradient(to bottom right, #adb5bd, #db9e02);
-    color: black;
+    background: linear-gradient(to bottom right, #adb5bd, #00b4d8);
+    color: #000814;
 }
 
 
@@ -490,7 +498,6 @@ li.page-item .page-link:hover {
     display: block;
     width: 35px;
     cursor: pointer;
-
     appearance: none;
     background: none;
     outline: none;
@@ -947,6 +954,10 @@ a.button-62:hover {
 /* Trade Insights General */
 .responsive-space {
     margin-top:20vh;
+    margin-bottom:15vh;
+}
+.responsive-space-15 {
+    margin-top:15vh;
     margin-bottom:15vh;
 }
 .tradingview-widget-container {
