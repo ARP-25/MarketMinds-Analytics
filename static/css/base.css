@@ -305,10 +305,8 @@ a:hover {
     margin-bottom: 50px;
 }
 /* Allauth */
-.container-allauth-templates{
-    margin-top: 30vh;
-    margin-bottom: 20vh;
-}
+
+
 
 /* FB Mailchimp Section */
 .container-mailchimp{
@@ -896,6 +894,10 @@ a.button-62:hover {
 
 /************************ Trade Insights *************************/
 /* Trade Insights General */
+.responsive-space {
+    margin-top:20vh;
+    margin-bottom:15vh;
+}
 .tradingview-widget-container {
     margin-top: 66px;
 }
