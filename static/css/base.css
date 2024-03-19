@@ -408,7 +408,7 @@ a:hover {
 
 .square-image {
     width: 100%; 
-    height: 100px; 
+    height: 150px; 
     overflow: hidden; 
     display: flex; 
     justify-content: center;
@@ -420,14 +420,16 @@ a:hover {
     height: 100%; 
     object-fit: cover; 
     display: block; 
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 .sub-title {
     height: 70px;
 }
 
 .sub-description {
-    min-height: 130px;
-}
+    min-height: 50px;
+  }
 
 .sub-price {
     height: 70px;
@@ -1210,7 +1212,7 @@ a.button-62:hover {
 }
 /* Admin Access Subscription */
 .sub-details {
-    height: 240px;
+    min-height: 240px;
     overflow: hidden;
 }
 .sub-plan-admin {
