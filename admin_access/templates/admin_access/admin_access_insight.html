@@ -2,7 +2,7 @@
 {% load static %}
 {% load custom_filters %}
 {% block content %}
-<div class="container header-space">
+<div class="container container-big header-space">
     <div class="row admin-access-row">
         <!-- Admin Access Banner -->
         <div class="admin-banner">
@@ -24,12 +24,12 @@
                 <h2 class="content-title pb-2">Trade Insights</h2>
                 <!-- Add Insight -->
                 <a class="a-inherit" href="{% url 'admin_access_insight_add' %}">
-                    <button type="submit" class="button-62 btn-edit mr-2" aria-label="Add Plan">Add Insight <i
+                    <button type="submit" class="button-62 btn-edit mr-sm-2 mb-1 ms-sm-0" aria-label="Add Plan">Add Insight <i
                             class="fa-solid fa-plus pl-2"></i></button>
                 </a>
                 <!-- Dropdown for Sorting -->
                 <div class="dropdown d-inline-block ">
-                    <button class="button-62 btn-edit w-100 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="button-62 btn-edit dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Sort Insights
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
