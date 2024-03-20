@@ -13,13 +13,21 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
-            <button type="submit" class="button-62 btn-edit col-8 offset-2" aria-label="Save"><i
-                    class="fa-solid fa-plus pr-2"></i> Add Subscription Plan</button>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="button-62 btn-edit" aria-label="Save">
+                    <i class="fa-solid fa-plus pr-2"></i> Add
+                </button>
+            </div>
         </form>
         <a href="{% url 'AdminAccessSubscription' %}">
-            <button class="button-62 btn-edit col-8 offset-2 mt-3" aria-label="Return"><i
-                    class="fa-solid fa-arrow-left pr-2"></i>
-                Return</button>
+            <div class="d-flex justify-content-center mt-3">
+                <a href="{% url 'AdminAccessSubscription' %}">
+                    <button class="button-62 btn-edit" aria-label="Return">
+                        <i class="fa-solid fa-arrow-left pr-2"></i>
+                        Return
+                    </button>
+                </a>
+            </div>
         </a>
     </div>
 </div>
