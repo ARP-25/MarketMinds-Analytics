@@ -9,12 +9,12 @@
             <i class="fa-solid fa-lock pr-2"></i>Admin Access
         </div>
         <!-- Admin Access Menu -->
-        <div class="col-12 admin-access-menu d-flex align-items-center justify-content-center">
-            <ul id="admin-menu" class="text-center">
-                <a href="{% url 'AdminAccessSubscription' %}" class="col-12 col-lg-3"><li class="menu-item is-active-admin" data-content="subscription-plans">Subscription Plans</li></a>
-                <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item " data-content="trade-insights">Trade Insights</li></a>
-                <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="special-offers">Special Offers</li></a>
-                <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="metrics">Platform Metrics</li></a>
+        <div class="col-12 admin-access-menu d-flex justify-content-center">
+            <ul id="admin-menu" class="d-flex justify-content-center">
+                <a href="{% url 'AdminAccessSubscription' %}" class=""><li class="menu-item is-active-admin" data-content="subscription-plans">Subscription Plans</li></a>
+                <a href="{% url 'AdminAccessInsight' %}" class=""><li class="menu-item " data-content="trade-insights">Trade Insights</li></a>
+               <!-- <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="special-offers">Special Offers</li></a>-->
+                <a href="{% url 'AdminAccessInsight' %}" class=""><li class="menu-item" data-content="metrics">Platform Metrics</li></a>
             </ul>                  
         </div>
 
@@ -56,9 +56,13 @@
                             <!-- SPlan IDs -->                            
                             <div class="col-12 col-md-8 d-flex flex-column justify-content-space-between">                              
                                 <div class="menu-element-third text-left ml-2 mr-2 mb-2">
+                                    <span class="d-block">Subscription Plan Title:</span>
+                                    <span class="text-secondary-custom d-block">{{ s.title }}</span>
+                                </div>
+                                <div class="menu-element-third text-left ml-2 mr-2 mb-2">
                                     <span class="d-block">Internal Plan ID:</span>
                                     <span class="text-secondary-custom d-block">{{ s.id }}</span>
-                                </div>
+                                </div>  
                                 <div class="menu-element-third text-left ml-2 mr-2 mt-auto">
                                     <span class="d-block">Stripe Price ID:</span>
                                     <span class="text-secondary-custom d-block">{{ s.stripe_price_id }}</span>
@@ -66,7 +70,7 @@
                             </div>
                             <!-- Btns -->
                             <div class="col-12 mt-2 mt-md-0 col-md-4 d-flex flex-column justify-content-space-between ">
-                                <div class="menu-element-third mr-2 ml-2">                                                         
+                                <div class="menu-element-third mr-2 ml-2 h-100 d-flex flex-column justify-content-space-between ">                                                         
                                     <form class="mt-2 mb-auto" method="GET" action="{% url 'admin_access_subscription_edit' subscription_id=s.id %}">
                                         {% csrf_token %}
                                         <button class="button-62 btn-edit" type="submit" aria-label="Edit">

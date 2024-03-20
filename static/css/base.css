@@ -1226,6 +1226,10 @@ a.button-62:hover {
     cursor: pointer;
     width: 100%;
 }
+li.menu-item {
+    width:200px;
+    text-align: center;
+}
 .admin-access-menu {
     color:whitesmoke;
     transition: color 0.2s ease-in-out;  
@@ -1475,3 +1479,31 @@ a.button-62:hover {
       max-width: 1500px!important;
     }
   }
+/* Default styles for larger screens */
+#admin-menu {
+    flex-direction: row; /* This makes items align in a row by default */
+}
+
+/* Media query for screens with a max width of 767px */
+/* Default styles for larger screens */
+#admin-menu {
+    flex-direction: row; /* Items align in a row by default */
+}
+
+/* Media query for screens with a max width of 767px */
+@media (max-width: 767px) {
+    #admin-menu {
+        flex-direction: column; 
+    }
+    #admin-menu a {
+        display: flex; 
+        justify-content: center;
+        width: 100%; 
+    }
+
+    .menu-item {
+        padding: 10px 0; 
+        text-align: center; 
+    }
+    
+}
