@@ -17,7 +17,7 @@ import stripe
 import logging
 
 # Get an instance of a logger
-logger = logging.getLogger(__name__)
+#logger = logging.getLogger(__name__)
 
 # Webhook
 @csrf_exempt
@@ -59,15 +59,15 @@ def stripe_webhook(request):
         )
     except ValueError as e:
         #log
-        logger.error(f"Webhook error: Invalid payload - {e}")
+        #logger.error(f"Webhook error: Invalid payload - {e}")
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
         #log
-        logger.error(f"Webhook error: Invalid signature - {e}")
+        #logger.error(f"Webhook error: Invalid signature - {e}")
         return HttpResponse(status=400)
 
     #log
-    logger.debug(f"Received Stripe webhook event: {event['type']}")
+    #logger.debug(f"Received Stripe webhook event: {event['type']}")
 
     event_handlers = {
         'setup_intent.created': handle_setup_intent_created,
@@ -211,9 +211,11 @@ def handle_subscription_created(event):
         new_active_subscription.save()
 
     except SubscriptionPlan.DoesNotExist:
-        logger.error(f"No SubscriptionPlan found with Stripe Price ID {plan_stripe_id}")
+        pass
+        #logger.error(f"No SubscriptionPlan found with Stripe Price ID {plan_stripe_id}")
     except Exception as e:
-        logger.error(f"Error in handling subscription_created event: {e}")
+        pass
+        #logger.error(f"Error in handling subscription_created event: {e}")
 
     return HttpResponse(status=200)
 
@@ -247,6 +249,7 @@ def handle_subscription_updated(event):
             active_subscription.renewal_date = active_subscription.current_period_end
             active_subscription.canceled_at = None
         active_subscription.save()
+        print("Saved active subscription")
         print(f"Updated subscription: {active_subscription}")
     except ActiveSubscription.DoesNotExist:
         print(f"No active subscription found in the database with Stripe Subscription ID {subscription['id']}.")

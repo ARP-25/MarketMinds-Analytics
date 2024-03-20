@@ -240,7 +240,7 @@ STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 #print(STRIPE_PUBLIC_KEY+"\n"+STRIPE_SECRET_KEY+"\n"+STRIPE_WH_SECRET+"\n")
 
 #Debugging
-"""
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -258,7 +258,7 @@ LOGGING = {
         },
     },
 }
-"""
+
 
 
 # AWS settings for storing static and media files in an S3 bucket

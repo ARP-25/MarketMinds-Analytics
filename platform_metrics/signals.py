@@ -7,22 +7,27 @@ from django.utils import timezone
 from decimal import Decimal
 
 
-
+@receiver(post_save, sender=ActiveSubscription)
 def update_metrics_on_new_subscription(sender, instance, created, **kwargs):
+    print("We are in the signal update new subscription")
     if created:
+        print("We are in the signal update new subscription Created")
         period_start = timezone.now().replace(day=1, hour=0, minute=0, second=0)
         metrics, created = FinancialMetrics.objects.get_or_create(period=period_start)
-
         metrics.new_subscriptions += 1
         metrics.total_revenue += Decimal(instance.monthly_cost)
         metrics.monthly_recurring_revenue += Decimal(instance.monthly_cost)
         metrics.save()
 
+        print("Financial metrics updated for new subscription.")
+
 
 @receiver(post_save, sender=ActiveSubscription)
 def update_metrics_on_subscription_update(sender, instance, created, **kwargs):
+    
     # Check if the instance is being updated (not created) and if canceled_at is set
     if not created and instance.canceled_at:
+        print("We are in the signal update cancel subscription")
         period_start = timezone.now().replace(day=1, hour=0, minute=0, second=0)
         metrics, created = FinancialMetrics.objects.get_or_create(period=period_start)
         metrics.canceled_subscriptions += 1
