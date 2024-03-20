@@ -1,5 +1,4 @@
 from decimal import Decimal
-import logging
 from django.utils import timezone
 from datetime import datetime
 
@@ -287,5 +286,5 @@ def get_user_from_stripe_customer_id(customer_id):
         user_profile = UserProfile.objects.get(stripe_customer_id=customer_id)
         return user_profile.user  
     except UserProfile.DoesNotExist:
-        logger.error(f"No UserProfile found for Stripe Customer ID {customer_id}")
+        #logger.error(f"No UserProfile found for Stripe Customer ID {customer_id}")
         return None
