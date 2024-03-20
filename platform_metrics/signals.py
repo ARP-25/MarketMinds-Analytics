@@ -10,7 +10,7 @@ from decimal import Decimal
 @receiver(post_save, sender=ActiveSubscription)
 def update_metrics_on_subscription_update_renew(sender, instance, created, **kwargs):
     print("We are in the signal update new subscription")
-    if not created and instance.renewed_at:
+    if not created and instance.renewal_date:
         period_start = timezone.now().replace(day=1, hour=0, minute=0, second=0)
         metrics, created = FinancialMetrics.objects.get_or_create(period=period_start)
         metrics.renewed_subscriptions += 1
