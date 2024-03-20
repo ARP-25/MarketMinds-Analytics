@@ -224,37 +224,44 @@ def handle_subscription_created(event):
 def handle_subscription_updated(event):
     """
     Handles the 'customer.subscription.updated' event from Stripe.
-
-    Args:
-    - event: The Stripe event object containing webhook data.
-
-    Returns:
-    - HttpResponse with a status code indicating the result of the operation.
     """
+    print("Received a subscription updated event.")
     subscription = event['data']['object']
 
     try:
+        print(f"Attempting to find ActiveSubscription with ID {subscription['id']}.")
         active_subscription = ActiveSubscription.objects.get(stripe_subscription_id=subscription['id'])
+        print(f"Found ActiveSubscription: {active_subscription}")
+
         active_subscription.status = subscription['status']
         active_subscription.current_period_end = timezone.make_aware(
             datetime.fromtimestamp(subscription['current_period_end'])
         )
+        
+        print(f"Updated status to {active_subscription.status} and period end to {active_subscription.current_period_end}.")
+
         if subscription['cancel_at_period_end']:
             active_subscription.canceled_at = timezone.make_aware(
                 datetime.fromtimestamp(subscription['canceled_at'])
             )
-            active_subscription.renewal_date = None                        
+            active_subscription.renewal_date = None
             active_subscription.status = 'pending cancellation'
+            print("Set status to pending cancellation due to cancel_at_period_end.")
         else:
             active_subscription.renewal_date = active_subscription.current_period_end
             active_subscription.canceled_at = None
+            print("Updated renewal date and cleared canceled_at.")
+
         active_subscription.save()
         print("Saved active subscription")
         print(f"Updated subscription: {active_subscription}")
     except ActiveSubscription.DoesNotExist:
         print(f"No active subscription found in the database with Stripe Subscription ID {subscription['id']}.")
+    except Exception as e:
+        print(f"Error in handle_subscription_updated: {e}")
 
     return HttpResponse(status=200)
+
 
 
 # Default Event Handling
