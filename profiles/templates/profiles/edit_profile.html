@@ -14,8 +14,7 @@
             <form method="POST" action="{% url 'edit_profile' %}">
                 {% csrf_token %}
                 {{ form|crispy }}
-                <div class="text-center pt-4">
-                    
+                <div class="text-center pt-4">                  
                     <button type="submit" class="button-62 btn-edit mx-auto mb-2 d-block" aria-label="Save"><i
                         class="fa-solid fa-download pr-2"></i>Save </button>
                     <a href="{% url 'view_profile' %}" class="mx-auto d-block" aria-label="Return">

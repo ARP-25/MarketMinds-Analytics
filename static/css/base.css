@@ -628,7 +628,7 @@ dl div.menu-element-third {
 .display-200 {
     font-size: 200%;
 }
-.icon-trigger, .icon-trigger-activate {
+.icon-trigger, .icon-renew-trigger {
     background: none;
     color: whitesmoke;
     border: none;
@@ -637,7 +637,7 @@ dl div.menu-element-third {
     cursor: pointer;
 }
 
-.icon-trigger:focus, .icon-trigger-activate:focus {
+.icon-trigger:focus, .icon-renew-trigger:focus {
     outline: none;
 }
 
@@ -815,6 +815,9 @@ a.button-62:hover {
 .modal-footer,
 .modal-body {
     background: #000814;
+}
+.renewSubscriptionModal button {
+    margin-bottom: 5px;
 }
 
 
@@ -1465,31 +1468,22 @@ li.menu-item {
         align-items: center;
     }
 }
-/* Bootstrap xl */
+
 @media (max-width: 1200px) {
     .footer-element-container {
         min-height: 40vh;
         padding: 15px;
     }
 }
-
-
+/* Bootstrap -xl */
 @media (min-width: 1200px) {
     .container-big {
       max-width: 1500px!important;
     }
   }
-/* Default styles for larger screens */
 #admin-menu {
-    flex-direction: row; /* This makes items align in a row by default */
+    flex-direction: row; 
 }
-
-/* Media query for screens with a max width of 767px */
-/* Default styles for larger screens */
-#admin-menu {
-    flex-direction: row; /* Items align in a row by default */
-}
-
 /* Media query for screens with a max width of 767px */
 @media (max-width: 767px) {
     #admin-menu {

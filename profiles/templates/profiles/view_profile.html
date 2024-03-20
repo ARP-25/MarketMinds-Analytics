@@ -8,6 +8,8 @@
 {% block content %}
 <div class="container responsive-space menu-element">
     <div class="row">
+
+        <!-- Profile Data -->
         <div class="col-12">
             <h1 class="mb-3"><i class="fa-solid fa-user pr-2"></i>Profile Information</h1>
             <!-- Profile Data -->
@@ -33,9 +35,10 @@
             </div>
         </div>
 
+        <!-- Active Subscriptions -->
         <div class="col-12">
             <h1><i class="fa-brands fa-creative-commons-sampling pr-2"></i>Active Subscriptions</h1>
-            <!-- Active Subscription Data -->
+            <!-- Active Subscription Elements -->
             {% for subscription in active_subscriptions %}
             <div class="row mb-4">
                 <div class="col-12">
@@ -62,16 +65,19 @@
                                     <dt>Start Date:</dt>
                                     <dd class="text-secondary-custom">{{ subscription.start_date }}</dd>
                                 </div>
+                                
                                 {% if subscription.renewal_date %}
                                 <div class="menu-element-fourth m-sm-2 mb-1">
                                     <dt>Renewal Date:</dt>
-                                    <dd class="text-secondary-custom">{{ subscription.renewal_date }}</dd>
+                                    <dd class="text-success">{{ subscription.renewal_date }}</dd>
                                 </div>
                                 {% endif %}
+
+                                <!-- Cancelled -->
                                 {% if subscription.canceled_at %}
                                 <div class="menu-element-fourth m-sm-2 mb-1">
                                     <dt>Current Period End:</dt>
-                                    <dd class="text-secondary-custom">{{ subscription.current_period_end }}</dd>
+                                    <dd class="text-info">{{ subscription.current_period_end }}</dd>
                                 </div>
                                 <div class="menu-element-fourth m-sm-2 mb-1 d-flex justify-content-between">
                                     <div class="">
@@ -79,13 +85,14 @@
                                         <dd class="text-info">{{ subscription.status }}</dd>
                                     </div>
                                     <div class="display-200">
-                                        <button class="icon-trigger-activate" data-toggle="modal"
-                                        data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}"
-                                        aria-label="Toggle Subscription">
+                                        <button class="icon-renew-trigger" data-toggle="modal"
+                                        data-target=".renewSubscriptionModal" data-subscription-id="{{ subscription.id }}"
+                                        aria-label="Renew Subscription">
                                         <i class="fa-solid fa-toggle-off text-info"></i>
                                         </button>
                                     </div>
                                 </div>
+                                <!-- Active -->
                                 {% else %}
                                 <div class="menu-element-fourth m-sm-2  mb-1 d-flex justify-content-between">
                                     <div class="">
@@ -139,9 +146,49 @@
             </div>
         </div>
     </div>
+    <!-- Renew Subscription Confirmation Modal -->
+    <div class="modal fade renewSubscriptionModal" tabindex="-1" role="dialog"
+        aria-labelledby="renewSubscriptionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="renewSubscriptionModalLabel">Renew Subscription</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to renew your subscription?</p>
+                </div>
+                <div class="modal-footer">
+                    <form class="confirmRenewForm" action="" method="post">
+                        {% csrf_token %}
+                        <button type="button" class="button-62 btn-edit" data-dismiss="modal" aria-label="Close">Close</button>
+                        <button type="submit" class="button-62 btn-delete" aria-label="Renew">Yes, renew</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 {% endblock %}
 {% block postloadjs %}
+<!-- Fetches the url and check for refreshed param, if its there refreshes site.
+    This ensure after renewing subscription the site gets refreshed
+    and rendered with the updated status for subscription. -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var url = new URL(window.location.href);
+        var params = new URLSearchParams(window.location.search);
+        if (params.has('refreshed')) {
+            params.delete('refreshed');
+            url.search = params;
+            window.history.replaceState({}, '', url);
+            window.location.reload(true);
+        }
+    });
+</script>
 {{ block.super }}
 <script src="{% static 'profiles/js/profiles.js' %}"></script>
 {% endblock %}

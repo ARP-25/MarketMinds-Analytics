@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.urls import reverse
 from bag.contexts import bag_contents
 from subscription.models import SubscriptionPlan
 from profiles.models import UserProfile
@@ -9,7 +10,7 @@ from checkout.models import ActiveSubscription
 
 
 from .forms import UserProfileForm
-
+import stripe
 
 def view_profile(request):
     """
@@ -85,3 +86,32 @@ def cancel_subscription(request, subscription_id):
         return redirect('view_profile') 
 
     return redirect('view_profile') 
+
+def initiate_subscription_renewal(request, subscription_id):
+    """
+    View to initiate a subscription renewal process.
+
+    Args:
+    - request: HTTP request object.
+    - subscription_id: ID of the ActiveSubscription to renew.
+
+    Returns:
+    - HttpResponse or redirect after initiating the renewal.
+    """
+    try:
+        # Get the ActiveSubscription object
+        active_subscription = ActiveSubscription.objects.get(id=subscription_id, user=request.user)
+
+        # Call Stripe API to renew the subscription
+        stripe.Subscription.modify(
+            active_subscription.stripe_subscription_id,
+            cancel_at_period_end=False
+        )
+        messages.success(request, "Subscription renewal initiated.")
+    except ActiveSubscription.DoesNotExist:
+        messages.error(request, "Subscription not found.")
+    except stripe.error.StripeError as e:
+        messages.error(request, f"Stripe Error: {e}")
+
+    profile_url = reverse('view_profile') + "?refreshed=true"
+    return redirect(profile_url)

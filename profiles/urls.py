@@ -7,4 +7,5 @@ urlpatterns = [
     path('', login_required(views.view_profile), name='view_profile'),
     path('edit/', login_required(views.edit_profile), name='edit_profile'), 
     path('cancel-subscription/<int:subscription_id>/', login_required(views.cancel_subscription), name='cancel_subscription'),
+    path('initiate-subscription-renewal/<int:subscription_id>/', login_required(views.initiate_subscription_renewal), name='initiate_subscription_renewal'),
 ]
