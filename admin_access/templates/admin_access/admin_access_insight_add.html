@@ -8,20 +8,24 @@
 </div>
 <div class="container mt-5 pt-5">
     <h1 class="text-center pb-5 mt-5">Add Insight</h1>
-    <div class="col-10 offset-1 col-lg-6 offset-lg-3 menu-element">
+    <div class="col-10 offset-1 col-lg-8 offset-lg-2 menu-element">
         <form method="post" action="{% url 'admin_access_insight_add' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.media }}
             {{ form|crispy }}
-            <button type="submit" class="button-62 btn-edit col-8 offset-2 mt-3 mb-2" aria-label="Add">
-                <i class="fa-solid fa-plus pr-2"></i>
-                Add Insight
-            </button>
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="button-62 btn-edit mt-3 mb-2" aria-label="Add">
+                    <i class="fa-solid fa-plus pr-2"></i>
+                    Add Insight
+                </button>
+            </div>
         </form>
-        <a href="{% url 'AdminAccessInsight' %}" class="button-62 btn-edit col-8 offset-2 mt-3" aria-label="Return">
-            <i class="fa-solid fa-arrow-left pr-2"></i>
-            Return
-        </a>
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'AdminAccessInsight' %}" class="button-62 btn-edit mt-3" aria-label="Return">
+                <i class="fa-solid fa-arrow-left pr-2"></i>
+                Return
+            </a>
+        </div>
     </div>
 </div>
 {% endblock %}

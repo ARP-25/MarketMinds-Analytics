@@ -101,7 +101,6 @@ def initiate_subscription_renewal(request, subscription_id):
     try:
         # Get the ActiveSubscription object
         active_subscription = ActiveSubscription.objects.get(id=subscription_id, user=request.user)
-
         # Call Stripe API to renew the subscription
         stripe.Subscription.modify(
             active_subscription.stripe_subscription_id,

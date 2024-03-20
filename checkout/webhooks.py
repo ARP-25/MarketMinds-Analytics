@@ -19,7 +19,7 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-# Webhook Handling
+# Webhook
 @csrf_exempt
 def stripe_webhook(request):
     """
@@ -71,9 +71,11 @@ def stripe_webhook(request):
 
     event_handlers = {
         'setup_intent.created': handle_setup_intent_created,
+        'price.created': handle_price_created,
         'price.deleted': handle_price_deleted,
         'customer.subscription.created': handle_subscription_created,
         'customer.subscription.updated': handle_subscription_updated,
+        'setup_intent.created': handle_setup_intent_created,
     }
 
     handler = event_handlers.get(event['type'], handle_unexpected_event)
@@ -216,7 +218,7 @@ def handle_subscription_created(event):
     return HttpResponse(status=200)
 
 
-# Renewal and Cancellation to a Plan Handling
+# Renewal and Cancellation to a SPlan Handling
 def handle_subscription_updated(event):
     """
     Handles the 'customer.subscription.updated' event from Stripe.
@@ -258,10 +260,13 @@ def handle_unexpected_event(event):
     return HttpResponse(status=200)
 
 
-# Not needed since it is implicitly handled  within stripe subscription process
+# Not needed for now since it is implicitly handled within stripe subscription process.
+# In later iteration of the program potential use case could be to handle the setup intent creation 
+# for different products than subscriptions.
 def handle_setup_intent_created(event):
     
     return HttpResponse(status=200)
+
 
 # Helper Functions
 def get_user_from_stripe_customer_id(customer_id):
