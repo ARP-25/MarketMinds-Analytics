@@ -21,7 +21,7 @@ class FinancialMetricsAdmin(admin.ModelAdmin):
 
     get_plan_metrics_display.short_description = 'Plan Metrics'
     
-    list_display = ('new_subscriptions','canceled_subscriptions','get_plan_metrics_display')
+    list_display = ('renewed_subscriptions', 'new_subscriptions','canceled_subscriptions','get_plan_metrics_display')
 
 
 

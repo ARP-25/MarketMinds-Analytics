@@ -8,7 +8,7 @@ class FinancialMetrics(models.Model):
     
     monthly_recurring_revenue = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     
-
+    renewed_subscriptions = models.IntegerField(default=0)
     new_subscriptions = models.IntegerField(default=0)
     canceled_subscriptions = models.IntegerField(default=0)
 
