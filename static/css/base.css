@@ -405,16 +405,18 @@ button a:hover {
     border: solid 3px #adb5bd;
     border-radius: 15px;
     background: #0d1b2a;
-    transition: background 0.3s ease;
 }
-
-.subscription-plan-style:hover {
-    background: #415a77;
-}
-
 .special-offer {
     border: solid 3px #fca311;
 }
+.min-height-1050 {
+    min-height: 1050px;
+}
+.deleteSubscriptionPlanBtn {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 .square-image, .square-image-bag{
     width: 100%; 
@@ -439,9 +441,7 @@ button a:hover {
     display: block; 
     border-radius: 4px;
 }
-.sub-title {
-    
-}
+
 
 .sub-description {
     min-height: 50px;
@@ -451,7 +451,6 @@ button a:hover {
     height: 70px;
 }
 
-.sub-details {}
 
 /* Messages */
 
@@ -459,15 +458,12 @@ button a:hover {
 
 /* Admin Access */
 .hr-admin-border {
-    border-top: 5px solid #17a2b8;
+    border-top: 5px solid whitesmoke;
     margin: 0;
     padding: 0;
 }
-.preview {
-    transition: transform 0.4s ease-in-out;/
-}
-.preview:hover {
-    transform: scale(1.04);
+h2.text-info {
+    color: whitesmoke!important;
 }
 .col-10-x {
     width: 86%;
@@ -712,7 +708,7 @@ a.button-62:hover {
     border-radius: 5px;
     font-size: 90%;
     color: #001d3d;
-    width:200px;
+    width:160px;
 }
 
 .btn-delete {
@@ -720,7 +716,7 @@ a.button-62:hover {
     border-radius: 5px;
     font-size: 90%;
     color: #001d3d;
-    width:200px;
+    width:160px;
 }
 
 .btn-bag {
@@ -1267,11 +1263,12 @@ a.button-62:hover {
 }
 /* Admin Access Subscription */
 .sub-details {
-    min-height: 240px;
     overflow: hidden;
 }
 .sub-plan-admin {
-    min-width:200px;
+    border: 1px solid #8d99ae;
+    border-radius: 3px;
+    margin:10px;
 }
 /* Admin Access banner */
 .admin-banner {

@@ -5,9 +5,9 @@
 <div class="admin-banner">
     <i class="fa-solid fa-lock pr-2"></i>Admin Access
 </div>
-<div class="container mt-5 pt-5">
+<div class="container responsive-space-15">
     <h1 class="text-center pb-5 mt-5">Edit Subscription Plan</h1>
-    <div class="col-10 offset-1 col-lg-6 offset-lg-3 menu-element">
+    <div class="col-10 offset-1 col-lg-8 offset-lg-2 menu-element">
         {% load crispy_forms_tags %}
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}

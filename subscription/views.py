@@ -4,6 +4,7 @@ from django.views.generic import ListView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import SubscriptionPlan
+from checkout.models import ActiveSubscription
 
 
 class GetStarted(ListView):

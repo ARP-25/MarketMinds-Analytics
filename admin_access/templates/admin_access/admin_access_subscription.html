@@ -2,7 +2,7 @@
 {% load static %}
 {% load custom_filters %}
 {% block content %}
-<div class="container container-big header-space">
+<div class="container header-space">
     <div class="row admin-access-row">
         <!-- Admin Access Header -->
         <div class="admin-banner">
@@ -17,120 +17,153 @@
                 <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="metrics">Platform Metrics</li></a>
             </ul>                  
         </div>
+
         <!-- Admin Access Content-->
         <!-- Admin Access Control Subscription Plan Board -->
-        <div class="col-12 admin-access-content menu-element" id="content-area">             
-            <div class="text-center">
+        <div class="admin-access-content" id="content-area">             
+            <div class="text-center ">
                 <h2 class="content-title pb-2">Subscription Plans</h2>
-                <!-- Add Plan -->
-                <a class="a-inherit" href="{% url 'admin_access_subscription_add' %}">
-                    <button type="submit" class="button-62 btn-edit mr-sm-2 mb-1 ms-sm-0" aria-label="Add Plan">Add Plan <i
-                            class="fa-solid fa-plus pl-2"></i></button>
-                </a>
-                <!-- Dropdown for Sorting -->
-                <div class="dropdown d-inline-block ">
-                    <button class="button-62 btn-edit dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sort Plans
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="?sort=most_recent">Most Recent</a>
-                        <a class="dropdown-item" href="?sort=oldest">Oldest</a>
-                        <a class="dropdown-item" href="?sort=a_z">A-Z</a>
-                        <a class="dropdown-item" href="?sort=z_a">Z-A</a>
-                        <a class="dropdown-item" href="?sort=price_desc">Price Descending</a>
-                        <a class="dropdown-item" href="?sort=price_asc">Price Ascending</a>
-                        <a class="dropdown-item" href="?sort=staged">Staged</a>
-                        <a class="dropdown-item" href="?sort=unstaged">Unstaged/Invisible</a>
-                        <a class="dropdown-item" href="?sort=all">All</a>
+                <div class="mb-3">
+                    <!-- Add Plan -->
+                    <a class="a-inherit" href="{% url 'admin_access_subscription_add' %}">
+                        <button type="submit" class="button-62 btn-edit mr-sm-2 mb-1 ms-sm-0" aria-label="Add Plan">Add Plan <i
+                                class="fa-solid fa-plus pl-2"></i></button>
+                    </a>
+                    <!-- Dropdown for Sorting -->
+                    <div class="dropdown d-inline-block ">
+                        <button class="button-62 btn-edit dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sort Plans
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="?sort=most_recent">Most Recent</a>
+                            <a class="dropdown-item" href="?sort=oldest">Oldest</a>
+                            <a class="dropdown-item" href="?sort=a_z">A-Z</a>
+                            <a class="dropdown-item" href="?sort=z_a">Z-A</a>
+                            <a class="dropdown-item" href="?sort=price_desc">Price Descending</a>
+                            <a class="dropdown-item" href="?sort=price_asc">Price Ascending</a>
+                            <a class="dropdown-item" href="?sort=staged">Staged</a>
+                            <a class="dropdown-item" href="?sort=unstaged">Unstaged/Invisible</a>
+                            <a class="dropdown-item" href="?sort=all">All</a>
+                        </div>
                     </div>
                 </div>
                 <!-- Admin Access Subscription Plans Preview -->
                 <div class="row">
                     {% for s in subscription_plans %}
-                    <div class="pt-1 pb-5 mb-5 mt-3 offset-1 col-10 offset-lg-0 col-lg-6 col-xl-4 sub-plan-admin">
-                        <hr class="text-info hr-admin-border">
-                        <div class="div">
-                            <h2 class="text-info text-center"><strong>Preview - Plan ID: {{ s.id }}</strong></h2>
-                        </div>
-                        <hr class="text-info hr-admin-border pb-3">
-                        <div class="preview subscription-plan-style p-3 mb-3">
-                            <div class="square-image">
-                                <img src="{{ s.image.url }}" alt="{{ s.title }}">
-                            </div>
-                            <div class="p-1 text-left sub-title d-flex align-items-center">
-                                <h2><strong>{{ s.title }}</strong></h2>
-                            </div>
-                            <div class="p-1 text-left text-secondary-custom sub-description">
-                                {{ s.description }}
-                            </div>
-                            <div class="p-1 text-left sub-price">
-                                <h2><span><strong>$ {{ s.price }}</strong></span><span class="pl-1"
-                                        style="font-size:60%">/month</span></h2>
-                            </div>
-                            <form method="post" action="{% url 'add_to_bag' %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="subscription_plan_id" value="{{ s.id }}">
-                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                                {% if bag_items %}
-                                {% for item in bag_items %}
-                                <input type="hidden" name="bag_items" value="{{ item }}">
-                                {% endfor %}
-                                {% endif %}
-                                <div class="d-flex text-align-center justify-content-center pb-3">
-                                    <button type="submit" class="button-62 btn-subscribe" disabled>
-                                        <i class="fa-solid fa-plus"></i> Add Subscription
-                                    </button>
+                    <div class="col-12 menu-element mb-5">
+                        <!-- Row 1 -->
+                        <div class="row">
+                            <!-- SPlan IDs -->                            
+                            <div class="col-12 col-md-8 d-flex flex-column justify-content-space-between">                              
+                                <div class="menu-element-third text-left ml-2 mr-2 mb-2">
+                                    <span class="d-block">Internal Plan ID:</span>
+                                    <span class="text-secondary-custom d-block">{{ s.id }}</span>
                                 </div>
-                            </form>
-                            <div class="p-1 text-left sub-details">
-                                <p>This includes:</p>
-                                {% for detail in s.details|split_by_comma %}
-                                <p><i class="fa-solid fa-trophy pr-3"></i> {{ detail }}</p>
-                                {% endfor %}
+                                <div class="menu-element-third text-left ml-2 mr-2 mt-auto">
+                                    <span class="d-block">Stripe Price ID:</span>
+                                    <span class="text-secondary-custom d-block">{{ s.stripe_price_id }}</span>
+                                </div>                            
+                            </div>
+                            <!-- Btns -->
+                            <div class="col-12 mt-2 mt-md-0 col-md-4 d-flex flex-column justify-content-space-between ">
+                                <div class="menu-element-third mr-2 ml-2">                                                         
+                                    <form class="mt-2 mb-auto" method="GET" action="{% url 'admin_access_subscription_edit' subscription_id=s.id %}">
+                                        {% csrf_token %}
+                                        <button class="button-62 btn-edit" type="submit" aria-label="Edit">
+                                            <i class="fa-solid fa-pen-to-square p-2"></i>
+                                            Edit
+                                        </button>
+                                    </form>
+                                    <form class="m-2" method="POST" action="{% url 'AdminAccessSubscription' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="subscription_id" value="{{ s.id }}">
+                                        {% if s.staged == False %}
+                                            <button class="button-62 btn-edit" name="action" value="stage" aria-label="Feature">
+                                                <i class="fa-solid fa-rocket pr-1"></i>
+                                                Stage
+                                            </button>
+                                        {% else %}
+                                            <button class="button-62 btn-edit" name="action" value="unstage" aria-label="Feature">
+                                                <i class="fa-solid fa-arrow-down pr-1"></i>
+                                                Unstage
+                                            </button>
+                                        {% endif %}
+                                    </form>    
+                                    <div class="mb-2 mt-auto">                      
+                                        <button class="button-62 btn-delete deleteSubscriptionPlanBtn" data-toggle="modal"
+                                            data-target=".deleteSubscriptionPlanModal" data-subscription-id="{{ s.id }}"
+                                            aria-label="Delete">
+                                            <i class="fa-solid fa-trash p-2"></i>
+                                            Delete
+                                        </button>
+                                    </div> 
+                                </div>
                             </div>
                         </div>
-                        <hr class="text-info hr-admin-border">
-                        <div class="div">
-                            <h2 class="text-info text-center pt-2 pb-1 mb-0"><strong>End Preview</strong></h2>
+                        <!-- Row 2 -->
+                        <div class="row mt-2 mt-md-3">
+                            <!-- SPlan Preview -->
+                            <div class="col-12 col-md-8">
+                                <div class="ml-2 mr-2 preview subscription-plan-style ">   
+                                    <!-- Preview SPlan -->
+                                        <div class="p-3">
+                                            <div class="square-image">
+                                                <img src="{{ s.image.url }}" alt="{{ s.title }}">
+                                            </div>
+                                            <div class="p-1 mt-3 d-flex justify-content-start align-items-center">
+                                                <h2 style="font-family: Rubik Mono One;">{{ s.title }}</h2>
+                                            </div>                       
+                                            <div class="p-1 text-left text-secondary-custom sub-description">
+                                                {{ s.description }}
+                                            </div>  
+                                            <div class="p-1 text-left sub-price">
+                                                <h2><span><strong>$ {{ s.price }}</strong></span><span class="pl-1"
+                                                        style="font-size:60%">/month</span></h2>
+                                            </div>
+                                            <form method="post" action="{% url 'add_to_bag' %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="subscription_plan_id" value="{{ s.id }}">
+                                                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                                                {% if bag_items %}
+                                                {% for item in bag_items %}
+                                                <input type="hidden" name="bag_items" value="{{ item }}">
+                                                {% endfor %}
+                                                {% endif %}
+                                                <div class="d-flex text-align-center justify-content-center pb-3">
+                                                    <button type="submit" class="button-62 btn-subscribe" disabled>
+                                                        <i class="fa-solid fa-plus"></i> Add Subscription
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <!-- SPlan Details -->
+                                            <div class="p-1 text-left sub-details">
+                                                <p class="text-secondary-custom">This includes:</p>                               
+                                                {% for detail in s.details|split_by_comma %}
+                                                <div class="d-flex d-flex justify-content-start">
+                                                    <div class="text-theme">
+                                                        <i class="fa-solid fa-trophy pr-3"></i>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        {{ detail }}
+                                                    </div>
+                                                </div>
+                                                {% endfor %}                         
+                                            </div>
+                                        </div>
+                                    <!-- End Preview SPlan -->
+                                </div>
+                            </div>
+                            <!-- Splan Metrics -->
+                            <div class="col-12 col-md-4">
+                                <div class="menu-element-third h-100 ml-2 mr-2 mt-3 mt-md-0"></div>
+                            </div>
                         </div>
-                        <div>
-                            <form method="GET" action="{% url 'admin_access_subscription_edit' subscription_id=s.id %}">
-                                {% csrf_token %}
-                                <button class="button-62 btn-edit col-8" type="submit" aria-label="Edit">
-                                    <i class="fa-solid fa-pen-to-square p-2"></i>
-                                    Edit
-                                </button>
-                            </form>
-                            <form method="POST" action="{% url 'AdminAccessSubscription' %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="subscription_id" value="{{ s.id }}">
-                                {% if s.staged == False %}
-                                    <button class="button-62 btn-edit col-8 mt-2" name="action" value="stage" aria-label="Feature">
-                                        <i class="fa-solid fa-rocket pr-1"></i>
-                                        Stage
-                                    </button>
-                                {% else %}
-                                    <button class="button-62 btn-edit col-8 mt-2" name="action" value="unstage" aria-label="Feature">
-                                        <i class="fa-solid fa-arrow-down pr-1"></i>
-                                        Unstage
-                                    </button>
-                                {% endif %}
-                            </form>
-                            
-                            <button class="button-62 btn-delete col-8 mt-2 deleteSubscriptionPlanBtn" data-toggle="modal"
-                                data-target=".deleteSubscriptionPlanModal" data-subscription-id="{{ s.id }}"
-                                aria-label="Delete">
-                                <i class="fa-solid fa-trash p-2"></i>
-                                Delete
-                                <!--<i class="fa-solid fa-trash p-2"></i>-->
-                            </button>
-                        </div>
-                        <hr class="text-info hr-admin-border mt-3">
                     </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
