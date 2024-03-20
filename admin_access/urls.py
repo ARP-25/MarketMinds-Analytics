@@ -17,4 +17,6 @@ urlpatterns = [
     path('insight/add/', user_passes_test(is_superuser)(views.admin_access_insight_add), name='admin_access_insight_add'),
     path('insight/edit/<int:insight_id>/', user_passes_test(is_superuser)(views.admin_access_insight_edit), name='admin_access_insight_edit'),
     path('insight/delete/<int:insight_id>/', user_passes_test(is_superuser)(views.admin_access_insight_delete), name='admin_access_insight_delete'),
+    #Admin Access Metrics
+    path('metrics/',user_passes_test(is_superuser)(views.AdminAccessMetric.as_view()), name='AdminAccessMetric'),
 ]

@@ -8,6 +8,7 @@ from django.conf import settings
 import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+from platform_metrics.models import FinancialMetrics
 from subscription.forms import SubscriptionPlanForm
 from subscription.models import SubscriptionPlan
 from checkout.models import ActiveSubscription
@@ -442,3 +443,39 @@ def admin_access_insight_delete(request, insight_id):
         messages.success(request, 'Trade Insight has been deleted successfully.')
         return redirect('AdminAccessInsight')  
     return redirect('AdminAccessInsight')  
+
+# Admin Access Trade Insight
+class AdminAccessMetric(ListView):
+
+    model = FinancialMetrics
+    template_name = 'admin_access/admin_access_metric.html'
+    context_object_name = 'trade_insights'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        sort = self.request.GET.get('sort')
+
+        if sort == 'most_recent':
+            queryset = queryset.order_by('-release_date') 
+        elif sort == 'oldest':
+            queryset = queryset.order_by('release_date')
+        elif sort == 'crypto':
+            queryset = Insight.objects.filter(category__title='Crypto')
+        elif sort == 'forex':
+            queryset = Insight.objects.filter(category__title='Forex')   
+        elif sort == 'stocks':
+            queryset = Insight.objects.filter(category__title='Stocks')  
+        elif sort == 'a_z':
+            queryset = queryset.order_by('title')
+        elif sort == 'z_a':
+            queryset = queryset.order_by('-title')
+        elif sort == 'mainstage':
+            queryset = Insight.objects.filter(stage='MS')
+        elif sort == 'secondstage':
+            queryset = Insight.objects.filter(stage='SS')
+        elif sort == 'backstage':
+            queryset = Insight.objects.filter(stage='BS')
+        elif sort == 'all':
+            queryset = super().get_queryset()
+          
+        return queryset
