@@ -100,7 +100,7 @@
                                         <dd class="text-success">{{ subscription.status }}</dd>
                                     </div>
                                     <div class="display-200">
-                                        <button class="icon-trigger" data-toggle="modal"
+                                        <button class="icon-trigger " data-toggle="modal"
                                         data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}"
                                         aria-label="Toggle Subscription">
                                             <i class="fa-solid fa-toggle-on text-success"></i>
@@ -174,21 +174,6 @@
 </div>
 {% endblock %}
 {% block postloadjs %}
-<!-- Fetches the url and check for refreshed param, if its there refreshes site.
-    This ensure after renewing subscription the site gets refreshed
-    and rendered with the updated status for subscription. -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var url = new URL(window.location.href);
-        var params = new URLSearchParams(window.location.search);
-        if (params.has('refreshed')) {
-            params.delete('refreshed');
-            url.search = params;
-            window.history.replaceState({}, '', url);
-            window.location.reload(true);
-        }
-    });
-</script>
 {{ block.super }}
 <script src="{% static 'profiles/js/profiles.js' %}"></script>
 {% endblock %}

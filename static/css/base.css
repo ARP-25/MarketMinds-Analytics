@@ -710,7 +710,9 @@ a.button-62:hover {
     color: #001d3d;
     width:160px;
 }
-
+.confirmRenewForm .btn-delete {
+    background: linear-gradient(to bottom right, #adb5bd, cyan);
+}
 .btn-delete {
     background: linear-gradient(to bottom right, #adb5bd, #EE0000);
     border-radius: 5px;

@@ -61,31 +61,28 @@ def edit_profile(request):
         
     return render(request, 'profiles/edit_profile.html', {'form': form})
 
-
+from django.urls import reverse
 
 def cancel_subscription(request, subscription_id):
     """
     View function to cancel an active subscription.
-
-    Retrieves the subscription by ID and handles POST requests to cancel it.
-    Upon cancellation, displays a success message and redirects to 'view_profile'.
 
     Args:
     - request: HTTP request object.
     - subscription_id: ID of the subscription to cancel.
 
     Returns:
-    - If successful cancellation, redirects to 'view_profile' with a success message.
-    - If not a POST request or subscription not found, redirects to 'view_profile'.
+    - Redirects to 'view_profile' with a success message and a refreshed parameter.
     """
     subscription = get_object_or_404(ActiveSubscription, pk=subscription_id)
     if request.method == 'POST':
         subscription.cancel_subscription()
         messages.success(request, f"Subscription canceled successfully and will expire at: {subscription.current_period_end.strftime('%Y-%m-%d %H:%M')}.")
 
-        return redirect('view_profile') 
+        profile_url = reverse('view_profile') + "?refreshed=true"
+        return redirect(profile_url) 
 
-    return redirect('view_profile') 
+
 
 def initiate_subscription_renewal(request, subscription_id):
     """
@@ -98,19 +95,20 @@ def initiate_subscription_renewal(request, subscription_id):
     Returns:
     - HttpResponse or redirect after initiating the renewal.
     """
-    try:
-        # Get the ActiveSubscription object
-        active_subscription = ActiveSubscription.objects.get(id=subscription_id, user=request.user)
-        # Call Stripe API to renew the subscription
-        stripe.Subscription.modify(
-            active_subscription.stripe_subscription_id,
-            cancel_at_period_end=False
-        )
-        messages.success(request, "Subscription renewal initiated.")
-    except ActiveSubscription.DoesNotExist:
-        messages.error(request, "Subscription not found.")
-    except stripe.error.StripeError as e:
-        messages.error(request, f"Stripe Error: {e}")
+    if request.method == 'POST':
+        try:
+            # Get the ActiveSubscription object
+            active_subscription = ActiveSubscription.objects.get(id=subscription_id, user=request.user)
+            # Call Stripe API to renew the subscription
+            stripe.Subscription.modify(
+                active_subscription.stripe_subscription_id,
+                cancel_at_period_end=False
+            )
+            messages.success(request, "Subscription renewal initiated.")
+        except ActiveSubscription.DoesNotExist:
+            messages.error(request, "Subscription not found.")
+        except stripe.error.StripeError as e:
+            messages.error(request, f"Stripe Error: {e}")
 
-    profile_url = reverse('view_profile')# + "?refreshed=true"
-    return redirect(profile_url)
+        profile_url = reverse('view_profile') + "?refreshed=true"
+        return redirect(profile_url)
