@@ -22,49 +22,28 @@ class ActiveSubscription(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     billing_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     monthly_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    """
-    def save(self, *args, **kwargs):
-        if not self.start_date:
-            self.start_date = timezone.now()
-        if self.status != 'pending cancellation' and (self.renewal_date is None or not self.pk):
-            self.renewal_date = self.start_date + timezone.timedelta(days=30)
-        if self.subscription_plan and self.monthly_cost is None:
-            self.monthly_cost = self.subscription_plan.price
 
-        super().save(*args, **kwargs)
-    """
+
     def cancel_subscription(self):
         """
         Cancel subscription via Stripe API and update renewal_date and canceled_at.
         """
         if self.canceled_at is not None:
             raise ValidationError("Subscription cannot be cancelled because it is already cancelled.")
-
         try:
             stripe.api_key = settings.STRIPE_SECRET_KEY
-            subscription = stripe.Subscription.retrieve(self.stripe_subscription_id)
             stripe.Subscription.modify(
                 self.stripe_subscription_id,
                 cancel_at_period_end=True
             )
-            self.current_period_end = timezone.make_aware(
-                datetime.datetime.fromtimestamp(subscription.current_period_end)
-            )
-            self.canceled_at = timezone.make_aware(
-                datetime.datetime.fromtimestamp(subscription.current_period_end)
-            )
-
-            print(f"{subscription.current_period_end}")
-
-            self.renewal_date = None  
-            self.status = 'pending cancellation'
-            self.save()
         except stripe.error.StripeError as e:
             print(f"Stripe error: {e}")
+
 
     def update_status(self, new_status):
         self.status = new_status
         self.save()
+
 
     def __str__(self):
         return f"{self.subscription_plan.title} - {self.user.username} - {self.status}"

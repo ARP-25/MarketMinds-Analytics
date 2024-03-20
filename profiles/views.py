@@ -112,5 +112,5 @@ def initiate_subscription_renewal(request, subscription_id):
     except stripe.error.StripeError as e:
         messages.error(request, f"Stripe Error: {e}")
 
-    profile_url = reverse('view_profile') + "?refreshed=true"
+    profile_url = reverse('view_profile')# + "?refreshed=true"
     return redirect(profile_url)

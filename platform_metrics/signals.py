@@ -28,7 +28,6 @@ def update_metrics_on_subscription_update(sender, instance, created, **kwargs):
         print("Signal renewal received for: ", instance)
         # For a renewal
         metrics.renewed_subscriptions += 1
-
-
+        metrics.monthly_revenue += Decimal(instance.monthly_cost)
 
     metrics.save()
