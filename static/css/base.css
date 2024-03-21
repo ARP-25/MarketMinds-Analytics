@@ -975,6 +975,10 @@ a.button-62:hover {
     margin-top:15vh;
     margin-bottom:15vh;
 }
+.responsive-space-10 {
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+}
 .tradingview-widget-container {
     margin-top: 66px;
 }
