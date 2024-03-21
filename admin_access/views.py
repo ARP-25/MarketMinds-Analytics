@@ -35,37 +35,36 @@ def is_superuser(user):
 # Admin Acces Subscription
 class AdminAccessSubscription(ListView):
     """
-    A view class for administrative access to manage subscription plans.
+    A ListView for managing subscription plans in the administrative interface.
 
-    This view handles both GET and POST requests. It displays a list of SubscriptionPlan 
-    objects, which can be sorted based on various criteria specified by the 'sort' GET 
-    parameter. It also allows administrators to stage and unstage subscription plans through 
-    POST requests.
+    This view displays a list of SubscriptionPlan objects and supports various sorting 
+    and filtering options. It also allows administrators to toggle the 'staged' status 
+    of subscription plans via POST requests, facilitating the management of which 
+    plans are available or featured.
 
     Attributes:
-        - model: SubscriptionPlan model, used to retrieve subscription plan data.
-        - template_name: The name of the HTML template used to render the view.
-        - context_object_name: The name of the context object to use in the template.
+        - model: The SubscriptionPlan model, specifying the source of the data.
+        - template_name: The template used to render the subscription plans list.
+        - context_object_name: The name of the context object in the template.
 
-    Supported sorting options:
-        - 'most_recent': Sorts the subscription plans by creation date in descending order.
-        - 'oldest': Sorts the subscription plans by creation date in ascending order.
-        - 'a_z': Sorts the subscription plans alphabetically by title in ascending order.
-        - 'z_a': Sorts the subscription plans alphabetically by title in descending order.
-        - 'price_desc': Sorts the subscription plans by price in descending order.
-        - 'staged': Filters to show only staged subscription plans.
-        - 'unstaged': Filters to show only unstaged subscription plans.
-        - 'all': Shows all subscription plans without any specific sorting or filtering.
+    Supported Sorting and Filtering Options:
+        The view supports sorting by most recent, oldest, alphabetical order (A-Z, Z-A), 
+        price, and filtering by staged or unstaged status. The default view shows all 
+        plans without specific sorting or filtering.
 
     POST Request Handling:
-        - Changes the 'staged' status of a subscription plan identified by 'subscription_id'.
-        - Provides success messages and redirects to the 'AdminAccessSubscription' view after
-          staging or unstaging operations.
+        Processes POST requests to stage or unstage subscription plans based on the 
+        'subscription_id' provided in the request. It updates the 'staged' attribute 
+        of the corresponding SubscriptionPlan and displays a success message.
 
     Methods:
-        - post: Handles POST requests to change the staging status of subscription plans.
-        - get_queryset: Overrides the default queryset to provide customized sorting and 
-          filtering based on the 'sort' parameter in the request.
+        - post: Handles POST requests to change the 'staged' status of subscription plans.
+        - get_queryset: Overrides the default queryset to apply the sorting and filtering 
+          logic based on the 'sort' parameter received in the GET request.
+
+    Note:
+        This view is intended for use by administrators or staff members with appropriate 
+        permissions to manage subscription plans.
     """
     model = SubscriptionPlan
     template_name = 'admin_access/admin_access_subscription.html'
@@ -112,28 +111,37 @@ class AdminAccessSubscription(ListView):
 
         return queryset
 
+
 def admin_access_subscription_add(request):
     """
-    View function for adding a new subscription plan. This function handles the 
-    creation of a subscription plan both in the Stripe platform and in the Django
-    application.
+    View function for creating and adding a new subscription plan to the Stripe platform 
+    and the Django application database.
 
-    This function creates a corresponding product and price in Stripe using the
-    submitted form data (title, description, details, and price). Metadata is 
-    added to the Stripe price object to indicate that this price was added through
-    this function. After successful creation in Stripe, the function saves the 
-    new subscription plan in the Django backend database, including the Stripe 
-    price ID.
+    This view handles two primary tasks:
+    1. On a GET request, it renders a form to add a new subscription plan.
+    2. On a POST request, it processes the submitted form to create a subscription plan.
+       If the form is valid, the function creates a corresponding product and price in Stripe 
+       and saves the new subscription plan in the Django database, including the Stripe 
+       price ID. If the form is invalid, it re-renders the form with error messages.
+
+    The Stripe product creation includes an image URL from an S3 bucket, if provided. The 
+    Stripe price creation includes metadata from the form, such as title, description, 
+    details, price, and an indication that this was an 'add action'. In the Django database, 
+    the subscription plan is saved with the Stripe price ID.
 
     Args:
-    - request: HTTP request object.
+    - request (HttpRequest): The Django request object.
 
     Returns:
-    - On GET request: Renders a form for adding a new subscription plan.
-    - On POST request: Processes the form. If valid, creates a new plan in Stripe,
-      saves it in the backend, and redirects to the 'AdminAccessSubscription' 
-      page with a success message. If invalid, renders the form again with error
-      messages.
+    - HttpResponse: Renders the subscription plan addition form on a GET request. On a POST request,
+      processes the form, and based on its validity, either creates a new subscription plan and 
+      redirects to the 'AdminAccessSubscription' page, or re-renders the form with error messages.
+
+    Notes:
+    - This view function requires a valid Stripe API setup and a corresponding SubscriptionPlanForm.
+    - The view communicates with Stripe's API to create new products and prices and handles Stripe 
+      errors appropriately.
+    - Success and error messages are used to provide feedback to the user.
     """
     if request.method == 'POST':
         form = SubscriptionPlanForm(request.POST, request.FILES)
@@ -154,7 +162,7 @@ def admin_access_subscription_add(request):
                 else:
                     s3_image_url = ''
 
-                # IMG URL for local
+                # IMG URL for backend
                 if 'image' in form.cleaned_data and form.cleaned_data['image'] is not None:
                     image_url = (form.cleaned_data['image'])
                 else:
@@ -194,6 +202,7 @@ def admin_access_subscription_add(request):
         form = SubscriptionPlanForm()
 
     return render(request, 'admin_access_add.html', {'form': form})
+
 
 def admin_access_subscription_edit(request, subscription_id):
     """
@@ -246,6 +255,7 @@ def admin_access_subscription_edit(request, subscription_id):
     
     return render(request, 'admin_access_edit.html', {'form': form, 'subscription_id': subscription_id})
 
+
 def admin_access_subscription_delete(request, subscription_id):
     """
     Handles the deletion of a subscription plan.
@@ -289,6 +299,7 @@ def admin_access_subscription_delete(request, subscription_id):
     print(f"\nShould still be on False now\n subscriptionPlan.id:{subscriptionPlan.id}\n")
     return redirect('AdminAccessSubscription')
 
+
 def remove_plan_from_bag(request, subscription_id):
     """
     Removes a given subscription plan ID from the 'bag_items' session variable.
@@ -305,6 +316,7 @@ def remove_plan_from_bag(request, subscription_id):
         bag_items.remove(str(subscription_id))
         request.session['bag_items'] = bag_items
         messages.info(request, 'Removed deleted plan from your bag.')
+
 
 # Admin Access Trade Insight
 class AdminAccessInsight(ListView):
@@ -364,6 +376,7 @@ class AdminAccessInsight(ListView):
           
         return queryset
 
+
 def admin_access_insight_add(request):
     """
     Handles the addition of a new Insight object through an admin interface.
@@ -389,6 +402,7 @@ def admin_access_insight_add(request):
     else:
         form = InsightForm()   
     return render(request, 'admin_access/admin_access_insight_add.html', {'form': form})
+
 
 def admin_access_insight_edit(request, insight_id):
     """
@@ -421,6 +435,7 @@ def admin_access_insight_edit(request, insight_id):
     form = InsightForm(instance=insight)
     return render(request, 'admin_access/admin_access_insight_edit.html', {'form': form,'insight_id': insight_id})
 
+
 def admin_access_insight_delete(request, insight_id):
     """
     Deletes a specified Insight object.
@@ -444,9 +459,33 @@ def admin_access_insight_delete(request, insight_id):
         return redirect('AdminAccessInsight')  
     return redirect('AdminAccessInsight')  
 
+
 # Admin Access Trade Insight
 class AdminAccessMetric(ListView):
+    """
+    A ListView for displaying financial metrics in the administrative interface.
 
+    This view is specifically designed for administrators to access and review financial 
+    metrics captured by the system. It lists instances of the FinancialMetrics model, 
+    providing a comprehensive view of financial data like revenue, subscriptions, and 
+    other related metrics.
+
+    Attributes:
+        - model: Specifies the FinancialMetrics model to define the source of data.
+        - template_name: The name of the template used to render the financial metrics.
+        - context_object_name: The name of the context object to use in the template. This is 
+          used to refer to the list of financial metrics in the template.
+
+    Methods:
+        - get_queryset: Overrides the default queryset to provide sorting functionality. The 
+          sorting criteria are specified via a 'sort' parameter in the request's GET data.
+
+    Notes:
+        - The view can be extended to include filtering and more advanced sorting capabilities 
+          based on different attributes of the FinancialMetrics model.
+        - The current implementation of `get_queryset` provides basic sorting functionality. 
+          Further customization can be added as required for more complex data handling.
+    """
     model = FinancialMetrics
     template_name = 'admin_access/admin_access_metric.html'
     context_object_name = 'trade_insights'
@@ -455,27 +494,4 @@ class AdminAccessMetric(ListView):
         queryset = super().get_queryset()
         sort = self.request.GET.get('sort')
 
-        if sort == 'most_recent':
-            queryset = queryset.order_by('-release_date') 
-        elif sort == 'oldest':
-            queryset = queryset.order_by('release_date')
-        elif sort == 'crypto':
-            queryset = Insight.objects.filter(category__title='Crypto')
-        elif sort == 'forex':
-            queryset = Insight.objects.filter(category__title='Forex')   
-        elif sort == 'stocks':
-            queryset = Insight.objects.filter(category__title='Stocks')  
-        elif sort == 'a_z':
-            queryset = queryset.order_by('title')
-        elif sort == 'z_a':
-            queryset = queryset.order_by('-title')
-        elif sort == 'mainstage':
-            queryset = Insight.objects.filter(stage='MS')
-        elif sort == 'secondstage':
-            queryset = Insight.objects.filter(stage='SS')
-        elif sort == 'backstage':
-            queryset = Insight.objects.filter(stage='BS')
-        elif sort == 'all':
-            queryset = super().get_queryset()
-          
         return queryset

@@ -11,6 +11,31 @@ from subscription.models import SubscriptionPlan
 
 
 class ActiveSubscription(models.Model):
+    """
+    Represents an active subscription of a user.
+
+    This model stores information about users' subscriptions, including the associated 
+    user, the subscription plan, and various timestamps relevant to the subscription's 
+    lifecycle. It also includes the Stripe subscription ID for integration with the Stripe 
+    payment platform.
+
+    Attributes:
+    - user (ForeignKey to User): The user who owns the subscription.
+    - subscription_plan (ForeignKey to SubscriptionPlan): The plan to which the user is subscribed.
+    - stripe_subscription_id (CharField): The ID of the subscription in Stripe.
+    - start_date (DateTimeField): The date and time when the subscription started.
+    - current_period_end (DateTimeField): The end date and time of the current subscription period.
+    - renewal_date (DateTimeField): The date and time when the subscription is scheduled to renew.
+    - canceled_at (DateTimeField): The date and time when the subscription was canceled.
+    - status (CharField): The current status of the subscription (e.g., 'active', 'cancelled').
+    - created_at (DateTimeField): The date and time when the subscription record was created.
+    - billing_amount (DecimalField): The amount thats left to be billed for the subscription.
+    - monthly_cost (DecimalField): The monthly cost of the subscription.
+
+    Methods:
+    - cancel_subscription: Cancels the subscription via the Stripe API.
+    - update_status: Updates the status of the subscription.
+    """
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='active_subscriptions')
     subscription_plan = models.ForeignKey(SubscriptionPlan, on_delete=models.CASCADE)
     stripe_subscription_id = models.CharField(max_length=200, blank=True, null=True)
