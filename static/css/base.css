@@ -1246,6 +1246,21 @@ li.menu-item {
     list-style: none; 
     margin: 0;
 }
+
+
+/* Admin Access Platform Metrics */
+.chart-container {
+    position: relative;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+.chart-style {
+    height: 100%!important; 
+    width: 100%!important;   
+    max-width: 100%!important; 
+}
+
+
 @media (min-width: 992px) { 
     #admin-menu {
         display: flex; 

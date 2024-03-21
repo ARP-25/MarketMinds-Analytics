@@ -18,10 +18,173 @@
             </ul>                  
         </div>
         <!-- Admin Access Content-->
+        <div class="row">           
+            <div class="col-12 col-lg-8 offset-lg-2 menu-element text-center chart-container">
+                <canvas id="revenueChart" class="chart-style"></canvas>
+            </div>
+            <div class="col-12 col-lg-8 offset-lg-2 menu-element text-center chart-container">
+                <canvas id="newSubscriptionsChart" class="chart-style"></canvas>
+            </div>
+            <div class="col-12 col-lg-8 offset-lg-2 menu-element text-center chart-container">
+                <canvas id="canceledSubscriptionsChart" class="chart-style"></canvas>
+            </div>
+            <div class="col-12 col-lg-8 offset-lg-2 menu-element text-center chart-container">
+                <canvas id="renewedSubscriptionsChart" class="chart-style"></canvas>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
 {% block postloadjs %}
-
 {{ block.super }}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fetch the financial metrics data via our url request
+        fetch('/api/financial-metrics/')
+            .then(response => response.json())
+            .then(data => {
+                var ctx = document.getElementById('revenueChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    // The data for our dataset
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: 'Monthly Revenue in $',
+                            data: data.revenues,
+                            borderColor: 'rgb(0,255,255)',
+                            tension: 0.1
+                        }]
+                    },
+                    // Configuration options go here
+                    options: {
+                        scales: {
+                            y: {  
+                                beginAtZero: true,
+
+                                ticks: {
+                                    callback: function(value, index, values) {
+                                        return '$' + value.toFixed(2);
+                                    }
+                                }
+                            }
+                        },
+                    },
+                    plugins: {
+                        tooltip: {
+                            enabled: true,
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    var label = context.dataset.label || '';
+                                    return label + ': $' + context.parsed.y.toFixed(2);
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/financial-metrics/')
+            .then(response => response.json())
+            .then(data => {
+                var ctxNewSubscriptions = document.getElementById('newSubscriptionsChart').getContext('2d');
+                new Chart(ctxNewSubscriptions, {
+                    type: 'line',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: 'New Subscriptions',
+                            data: data.new_subscriptions,
+                            borderColor: 'rgb(0,255,127)',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {  
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value, index, values) {
+                                        return value; 
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+    });
+</script> 
+<script>  
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/financial-metrics/')
+            .then(response => response.json())
+            .then(data => {
+                var ctxCanceledSubscriptions = document.getElementById('canceledSubscriptionsChart').getContext('2d');
+                new Chart(ctxCanceledSubscriptions, {
+                    type: 'line',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: 'Canceled Subscriptions',
+                            data: data.canceled_subscriptions,
+                            borderColor: 'rgb(220,20,60)',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {  
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value, index, values) {
+                                        return value; 
+                                    }
+                                }
+                            }
+                        },
+                    }
+                });
+            });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    fetch('/api/financial-metrics/')
+        .then(response => response.json())
+        .then(data => {
+            var ctxRenewedSubscriptions = document.getElementById('renewedSubscriptionsChart').getContext('2d');
+            new Chart(ctxRenewedSubscriptions, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Renewed Subscriptions',
+                        data: data.renewed_subscriptions, 
+                        borderColor: 'rgb(54, 162, 235)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {  
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value, index, values) {
+                                    return value;
+                                }
+                            }
+                        }
+                    },
+                }
+            });
+        });
+});
+
+</script>
 {% endblock %}
