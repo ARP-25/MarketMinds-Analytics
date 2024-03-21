@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load custom_filters %}
 {% block content %}
 
 {% include 'includes/tradingview/tradingview_widget.html' %}
@@ -34,7 +34,8 @@
                     <!-- Left Sidebar Detail Small-->
                     <div class="col-xl-2 col-12 insight-detail-leftside mt-2">
                         <p class="cover-text-small">Similar Insights</p>
-                        {% for insight in similiar_insights %}
+                        {% for insight in similar_insights %}
+                        {{ insight.title }}
                         <a href="{% url 'trade_insights_detail' slug=insight.slug %}">
                             <div class="col-12 ss-insight-img dark-overlay d-flex justify-content-end flex-column">
                                 <div class="secondstage-insight d-flex justify-content-end flex-column">
@@ -54,6 +55,109 @@
                     <!-- Insight Text Content -->
                     <div class="col-xl-10 col-12 insight-detail-text mt-2">
                         {{ insight.content|safe }}
+                        
+                        <!-- Call to Action Subscribing or Login -->
+                        {% if not user.is_authenticated %}
+                        <!-- Call to Action Text And Miniature Subscription-->
+                        <div>
+                            <div class="menu-element-secondary text-center p-2 mt-5 mb-5">
+                                <i class="fa-solid fa-lock pr-2 text-info display-4 m-2"></i>      
+                                <span class="bold-text d-block m-2">
+                                    Hey there! 👋 Want the full scoop on this insight? 
+                                    <a href="{% url 'account_login' %}" class="text-info">Log in</a> if you're already a member. 
+                                    New around here? <a href="{% url 'account_signup' %}" class="text-info">Sign up</a> and discover the benefits of a subscription!
+                                </span>                           
+                                <div class="d-flex justify-content-center mt-2">
+                                    <a href="{% url 'get_started' %}" class="button-62 btn-start m-2">Get Started</a>
+                                </div>
+                            </div>
+                            <!-- Miniature Subscription -->
+                            <div class="col-12 col-md-8 mx-auto mb-5">
+                                <div class="subscription-plan-style p-2">
+                                    <!-- SPlan Img, Title, Descr, Price -->
+                                    <div class="square-image">
+                                        <img src="{{ subscription_plan.image.url }}" alt="{{ subscription_plan.title }}">
+                                    </div>
+                                    <div class="p-1 mt-3 d-flex justify-content-start align-items-center">
+                                        <h2 style="font-family: Rubik Mono One;">{{ subscription_plan.title }}</h2>
+                                    </div>                       
+                                    <div class="p-1 text-left text-secondary-custom sub-description">
+                                        {{ subscription_plan.description }}
+                                    </div>                       
+                                    <div class="p-1 text-left sub-price">
+                                        <h2><span><strong>$ {{ subscription_plan.price }}</strong></span><span class="pl-1"
+                                                style="font-size:60%">/month</span></h2>
+                                    </div>
+                                    <!-- SPlan Details -->
+                                    <div class="p-1 text-left sub-details">                         
+                                        <div class="p-1 text-left sub-details">
+                                            <p class="text-secondary-custom">This includes:</p>                               
+                                            {% for detail in subscription_plan.details|split_by_comma %}
+                                            <div class="d-flex d-flex justify-content-start">
+                                                <div class="text-theme">
+                                                    <i class="fa-solid fa-trophy pr-3"></i>
+                                                </div>
+                                                <div class="mb-2">
+                                                    {{ detail }}
+                                                </div>
+                                            </div>
+                                            {% endfor %}                         
+                                        </div>                                                                 
+                                    </div>
+                                </div>
+                            </div>                           
+                        </div>
+                        {% elif subscribed == False %}
+                            {% if user.is_authenticated %}
+                            <div>
+                                <!-- Call to Action Text and Miniature Subscription-->
+                                <div class="menu-element-secondary text-center p-2 mt-5 mb-5">
+                                    <i class="fa-solid fa-lock pr-2 text-info display-4 m-2"></i>      
+                                    <span class="bold-text d-block m-2">
+                                        Excited to dive deeper into this insight? 🌟 To unlock the full story and more subscribe!
+                                    </span>                           
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <a href="{% url 'get_started' %}" class="button-62 btn-start m-2">Get Started</a>
+                                    </div>
+                                </div>                        
+                            </div>
+                            <!-- Miniature Subscription -->
+                            <div class="col-12 col-md-8 mx-auto mb-5">
+                                <div class="subscription-plan-style p-2">
+                                    <!-- SPlan Img, Title, Descr, Price -->
+                                    <div class="square-image">
+                                        <img src="{{ subscription_plan.image.url }}" alt="{{ subscription_plan.title }}">
+                                    </div>
+                                    <div class="p-1 mt-3 d-flex justify-content-start align-items-center">
+                                        <h2 style="font-family: Rubik Mono One;">{{ subscription_plan.title }}</h2>
+                                    </div>                       
+                                    <div class="p-1 text-left text-secondary-custom sub-description">
+                                        {{ subscription_plan.description }}
+                                    </div>                       
+                                    <div class="p-1 text-left sub-price">
+                                        <h2><span><strong>$ {{ subscription_plan.price }}</strong></span><span class="pl-1"
+                                                style="font-size:60%">/month</span></h2>
+                                    </div>
+                                    <!-- SPlan Details -->
+                                    <div class="p-1 text-left sub-details">                         
+                                        <div class="p-1 text-left sub-details">
+                                            <p class="text-secondary-custom">This includes:</p>                               
+                                            {% for detail in subscription_plan.details|split_by_comma %}
+                                            <div class="d-flex d-flex justify-content-start">
+                                                <div class="text-theme">
+                                                    <i class="fa-solid fa-trophy pr-3"></i>
+                                                </div>
+                                                <div class="mb-2">
+                                                    {{ detail }}
+                                                </div>
+                                            </div>
+                                            {% endfor %}                         
+                                        </div>                                                                 
+                                    </div>
+                                </div>
+                            </div> 
+                            {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>

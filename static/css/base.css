@@ -710,6 +710,13 @@ a.button-62:hover {
     color: #001d3d;
     width:160px;
 }
+.btn-edit-small {
+    background: linear-gradient(to bottom right, whitesmoke, #303030);
+    border-radius: 5px;
+    font-size: 90%;
+    color: #001d3d;
+    width:100px;
+}
 .confirmRenewForm .btn-delete {
     background: linear-gradient(to bottom right, #adb5bd, cyan);
 }
@@ -719,6 +726,13 @@ a.button-62:hover {
     font-size: 90%;
     color: #001d3d;
     width:160px;
+}
+.btn-delete-small {
+    background: linear-gradient(to bottom right, #adb5bd, #EE0000);
+    border-radius: 5px;
+    font-size: 90%;
+    color: #001d3d;
+    width:100px;
 }
 
 .btn-bag {
@@ -1214,7 +1228,7 @@ a.button-62:hover {
 /******************** Admin Access *******************/
 .is-active-admin {
     color: #000814;
-    background: linear-gradient(to bottom right, #5de0e6, #004aad);
+    background: linear-gradient(to bottom right, #5de0e6, #06d6a0);
 }
 .header-space {
     margin-top: 13vh;
@@ -1283,8 +1297,9 @@ li.menu-item {
 }
 .admin-access-menu li:hover {
     color: #000814;
-    background: linear-gradient(to bottom right, #5de0e6, #004aad);
+    background: linear-gradient(to bottom right, #5de0e6, #06d6a0);
 }
+
 /* Admin Access Subscription */
 .sub-details {
     overflow: hidden;
@@ -1432,7 +1447,23 @@ li.menu-item {
         margin-left: 5vw!important;
         margin-right: 5vw!important;
     }
+    .btn-delete {
+        width:80px;
+    }
+    .btn-edit {
+        width:80px;
+    }
 }
+/* Bootstrap -md */
+@media screen and (max-width: 768px) {
+    .btn-delete {
+        width:120px;
+    }
+    .btn-edit {
+        width:120px;
+    }
+}
+
 /* Bootstrap -lg */
 @media screen and (max-width: 992px) {
     .mainstage-row > div {

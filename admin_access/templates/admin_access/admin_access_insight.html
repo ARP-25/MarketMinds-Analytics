@@ -18,86 +18,102 @@
             </ul>                  
         </div>
         <!-- Admin Access Content-->
-        <!-- Admin Access Control Subscription Plan Board -->
-        <div class="col-12 admin-access-content menu-element" id="content-area">             
-            <div class="text-center">
+        <!-- Admin Access Control Insight Board -->
+        <div class="col-12 admin-access-content" id="content-area">             
+            <div class="">
+                <div class="text-center">
                 <h2 class="content-title pb-2">Trade Insights</h2>
-                <!-- Add Insight -->
-                <a class="a-inherit" href="{% url 'admin_access_insight_add' %}">
-                    <button type="submit" class="button-62 btn-edit mr-sm-2 mb-1 ms-sm-0" aria-label="Add Plan">Add Insight <i
-                            class="fa-solid fa-plus pl-2"></i></button>
-                </a>
-                <!-- Dropdown for Sorting -->
-                <div class="dropdown d-inline-block ">
-                    <button class="button-62 btn-edit dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sort Insights
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="?sort=crypto">Crypto</a>
-                        <a class="dropdown-item" href="?sort=forex">Forex</a>
-                        <a class="dropdown-item" href="?sort=stocks">Stocks</a>
-                        <a class="dropdown-item" href="?sort=most_recent">Most Recent</a>
-                        <a class="dropdown-item" href="?sort=oldest">Oldest</a>
-                        <a class="dropdown-item" href="?sort=a_z">A-Z</a>
-                        <a class="dropdown-item" href="?sort=z_a">Z-A</a>
-                        <a class="dropdown-item" href="?sort=mainstage">Mainstage</a>
-                        <a class="dropdown-item" href="?sort=secondstage">Secondstage</a>
-                        <a class="dropdown-item" href="?sort=backsttage">Backstage</a>
-                        <a class="dropdown-item" href="?sort=all">All</a>
-                    </div>
-                </div>               
-                <!-- Admin Access Subscription Plans Preview -->
+                <div class="mb-3">
+                    <!-- Add Insight -->
+                    <a class="a-inherit" href="{% url 'admin_access_insight_add' %}">
+                        <button type="submit" class="button-62 btn-edit mr-sm-2 mb-1 ms-sm-0" aria-label="Add Plan">Add Insight <i
+                                class="fa-solid fa-plus pl-2"></i></button>
+                    </a>
+                    <!-- Dropdown for Sorting -->
+                    <div class="dropdown d-inline-block ">
+                        <button class="button-62 btn-edit dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sort Insights
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="?sort=crypto">Crypto</a>
+                            <a class="dropdown-item" href="?sort=forex">Forex</a>
+                            <a class="dropdown-item" href="?sort=stocks">Stocks</a>
+                            <a class="dropdown-item" href="?sort=most_recent">Most Recent</a>
+                            <a class="dropdown-item" href="?sort=oldest">Oldest</a>
+                            <a class="dropdown-item" href="?sort=a_z">A-Z</a>
+                            <a class="dropdown-item" href="?sort=z_a">Z-A</a>
+                            <a class="dropdown-item" href="?sort=mainstage">Mainstage</a>
+                            <a class="dropdown-item" href="?sort=secondstage">Secondstage</a>
+                            <a class="dropdown-item" href="?sort=backsttage">Backstage</a>
+                            <a class="dropdown-item" href="?sort=all">All</a>
+                        </div>
+                    </div>   
+                </div>
+                </div>
+
+                <!-- Admin Access Insight -->
                 <div class="row">
                     {% for insight in trade_insights %}
-                    <div class="pt-1 pb-5 mb-5 mt-3 offset-1 col-10 offset-lg-0 col-lg-6 col-xl-4">
-                        <hr class="text-info hr-admin-border">
-                        <div class="div">
-                            <h2 class="text-info text-center"><strong>Preview - Insight ID: {{ insight.id }}</strong></h2>
+                    <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-0">
+                        <div class="menu-element mb-5">
+                        <!-- Insight Infos -->
+                        <div class="col-12 d-flex flex-column justify-content-space-between mb-2">                              
+                            <div class="menu-element-third text-left  mb-2">
+                                <span class="d-block">Insight Title:</span>
+                                <span class="text-secondary-custom d-block">{{ insight.title }}</span>
+                            </div>
+                            <div class="menu-element-third text-left  mb-2">
+                                <span class="d-block">Inside ID:</span>
+                                <span class="text-secondary-custom d-block">{{ insight.id }}</span>
+                            </div>  
+                            <div class="menu-element-third text-left  mt-auto">
+                                <span class="d-block">Release Date:</span>
+                                <span class="text-secondary-custom d-block">{{ insight.release_date }}</span>
+                            </div>                            
                         </div>
-                        <hr class="text-info hr-admin-border">
-
                         <!-- Insight Preview Display -->
-                        <a href="{% url 'admin_access_insight_edit' insight_id=insight.id %}">
-                            <div class=" col-12 d-flex justify-content-end flex-column image-overlay-container" style="height: 30vh; position: relative;">
-                                <!-- Backgrounds -->
-                                <div class="insight-background-image" style="background-image: url('{{ insight.cover_image.url }}');"></div>
-                                <div class="overlay-admin"></div>
-                                <!-- Content -->
-                                <span class="secondstage-release_date pl-2 d-block pr-2 z-index-2">{{ insight.release_date }}</span>
-                                <span class="secondstage-title pl-2 d-block bold-text pr-2 z-index-2">{{ insight.title }}</span>
-                                <span class="secondstage-short_description pb-2 pl-2 pt-1 pr-2 z-index-2">{{ insight.short_description }}</span>
-                                <div class="d-flex justify-content-between align-items-center pl-2 pb-2 pr-2 z-index-2">
-                                    <div class="category text-center">
-                                        <i class="fa-solid fa-square-poll-vertical pr-2"></i>{{ insight.category }}
+                        <div class="col-12">
+                            <a href="{% url 'admin_access_insight_edit' insight_id=insight.id %}" >
+                                <div class="d-flex justify-content-end flex-column image-overlay-container pl-2 pr-2" style="height: 30vh; position: relative;">
+                                    <div class="insight-background-image rounded" style="background-image: url('{{ insight.cover_image.url }}');"></div>
+                                    <div class="overlay-admin rounded"></div>
+                                    <span class="secondstage-release_date d-block z-index-2">{{ insight.release_date }}</span>
+                                    <span class="secondstage-title d-block bold-text z-index-2">{{ insight.title }}</span>
+                                    <span class="secondstage-short_description pb-2 pt-1  z-index-2">{{ insight.short_description }}</span>
+                                    <div class="d-flex justify-content-between align-items-center pb-2  z-index-2">
+                                        <div class="category text-center">
+                                            <i class="fa-solid fa-square-poll-vertical pr-2"></i>{{ insight.category }}
+                                        </div>
+                                        <div>
+                                            Stage: {{ insight.stage }}
+                                        </div>
+                                    </div>                       
+                                </div>
+                            </a>
+                        </div>
+                        <!-- Edit and Delete Btn -->
+                        <div class="col-12 d-flex justify-content-center">
+                            <div class="col-12 menu-element-third mt-2">
+                                <div class="d-flex justify-content-between">
+                                    <form method="GET" action="{% url 'admin_access_insight_edit' insight_id=insight.id %}" class="mb-1 mt-1">
+                                        {% csrf_token %}
+                                        <button class="button-62 btn-edit" type="submit" aria-label="Edit">
+                                            <i class="fa-solid fa-pen-to-square p-2"></i>
+                                            Edit
+                                        </button>
+                                    </form>
+                                    <div class="mb-1 mt-1">                      
+                                        <button class="button-62 btn-delete deleteInsightBtn" data-toggle="modal"
+                                                data-target=".deleteInsightModal" data-insight-id="{{ insight.id }}"
+                                                aria-label="Delete">
+                                            <i class="fa-solid fa-trash p-2"></i>
+                                            Delete                             
+                                        </button>
                                     </div>
-                                    <div>
-                                        Stage: {{ insight.stage }}
-                                    </div>
-                                </div>                       
+                                </div>
                             </div>
-                                                
-                            <hr class="text-info hr-admin-border">
-                            <div class="div">
-                                <h2 class="text-info text-center pt-2 pb-1 mb-0"><strong>End Preview</strong></h2>
-                            </div>
-                            <div>
-                                <form method="GET" action="{% url 'admin_access_insight_edit' insight_id=insight.id %}">
-                                    {% csrf_token %}
-                                    <button class="button-62 btn-edit col-8" type="submit" aria-label="Edit">
-                                        <i class="fa-solid fa-pen-to-square p-2"></i>
-                                        Edit
-                                    </button>
-                                </form>                           
-                                <button class="button-62 btn-delete col-8 mt-2 deleteInsightBtn" data-toggle="modal"
-                                    data-target=".deleteInsightModal" data-insight-id="{{ insight.id }}"
-                                    aria-label="Delete">
-                                    <i class="fa-solid fa-trash p-2"></i>
-                                    Delete
-                            
-                                </button>
-                            </div>
-                        </a>
-                        <hr class="text-info hr-admin-border mt-3">
+                        </div>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
