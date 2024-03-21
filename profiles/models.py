@@ -45,7 +45,7 @@ class UserProfile(models.Model):
         Returns:
             str: A string representation including the username, email, and Stripe customer ID.
         """
-        return f"{self.user} - Email: {self.email}, Stripe ID: {self.stripe_customer_id if self.stripe_customer_id else 'N/A'}"
+        return f"{self.user}"
 
         
 
