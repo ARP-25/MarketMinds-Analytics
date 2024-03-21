@@ -1332,7 +1332,7 @@ li.menu-item {
 }
 .dropdown-item:hover {
     color: #000814;
-    background: linear-gradient(to bottom right, #5de0e6, #004aad);
+    background: linear-gradient(to bottom right, #5de0e6, #06d6a0);
 }
 .dropdown-menu a{
     transition: color 0.2s ease-in-out;
