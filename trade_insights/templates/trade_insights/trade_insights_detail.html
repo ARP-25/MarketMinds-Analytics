@@ -35,7 +35,7 @@
                     <div class="col-xl-2 col-12 insight-detail-leftside mt-2">
                         <p class="cover-text-small">Similar Insights</p>
                         {% for insight in similar_insights %}
-                        {{ insight.title }}
+                        
                         <a href="{% url 'trade_insights_detail' slug=insight.slug %}">
                             <div class="col-12 ss-insight-img dark-overlay d-flex justify-content-end flex-column">
                                 <div class="secondstage-insight d-flex justify-content-end flex-column">
@@ -51,11 +51,9 @@
                             </a>
                         {% endfor %}
                     </div>
-
                     <!-- Insight Text Content -->
                     <div class="col-xl-10 col-12 insight-detail-text mt-2">
                         {{ insight.content|safe }}
-                        
                         <!-- Call to Action Subscribing or Login -->
                         {% if not user.is_authenticated %}
                         <!-- Call to Action Text And Miniature Subscription-->
@@ -114,7 +112,7 @@
                                 <div class="menu-element-secondary text-center p-2 mt-5 mb-5">
                                     <i class="fa-solid fa-lock pr-2 text-info display-4 m-2"></i>      
                                     <span class="bold-text d-block m-2">
-                                        Excited to dive deeper into this insight? 🌟 To unlock the full story and more subscribe!
+                                        Excited to dive deeper into this insight? 🌟 To unlock the full content and more - subscribe!
                                     </span>                           
                                     <div class="d-flex justify-content-center mt-2">
                                         <a href="{% url 'get_started' %}" class="button-62 btn-start m-2">Get Started</a>
