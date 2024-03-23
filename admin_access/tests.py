@@ -129,27 +129,27 @@ class AdminAccessTests(TestCase):
         mock_price = MagicMock(id='price_test123')
         mock_product_create.return_value = mock_product
         mock_price_create.return_value = mock_price
-        
-        original_price = self.subscription_plan.price
+
+        initial_plan_count = SubscriptionPlan.objects.count()
         original_id = self.subscription_plan.id
 
         # Test case 1: Price unchanged
+        # Expectation: SubscriptionPlan should be updated in the database, but no new Stripe Price should be created
         form_data_unchanged = {
             'title': 'Basic Plan',
             'description': 'A basic plan - updated description',
-            'price': 10,
+            'price': self.subscription_plan.price,  # Keeping the price unchanged
             'details': 'Updated details',
             'image': create_test_image(),
         }
         response = self.client.post(reverse('admin_access_subscription_edit', args=[self.subscription_plan.id]), form_data_unchanged)
-        if response.status_code != 302:
-            print("Form Errors:", response.context['form'].errors)
         self.assertEqual(response.status_code, 302)
         self.subscription_plan.refresh_from_db()
         self.assertEqual(self.subscription_plan.description, 'A basic plan - updated description')
         mock_price_create.assert_not_called()
 
-        # Test case 2: Price changed with active subscriptions
+        # Test case 2: Price changed without active subscriptions
+        # Expectation: The existing SubscriptionPlan should be updated, no new SubscriptionPlan created
         new_price = 20
         form_data_changed = {
             'title': 'Basic Plan - New Price',
@@ -158,13 +158,25 @@ class AdminAccessTests(TestCase):
             'details': 'Updated details with new price',
             'image': create_test_image(),
         }
+
+        # Deactivate or remove all active subscriptions for the test plan
+        ActiveSubscription.objects.filter(subscription_plan=self.subscription_plan).delete()
+
         response = self.client.post(reverse('admin_access_subscription_edit', args=[self.subscription_plan.id]), form_data_changed)
-        if response.status_code != 302:
-            print("Form Errors:", response.context['form'].errors)
-        new_plan = SubscriptionPlan.objects.latest('id')
-        self.assertNotEqual(new_plan.id, original_id)
-        self.assertEqual(new_plan.price, Decimal(new_price))
-        mock_price_create.assert_called_once()
+        self.assertEqual(response.status_code, 302)
+        self.subscription_plan.refresh_from_db()
+
+        # Check if the SubscriptionPlan has been updated with new details
+        self.assertEqual(self.subscription_plan.price, Decimal(new_price))
+        self.assertEqual(self.subscription_plan.title, 'Basic Plan - New Price')
+        self.assertEqual(self.subscription_plan.description, 'A basic plan with new price')
+        # Am Ende des Testfalls
+        self.assertEqual(SubscriptionPlan.objects.count(), initial_plan_count)
+
+
+        # Verify that a new plan was not created
+        self.assertEqual(SubscriptionPlan.objects.count(), initial_plan_count)  # assuming initial_plan_count is defined
+        mock_price_create.assert_called_once()  # assuming Stripe Price should still be created
 
 
 

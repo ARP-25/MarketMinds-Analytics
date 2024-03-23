@@ -263,7 +263,6 @@ def admin_access_subscription_edit(request, subscription_id):
                     messages.error(request, f"Stripe error: {e}")
                     return render(request, 'admin_access_edit.html', {'form': form, 'subscription_id': subscription_id})
      
-            print(f"\n {is_price_changed} \n {active_subscriptions_exist} \n")
 
             if not is_price_changed or not active_subscriptions_exist:               
                 subscription.save()

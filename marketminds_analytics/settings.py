@@ -154,18 +154,18 @@ WSGI_APPLICATION = 'marketminds_analytics.wsgi.application'
 
 
 # Main Database
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
-}
+#DATABASES = {
+#    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+#}
 
 
 # Testing Database
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': 'mydatabase',
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -231,7 +231,7 @@ STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 #STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 STRIPE_WH_SECRET = 'whsec_ZESFhoEiB2lXOL0dCKiDMtPhQP1DeZb6'
 #Debugging
-print(STRIPE_PUBLIC_KEY+"\n"+STRIPE_SECRET_KEY+"\n"+STRIPE_WH_SECRET+"\n")
+#print(STRIPE_PUBLIC_KEY+"\n"+STRIPE_SECRET_KEY+"\n"+STRIPE_WH_SECRET+"\n")
 
 #Debugging
 """
