@@ -195,6 +195,9 @@ def admin_access_subscription_edit(request, subscription_id):
         form = SubscriptionPlanForm(request.POST, request.FILES, instance=subscription)
         if form.is_valid():
             is_price_changed = form.cleaned_data['price'] != original_price
+            print(f"original_price: {original_price}")
+            print(f"form.cleaned_data['price']: {form.cleaned_data['price']}")
+            print(f"details: {form.cleaned_data.get('details', '')}")
             metadata = {'django_plan_id': subscription.id, 'created_by_admin': True}
             print(f"is_price_changed:", is_price_changed)
             if is_price_changed:
@@ -213,6 +216,7 @@ def admin_access_subscription_edit(request, subscription_id):
                         'image_url': image_url,
                         'django_plan_id': subscription.id,
                     }
+                    print(f"\n\nmetadata: {metadata}\n\n")
                     # Determine whether to create a new plan or update the existing one
                     active_subscriptions_exist = ActiveSubscription.objects.filter(subscription_plan=subscription).exists()
 
