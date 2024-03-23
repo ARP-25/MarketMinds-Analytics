@@ -154,21 +154,19 @@ WSGI_APPLICATION = 'marketminds_analytics.wsgi.application'
 
 
 # Main Database
-"""
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
-"""
-
 
 # Testing Database
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'mydatabase',
     }
 }
+"""
 
 
 # Password validation
