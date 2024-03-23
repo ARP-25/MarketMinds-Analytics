@@ -1,15 +1,18 @@
 from datetime import date
 import datetime
 from unittest.mock import MagicMock, patch
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.contrib.sessions.middleware import SessionMiddleware
+from django.contrib.messages.storage.fallback import FallbackStorage
 from subscription.models import SubscriptionPlan
 from trade_insights.models import Insight
 from checkout.models import ActiveSubscription
 from profiles.models import UserProfile
 from .views import is_superuser
+from .views import remove_plan_from_bag
 from django.core.files.uploadedfile import SimpleUploadedFile
 from decimal import Decimal
 
@@ -76,6 +79,8 @@ class AdminAccessTests(TestCase):
         self.user = User.objects.create_user(
             username='user', email='user@test.com', password='userpass')
 
+        self.factory = RequestFactory()
+
         # Create a mock image file and assign it as an instance attribute
         self.mock_image = SimpleUploadedFile("test_image.jpg", b"file_content", content_type="image/jpeg")
 
@@ -106,7 +111,6 @@ class AdminAccessTests(TestCase):
             monthly_cost=Decimal('10.00')
         )
 
-
     def test_is_superuser(self):
         # Test the is_superuser function
         self.assertTrue(is_superuser(self.admin_user))
@@ -118,7 +122,6 @@ class AdminAccessTests(TestCase):
         response = self.client.get(reverse('AdminAccessSubscription'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Basic Plan')
-
 
     @patch('stripe.Price.create')
     @patch('stripe.Product.create')
@@ -151,8 +154,6 @@ class AdminAccessTests(TestCase):
 
         # Verify that the SubscriptionPlan was created
         self.assertTrue(SubscriptionPlan.objects.filter(title='Test Plan').exists())
-
-
 
     @patch('stripe.Price.create')
     @patch('stripe.Product.create')
@@ -213,6 +214,26 @@ class AdminAccessTests(TestCase):
         self.assertEqual(SubscriptionPlan.objects.count(), initial_plan_count)  # assuming initial_plan_count is defined
         mock_price_create.assert_called_once()  # assuming Stripe Price should still be created
 
+    def test_remove_plan_from_bag(self):
+        # Create a request and attach a session and messages
+        request = self.factory.get('/fake-url')
+        middleware = SessionMiddleware(lambda _: _)
+        middleware.process_request(request)
+        request.session.save()
+        setattr(request, 'session', request.session)
+        messages = FallbackStorage(request)
+        setattr(request, '_messages', messages)
+
+        # Add a subscription plan to the session
+        request.session['bag_items'] = ['1', '2', '3']  # Example subscription IDs
+
+        # Call the remove_plan_from_bag view
+        remove_plan_from_bag(request, '2')  # Remove subscription with ID '2'
+
+        # Test if the plan was removed correctly
+        self.assertNotIn('2', request.session['bag_items'])
+        self.assertIn('1', request.session['bag_items'])
+        self.assertIn('3', request.session['bag_items'])
 
     @patch('stripe.Plan.delete')
     def test_admin_access_subscription_delete(self, mock_stripe_plan_delete):
