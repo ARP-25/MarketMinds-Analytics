@@ -313,7 +313,7 @@ button a:hover {
     border-radius:20px;
 }
 .fb-mailchimp {
-    padding: 40px 0 40px;
+    padding: 50px 0 45px;
 }
 .fb-mailchimp i:hover{
     color:#00b4d8!important;
@@ -1424,6 +1424,9 @@ li.menu-item {
     }
     .btn-edit {
         width:80px;
+    }
+    i.display-4 {
+        font-size:1.5rem;
     }
 }
 /* Bootstrap -md */

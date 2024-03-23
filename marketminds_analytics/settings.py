@@ -18,6 +18,7 @@ from dotenv import load_dotenv, dotenv_values
 load_dotenv()
 
 SECRET_KEY='secret_123'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -89,11 +90,13 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'storages',
 ]
+
 SUMMERNOTE_CONFIG = {
     # Using 'width' and 'height' properties
+    # Dimensions for Rich Text Editor in Insights
     'summernote': {
-        'width': '100%',  # width of the editor
-        'height': '480',  # height of the editor in pixels
+        'width': '100%',  
+        'height': '480',  
     },
 }
 
