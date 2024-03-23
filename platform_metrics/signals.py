@@ -46,6 +46,9 @@ def update_metrics_on_subscription_update(sender, instance, created, **kwargs):
     period_start = timezone.now().replace(day=1, hour=0, minute=0, second=0)
     metrics, _ = FinancialMetrics.objects.get_or_create(period=period_start)
     
+    # Ensure that monthly_revenue is treated as a Decimal
+    metrics.monthly_revenue = Decimal(metrics.monthly_revenue)
+
     if created:
         # For a new subscription
         metrics.new_subscriptions += 1

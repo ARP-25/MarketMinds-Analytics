@@ -48,7 +48,6 @@ class UserProfile(models.Model):
         return f"{self.user}"
 
         
-
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
@@ -69,6 +68,7 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
         UserProfile.objects.create(user=instance, email=instance.email)
     else:
         # Update the user profile only if it already exists
-        user_profile, created = UserProfile.objects.get_or_create(user=instance)
-        user_profile.email = instance.email
-        user_profile.save()
+        user_profile, profile_created = UserProfile.objects.get_or_create(user=instance)
+        if not profile_created:  # If the profile was not just created, update the email
+            user_profile.email = instance.email
+            user_profile.save()

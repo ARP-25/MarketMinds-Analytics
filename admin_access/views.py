@@ -205,49 +205,43 @@ def admin_access_subscription_add(request):
 
 
 def admin_access_subscription_edit(request, subscription_id):
-    """
-    This view function is responsible for handling the editing of a subscription plan. It checks for price changes in the form data. If the price has changed, a new plan with the updated details is created in Stripe, and the Django model is updated accordingly.
-
-    The process is as follows:
-    1. The function first checks if the price has changed from the original.
-    2. If there is a price change, a new Stripe price object is created.
-    3. In the case of active subscriptions associated with this plan, the plan is marked as inactive ('unstaged') in the Django model but not deleted. This is to ensure data integrity with active subscriptions.
-    4. If there are no active subscriptions, the old plan is updated with the new Stripe price ID.
-
-    This approach ensures consistency between Stripe and the Django application and handles scenarios where a price change might affect existing subscribers.
-
-    Args:
-    - request: The HttpRequest object.
-    - subscription_id: The ID of the subscription plan being edited.
-
-    Returns:
-    - Renders a form with the current subscription plan data.
-    - On form submission, updates or creates the plan as required and redirects to the subscription admin page.
-    - Displays appropriate success or error messages.
-    """
     subscription = get_object_or_404(SubscriptionPlan, pk=subscription_id) 
     original_price = subscription.price  
 
     if request.method == 'POST':
         form = SubscriptionPlanForm(request.POST, request.FILES, instance=subscription)
         if form.is_valid():
-            if form.cleaned_data['price'] != original_price:
-                try:                    
+            is_price_changed = form.cleaned_data['price'] != original_price
+            metadata = {'django_plan_id': subscription.id, 'created_by_admin': True}
+            print(f"is_price_changed:", is_price_changed)
+            if is_price_changed:
+                try:
                     new_price = int(form.cleaned_data['price'] * 100) 
                     stripe_product = stripe.Product.create(name=form.cleaned_data['title'])
+                    active_subscriptions_exist = ActiveSubscription.objects.filter(subscription_plan=subscription).exists()
+
+                    if active_subscriptions_exist:
+                        metadata['add_action'] = 'true'
+                    else:
+                        metadata['edit_action'] = 'true'
+
                     stripe_price = stripe.Price.create(
                         unit_amount=new_price,
                         currency='usd',
                         recurring={"interval": "month"},
                         product=stripe_product.id,
-                        metadata={'django_plan_id': subscription.id, 'created_by_admin': True}
+                        metadata=metadata
                     )
+                    print(f"\n\nmetadata: {metadata}\n\n")
                     subscription.stripe_price_id = stripe_price.id
                 except stripe.error.StripeError as e:
                     messages.error(request, f"Stripe error: {e}")
                     return render(request, 'admin_access_edit.html', {'form': form, 'subscription_id': subscription_id})
 
-            subscription.save()
+            if not is_price_changed or not active_subscriptions_exist:
+                # Update the plan in Django (if price hasn't changed or there are no active subscriptions)
+                subscription.save()
+
             messages.success(request, f"{subscription.title} has been edited successfully!")
             return redirect('AdminAccessSubscription') 
     else:

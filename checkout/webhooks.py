@@ -11,7 +11,7 @@ from profiles.models import UserProfile
 from subscription.models import SubscriptionPlan
 
 import stripe
-import logging
+
 
 
 # Webhook
