@@ -26,6 +26,23 @@ def create_test_image():
     file.seek(0)
     return file
 
+def create_active_subscription(self):
+    # Erstellen eines Benutzers und eines Abonnementplans (oder Verwendung existierender Objekte)
+    user = User.objects.create(username='testuser', password='password', email='testuser@example.com')
+    subscription_plan = SubscriptionPlan.objects.create(title='Test Plan', description='Test Description', price=10)
+
+    # Erstellen der ActiveSubscription
+    active_subscription = ActiveSubscription.objects.create(
+        user=user,
+        subscription_plan=subscription_plan,
+        stripe_subscription_id="stripe_test_id",
+        start_date=timezone.now(),
+        current_period_end=timezone.now() + datetime.timedelta(days=30),
+        status='active',
+        billing_amount=Decimal('10.00'),
+        monthly_cost=Decimal('10.00')
+    )
+    return active_subscription
 
 class MockStripeResponse:
     def __init__(self, id):
@@ -33,6 +50,24 @@ class MockStripeResponse:
 
 
 class AdminAccessTests(TestCase):
+
+    def create_active_subscription(self):
+        # Erstellen eines Benutzers und eines Abonnementplans (oder Verwendung existierender Objekte)
+        user = User.objects.create(username='testuser', password='password', email='testuser@example.com')
+        subscription_plan = SubscriptionPlan.objects.create(title='Test Plan', description='Test Description', price=10)
+
+        # Erstellen der ActiveSubscription
+        active_subscription = ActiveSubscription.objects.create(
+            user=user,
+            subscription_plan=subscription_plan,
+            stripe_subscription_id="stripe_test_id",
+            start_date=timezone.now(),
+            current_period_end=timezone.now() + datetime.timedelta(days=30),
+            status='active',
+            billing_amount=Decimal('10.00'),
+            monthly_cost=Decimal('10.00')
+        )
+        return active_subscription
 
     def setUp(self):
         # Set up users without creating UserProfiles manually
@@ -177,6 +212,26 @@ class AdminAccessTests(TestCase):
         # Verify that a new plan was not created
         self.assertEqual(SubscriptionPlan.objects.count(), initial_plan_count)  # assuming initial_plan_count is defined
         mock_price_create.assert_called_once()  # assuming Stripe Price should still be created
+
+
+    @patch('stripe.Plan.delete')
+    def test_admin_access_subscription_delete(self, mock_stripe_plan_delete):
+        mock_stripe_plan_delete.return_value = MagicMock()
+
+        # Test case 1: Deleting a plan with active subscriptions
+        self.create_active_subscription()  # Create an active subscription using the helper function
+        response = self.client.post(reverse('admin_access_subscription_delete', args=[self.subscription_plan.id]))
+        self.assertEqual(response.status_code, 302)
+        self.subscription_plan.refresh_from_db()
+        self.assertFalse(self.subscription_plan.staged)  # Plan should be marked as invisible
+        self.assertTrue(SubscriptionPlan.objects.filter(id=self.subscription_plan.id).exists())  # Plan should still exist in DB
+        mock_stripe_plan_delete.assert_not_called()  # Stripe API should not be called
+
+        # Test case 2: Deleting a plan without active subscriptions
+        ActiveSubscription.objects.filter(subscription_plan=self.subscription_plan).delete()
+        response = self.client.post(reverse('admin_access_subscription_delete', args=[self.subscription_plan.id]))
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(SubscriptionPlan.objects.filter(id=self.subscription_plan.id).exists())  
 
 
 
