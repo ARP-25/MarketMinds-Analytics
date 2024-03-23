@@ -154,13 +154,25 @@ def handle_price_created(event):
 
         try:
             subscription_plan = SubscriptionPlan.objects.get(id=django_plan_id)
-            if ActiveSubscription.objects.filter(subscription_plan=subscription_plan).exists():
-                # Mark the existing plan as 'unstaged' instead of directly editing it
+            active_subs_exist = ActiveSubscription.objects.filter(subscription_plan=subscription_plan).exists()
+            if active_subs_exist:
+                # Mark the existing plan as 'unstaged' and create a new plan
+                print(f"Active subscriptions found for Plan {subscription_plan.title}. Marking as unstaged and creating a new plan.")
                 subscription_plan.staged = False
                 subscription_plan.save()
-                print(f"Plan {subscription_plan.title} marked as inactive due to active subscriptions.")
+
+                # Create a new plan with updated details
+                new_price = metadata.get('price', subscription_plan.price)
+                new_plan = SubscriptionPlan.objects.create(
+                    title=metadata.get('title', subscription_plan.title),
+                    description=metadata.get('description', subscription_plan.description),
+                    price=new_price,
+                    stripe_price_id=price['id']
+                )
+                print(f"New plan created with ID {new_plan.id}")
             else:
                 # Update the plan directly as there are no active subscriptions
+                print(f"Updating Plan {subscription_plan.title} directly as there are no active subscriptions.")
                 subscription_plan.stripe_price_id = price['id']
                 subscription_plan.price = metadata.get('price', subscription_plan.price)
                 subscription_plan.title = metadata.get('title', subscription_plan.title)
@@ -168,6 +180,7 @@ def handle_price_created(event):
                 subscription_plan.save()
         except SubscriptionPlan.DoesNotExist:
             print(f"No SubscriptionPlan found with ID {django_plan_id} in the database.")
+
 
     elif 'add_action' in metadata and metadata['add_action'] == 'true':
         if not SubscriptionPlan.objects.filter(stripe_price_id=price['id']).exists():
