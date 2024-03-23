@@ -106,85 +106,83 @@ def handle_price_created(event):
     """
     Handles the 'price.created' webhook event from Stripe.
 
-    This function is triggered when a new price object is created in Stripe. The event data 
-    is used to either create a new SubscriptionPlan or update an existing one in the Django 
-    database, depending on the provided metadata.
+    This function is triggered when a new price object is created in Stripe. It processes the 
+    event data to either create a new SubscriptionPlan or update an existing one in the Django 
+    database, based on the metadata provided.
 
     New Plan Creation:
-    If the event's metadata indicates a new plan creation (add_action is true), a new 
-    SubscriptionPlan object is created with details extracted from the metadata and Stripe's 
+    If the event's metadata indicates a new plan creation ('add_action' is true), a new 
+    SubscriptionPlan object is created using details extracted from the metadata and Stripe's 
     price object.
 
     Existing Plan Update:
-    If the metadata indicates an existing plan is being edited (edit_action is true), the 
-    function first checks if there are any active subscriptions associated with this plan.
-    - If active subscriptions are present, the plan is marked as 'unstaged' (i.e., not 
-      directly editable). This ensures that changes to the plan do not affect active 
-      subscribers.
-    - If there are no active subscriptions, the plan is directly updated with new details 
-      such as price, title, and description.
+    If the metadata indicates an existing plan is being edited ('edit_action' is true), the 
+    function follows these steps:
+    - If there are active subscriptions associated with this plan, the plan is marked as 
+      'unstaged' (i.e., not directly editable), and a new SubscriptionPlan is created with 
+      the updated details.
+    - If there are no active subscriptions, the existing plan is updated with the new details 
+      such as price, title, description, and image.
 
     Args:
-    - event (dict): The Stripe event object containing webhook data. This includes all 
-      information about the price creation, such as the price ID, metadata, and associated 
-      product details.
+    - event (dict): The Stripe event object containing webhook data, including price ID, 
+      metadata, and associated product details.
 
     Returns:
-    - HttpResponse: An HttpResponse object with a status code of 200. This indicates that 
-      the event was received and processed successfully. In the case of an exception or 
-      failure to find a matching SubscriptionPlan, appropriate error messages are printed, 
-      but the function still returns an HttpResponse with a status code of 200 to acknowledge 
-      receipt of the event to Stripe.
+    - HttpResponse: An HttpResponse object with a status code of 200, indicating successful 
+      processing of the event. In cases of exceptions or inability to find a matching 
+      SubscriptionPlan, appropriate error messages are logged, but a status code of 200 is 
+      still returned to Stripe.
 
     Raises:
-    - SubscriptionPlan.DoesNotExist: If the metadata references a Django plan ID that does 
-      not exist in the database. This exception is caught within the function, and a message 
-      is printed for logging purposes.
+    - SubscriptionPlan.DoesNotExist: If no SubscriptionPlan is found with the ID provided in 
+      the metadata. This exception is caught and logged within the function.
 
     Note:
-    The function assumes that the price creation in Stripe includes relevant metadata for 
-    plan creation or update. This metadata should ideally include identifiers and details 
-    necessary to reflect the changes in the Django application's database.
+    This function assumes that the price creation in Stripe contains metadata crucial for 
+    reflecting changes in the Django application's database. This metadata should include 
+    identifiers and other necessary details for creating or updating SubscriptionPlan 
+    instances.
     """
     price = event['data']['object']
     metadata = price['metadata']
 
+    # Handling editing of existing Plan
     if 'edit_action' in metadata and metadata['edit_action'] == 'true':
         django_plan_id = metadata['django_plan_id']
 
         try:
+            # If active subscription exists on edited Plan,
+            # we mark the old Plan as unstaged and create a new one,
+            # with the metadata provided from stripe.
             subscription_plan = SubscriptionPlan.objects.get(id=django_plan_id)
             active_subs_exist = ActiveSubscription.objects.filter(subscription_plan=subscription_plan).exists()
             if active_subs_exist:
-                # Mark the existing plan as 'unstaged' and create a new plan
-                print(f"Active subscriptions found for Plan {subscription_plan.title}. Marking as unstaged and creating a new plan.")
-                subscription_plan.staged = False
-                print(f"\n\nMarked Plan {subscription_plan.title} as unstaged. Srubscription_plan.stages = {subscription_plan.staged}\n\n")
-                subscription_plan.save()
-
-                # Create a new plan with updated details
+                subscription_plan.staged = False        
+                subscription_plan.save()               
                 new_price = metadata.get('price', subscription_plan.price)
                 new_plan = SubscriptionPlan.objects.create(
                     title=metadata.get('title', subscription_plan.title),
                     description=metadata.get('description', subscription_plan.description),
+                    image=metadata.get('image_url', subscription_plan.image),
                     price=new_price,
                     stripe_price_id=price['id'],
                     details = metadata.get('details', subscription_plan.details),
                 )
-                print(f"New plan created with ID {new_plan.id}")
+            # If no active subscription exists on edited Plan,
+            # we update the old Plan with the metadata provided from stripe.
             else:
-                # Update the plan directly as there are no active subscriptions
-                print(f"Updating Plan {subscription_plan.title} directly as there are no active subscriptions.")
                 subscription_plan.stripe_price_id = price['id']
                 subscription_plan.price = metadata.get('price', subscription_plan.price)
                 subscription_plan.title = metadata.get('title', subscription_plan.title)
+                subscription_plan.image = metadata.get('image_url', subscription_plan.image) 
                 subscription_plan.description = metadata.get('description', subscription_plan.description)
                 subscription_plan.details = metadata.get('details', subscription_plan.details)
                 subscription_plan.save()
         except SubscriptionPlan.DoesNotExist:
             print(f"No SubscriptionPlan found with ID {django_plan_id} in the database.")
 
-
+    # Handling creation of new Plan
     elif 'add_action' in metadata and metadata['add_action'] == 'true':
         if not SubscriptionPlan.objects.filter(stripe_price_id=price['id']).exists():
             SubscriptionPlan.objects.create(
