@@ -159,16 +159,17 @@ def handle_price_created(event):
                 # Mark the existing plan as 'unstaged' and create a new plan
                 print(f"Active subscriptions found for Plan {subscription_plan.title}. Marking as unstaged and creating a new plan.")
                 subscription_plan.staged = False
+                print(f"\n\nMarked Plan {subscription_plan.title} as unstaged. Srubscription_plan.stages = {subscription_plan.staged}\n\n")
                 subscription_plan.save()
-                # Extract title if available, or use default from the existing plan
-                title = metadata.get('title', subscription_plan.title)
+
                 # Create a new plan with updated details
                 new_price = metadata.get('price', subscription_plan.price)
                 new_plan = SubscriptionPlan.objects.create(
                     title=metadata.get('title', subscription_plan.title),
                     description=metadata.get('description', subscription_plan.description),
                     price=new_price,
-                    stripe_price_id=price['id']
+                    stripe_price_id=price['id'],
+                    details = metadata.get('details', subscription_plan.details),
                 )
                 print(f"New plan created with ID {new_plan.id}")
             else:
@@ -178,6 +179,7 @@ def handle_price_created(event):
                 subscription_plan.price = metadata.get('price', subscription_plan.price)
                 subscription_plan.title = metadata.get('title', subscription_plan.title)
                 subscription_plan.description = metadata.get('description', subscription_plan.description)
+                subscription_plan.details = metadata.get('details', subscription_plan.details)
                 subscription_plan.save()
         except SubscriptionPlan.DoesNotExist:
             print(f"No SubscriptionPlan found with ID {django_plan_id} in the database.")

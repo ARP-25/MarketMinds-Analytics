@@ -211,6 +211,7 @@ def admin_access_subscription_edit(request, subscription_id):
                         'details': details,
                         'price': form.cleaned_data['price'],
                         'image_url': image_url,
+                        'django_plan_id': subscription.id,
                     }
                     # Determine whether to create a new plan or update the existing one
                     active_subscriptions_exist = ActiveSubscription.objects.filter(subscription_plan=subscription).exists()
@@ -219,7 +220,7 @@ def admin_access_subscription_edit(request, subscription_id):
                         metadata['add_action'] = 'true'
                     else:
                         metadata['edit_action'] = 'true'
-                        
+
                     stripe_product = stripe.Product.create(
                         name=title,
                     )
@@ -228,7 +229,7 @@ def admin_access_subscription_edit(request, subscription_id):
                         currency='usd',
                         recurring={"interval": "month"},
                         product=stripe_product.id,
-                        metadata=metadata
+                        metadata=metadata,
                     )
                     print(f"\n\nmetadata: {metadata}\n\n")
                     subscription.stripe_price_id = stripe_price.id
