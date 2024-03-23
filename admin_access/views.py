@@ -155,7 +155,6 @@ def admin_access_subscription_add(request):
 
                 stripe_product = stripe.Product.create(
                     name=title,
-                    images=image_url
                 )
                 # Creating the price in Stripe with local image URL/Filename
                 stripe_price = stripe.Price.create(
@@ -206,8 +205,6 @@ def admin_access_subscription_edit(request, subscription_id):
                     new_price = int(form.cleaned_data['price'] * 100)
                     image_url = form.cleaned_data.get('image', '')
 
-                    stripe_product = stripe.Product.create(name=title, images=image_url)
-
                     metadata = {
                         'title': title,
                         'description': description,
@@ -222,7 +219,10 @@ def admin_access_subscription_edit(request, subscription_id):
                         metadata['add_action'] = 'true'
                     else:
                         metadata['edit_action'] = 'true'
-
+                        
+                    stripe_product = stripe.Product.create(
+                        name=title,
+                    )
                     stripe_price = stripe.Price.create(
                         unit_amount=new_price,
                         currency='usd',
