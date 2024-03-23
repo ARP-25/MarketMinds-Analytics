@@ -160,7 +160,8 @@ def handle_price_created(event):
                 print(f"Active subscriptions found for Plan {subscription_plan.title}. Marking as unstaged and creating a new plan.")
                 subscription_plan.staged = False
                 subscription_plan.save()
-
+                # Extract title if available, or use default from the existing plan
+                title = metadata.get('title', subscription_plan.title)
                 # Create a new plan with updated details
                 new_price = metadata.get('price', subscription_plan.price)
                 new_plan = SubscriptionPlan.objects.create(
