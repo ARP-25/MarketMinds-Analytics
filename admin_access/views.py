@@ -151,27 +151,11 @@ def admin_access_subscription_add(request):
                 description = form.cleaned_data['description']
                 details = form.cleaned_data.get('details', '')
                 price = int(form.cleaned_data['price'] * 100)
-
-                # IMG URL for Stripe, directly to s3 bucket so it can be display in Stripe Dashboard
-                s3_base_url = "https://marketminds-analytics.s3.amazonaws.com/media/images/"
-                # This will be used for the Stripe product image
-                if 'image' in request.FILES:
-                    image_file = request.FILES['image']
-                    image_filename = image_file.name
-                    s3_image_url = s3_base_url + image_filename
-                else:
-                    s3_image_url = ''
-
-                # IMG URL for backend
-                if 'image' in form.cleaned_data and form.cleaned_data['image'] is not None:
-                    image_url = (form.cleaned_data['image'])
-                else:
-                    image_url = ''
-
-                # Creating the product in Stripe with the S3 image URL
+                image_url = form.cleaned_data.get('image', '')
+                
                 stripe_product = stripe.Product.create(
                     name=title,
-                    images=[s3_image_url] if s3_image_url else []
+                    images=image_url
                 )
                 # Creating the price in Stripe with local image URL/Filename
                 stripe_price = stripe.Price.create(
@@ -220,28 +204,8 @@ def admin_access_subscription_edit(request, subscription_id):
                     description = form.cleaned_data['description']
                     details = form.cleaned_data.get('details', '')
                     new_price = int(form.cleaned_data['price'] * 100)
+                    image_url = form.cleaned_data.get('image', '')
 
-                    # IMG URL for Stripe, directly to s3 bucket so it can be display in Stripe Dashboard
-                    s3_base_url = "https://marketminds-analytics.s3.amazonaws.com/media/images/"
-                    # This will be used for the Stripe product image
-                    if 'image' in request.FILES:
-                        image_file = request.FILES['image']
-                        image_filename = image_file.name
-                        s3_image_url = s3_base_url + image_filename
-                    else:
-                        s3_image_url = ''
-
-                    # IMG URL for backend
-                    if 'image' in form.cleaned_data and form.cleaned_data['image'] is not None:
-                        image_url = (form.cleaned_data['image'])
-                    else:
-                        image_url = ''
-
-                    # Creating the product in Stripe with the S3 image URL
-                    stripe_product = stripe.Product.create(
-                        name=title,
-                        images=[s3_image_url] if s3_image_url else []
-                    )
                     stripe_product = stripe.Product.create(name=title, images=[s3_image_url])
 
                     metadata = {
