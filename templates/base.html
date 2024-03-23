@@ -1,10 +1,11 @@
-{% load static %}
+
 <!doctype html>
+{% load static %}
 <html lang="en">
 
 <head>
   {% block meta %}
-  <meta http-equiv="X-UA-Compatible" content="ie-edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description"
@@ -23,7 +24,7 @@
   <!-- Font Awesome  -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    crossorigin="anonymous" referrerpolicy="no-referrer">
   <!-- Main CSS -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
   {% endblock %}
@@ -47,7 +48,7 @@
   {% block extra_js %}
   {% endblock %}
   <link rel="icon" type="image/x-icon"
-    href="https://res.cloudinary.com/dbui0ebjv/image/upload/v1710761972/MarketMinds-Logo_gu9azl.png" />
+    href="https://res.cloudinary.com/dbui0ebjv/image/upload/v1710761972/MarketMinds-Logo_gu9azl.png">
   <title>MarketMinds Analytics {% block extra_title %}{% endblock %}</title>
 </head>
 
@@ -78,7 +79,7 @@
   
       <div class="col-6 col-lg-3 d-flex align-items-center justify-content-end">
         <button class="hamburger mr-sm-3" aria-label="Menu">
-          <div class="bar"></div>
+          <span class="bar"></span>
         </button>
   
         <a href="#" class="inherit-color nav-element mr-sm-3 pr-lg-3 p-2 p-l-3" id="dropdownMenu"
@@ -143,7 +144,7 @@
                 </div>
                 <div class="col-6 text-right">
                   <strong>
-                    <p>{{ total }} $ /mo.</p>
+                    <span>{{ total }} $ /mo.</span>
                   </strong>
                 </div>
               </div>
@@ -155,10 +156,8 @@
                       <i class="fa-solid fa-lock pr-1"></i> Secure Checkout
                     </button>
                     {% else %}
-                    <a href="{% url 'checkout' %}" aria-label="Secure Checkout">
-                      <button type="submit" class="button-62 btn-bag" aria-label="Secure Checkout Button">
+                    <a href="{% url 'checkout' %}" class="button-62 btn-bag" aria-label="Secure Checkout">
                         <i class="fa-solid fa-lock pr-1"></i> Secure Checkout
-                      </button>
                     </a>
                     {% endif %}
                   </div>
@@ -336,7 +335,7 @@
   {% block postloadjs %}
   {{ block.super }}
   <!-- Toast Animation for In and Out -->
-  <script type="text/javascript">
+  <script>
     $(document).ready(function () {
       $('.toast').addClass('toast-in');
       $('.toast').toast({
@@ -353,7 +352,7 @@
   </script>
 
   <!-- Scroll Arrow on Landing Page-->
-  <script type="text/javascript">
+  <script>
     $(document).ready(function(){
       $('.arrow-container').on('click', function() {
         var currentScroll = $(window).scrollTop();
@@ -365,7 +364,7 @@
   </script>
   
   <!-- Hamburger Menu for Nav Bar on Small Screen Sizes -->
-  <script type="text/javascript">
+  <script>
     $(document).ready(function() {
         const menu_btn = document.querySelector('.hamburger');
         const mobile_menu = document.querySelector('.mobile-nav');

@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-5 text-right">
                                 <strong>
-                                    <p>{{ total }} $ /mo.</p>
+                                    <span>{{ total }} $ /mo.</span>
                                 </strong>
                             </div>
                         </div>
@@ -79,15 +79,13 @@
                     {% endif %}
                     <!-- Form Control Buttons -->
                     <div>
-                        <button class="col-10 col-md-5 d-inline-block button-62 btn-bag" aria-label="Adjust Bag">
-                            <a href="{% url 'bag' %}" style="color:inherit;text-decoration: none;"
-                                aria-label="Adjust Bag">
-                                <span class="icon">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="font-weight-bold">Adjust Bag</span>
-                            </a>
-                        </button>
+                        <a href="{% url 'bag' %}" class="col-10 col-md-5 d-inline-block button-62 btn-bag" style="color:inherit;text-decoration: none;"
+                            aria-label="Adjust Bag">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="font-weight-bold">Adjust Bag</span>
+                        </a>
                         {% if user.is_authenticated and bag_items %}
                         <button id="submit-button"
                             class="col-md-5 col-10 button-62 btn-bag d-inline-blockml-sm-3 mt-3 mt-md-0 ml-md-3"
@@ -120,8 +118,6 @@
         </div>
 
     </div>
-</div>
-</div>
 </div>
 
 <div id="loading-overlay">

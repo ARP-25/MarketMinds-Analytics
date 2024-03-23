@@ -1127,6 +1127,9 @@ a.button-62:hover {
 .tradingview-widget-container {
     margin-top: 66px;
 }
+.tv-site-widget--bg_none, html.theme-dark .tv-site-widget--bg_none {
+    background-color: whitesmoke!important;
+  }
 
 /* Products */
 .product-container {

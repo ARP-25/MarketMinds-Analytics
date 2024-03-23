@@ -27,7 +27,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="subscription_plan_id" value="{{ subscription_plan.id }}">
                         <button type="submit" class="btn btn-link text-danger"
-                            aria-labe="Delete Subscription Plan Button">
+                            aria-label="Delete Subscription Plan Button">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </form>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-5 text-right">
                     <strong>
-                        <p>{{ total }} $ /mo.</p>
+                        <span>{{ total }} $ /mo.</span>
                     </strong>
                 </div>
             </div>
@@ -58,17 +58,15 @@
                             disabled><i class="fa-solid fa-lock pr-1"></i>
                             Secure Checkout</button>
                         {% else %}
-                        <a href="{% url 'checkout' %}" aria-label="Secure Checkout">
-                            <button type="submit" class="button-62 btn-bag" aria-label="Secure Checkout Button"><i
-                                    class="fa-solid fa-lock pr-1"></i> Secure
-                                Checkout</button>
+                        <a href="{% url 'checkout' %}" class="button-62 btn-bag" aria-label="Secure Checkout">
+                            <i class="fa-solid fa-lock pr-1"></i> Secure Checkout
                         </a>
                         {% endif %}
                     </div>
                     <div class="pb-3">
-                        <a href="{% url 'get_started' %}">
-                            <button type="submit" class="button-62 btn-bag"><i class="fas fa-chevron-left pr-1"></i>
-                                Keep Exploring</button>
+                        <a href="{% url 'get_started' %}" class="button-62 btn-bag">
+                            <i class="fas fa-chevron-left pr-1"></i>
+                            Keep Exploring
                         </a>
                     </div>
                 </div>
