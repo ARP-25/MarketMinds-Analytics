@@ -435,7 +435,7 @@ Google Lighthouse in Google Chrome Developer Tools was used to test the performa
 - **Trade Insight**
 ![Admin](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711306692/lighthouse_trade_insight_hj9lkw.png)
 
-#### Explanation Best Practices Performance on Trade Insight
+#### Explanation low Best Practices and Performance on Trade Insight
 While the integration of TradingView widgets as seen in some of the screenshots has slightly lowered the best practice score in our Lighthouse report, this is a trade-off I consider acceptable for the value they provide. These widgets are widely recognized for their reliability and are essential for presenting live financial data and insights directly on the platform.
 
 The lower score primarily pertains to performance optimization standards and not to security or operational functionality. The modern browsers' approach to handling third-party widgets through partitioned cookie access and specific referrer policies is a standard privacy measure, indicating no compromise in the widgets' safety.
