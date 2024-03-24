@@ -948,9 +948,7 @@ a.button-62:hover {
     margin-top: 10vh;
     margin-bottom: 10vh;
 }
-.tradingview-widget-container {
-    margin-top: 66px;
-}
+
 
 /* Trade Insights Main Stage */
 .mainstage-insight {
@@ -963,6 +961,9 @@ a.button-62:hover {
     -moz-transition: all 1s ease;
     -o-transition: all 1s ease;
     transition: all 1s ease;
+}
+.mainstage-row {
+    margin-top: -30px;
 }
 .mainstage-insight .background-image, .secondstage-insight .background-image {
     position: absolute;

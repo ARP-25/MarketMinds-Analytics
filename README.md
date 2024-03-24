@@ -487,19 +487,11 @@ Extensive testing practices were a cornerstone of my commitment to reliability a
 
 ### Profile Functionality
 
-| Test Case                     | Expected Outcome                                                  | Test Passed |
-|-------------------------------|-------------------------------------------------------------------|--------------|
-| View Profile                  | Displays user profile information and active subscriptions.        | ✔️     |
-| Edit Profile                  | Allows the user to update profile information successfully.         | ✔️     |
-| Cancel Active Subscription    | Successfully cancels an active subscription.                        | ✔️     |
-| Attempt to Edit with Invalid Data | Displays validation errors and does not save changes.           | ✔️     |
-
 ### Bag View
 | Test Case                  | Expected Outcome                                                    | Test Passed |
 |----------------------------|---------------------------------------------------------------------|--------------|
 | Access Bag Page            | Successfully loads the bag page with saved subscription plans.       | ✔️     |
 | Deleting Bag items                  | Bag items gets successfully deleted  | ✔️     |
-
 
 ### Add to Bag Functionality
 | Test Case                  | Expected Outcome                                                                 | Test Passed |
@@ -520,26 +512,6 @@ Extensive testing practices were a cornerstone of my commitment to reliability a
 | Access Admin Panel | Successfully loads the admin panel page.           | ✔️     |
 | Sort Plans         | Clicking on the sort button sorts the plans.       | ✔️     |
 | Delete Plan        | Clicking on delete removes the selected plan.      | ✔️     |
-
-### Admin Access Add Functionality
-| Test Case          | Expected Outcome                                       | Test Passed |
-|--------------------|--------------------------------------------------------|--------------|
-| Add New Plan       | Successfully adds a new plan through the form.         | ✔️     |
-| Invalid Form Data  | Form does not submit.                                  | ✔️     |
-| Redirect           | After adding, user is redirected to admin access page. | ✔️     |
-
-### Admin Access Delete Functionality
-| Test Case             | Expected Outcome                                    | Test Passed |
-|-----------------------|-----------------------------------------------------|--------------|
-| Delete Existing Plan  | Successfully deletes an existing plan by its ID.    | ✔️     |
-| Redirect              | After deletion, user is redirected to admin access. | ✔️     |
-
-### Admin Access Edit Functionality
-| Test Case          | Expected Outcome                                       | Test Passed |
-|--------------------|--------------------------------------------------------|--------------|
-| Edit Plan           | Successfully edits an existing plan through the form.  | ✔️     |
-| Invalid Form Data  | Form does not submit                                  | ✔️     |
-| Redirect           | After editing, user is redirected to admin access.     | ✔️     |
 
 ### Checkout View
 | Test Case                          | Expected Outcome                                                              | Test Passed |
@@ -565,8 +537,6 @@ Extensive testing practices were a cornerstone of my commitment to reliability a
 
 
 ## Deployment
-
-
 ### Deployment to Heroku:
 
 1. **Create a new Database at ElephantSQL:**
@@ -830,9 +800,3 @@ Special thanks to my Mentor Oluwafemi Medale for helping me out whenever I have 
 
 ## Update 24.03.2024
 
-### New Features
-
-- New Design for Landing Page
-- Content Delivery System "Trade Insights"
-- New Design Profile Info Page and New Functionalities
-- New Design Admin Access Page and New Functionalities
