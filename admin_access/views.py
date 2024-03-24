@@ -171,9 +171,15 @@ def admin_access_subscription_add(request):
                         'add_action': 'true'  
                     }
                 )
-                #subscription_plan = form.save(commit=False)
-                #subscription_plan.stripe_price_id = stripe_price.id
-                #subscription_plan.save()
+
+
+                # Erstellen des SubscriptionPlan-Objekts, aber noch ohne Bild speichern
+                subscription_plan = form.save(commit=False)
+                subscription_plan.stripe_price_id = stripe_price.id
+                if 'image' in request.FILES:
+                    subscription_plan.image = form.cleaned_data['image']
+                subscription_plan.save()  # Hier speichern wir das Bild
+
 
                 messages.info(request, 'Subscription Plan creation initiated. Waiting for confirmation from Stripe.')
                 return redirect('AdminAccessSubscription')
@@ -228,6 +234,10 @@ def admin_access_subscription_edit(request, subscription_id):
             metadata = {'django_plan_id': subscription.id, 'created_by_admin': True}
             if is_price_changed:
                 try:
+                    #subscription_plan = form.save(commit=False)
+                    #if 'image' in request.FILES:
+                    #    subscription_plan.image = form.cleaned_data['image']
+                    #subscription_plan.save(update_fields=['image'])                    
                     title = form.cleaned_data['title']
                     description = form.cleaned_data['description']
                     details = form.cleaned_data.get('details', '')
