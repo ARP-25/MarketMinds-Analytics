@@ -171,15 +171,12 @@ def admin_access_subscription_add(request):
                         'add_action': 'true'  
                     }
                 )
-
-
-                # Erstellen des SubscriptionPlan-Objekts, aber noch ohne Bild speichern
+         
                 subscription_plan = form.save(commit=False)
                 subscription_plan.stripe_price_id = stripe_price.id
                 if 'image' in request.FILES:
                     subscription_plan.image = form.cleaned_data['image']
-                subscription_plan.save()  # Hier speichern wir das Bild
-
+                subscription_plan.save() 
 
                 messages.info(request, 'Subscription Plan creation initiated. Waiting for confirmation from Stripe.')
                 return redirect('AdminAccessSubscription')
@@ -269,6 +266,14 @@ def admin_access_subscription_edit(request, subscription_id):
                         metadata=metadata,
                     )
                     subscription.stripe_price_id = stripe_price.id
+                    messages.info(
+                        request, 
+                        f"The '{subscription.title}' plan has active subscriptions and its price "
+                        "has been updated. To preserve subscriber experience, the existing plan "
+                        "has been set to invisible, and a new plan incorporating your changes "
+                        "has been created."
+                    )
+                                    
                 except stripe.error.StripeError as e:
                     messages.error(request, f"Stripe error: {e}")
                     return render(request, 'admin_access_edit.html', {'form': form, 'subscription_id': subscription_id})
@@ -276,8 +281,8 @@ def admin_access_subscription_edit(request, subscription_id):
 
             if not is_price_changed or not active_subscriptions_exist:               
                 subscription.save()
+                messages.success(request, f"{subscription.title} has been edited successfully!")
 
-            messages.success(request, f"{subscription.title} has been edited successfully!")
             return redirect('AdminAccessSubscription') 
     else:
         form = SubscriptionPlanForm(instance=subscription)
