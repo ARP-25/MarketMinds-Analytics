@@ -34,7 +34,7 @@ X_FRAME_OPTIONS = 'ALLOW-FROM https://ui.dev/amiresponsive'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*', '8000-arp25-marketmindsanaly-f0kfoh7ork3.ws-eu107.gitpod.io', 'marketminds-analytics-31d309061593.herokuapp.com', 'https://6974-45-84-139-203.ngrok-free.app/']
-CSRF_TRUSTED_ORIGINS = ['https://b1c2-45-84-139-204.ngrok-free.app',]
+CSRF_TRUSTED_ORIGINS = ['https://b1c2-45-84-139-204.ngrok-free.app','https://marketminds-analytics-31d309061593.herokuapp.com']
 
 
 # Email Setup to enable django-allauth sending confimation etc
