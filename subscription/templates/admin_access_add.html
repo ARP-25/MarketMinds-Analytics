@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-
 <!-- Admin Access Banner -->
 <div class="admin-banner">
     <i class="fa-solid fa-lock pr-2"></i>Admin Access
@@ -13,27 +12,20 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
-            <div class="d-flex justify-content-center">
+            <div class="text-center">
                 <button type="submit" class="button-62 btn-edit" aria-label="Save">
                     <i class="fa-solid fa-plus pr-2"></i> Add
                 </button>
             </div>
         </form>
-        <a href="{% url 'AdminAccessSubscription' %}">
-            <div class="d-flex justify-content-center mt-3">
-                <a href="{% url 'AdminAccessSubscription' %}">
-                    <button class="button-62 btn-edit" aria-label="Return">
-                        <i class="fa-solid fa-arrow-left pr-2"></i>
-                        Return
-                    </button>
-                </a>
-            </div>
-        </a>
+        <div class="text-center mt-2">
+            <a href="{% url 'AdminAccessSubscription' %}" class="button-62 btn-edit">
+                <i class="fa-solid fa-arrow-left pr-2"></i>
+                Return
+            </a>
+        </div>
     </div>
 </div>
-
-
-
 {% endblock %}
 
 {% block postloadjs %}

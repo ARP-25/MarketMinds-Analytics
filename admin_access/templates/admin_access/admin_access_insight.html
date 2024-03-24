@@ -11,10 +11,15 @@
         <!-- Admin Access Menu -->
         <div class="col-12 admin-access-menu d-flex justify-content-center">
             <ul id="admin-menu" class="d-flex justify-content-center">
-                <a href="{% url 'AdminAccessSubscription' %}" class=""><li class="menu-item" data-content="subscription-plans">Subscription Plans</li></a>
-                <a href="{% url 'AdminAccessInsight' %}" class=""><li class="menu-item is-active-admin" data-content="trade-insights">Trade Insights</li></a>
-               <!-- <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="special-offers">Special Offers</li></a>-->
-                <a href="{% url 'AdminAccessMetric' %}" class=""><li class="menu-item" data-content="metrics">Platform Metrics</li></a>
+                <li class="menu-item">
+                    <a href="{% url 'AdminAccessSubscription' %}" data-content="subscription-plans">Subscription Plans</a>
+                </li>
+                <li class="menu-item is-active-admin">
+                    <a href="{% url 'AdminAccessInsight' %}" data-content="trade-insights">Trade Insights</a>
+                </li>
+                <li class="menu-item rounded-end">
+                    <a href="{% url 'AdminAccessMetric' %}" data-content="metrics">Platform Metrics</a>
+                </li>
             </ul>                  
         </div>
         <!-- Admin Access Content-->
@@ -25,9 +30,9 @@
                 <h2 class="content-title pb-2">Trade Insights</h2>
                 <div class="mb-3">
                     <!-- Add Insight -->
-                    <a class="a-inherit" href="{% url 'admin_access_insight_add' %}">
-                        <button type="submit" class="button-62 btn-edit mr-sm-2 mb-1 ms-sm-0" aria-label="Add Plan">Add Insight <i
-                                class="fa-solid fa-plus pl-2"></i></button>
+                    <a class="a-inherit button-62 btn-edit mr-sm-2 mb-1 ms-sm-0" href="{% url 'admin_access_insight_add' %}">
+                        Add Insight 
+                        <i class="fa-solid fa-plus pl-2"></i>
                     </a>
                     <!-- Dropdown for Sorting -->
                     <div class="dropdown d-inline-block ">

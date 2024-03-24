@@ -23,15 +23,14 @@
                         <dt>Email:</dt>
                         <dd class="text-secondary-custom">{{ user_profile.email }}</dd>
                     </div>
+                </dl>
                     <div class="text-center">
-                        <a href="{% url 'edit_profile' %}" style="color:inherit; text-decoration: none;" aria-label="Edit Profile">
-                            <button class="button-62 btn-edit mt-2" aria-label="Edit Profile">
+                        <a href="{% url 'edit_profile' %}" class="button-62 btn-edit mt-2" style="color:inherit; text-decoration: none;" aria-label="Edit Profile">
                                 <i class="fa-solid fa-pen-to-square pr-2"></i>
-                                Edit Profile
-                            </button>
+                                Edit Profile                           
                         </a>
                     </div>
-                </dl>
+                
             </div>
         </div>
 
@@ -54,62 +53,72 @@
                                    margin-top: 3px;
                                    margin-bottom: 3px;">
                         </div>
-                        <dl>
-                            <div class="pt-3 pl-2 pr-2" style="font-family: Rubik Mono One; font-size: 130%;">{{ subscription.subscription_plan.title }}</div>
-                            <div class="pt-2 pl-2 pl-sm-4 pr-2 pr-sm-4">
-                                <div class="menu-element-fourth m-sm-2 mb-1">
-                                    <dt>Stripe Subscription ID:</dt>
-                                    <dd class="text-secondary-custom text-wrap">{{ subscription.stripe_subscription_id }}</dd>
+                        <div class="subscription-details">
+                            <div class="title" style="font-family: Rubik Mono One; font-size: 130%;">
+                                {{ subscription.subscription_plan.title }}
+                            </div>
+                            <div class="subscription-info">
+                                <div class="info-item menu-element-fourth m-sm-2 mb-1">
+                                    <span class="info-label">Stripe Subscription ID:</span>
+                                    <span class="info-value text-secondary-custom text-wrap">
+                                        {{ subscription.stripe_subscription_id }}
+                                    </span>
                                 </div>
-                                <div class="menu-element-fourth m-sm-2 mb-1">
-                                    <dt>Start Date:</dt>
-                                    <dd class="text-secondary-custom">{{ subscription.start_date }}</dd>
+                                <div class="info-item menu-element-fourth m-sm-2 mb-1">
+                                    <span class="info-label">Start Date:</span>
+                                    <span class="info-value text-secondary-custom">
+                                        {{ subscription.start_date }}
+                                    </span>
                                 </div>
-                                
                                 {% if subscription.renewal_date %}
-                                <div class="menu-element-fourth m-sm-2 mb-1">
-                                    <dt>Renewal Date:</dt>
-                                    <dd class="text-success">{{ subscription.renewal_date }}</dd>
-                                </div>
+                                    <div class="info-item menu-element-fourth m-sm-2 mb-1">
+                                        <span class="info-label">Renewal Date:</span>
+                                        <span class="info-value text-success">
+                                            {{ subscription.renewal_date }}
+                                        </span>
+                                    </div>
                                 {% endif %}
-
-                                <!-- Cancelled -->
+                        
                                 {% if subscription.canceled_at %}
-                                <div class="menu-element-fourth m-sm-2 mb-1">
-                                    <dt>Current Period End:</dt>
-                                    <dd class="text-info">{{ subscription.current_period_end }}</dd>
-                                </div>
-                                <div class="menu-element-fourth m-sm-2 mb-1 d-flex justify-content-between">
-                                    <div class="">
-                                        <dt>Status</dt>
-                                        <dd class="text-info">{{ subscription.status }}</dd>
+                                    <div class="d-flex justify-content-between align-items-center info-item menu-element-fourth m-sm-2 mb-1">
+                                        <span class="info-label">Current Period End:</span>
+                                        <span class="info-value text-info">
+                                            {{ subscription.current_period_end }}
+                                        </span>
                                     </div>
-                                    <div class="display-200">
-                                        <button class="icon-renew-trigger" data-toggle="modal"
-                                        data-target=".renewSubscriptionModal" data-subscription-id="{{ subscription.id }}"
-                                        aria-label="Renew Subscription">
-                                        <i class="fa-solid fa-toggle-off text-info"></i>
-                                        </button>
+                                    <div class="info-item status">
+                                        <div class="info-item">
+                                            <span class="info-label">Status:</span>
+                                            <span class="info-value text-info">{{ subscription.status }}</span>
+                                        </div>
+                                        <div class="toggle-icon">
+                                            <button class="icon-renew-trigger" data-toggle="modal"
+                                                    data-target=".renewSubscriptionModal" 
+                                                    data-subscription-id="{{ subscription.id }}"
+                                                    aria-label="Renew Subscription">
+                                                <i class="fa-solid fa-toggle-off text-info display-4"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Active -->
                                 {% else %}
-                                <div class="menu-element-fourth m-sm-2  mb-1 d-flex justify-content-between">
-                                    <div class="">
-                                        <dt>Status</dt>
-                                        <dd class="text-success">{{ subscription.status }}</dd>
+                                    <div class="d-flex justify-content-between align-items-center status menu-element-fourth m-sm-2 mb-1">
+                                        <div class="info-item">
+                                            <span class="info-label">Status:</span>
+                                            <span class="info-value text-success">{{ subscription.status }}</span>
+                                        </div>
+                                        <div class="toggle-icon">
+                                            <button class="icon-trigger" data-toggle="modal"
+                                                    data-target=".cancelSubscriptionModal" 
+                                                    data-subscription-id="{{ subscription.id }}"
+                                                    aria-label="Toggle Subscription">
+                                                <i class="fa-solid fa-toggle-on text-success display-4"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="display-200">
-                                        <button class="icon-trigger " data-toggle="modal"
-                                        data-target=".cancelSubscriptionModal" data-subscription-id="{{ subscription.id }}"
-                                        aria-label="Toggle Subscription">
-                                            <i class="fa-solid fa-toggle-on text-success"></i>
-                                        </button>
-                                    </div>
-                                </div>
                                 {% endif %}
                             </div>
-                        </dl>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 # MarketMinds Analytics
-![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705585263/amiresponsive_marketminds_kbhhrn.png) 
+![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711241305/amiresponsive_b86ttt.png) 
 
 
 ## Description
@@ -208,17 +208,11 @@ In this table you can see that every User Story is covered by an implemented Fea
     -   Google Fonts was utilized to import fonts into styles.css. Lato was chosen for the majority of the content due to its excellent readability. Rubik Mono One was selected for specific titles and various elements to make them stand out and distinguish them from the rest of the content.
 
 -   ### Wireframes
-    -   Landing Page
     ![Landing](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705686222/figma_landing_page_i1xthl.png)
-    -   Get Started
     ![GetStarted](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705686221/figma_get_started_page_g0vzcs.png)
-    -   Bag
     ![Bag](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705686222/figma_bag_yo98nu.png)
-    -   Checkout
     ![Checkout](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705686223/figma_checkout_awiwky.png)
-    -   Profile
     ![Profile](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705686223/figma_profile_ri58zv.png)
-    -   Admin Access
     ![Admin](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705686222/figma_admin_access_zhgpsp.png)
 
 ### Database Models
@@ -756,3 +750,14 @@ Additional searching for problemfixes:
 ### Shoutout
 
 Special thanks to my Mentor Oluwafemi Medale for helping me out whenever I have a question.
+
+
+
+## Update 24.03.2024
+
+### New Features
+
+- New Design for Landing Page
+- Content Delivery System "Trade Insights"
+- New Design Profile Info Page and New Functionalities
+- New Design Admin Access Page and New Functionalities

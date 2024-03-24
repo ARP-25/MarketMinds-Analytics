@@ -8,15 +8,22 @@
         <div class="admin-banner">
             <i class="fa-solid fa-lock pr-2"></i>Admin Access
         </div>
+
         <!-- Admin Access Menu -->
         <div class="col-12 admin-access-menu d-flex justify-content-center">
             <ul id="admin-menu" class="d-flex justify-content-center">
-                <a href="{% url 'AdminAccessSubscription' %}" class=""><li class="menu-item" data-content="subscription-plans">Subscription Plans</li></a>
-                <a href="{% url 'AdminAccessInsight' %}" class=""><li class="menu-item" data-content="trade-insights">Trade Insights</li></a>
-               <!-- <a href="{% url 'AdminAccessInsight' %}" class="col-12 col-lg-3"><li class="menu-item" data-content="special-offers">Special Offers</li></a>-->
-                <a href="{% url 'AdminAccessInsight' %}" class=""><li class="menu-item  is-active-admin" data-content="metrics">Platform Metrics</li></a>
+                <li class="menu-item">
+                    <a href="{% url 'AdminAccessSubscription' %}" data-content="subscription-plans">Subscription Plans</a>
+                </li>
+                <li class="menu-item">
+                    <a href="{% url 'AdminAccessInsight' %}" data-content="trade-insights">Trade Insights</a>
+                </li>
+                <li class="menu-item is-active-admin">
+                    <a href="{% url 'AdminAccessMetric' %}" data-content="metrics">Platform Metrics</a>
+                </li>
             </ul>                  
         </div>
+
         <!-- Admin Access Content-->
         <div class="row">           
             <div class="col-12 col-lg-8 offset-lg-2 menu-element text-center chart-container">
