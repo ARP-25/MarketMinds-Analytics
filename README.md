@@ -1,7 +1,7 @@
 # MarketMinds Analytics
 ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711241305/amiresponsive_b86ttt.png) 
 
-
+## Note : Admin Credentials available on request
 ## Introduction
 My platform is a Django-based solution for managing and selling subscription plans in the trading sector. It features a custom admin panel that allows site administrators to control subscription plans thoroughly, with complete CRUD (Create, Read, Update, Delete) capabilities. Integrated with Stripe API, the platform ensures secure payment processing and maintains database integrity through Stripe webhooks for all subscription-related operations.
 
@@ -490,8 +490,6 @@ Given the critical nature of subscription-based services, the tests are designed
 #### Results
 ![ErrorFree](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296245/unit_tests_mma_qqukcm.png)
 
-### Conclusion
-Extensive testing practices were a cornerstone of my commitment to reliability and accuracy. They are critical in maintaining the high standards of my platform's subscription management and financial tracking functionalities.
 
 ## Manual Testing
 ### Allauth Login and Registration
@@ -547,6 +545,8 @@ Extensive testing practices were a cornerstone of my commitment to reliability a
 | Stripe Integration                 | Verifies that the Stripe integration works properly.                            | ✔️     |
 | Stripe webhook handler          | Handles creating entry in database for Active Subscription after payment intent succeeded if form submission/checkout view fails to do so.           | ✔️     |
 
+### Conclusion
+Extensive testing practices were a cornerstone of my commitment to reliability and accuracy. They are critical in maintaining the high standards of my platform's subscription management and financial tracking functionalities.
 
 ### Browser Compatibility
 
