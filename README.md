@@ -34,11 +34,19 @@ Overall, the platform offers a comprehensive toolset for subscription management
     -   **F 1.2** - Hero Image with Hero Text 
     -   **F 1.3** - Services Information with Credentials 
     -   **F 1.4** - Stay in Touch section with Social Links and Mailchimp   Newsletter Form
-    -   **F 1.5** - Footer (present on all pages)
+    -   **F 1.5** - Interactive Footer (present on all pages)
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296233/navbar_hero_kphpmk.png) 
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296238/services_credentials_yw5pl9.png) 
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296238/socials_newsletter_x3tbsm.png) 
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296231/footer_wew99n.png) 
+
 
 -   **F 2.0 - Get Started Page** 
     -   **F 2.1** - Special Offers section
     -   **F 2.2** - Subscription Plan section
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296674/get_started_1_fduhwh.png) 
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296671/get_started_2_zq4icp.png)  
+
 
 -   **F 3.0 - Trade Insight Page**
     -   **F 3.1** - TradingView Ticker Tape (present on all Trade Insight pages)
@@ -47,24 +55,38 @@ Overall, the platform offers a comprehensive toolset for subscription management
     -   **F 3.5** - Subscription Showcase (present aon all Trade Insight pages)
     -   **F 3.6** - Trade Insight Mainstage
     -   **F 3.7** - Trade Insight Secondstage
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296242/trade_insight_page_1_qmgn5w.png)  
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296243/trade_insight_page_2_gproap.png)  
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296244/trade_insight_page_3_zvprnt.png)  
+
 
 -   **F 4.0 - Tade Insight Detail Page**
     -   **F 4.1** - Insight Full Content/Restricted Content
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296239/trade_insight_detail_page_1_yjsm5a.png)  
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296241/trade_insight_detail_page_2_pwqufr.png)  
+
 
 -   **F 5.0 - Admin Access Subscription Plan Page**
     -   **F 5.1** - Subscription Plan CRUD
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296230/aa_splan_xsecnb.png)  
+
 
 -   **F 6.0 - Admin Access Trade Insight Page**
     -   **F 6.1** - Trade Insight CRUD
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296229/aa_insight_kfp2vl.png)  
+
 
 -   **F 7.0 - Admin Access Financial Metrics Page**
     -   **F 6.1** - Financial Metrics Data Charts Diagrams
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296229/aa_metrics_vic3vk.png)  
+
 
 -   **F 8.0 - User Profile Information Page**
     -   **F 8.1** - User Profile Information CRUD
     -   **F 8.2** - User Profile Active Subscription Terminal
-
-
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296234/profile_info_1_cyv1os.png)  
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296236/profile_info_3_orjbjo.png)  
+    ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296236/profile_info_2_iir0v7.png)  
 
 
 
