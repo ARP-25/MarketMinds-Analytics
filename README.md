@@ -2,25 +2,75 @@
 ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711241305/amiresponsive_b86ttt.png) 
 
 
-## Description
-MarketMinds Analytics is a powerful Django web application tailored for traders and investors seeking expert market analysis in the fields of crypto, forex, and stocks. Users can seamlessly purchase subscriptions to gain valuable insights into financial markets and enhance their trading strategies.
-Users have the flexibility to choose from a variety of subscription plans tailored for crypto, forex, and stocks.
-Plans offer in-depth market analysis, trade insights, and strategies to empower traders for success.
-The web app is equipped with custom admin access page, providing superusers the ability to manage the platform with an intuitive interface.
-Superusers can effortlessly add, edit, and delete subscription plans, ensuring dynamic and responsive adjustments to market demands.
+## Introduction
+Our platform is a Django-based solution for managing and selling subscription plans in the trading sector. It features a custom admin panel that allows site administrators to control subscription plans thoroughly, with complete CRUD (Create, Read, Update, Delete) capabilities. Integrated with Stripe API, the platform ensures secure payment processing and maintains database integrity through Stripe webhooks for all subscription-related operations.
+
+Additionally, the platform includes 'Trade Insights,' a content delivery system that allows for the direct provision of trading resources and information to subscribers, bypassing the need for external media platforms. Administrators have full control over this content, ensuring timely and relevant updates.
+
+A key component is the 'Platform Metrics' section in the admin panel, providing administrators with essential financial data and metrics about the site and its subscriptions. This helps in making informed decisions about the site's operation and growth.
+
+Overall, the platform offers a comprehensive toolset for subscription management and content delivery in the trading domain, emphasizing security, reliability, and ease of administration.
 [Click here to view the Live Project](https://marketminds-analytics-31d309061593.herokuapp.com/)
 
 
 ## Table of contents
-- [User Experience (UX)](#User-Experience-(UX))
 - [Features](#Features)
-- [Design](#Design)
+- [User Stories (US)](#User-Stories-(US))
+- [Technical Details and Design](#Design)
 - [Technologies Used](#Technologies-Used)
 - [Testing](#Testing)
 - [Deployment](#Deployment)
 - [Business Plan](#Business-Plan)
 - [SEO](#Search-Engine-Optimization)
 - [Credits](#Credits)
+
+
+## Features
+
+### Existing Features
+
+-   **F 1.0 - Landing Page**
+    -   **F 1.1** - Navigation Bar (present on all pages)
+    -   **F 1.2** - Hero Image with Hero Text 
+    -   **F 1.3** - Services Information with Credentials 
+    -   **F 1.4** - Stay in Touch section with Social Links and Mailchimp   Newsletter Form
+    -   **F 1.5** - Footer (present on all pages)
+
+-   **F 2.0 - Get Started Page** 
+    -   **F 2.1** - Special Offers section
+    -   **F 2.2** - Subscription Plan section
+
+-   **F 3.0 - Trade Insight Page**
+    -   **F 3.1** - TradingView Ticker Tape (present on all Trade Insight pages)
+    -   **F 3.2** - TradingView Global Markets (present on all Trade Insight pages)
+    -   **F 3.3** - TradingView News (present on all Trade Insight pages)
+    -   **F 3.5** - Subscription Showcase (present aon all Trade Insight pages)
+    -   **F 3.6** - Trade Insight Mainstage
+    -   **F 3.7** - Trade Insight Secondstage
+
+-   **F 4.0 - Tade Insight Detail Page**
+    -   **F 4.1** - Insight Full Content/Restricted Content
+
+-   **F 5.0 - Admin Access Subscription Plan Page**
+    -   **F 5.1** - Subscription Plan CRUD
+
+-   **F 6.0 - Admin Access Trade Insight Page**
+    -   **F 6.1** - Trade Insight CRUD
+
+-   **F 7.0 - Admin Access Financial Metrics Page**
+    -   **F 6.1** - Financial Metrics Data Charts Diagrams
+
+-   **F 8.0 - User Profile Information Page**
+    -   **F 8.1** - User Profile Information CRUD
+    -   **F 8.2** - User Profile Active Subscription Terminal
+
+
+
+
+
+
+
+
 
 
 
@@ -55,141 +105,10 @@ Superusers can effortlessly add, edit, and delete subscription plans, ensuring d
 - **__US07 - User Interested in Updates:__**
     - As a user interested in updates, I want the option to subscribe to newsletters or notifications to receive the latest market trends and special offers.
 
-## Features
-
-### Existing Features
-
--   **__F01 - Navigation Bar__**
-    -   Logo(redirects to the Main Page) 
-    -   Home(redirects to the Main Page)
-    -   Trade Insights(redirects to the Trade Insights Page which is still under construction)
-    -   Get Started(redirects to the Get Started Page)
-    -   Profile Icon(opens dropdown menu on click with varying content depending if user is authenticated or superuser(admin) is authenticated)
-    -   Bag Icon(redirects to the shipping bag)
-    -   Collapses down to a hamburger menu on smaller screen sizes
-        - Navigation Bar
-            -   ![NavBar](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594298/F01_navbar_plrw0x.png)
-        
-        - Not Authenticated Profile Menu  
-            -   ![NotAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594936/F01_navbar_profile_menu_hfeje3.png)
-        
-        - Authenticated as User
-            -   ![UserAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594935/F01_navbar_profile_menu_authenticated_jswrmd.png)
-        
-        - Authenticated as Admin
-            -   ![SuperuserAuthenticated](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594937/F01_navbar_profile_menu_superuser_bvoy1g.png)
-        
-        - Hamburger clicked
-            -   ![HamburgerClicked](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705594297/F01_navbar_hamburger_xkmeld.png)
-
--   **__F02 - Authentication__**
-    -   Django-Allauth was used for semseless and secure authentication processes.
-    -   The Django-Allauth templates were modfied to match the style of the rest of the project
-        -   Sign In
-        ![SignIn](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705596331/F02_authentication_login_1_1_yzedsw.png) 
-        -   Sign Up
-        ![SignUp](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705596330/F02_authentication_register_1_xe8c2u.png)
-
--   **__F03 - Langing Image with Short-Description and Get-Started-Button__**
-    -   Dynamic welcome section
-    -   Presenting brief overview of what to expect
-    -   Get-Started-Button enables visitors to instantly to have quick access to the Get Started Page
-        -   Landing
-        ![LandingSection](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705597448/F03_landing_section_lb0beg.png)
-
--   **__F04 - Services and Credentials__**
-    -   Information about what services can be expected 
-    -   Credentials and Track-Record
-        - Services
-        ![Services](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705598378/F04_services_yiyyyn.png)
-        - Credentials and Track-Record
-        ![CredTrack](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705598376/F04_credentials_emihyu.png)
-
--   **__F05 - Stay in Touch__**
-    -   Social links (Facebook Business Page)
-    -   Newsletter Subscription Form (Mailchimp)
-        - Stay in Touch
-        ![StayInTouch](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705598377/F05_socials_newsletter_vwb4xd.png)
-
--   **__F06 - Profile Info__**
-    -   Profile Info
-    -   Profile Edit Function
-    -   Active Subscription Info 
-    -   Cancel Active Subscription Function
-        -   Profile Info
-        ![Profile Info](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705600046/F06_profile_info_pv4met.png)
-        -   Profile Edit
-        ![ProfileEdit](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705663756/F06_profile_edit_mp3915.png)
-        -   Cancel Subscription Popup
-        ![CancelPopup](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705663878/F06_profile_unsubscribe_wdq7lb.png)
-
--   **__F07 - Admin Access__**
-    -   Admin Access View (only as superuser accessible)
-    -   Access to all Subscription Plan's in Database
-    -   Option to add new, edit oder delete Subscription Plan's
-    -   Option to select which Subscription Plan's get featured on "Get Started Site" __(functionality currently under construction)__
-    -   Option to sort the Subscription Plan's by various criterias __(functionality currently under construction)__
-        -   Admin Access Part 1   
-        ![AdminAccess](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705664181/F07_admin_access_1_fetua7.png)
-        -   Admin Access Part 2
-        ![AdminAccess](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705664204/F07_admin_access_2_qzrcpb.png)
-        -  Admin Access Add Subscription Plan 
-        ![AdminAccessAdd](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705664937/F07_admin_access_add_e9ly2s.png)
-        -  Admin Access Edit Subscription Plan
-        ![AdminAccessEdit](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705664937/F07_admin_access_edit_lmgypl.png)
-        -  Admin Access Delete Subscription Plan
-        ![AdminAccessDelete](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705664937/F07_admin_access_delete_kf2byo.png)
-
--   **__F08 - Get Started__**
-    -   Get Started View
-    -   Site Visitor can choose from a selection of Subscription Plan's and put them into their shopping bag
-    -   Special Offers Section which presents special offers to customers __(functionality to make this section dynamic and editable in the frontend by navigating to Admin Access Page is under construction)__
-    -   Subscription Plan Section which presents featured Subscription Plan's
-        -   Get Started
-        ![GetStarted](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705665180/F08_get_started_khvnqg.png)
-
--   **__F09 - Shopping Bag__**
-    -   Customer can review his Shopping Bag, delete items from it, return to Get Started Page or proceed with Checkout
-        -   Shopping Bag View
-        ![ShoppingBag](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705667239/F09_shopping_bag_yulg7c.png)
--   **__F10 - Checkout__**
-    -  Customer sees a miniature view of his shopping bag items __(if user has already subscribed the user gets notified, the Subscription Plan gets marked in a signaling color and secure checkout form gets disabled)__
-    -  Checkout Form __(Stripe Secure CreditCard Payment)__
-        -   Checkout View not authenticated
-        ![CheckoutAuth](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705668950/F10_checkout_not_authenticated_avyu2f.png)
-        -   Checkout View authenticated
-        ![CheckoutNotAuth](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705667783/F10_checkout_fvgtko.png)
--   **__Fxx - Additional Features__** 
-    -   Custom 404 error page
-        ![404](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705716698/Fxx_custom_404_qrd2xy.png)        
-
-### Table of Features and User Stories combined
-
-In this table you can see that every User Story is covered by an implemented Feature.
-
-| Feature         | US01 - Visitor | US02 - Registered User | US03 - Subscriber | US04 - Superuser (Site Owner) | US05 - Admin Access User | US06 - Potential Subscriber | US07 - User Interested in Updates |
-| --------------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| **F01 Navigation Bar** | x |  |  |  |  |  |  |
-| **F02 Authentication** |  | x |  |  |  |  |  |
-| **F03 Landing Image** | x |  |  |  |  | x |  |
-| **F04 Services and Credentials** | x |  |  |  |  | x |  |
-| **F05 Stay in Touch** | x |  |  |  |  |  | x |
-| **F06 Profile Info** |  | x | x|  |  |  |  |
-| **F07 Admin Access** |  |  |  | x | x|  |  |
-| **F08 Get Started** |  |  |  |  |  | x |  |
-| **F09 Shopping Bag** |  |  |  |  |  | x |  |
-| **F10 Checkout** |  |  |  |  |  | x|  |
 
 
-### Features which are currently under construction
--   Sort functionaliy in Admin Acces
--   Feature functionality in Admin Access
--   Special Offers Disclaimer on Get Started Page dynamic and editable by Admin in Admin Access
 
-### Features which could be implemented in the future
--   Market Analysis Model and and (UI) to access them as User to view and as  "CRUD functionality" as Admin 
--   More Social Pages (Instagram , X, YouTube etc.)
--   User ability to swtich between monthly and yearly pament
+
 
 ## Design
 -   ### Styling
