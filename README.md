@@ -3,7 +3,7 @@
 
 
 ## Introduction
-Our platform is a Django-based solution for managing and selling subscription plans in the trading sector. It features a custom admin panel that allows site administrators to control subscription plans thoroughly, with complete CRUD (Create, Read, Update, Delete) capabilities. Integrated with Stripe API, the platform ensures secure payment processing and maintains database integrity through Stripe webhooks for all subscription-related operations.
+My platform is a Django-based solution for managing and selling subscription plans in the trading sector. It features a custom admin panel that allows site administrators to control subscription plans thoroughly, with complete CRUD (Create, Read, Update, Delete) capabilities. Integrated with Stripe API, the platform ensures secure payment processing and maintains database integrity through Stripe webhooks for all subscription-related operations.
 
 Additionally, the platform includes 'Trade Insights,' a content delivery system that allows for the direct provision of trading resources and information to subscribers, bypassing the need for external media platforms. Administrators have full control over this content, ensuring timely and relevant updates.
 

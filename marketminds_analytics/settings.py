@@ -19,7 +19,6 @@ load_dotenv()
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY='secret_123'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,7 +31,7 @@ X_FRAME_OPTIONS = 'ALLOW-FROM https://ui.dev/amiresponsive'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*', '8000-arp25-marketmindsanaly-f0kfoh7ork3.ws-eu107.gitpod.io', 'marketminds-analytics-31d309061593.herokuapp.com', 'https://6974-45-84-139-203.ngrok-free.app/']
 CSRF_TRUSTED_ORIGINS = ['https://b1c2-45-84-139-204.ngrok-free.app',]
@@ -41,10 +40,10 @@ CSRF_TRUSTED_ORIGINS = ['https://b1c2-45-84-139-204.ngrok-free.app',]
 # Email Setup to enable django-allauth sending confimation etc
 
 # Development
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Production
-#EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
@@ -234,12 +233,11 @@ MESSAGE_TAGS = {
 STRIPE_CURRENCY = 'usd'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
-#STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
-STRIPE_WH_SECRET = 'whsec_ZESFhoEiB2lXOL0dCKiDMtPhQP1DeZb6'
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+
 #Debugging
 #print(STRIPE_PUBLIC_KEY+"\n"+STRIPE_SECRET_KEY+"\n"+STRIPE_WH_SECRET+"\n")
 
-#Debugging
 """
 #LOGGING = {
     'version': 1,
@@ -285,8 +283,5 @@ if 'USE_AWS' in os.environ:
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
 
-
-# CK5 Editor
-CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 
