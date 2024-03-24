@@ -190,6 +190,7 @@ def handle_price_created(event):
                 description=metadata['description'],
                 price=metadata.get('price', 0.00),
                 image=metadata.get('image_url', ''),
+                details=metadata.get('details', ''),
                 stripe_price_id=price['id']
             )
 

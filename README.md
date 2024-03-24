@@ -90,6 +90,10 @@ Overall, the platform offers a comprehensive toolset for subscription management
     ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296236/profile_info_2_iir0v7.png)  
 
 
+-   **F X.X - Planned Features**
+    -   Additional Platform Metrics
+    -   Enhancement Financial Metrics Model
+    -   Confirmation Emails for cancelling and renewing Subscription
 
 
 

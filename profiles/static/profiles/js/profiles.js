@@ -16,11 +16,15 @@ document.addEventListener('DOMContentLoaded', function() {
     var url = new URL(window.location.href);
     var params = new URLSearchParams(window.location.search);
     if (params.has('refreshed')) {
-        console.log("'refreshed' parameter found, reloading page.");
-        params.delete('refreshed');
-        url.search = params;
-        window.history.replaceState({}, '', url);
-        window.location.reload(true);
+        console.log("'refreshed' parameter found. Reloading page after 1 second delay.");
+    
+        // Delayed reload
+        setTimeout(function() {
+            params.delete('refreshed');
+            url.search = params;
+            window.history.replaceState({}, '', url);
+            window.location.reload(true);
+        }, 1000); // Delay for 1 second (1000 milliseconds)
     } else {
         console.log("'refreshed' parameter not found.");
     }

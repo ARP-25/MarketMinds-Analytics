@@ -171,11 +171,11 @@ def admin_access_subscription_add(request):
                         'add_action': 'true'  
                     }
                 )
-                subscription_plan = form.save(commit=False)
-                subscription_plan.stripe_price_id = stripe_price.id
-                subscription_plan.save()
+                #subscription_plan = form.save(commit=False)
+                #subscription_plan.stripe_price_id = stripe_price.id
+                #subscription_plan.save()
 
-                messages.success(request, 'Subscription Plan has been added successfully!')
+                messages.info(request, 'Subscription Plan creation initiated. Waiting for confirmation from Stripe.')
                 return redirect('AdminAccessSubscription')
             except stripe.error.StripeError as e:
                 messages.error(request, f"Stripe error: {e}")
