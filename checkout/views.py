@@ -16,7 +16,6 @@ from .models import ActiveSubscription
 from .forms import ActiveSubscriptionForm  
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
-from .email_utils import send_subscription_confirmation_email
 
 
 
@@ -68,9 +67,8 @@ def checkout_success(request):
     Returns:
     - HttpResponse: A rendered checkout success page, confirming the successful transaction.
     """
-    send_subscription_confirmation_email(request)
+    
     request.session.pop('bag_items', None)
-
     return render (request, 'checkout/checkout_success.html')
 
 

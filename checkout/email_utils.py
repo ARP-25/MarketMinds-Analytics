@@ -4,7 +4,7 @@ from django.utils.dateformat import format
 from subscription.models import SubscriptionPlan 
 from checkout.models import ActiveSubscription
 
-def send_subscription_confirmation_email(request):
+def send_subscription_confirmation_email(user):
     """
     Send a subscription confirmation email to the user after successful checkout.
 
@@ -15,7 +15,7 @@ def send_subscription_confirmation_email(request):
     Args:
     - request (HttpRequest): The HTTP request object from the checkout success view.
     """
-    current_user = request.user
+    current_user = user
     if current_user.is_authenticated and current_user.email:
         active_subscriptions = ActiveSubscription.objects.filter(user=current_user)
         active_subscriptions_list = []

@@ -1,17 +1,17 @@
 from decimal import Decimal
+from urllib import request
 from django.utils import timezone
 from datetime import datetime
 
 from django.conf import settings
 from django.http import HttpResponse
-from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from .models import ActiveSubscription
 from profiles.models import UserProfile
 from subscription.models import SubscriptionPlan
 
 import stripe
-
+from .email_utils import send_subscription_confirmation_email
 
 
 # Webhook
@@ -313,6 +313,8 @@ def handle_subscription_created(event):
             monthly_cost=monthly_cost
         )
         new_active_subscription.save()
+        send_subscription_confirmation_email(user)
+        
 
     except SubscriptionPlan.DoesNotExist:       
         print(f"Subscription Plan not found for Stripe Price ID: {plan_stripe_id}")
