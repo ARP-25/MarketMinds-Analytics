@@ -169,6 +169,7 @@ def handle_price_created(event):
                     stripe_price_id=price['id'],
                     details = metadata.get('details', subscription_plan.details),
                 )
+                new_plan.save()
             # If no active subscription exists on edited Plan,
             # we update the old Plan with the metadata provided from stripe.
             else:
@@ -185,7 +186,7 @@ def handle_price_created(event):
     # Handling creation of new Plan
     elif 'add_action' in metadata and metadata['add_action'] == 'true':
         if not SubscriptionPlan.objects.filter(stripe_price_id=price['id']).exists():
-            SubscriptionPlan.objects.create(
+            new_plan = SubscriptionPlan(
                 title=metadata['title'],
                 description=metadata['description'],
                 price=metadata.get('price', 0.00),
@@ -193,6 +194,8 @@ def handle_price_created(event):
                 details=metadata.get('details', ''),
                 stripe_price_id=price['id']
             )
+            new_plan.save()
+
 
     return HttpResponse(status=200)
 
