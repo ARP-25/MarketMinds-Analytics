@@ -119,7 +119,7 @@ Overall, the platform offers a comprehensive toolset for subscription management
 ### 5. Admin CRUD Functionality for Trade Insights
 - **As an** admin,  
   **I require** the ability to create, view, modify, and remove trade insights,  
-  **So that** I can ensure the content is current, relevant, and valuable for our subscribers.
+  **So that** I can ensure the content is current, relevant, and valuable for my subscribers.
 
 ### 6. Accessing Subscription Services
 - **As a** subscriber,  
@@ -421,29 +421,45 @@ The use of Django signals and Stripe webhooks ensures real-time data integrity a
 Google Lighthouse in Google Chrome Developer Tools was used to test the performance of the website. 
 
 - **Landing**
-![Landing](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705704749/lighthouse_testing_landing_pvojuv.png)
+![Landing](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711305570/lighthouse_landing_e0zr4p.png)
 - **Get Started**
-![Get Started](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705704749/lighthouse_testing_get_started_n64oof.png)
+![Get Started](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711305556/lighthouse_get_started_nh54tb.png)
 - **Profile**
-![Profile](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705704749/lighthouse_testing_profile_zr1mcs.png)
-- **Admin**
-![Admin](https://res.cloudinary.com/dbui0ebjv/image/upload/v1705704748/lighthouse_testing_admin_s4ra9i.png)
+![Profile](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711305558/lighthouse_profile_qvu5l1.png)
+- **Admin Subscription Plan**
+![Admin](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711305557/lighthouse_admin_splan_jcdpoa.png)
+- **Admin Trade Insight**
+![Admin](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711305557/lighthouse_admin_insight_ony7kr.png)
+- **Admin Financial Metrics**
+![Admin](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711305557/lighthouse_admin_metrics_jkimaw.png)
+- **Trade Insight**
+![Admin](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711306692/lighthouse_trade_insight_hj9lkw.png)
+
+#### Explanation Best Practices Performance on Trade Insight
+While the integration of TradingView widgets as seen in some of the screenshots has slightly lowered the best practice score in our Lighthouse report, this is a trade-off I consider acceptable for the value they provide. These widgets are widely recognized for their reliability and are essential for presenting live financial data and insights directly on the platform.
+
+The lower score primarily pertains to performance optimization standards and not to security or operational functionality. The modern browsers' approach to handling third-party widgets through partitioned cookie access and specific referrer policies is a standard privacy measure, indicating no compromise in the widgets' safety.
+
+I’ve chosen to prioritize the significant functional benefits these widgets offer for an enhanced user experience, despite the minor impact on certain performance metrics. This ensures that users have access to critical financial information and insights without navigating away from the platform.
+
+An important aspect of our platform's functionality involves dynamically handling images, which are uploaded through model field URLs and displayed across various sections of the application. In the Lighthouse performance analysis, it was observed that some images appear too large for their containers. This issue arises because the application utilizes these images in different contexts where their sizes are optimally suited.
+
 
 # Testing
 ## Automated Testing and Data Model Validation
-In our application, ensuring data integrity and seamless integration with Stripe's API is paramount. Given the complexity and importance of accurate data representation, particularly regarding subscriptions and active subscriptions, thorough testing has been conducted. This section details our approach to validating our data models and their interactions with Stripe's API.
+In my application, ensuring data integrity and seamless integration with Stripe's API is paramount. Given the complexity and importance of accurate data representation, particularly regarding subscriptions and active subscriptions, thorough testing has been conducted. This section details my approach to validating my data models and their interactions with Stripe's API.
 
 ### Test Suite Description
 #### ActiveSubscription and SubscriptionPlan Testing
-Tests for `ActiveSubscription` and `SubscriptionPlan` models are central to ensuring that our database remains in sync with Stripe's API. The CRUD operations for these models are mirrored in Stripe to guarantee consistency and security.
+Tests for `ActiveSubscription` and `SubscriptionPlan` models are central to ensuring that my database remains in sync with Stripe's API. The CRUD operations for these models are mirrored in Stripe to guarantee consistency and security.
 
-- **ActiveSubscription Creation and Updates**: Tests simulate the creation and modification of active subscriptions, reflecting these changes both in our database and on Stripe's platform.
+- **ActiveSubscription Creation and Updates**: Tests simulate the creation and modification of active subscriptions, reflecting these changes both in my database and on Stripe's platform.
 - **SubscriptionPlan Modifications**: Tests cover creating, updating, and deleting subscription plans, checking for accurate reflection in the database and Stripe's records.
 
 #### FinancialMetrics Testing
 `FinancialMetrics` model testing ensures the proper tracking and updating of financial data related to subscriptions. These tests are crucial for providing an accurate financial overview of the platform's performance.
 
-- **Automated Update of Financial Metrics**: When a subscription is created, renewed, or canceled, our tests verify the automatic adjustment of relevant financial metrics, such as revenue, new subscriptions, and canceled subscriptions.
+- **Automated Update of Financial Metrics**: When a subscription is created, renewed, or canceled, my tests verify the automatic adjustment of relevant financial metrics, such as revenue, new subscriptions, and canceled subscriptions.
 
 #### Admin Access Testing
 
@@ -454,18 +470,18 @@ Tests under the `AdminAccessTests` class focus on the admin functionalities for 
 
 ### Test Implementation
 
-Our test suite employs Django's `TestCase` framework, utilizing mock objects and patches to simulate Stripe's responses. This allows us to test our application's behavior in a controlled environment, mimicking real-world scenarios without actual API calls.
+Our test suite employs Django's `TestCase` framework, utilizing mock objects and patches to simulate Stripe's responses. This allows us to test my application's behavior in a controlled environment, mimicking real-world scenarios without actual API calls.
 
 - **MockStripeResponse**: Used to mock Stripe's response objects.
 - **Helper Functions**: Functions like `create_test_image()` and `create_active_subscription()` set up necessary test data.
 
 ### Importance of Testing
 
-Given the critical nature of subscription-based services, the tests are designed to eliminate any discrepancies between our database and Stripe's API. Ensuring data accuracy and integrity is not just a matter of functionality but also of maintaining user trust and financial accuracy.
+Given the critical nature of subscription-based services, the tests are designed to eliminate any discrepancies between my database and Stripe's API. Ensuring data accuracy and integrity is not just a matter of functionality but also of maintaining user trust and financial accuracy.
 
-- **Maintaining Data Consistency**: Tests validate that all changes in subscription status or plan details are accurately mirrored between our database and Stripe.
+- **Maintaining Data Consistency**: Tests validate that all changes in subscription status or plan details are accurately mirrored between my database and Stripe.
 - **Error Handling**: Tests ensure robust error handling and data validation, reducing the risk of data corruption or inconsistency.
-- **Security and Reliability**: By thoroughly testing our integration with Stripe, we ensure the security and reliability of our payment and subscription systems.
+- **Security and Reliability**: By thoroughly testing my integration with Stripe, we ensure the security and reliability of my payment and subscription systems.
 
 #### Results
 ![ErrorFree](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711296245/unit_tests_mma_qqukcm.png)
@@ -787,7 +803,6 @@ Additional searching for problemfixes:
 - https://www.youtube.com/?gl=DE&hl=de
 
 ### Media 
-- All images are bought and licensed from https://stock.adobe.com/.
 - All icons were taken from [Font Awesome](https://fontawesome.com/).
 - All fonts used were imported from [Google Fonts](https://fonts.google.com/).
 
@@ -795,8 +810,4 @@ Additional searching for problemfixes:
 ### Shoutout
 
 Special thanks to my Mentor Oluwafemi Medale for helping me out whenever I have a question.
-
-
-
-## Update 24.03.2024
 
