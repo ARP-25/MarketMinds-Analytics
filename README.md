@@ -1,7 +1,7 @@
 # MarketMinds Analytics
 ![titleimage](https://res.cloudinary.com/dbui0ebjv/image/upload/v1711241305/amiresponsive_b86ttt.png) 
 
-## Note : Admin Credentials available on request
+
 ## Introduction
 My platform is a Django-based solution for managing and selling subscription plans in the trading sector. It features a custom admin panel that allows site administrators to control subscription plans thoroughly, with complete CRUD (Create, Read, Update, Delete) capabilities. Integrated with Stripe API, the platform ensures secure payment processing and maintains database integrity through Stripe webhooks for all subscription-related operations.
 
@@ -10,8 +10,9 @@ Additionally, the platform includes 'Trade Insights,' a content delivery system 
 A key component is the 'Platform Metrics' section in the admin panel, providing administrators with essential financial data and metrics about the site and its subscriptions. This helps in making informed decisions about the site's operation and growth.
 
 Overall, the platform offers a comprehensive toolset for subscription management and content delivery in the trading domain, emphasizing security, reliability, and ease of administration.
-[Click here to view the Live Project](https://marketminds-analytics-31d309061593.herokuapp.com/)
+[Click here to view the Live Project](https://marketminds-analytics-31d309061593.herokuapp.com/).
 
+Note: Admin Credentials to test full functionality are available on request.
 
 ## Table of contents
 - [Features](#Features)
